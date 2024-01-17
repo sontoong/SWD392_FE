@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import roleSlice from "./slice/roleSlice.ts";
+import authReducer from "./slice/loginSlice";
+import { headerSlice } from "./slice/headerSlice.ts";
 
 export const store = configureStore({
   reducer: {
     roleCheck: roleSlice,
+    auth: authReducer,
+    header: headerSlice.reducer,
   },
 });
 

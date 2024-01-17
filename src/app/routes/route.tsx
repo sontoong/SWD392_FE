@@ -1,13 +1,13 @@
-import { Route, Routes, createBrowserRouter } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import Forbidden from "../pages/forbidden/forbidden";
+import { Route, Routes, createBrowserRouter } from "react-router-dom";
 import { ROLE } from "../../constants/role";
 
+const Layout = lazy(() => import("../components/layout/mainLayout"));
+const Forbidden = lazy(() => import("../pages/forbidden/forbidden"));
 const LoginPage = lazy(() => import("../pages/auth/loginPage"));
 const PrivateRoute = lazy(() => import("./privateRoute"));
-const TestPage = lazy(() => import("../pages/testsPage/testPage"));
+const TestPage = lazy(() => import("../pages/testsPage/TestPage1"));
 const ErrorPage = lazy(() => import("../pages/404"));
-const Layout = lazy(() => import("../components/layout/mainLayout"));
 const Template = lazy(() => import("../pages/file/template"));
 
 export const router = createBrowserRouter([
@@ -20,19 +20,17 @@ export const router = createBrowserRouter([
             path="/forbidden"
             element={
               <Suspense fallback={<></>}>
-                <PrivateRoute inverted={false}>
-                  <Forbidden />
-                </PrivateRoute>
+                {/* <PrivateRoute inverted={false}> */}
+                <Forbidden />
+                {/* </PrivateRoute> */}
               </Suspense>
             }
           />
           <Route
-            path="/tests"
+            path="/test"
             element={
               <Suspense fallback={<></>}>
-                <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
-                  <TestPage />
-                </PrivateRoute>
+                <TestPage />
               </Suspense>
             }
           />
@@ -40,7 +38,7 @@ export const router = createBrowserRouter([
             path="/template"
             element={
               <Suspense fallback={<></>}>
-                <PrivateRoute inverted={false}>
+                <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
                   <Template />
                 </PrivateRoute>
               </Suspense>
@@ -50,9 +48,9 @@ export const router = createBrowserRouter([
             path="*"
             element={
               <Suspense fallback={<></>}>
-                <PrivateRoute inverted={false}>
-                  <ErrorPage />
-                </PrivateRoute>
+                {/* <PrivateRoute inverted={false}> */}
+                <ErrorPage />
+                {/* </PrivateRoute> */}
               </Suspense>
             }
           />
