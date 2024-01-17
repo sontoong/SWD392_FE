@@ -24,7 +24,7 @@ const roleSlice = createSlice({
     },
     roleCheckSuccess: (state, action: PayloadAction<RoleSlug>) => {
       state.isFetching = false;
-      state.role = action.payload;
+      state.role = action.payload ?? {};
       state.error = false;
     },
     roleCheckFailure: (state) => {
