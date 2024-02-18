@@ -97,7 +97,7 @@ export default function UserManage() {
       title: "",
       key: "actions",
       render: (_, record) => (
-        <a>
+        <a href={`/user/${record.id}`}>
           <EyeOutlined />
         </a>
       ),
