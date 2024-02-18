@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../redux/hook";
-import Forbidden from "../pages/forbidden/forbidden";
+import Forbidden from "../pages/forbidden";
 
 interface PrivateRouteProps {
   inverted: boolean;
@@ -25,7 +25,7 @@ const PrivateRoute = ({
   // }
 
   if (inverted) {
-    return isAuth ? <Navigate to="/account" /> : children;
+    return isAuth ? <Navigate to="/home" /> : children;
   }
 
   if (currentRole.role && !requiredRoles?.some((r) => currentRole.role === r))

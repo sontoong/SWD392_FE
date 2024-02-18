@@ -1,9 +1,9 @@
 import { Button, Select, Space } from "antd";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import { MyInput, MyInputPassword } from "../../components/input/myInput";
-import MyCarousel from "../../components/ui/carousel";
-import { useAuth } from "../../hooks/useAuth";
+import { MyInput, MyInputPassword } from "../components/input/myInput";
+import MyCarousel from "../components/ui/carousel";
+import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
@@ -11,7 +11,7 @@ import {
   LANGUAGES,
   LANGUAGE_OPTIONS,
   LOGIN_PAGE_TEXT,
-} from "../../utils/language";
+} from "../utils/language";
 
 export interface FormValues {
   email: string;

@@ -17,6 +17,7 @@
     "axios": "^1.6.5",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
+    "firebase": "^10.8.0",
     "formik": "^2.4.5",
     "jwt-decode": "^4.0.0",
     "nprogress": "^0.2.0",

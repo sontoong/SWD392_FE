@@ -4,7 +4,7 @@ import {
   loginStart,
   loginSuccess,
 } from "../redux/slice/loginSlice";
-import { FormValues } from "../pages/auth/loginPage";
+import { FormValues } from "../pages/loginPage";
 import { NavigateFunction } from "react-router-dom";
 import baseApi from "../utils/baseApi";
 import { AxiosError } from "axios";

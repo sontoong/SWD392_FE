@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { setHeaderTitle } from "../../redux/slice/headerSlice";
-import { ROLE } from "../../../constants/role";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { setHeaderTitle } from "../redux/slice/headerSlice";
+import { ROLE } from "../../constants/role";
+import { UploadInput } from "../components/input/uploadInput";
 
 export default function TestPage() {
   const { role: currentRole } = useAppSelector((state) => state.roleCheck);
@@ -20,7 +21,14 @@ export default function TestPage() {
         },
       ]),
     );
-  }, [dispatch]);
+  }, [dispatch, currentRole.role]);
 
-  return <div>TestPage</div>;
+  return (
+    <div>
+      Logo img:
+      <UploadInput name={"logo"} />
+      Default avatar img:
+      <UploadInput name={"defaultAvatar"} />
+    </div>
+  );
 }

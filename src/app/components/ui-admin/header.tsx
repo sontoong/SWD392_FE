@@ -1,13 +1,24 @@
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Dropdown, MenuProps, Modal, Spin, notification } from "antd";
+import {
+  Avatar,
+  Dropdown,
+  Menu,
+  MenuProps,
+  Modal,
+  Spin,
+  notification,
+} from "antd";
 import { Header } from "antd/es/layout/layout";
-import { Menu } from "antd";
-import { Link, useNavigate } from "react-router-dom";
-import apiJWT from "../../utils/api";
-import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import apiJWT from "../../utils/api";
+
 export default function MyHeader() {
+  const location = useLocation();
   const navigate = useNavigate();
+  const { state } = useAuth();
+
   const [loading, setLoading] = useState(false);
 
   const logOut = async () => {
@@ -43,20 +54,23 @@ export default function MyHeader() {
 
   const navItems = [
     {
-      key: 1,
-      label: "Tìm Project",
+      key: "/admin/user-manage",
+      label: "Quản Lý Tài Khoản",
     },
     {
-      key: 2,
+      key: "/admin/project-manage",
       label: "Quản Lý Project",
     },
     {
-      key: 3,
-      label: "Thống kê",
+      key: "/admin/verify-user",
+      label: "Xác Thực Người Dùng",
     },
   ];
 
-  const { state } = useAuth();
+  const onClick: MenuProps["onClick"] = (e) => {
+    navigate(`${e.key}`);
+  };
+
   return (
     <Header className="fixed z-50 flex w-full justify-between border-b border-gray-200 bg-white px-5">
       <img
@@ -65,9 +79,10 @@ export default function MyHeader() {
       />
       <Menu
         mode="horizontal"
-        defaultSelectedKeys={["2"]}
         items={navItems}
-        style={{ flex: 1, minWidth: 0 }}
+        style={{ flex: 1, minWidth: 0, paddingLeft: "10%" }}
+        onClick={onClick}
+        selectedKeys={[location.pathname]}
       />
       <Dropdown
         menu={{ items }}
@@ -94,6 +109,3 @@ export default function MyHeader() {
     </Header>
   );
 }
-// function useAppSelector(arg0: (state: any) => any): { headerTitle: any; } {
-//   throw new Error('Function not implemented.');
-// }

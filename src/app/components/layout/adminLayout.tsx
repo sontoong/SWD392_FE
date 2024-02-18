@@ -1,5 +1,4 @@
-import MyHeader from "../ui/header";
-import MyFooter from "../ui/footer";
+import MyHeader from "../ui-admin/header";
 import MyContent from "../ui/content";
 import { Layout, Spin } from "antd";
 import { useCallback, useEffect, useState } from "react";
@@ -38,7 +37,6 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <Layout className="bg-white">
         <MyHeader />
         <MyContent children={children} />
-        <MyFooter />
       </Layout>
     </Layout>
   );
