@@ -62,6 +62,7 @@ export default function MyHeader() {
       <img
         src="https://firebasestorage.googleapis.com/v0/b/swd392-41e12.appspot.com/o/images%2Flogo?alt=media&token=a87ce9ca-d5ab-4009-aa06-75a24f551479"
         alt=""
+        className="px-10 py-1"
       />
       <Menu
         mode="horizontal"

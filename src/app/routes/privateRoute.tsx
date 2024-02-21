@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../redux/hook";
-import Forbidden from "../pages/forbidden";
+import Forbidden from "../pages/ForbiddenPage";
 
 interface PrivateRouteProps {
   inverted: boolean;

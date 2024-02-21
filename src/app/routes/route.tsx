@@ -2,20 +2,20 @@ import { Suspense, lazy } from "react";
 import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
 import { ROLE } from "../../constants/role";
 
-const Layout = lazy(() => import("../components/layout/mainLayout"));
-const Layout2 = lazy(() => import("../components/layout/adminLayout"));
+const Layout = lazy(() => import("../components/layout/public-layout"));
+const Layout2 = lazy(() => import("../components/layout/admin-layout"));
 
-const HomePage = lazy(() => import("../pages/home"));
+const HomePage = lazy(() => import("../pages/HomePage"));
 
-const UserManagePage = lazy(() => import("../pages/userManage"));
-const ProjectManagePage = lazy(() => import("../pages/projectManage"));
-const VerifyUserPage = lazy(() => import("../pages/verifyUser"));
+const UserManagePage = lazy(() => import("../pages/UserManagePage"));
+const ProjectManagePage = lazy(() => import("../pages/ProjectManagePage"));
+const VerifyUserPage = lazy(() => import("../pages/VerifyUserPage"));
 
-const Forbidden = lazy(() => import("../pages/forbidden"));
-const LoginPage = lazy(() => import("../pages/loginPage"));
-const PrivateRoute = lazy(() => import("./privateRoute"));
-const TestPage = lazy(() => import("../pages/testPage"));
-const ErrorPage = lazy(() => import("../pages/404"));
+const Forbidden = lazy(() => import("../pages/ForbiddenPage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const PrivateRoute = lazy(() => import("./PrivateRoute"));
+const TestPage = lazy(() => import("../pages/TestPage"));
+const ErrorPage = lazy(() => import("../pages/404Page"));
 
 const Template = lazy(() => import("../pages/template"));
 

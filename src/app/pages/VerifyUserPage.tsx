@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { setHeaderTitle } from "../redux/slice/headerSlice";
-import { ROLE } from "../../constants/role";
-import { Select, Table, TableProps } from "antd";
+import { Table, TableProps } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
 
 export default function UserManage() {
   const { role: currentRole } = useAppSelector((state) => state.roleCheck);
@@ -11,12 +11,8 @@ export default function UserManage() {
     dispatch(
       setHeaderTitle([
         {
-          title: "test",
-          path: currentRole.role === ROLE.ADMIN ? "/" : "/forbidden",
-        },
-        {
-          title: `test1`,
-          path: "/login",
+          title: `Xác thực người dùng`,
+          path: "/verify-user",
         },
       ]),
     );
@@ -93,20 +89,12 @@ export default function UserManage() {
       key: "status",
     },
     {
-      title: "Actions",
+      title: "",
       key: "actions",
       render: (_, record) => (
-        <Select
-          defaultValue="lucy"
-          style={{ width: 120 }}
-          onChange={() => {}}
-          options={[
-            { value: record.id, label: "Kích hoạt tài khoản", disabled: true },
-            { value: record.id, label: "Hủy kích hoạt tài khoản" },
-            { value: record.id, label: "cấm tài khoản" },
-            { value: record.id, label: "Chỉnh sửa tài khoản" },
-          ]}
-        />
+        <a href={`/user/${record.id}`} target="_blank">
+          <EyeOutlined />
+        </a>
       ),
     },
   ];

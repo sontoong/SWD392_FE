@@ -1,5 +1,5 @@
 import MyHeader from "../ui-admin/header";
-import MyContent from "../ui/content";
+import MyContent from "../ui-admin/content";
 import { Layout, Spin } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import agent from "../../utils/agent";

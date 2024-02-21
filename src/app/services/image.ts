@@ -6,16 +6,19 @@ export const handleUpload = (name: string, image: File) => {
   uploadBytes(storageRef, image)
     .then(() => {
       console.log("Image uploaded successfully");
-      getDownloadURL(storageRef)
-        .then((url) => {
-          console.log("Download URL:", url);
-          return url;
-        })
-        .catch((error) => {
-          console.log("Error getting download URL: ", error);
-        });
     })
     .catch((error) => {
       console.log("Error uploading image: ", error);
     });
+};
+
+export const getImageUrl = async (name: string): Promise<string | null> => {
+  const storageRef = ref(storage, `images/${name}`);
+  try {
+    const url = await getDownloadURL(storageRef);
+    return url;
+  } catch (error) {
+    console.log("Error getting download URL: ", error);
+    return null;
+  }
 };

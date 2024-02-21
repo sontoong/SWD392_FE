@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { setHeaderTitle } from "../redux/slice/headerSlice";
-import { ROLE } from "../../constants/role";
-import { Table, TableProps } from "antd";
-import { EyeOutlined } from "@ant-design/icons";
+import { Button, Dropdown, MenuProps, Table, TableProps } from "antd";
+import { SmileOutlined } from "@ant-design/icons";
 
 export default function UserManage() {
   const { role: currentRole } = useAppSelector((state) => state.roleCheck);
@@ -12,12 +11,8 @@ export default function UserManage() {
     dispatch(
       setHeaderTitle([
         {
-          title: "test",
-          path: currentRole.role === ROLE.ADMIN ? "/" : "/forbidden",
-        },
-        {
-          title: `test1`,
-          path: "/login",
+          title: `Quản lý tài khoản`,
+          path: "/user-manage",
         },
       ]),
     );
@@ -57,6 +52,18 @@ export default function UserManage() {
     },
   ];
 
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: "Kích hoạt tài khoản",
+      icon: <SmileOutlined />,
+      disabled: true,
+    },
+    { key: "2", label: "Hủy kích hoạt tài khoản" },
+    { key: "3", label: "Cấm tài khoản" },
+    { key: "4", label: "Chỉnh sửa tài khoản" },
+  ];
+
   const columns: TableProps<DataType>["columns"] = [
     {
       title: "ID",
@@ -94,15 +101,24 @@ export default function UserManage() {
       key: "status",
     },
     {
-      title: "",
+      title: "Actions",
       key: "actions",
       render: (_, record) => (
-        <a href={`/user/${record.id}`}>
-          <EyeOutlined />
-        </a>
+        <Dropdown menu={{ items }} placement="bottomLeft" trigger={["click"]}>
+          <Button>Actions {record.name}</Button>
+        </Dropdown>
       ),
     },
   ];
 
   return <Table columns={columns} dataSource={data} />;
+}
+
+{
+  /* <Select
+          defaultValue="Actions"
+          style={{ width: 120 }}
+          onChange={() => {}}
+         
+        /> */
 }

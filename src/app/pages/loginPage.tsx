@@ -1,7 +1,7 @@
 import { Button, Select, Space } from "antd";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import { MyInput, MyInputPassword } from "../components/input/myInput";
+import { MyInput, MyInputPassword } from "../components/input/inputs";
 import MyCarousel from "../components/ui/carousel";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
