@@ -1,22 +1,14 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hook";
-import { setHeaderTitle } from "../redux/slice/headerSlice";
 import { Table, TableProps } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
+import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 
 export default function UserManage() {
-  const { role: currentRole } = useAppSelector((state) => state.roleCheck);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(
-      setHeaderTitle([
-        {
-          title: `Xác thực người dùng`,
-          path: "/verify-user",
-        },
-      ]),
-    );
-  }, [dispatch, currentRole.role]);
+  useSetHeaderTitle([
+    {
+      title: `Xác thực người dùng`,
+      path: "/verify-user",
+    },
+  ]);
 
   interface DataType {
     key: string;

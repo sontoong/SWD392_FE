@@ -1,35 +1,44 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hook";
-import { setHeaderTitle } from "../redux/slice/headerSlice";
-import { Button, Dropdown, MenuProps, Table, TableProps } from "antd";
+import { MenuProps, Table, TableProps } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
+import { UserDetail } from "../models/user";
+import CustomDropdown from "../components/ui-admin/dropdown";
+import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
+import { Key } from "react";
 
 export default function UserManage() {
-  const { role: currentRole } = useAppSelector((state) => state.roleCheck);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(
-      setHeaderTitle([
-        {
-          title: `Quản lý tài khoản`,
-          path: "/user-manage",
-        },
-      ]),
-    );
-  }, [dispatch, currentRole.role]);
+  useSetHeaderTitle([
+    {
+      title: `Quản lý tài khoản`,
+      path: "/user-manage",
+    },
+  ]);
 
-  interface DataType {
-    key: string;
-    id: string;
-    name: string;
-    email: string;
-    phone: string;
-    dob: string;
-    accountType: "Nhà tuyển dụng" | "Nguời ứng tuyển";
-    status: "Đã xác thực" | "Chưa xác thực";
-  }
+  const dropdownItems: MenuProps["items"] = [
+    {
+      key: "activate",
+      label: "Kích hoạt tài khoản",
+      icon: <SmileOutlined />,
+    },
+    { key: "unactivate", label: "Hủy kích hoạt tài khoản" },
+    { key: "terminate", label: "Cấm tài khoản" },
+    { key: "edit", label: "Chỉnh sửa tài khoản" },
+  ];
 
-  const data: DataType[] = [
+  const checkDisabled = (key: Key | undefined, record: UserDetail): boolean => {
+    const { status } = record;
+    switch (key) {
+      case "activate": {
+        return status === "Đã xác thực";
+      }
+      case "unactivate": {
+        return status === "Chưa xác thực";
+      }
+      default:
+        return false;
+    }
+  };
+
+  const data: UserDetail[] = [
     {
       key: "1",
       id: "01",
@@ -50,21 +59,19 @@ export default function UserManage() {
       accountType: "Nhà tuyển dụng",
       status: "Đã xác thực",
     },
-  ];
-
-  const items: MenuProps["items"] = [
     {
-      key: "1",
-      label: "Kích hoạt tài khoản",
-      icon: <SmileOutlined />,
-      disabled: true,
+      key: "2",
+      id: "01",
+      name: "Nguyen van b",
+      email: "a@gmail.com",
+      phone: "0123456789",
+      dob: "01/01/2000",
+      accountType: "Nhà tuyển dụng",
+      status: "Chưa xác thực",
     },
-    { key: "2", label: "Hủy kích hoạt tài khoản" },
-    { key: "3", label: "Cấm tài khoản" },
-    { key: "4", label: "Chỉnh sửa tài khoản" },
   ];
 
-  const columns: TableProps<DataType>["columns"] = [
+  const columns: TableProps<UserDetail>["columns"] = [
     {
       title: "ID",
       dataIndex: "id",
@@ -104,21 +111,14 @@ export default function UserManage() {
       title: "Actions",
       key: "actions",
       render: (_, record) => (
-        <Dropdown menu={{ items }} placement="bottomLeft" trigger={["click"]}>
-          <Button>Actions {record.name}</Button>
-        </Dropdown>
+        <CustomDropdown
+          items={dropdownItems}
+          record={record}
+          checkDisabled={checkDisabled}
+        />
       ),
     },
   ];
 
   return <Table columns={columns} dataSource={data} />;
-}
-
-{
-  /* <Select
-          defaultValue="Actions"
-          style={{ width: 120 }}
-          onChange={() => {}}
-         
-        /> */
 }

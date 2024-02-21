@@ -1,27 +1,13 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hook";
-import { setHeaderTitle } from "../redux/slice/headerSlice";
-import { ROLE } from "../../constants/role";
 import { UploadInput } from "../components/input/upload-input";
+import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 
 export default function TestPage() {
-  const { role: currentRole } = useAppSelector((state) => state.roleCheck);
-
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(
-      setHeaderTitle([
-        {
-          title: "test",
-          path: currentRole.role === ROLE.ADMIN ? "/" : "/forbidden",
-        },
-        {
-          title: `test1`,
-          path: "/login",
-        },
-      ]),
-    );
-  }, [dispatch, currentRole.role]);
+  useSetHeaderTitle([
+    {
+      title: `test1`,
+      path: "/login",
+    },
+  ]);
 
   return (
     <div>

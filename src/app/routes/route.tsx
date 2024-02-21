@@ -13,7 +13,7 @@ const VerifyUserPage = lazy(() => import("../pages/VerifyUserPage"));
 
 const Forbidden = lazy(() => import("../pages/ForbiddenPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
-const PrivateRoute = lazy(() => import("./PrivateRoute"));
+const PrivateRoute = lazy(() => import("./proute"));
 const TestPage = lazy(() => import("../pages/TestPage"));
 const ErrorPage = lazy(() => import("../pages/404Page"));
 
