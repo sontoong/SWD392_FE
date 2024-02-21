@@ -1,11 +1,19 @@
 import { EllipsisOutlined } from "@ant-design/icons";
 import { Dropdown, MenuProps } from "antd";
 import { UserDetail } from "../../models/user";
-import { ItemType } from "antd/es/menu/hooks/useItems";
 import { Key } from "react";
 
-type DropdownProps = {
-  items: ItemType[];
+export type CustomDropdownProps = {
+  items: {
+    key: Key;
+    label: string;
+    disabled?: boolean;
+    dashed?: boolean;
+    type?: "item" | "divider";
+    style?: React.CSSProperties;
+    className?: string;
+    [key: string]: any;
+  }[];
   record: UserDetail;
   checkDisabled: (key: Key | undefined, record: UserDetail) => boolean;
 };
@@ -14,7 +22,7 @@ export default function CustomDropdown({
   items,
   record,
   checkDisabled,
-}: DropdownProps) {
+}: CustomDropdownProps) {
   const onMenuClick: MenuProps["onClick"] = (e) => {
     const { key } = e;
     switch (key) {
@@ -58,20 +66,4 @@ export default function CustomDropdown({
       <EllipsisOutlined />
     </Dropdown>
   );
-
-  // const menu = (
-  //   <Menu onClick={onMenuClick}>
-  //     {items.map((item) => (
-  //       <Menu.Item key={item?.key} disabled={checkDisabled(item?.key)}>
-  //         {`${item?.label}`}
-  //       </Menu.Item>
-  //     ))}
-  //   </Menu>
-  // );
-
-  // return (
-  //   <Dropdown overlay={menu} placement="bottomLeft" trigger={["click"]}>
-  //     <EllipsisOutlined />
-  //   </Dropdown>
-  // );
 }

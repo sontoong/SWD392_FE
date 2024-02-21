@@ -1,7 +1,9 @@
-import { MenuProps, Table, TableProps } from "antd";
+import { Table, TableProps } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import { UserDetail } from "../models/user";
-import CustomDropdown from "../components/ui-admin/dropdown";
+import CustomDropdown, {
+  CustomDropdownProps,
+} from "../components/ui-admin/dropdown";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 import { Key } from "react";
 
@@ -13,7 +15,7 @@ export default function UserManage() {
     },
   ]);
 
-  const dropdownItems: MenuProps["items"] = [
+  const dropdownItems: CustomDropdownProps["items"] = [
     {
       key: "activate",
       label: "Kích hoạt tài khoản",
