@@ -16,6 +16,7 @@ export default {
         greenHome: "#AFD8DA",
         grayLine: "#747474",
         blueAnt: "#1890FF",
+        main: "#74BA7B",
       },
     },
   },

@@ -2,7 +2,7 @@ import { Table, TableProps } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 
-export default function UserManage() {
+export default function VerifyUserPage() {
   useSetHeaderTitle([
     {
       title: `Xác thực người dùng`,

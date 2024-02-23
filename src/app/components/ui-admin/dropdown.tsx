@@ -18,7 +18,7 @@ export type CustomDropdownProps = {
   checkDisabled: (key: Key | undefined, record: UserDetail) => boolean;
 };
 
-export default function CustomDropdown({
+export function CustomDropdown({
   items,
   record,
   checkDisabled,

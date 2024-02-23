@@ -33,7 +33,7 @@ apiJWT.interceptors.request.use(async (config) => {
         localStorage.setItem("uid", data.data.id);
       } catch (error) {
         if (error instanceof AxiosError) {
-          console.log(error.response?.data.error);
+          // console.log(error.response?.data.error);
           if (
             error.response?.data.error.message === "You are not authenticated"
           ) {

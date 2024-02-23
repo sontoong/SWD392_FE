@@ -1,7 +1,8 @@
 import { Table, TableProps } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import { UserDetail } from "../models/user";
-import CustomDropdown, {
+import {
+  CustomDropdown,
   CustomDropdownProps,
 } from "../components/ui-admin/dropdown";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
@@ -62,7 +63,7 @@ export default function UserManage() {
       status: "Đã xác thực",
     },
     {
-      key: "2",
+      key: "3",
       id: "01",
       name: "Nguyen van b",
       email: "a@gmail.com",
