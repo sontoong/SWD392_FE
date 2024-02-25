@@ -59,9 +59,6 @@ export function CustomDropdown({
       }}
       placement="bottomLeft"
       trigger={["click"]}
-      dropdownRender={(menu) => {
-        return <div>{menu}</div>;
-      }}
     >
       <EllipsisOutlined />
     </Dropdown>

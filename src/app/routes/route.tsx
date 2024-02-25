@@ -37,7 +37,7 @@ const AdminLayout = () => {
 
 export const router = createBrowserRouter([
   {
-    path: "*",
+    path: "/",
     element: <UserLayout />,
     children: [
       {
@@ -139,6 +139,16 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<></>}>
             <TestPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "*",
+        element: (
+          <Suspense fallback={<></>}>
+            <PrivateRoute inverted={false}>
+              <ErrorPage />
+            </PrivateRoute>
           </Suspense>
         ),
       },

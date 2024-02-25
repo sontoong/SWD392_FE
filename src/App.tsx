@@ -1,12 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./app/routes/route";
+import { App } from "antd";
 
-function App() {
+function AppWrapper() {
   return (
-    <>
+    <App>
       <RouterProvider router={router} />
-    </>
+    </App>
   );
 }
 
-export default App;
+export default AppWrapper;

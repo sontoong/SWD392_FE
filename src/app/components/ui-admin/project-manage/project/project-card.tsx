@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Space, Tooltip } from "antd";
+import { Avatar, Button, Card, Divider, Space, Tooltip } from "antd";
 import { Project } from "../../../../models/project";
 import {
   formatCurrency,
@@ -8,6 +8,7 @@ import {
   EnvironmentOutlined,
   EyeOutlined,
   FolderOpenOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import Link from "antd/es/typography/Link";
 
@@ -30,7 +31,13 @@ export default function ProjectCard({ project }: { project: Project }) {
       className="overflow-auto"
       extra={
         <Tooltip title="Xem chi tiết">
-          <Button icon={<EyeOutlined />} className="ml-auto">
+          <Button
+            type="link"
+            href="/"
+            icon={<EyeOutlined />}
+            className="ml-auto"
+            target="_blank"
+          >
             Chi tiết
           </Button>
         </Tooltip>
@@ -54,7 +61,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
         <div>{description}</div>
-        <div className="flex gap-10">
+        <div className="flex items-center gap-5">
           <div className="whitespace-nowrap">
             <span className="font-bold">Kinh nghiệm: </span>
             {freelancerRequirement}
@@ -64,10 +71,13 @@ export default function ProjectCard({ project }: { project: Project }) {
             <span className="font-bold">Báo giá: </span> {applicationCount}
           </div>
         </div>
-        <div className="flex gap-10">
+        <div className="flex items-center gap-5">
+          <Avatar size={"default"} icon={<UserOutlined />} />
           <div className="whitespace-nowrap">
             <span className="font-bold">Đăng bởi: </span>
-            <Link href={`/admin/accounts?name=${createdBy}`}>{createdBy}</Link>
+            <Link href={`/admin/accounts?name=${createdBy}`} target="_blank">
+              {createdBy}
+            </Link>
           </div>
           <Divider type="vertical" />
           <div className="whitespace-nowrap">

@@ -11,6 +11,7 @@ export default function ProjectManage() {
       path: "/project-manage",
     },
   ]);
+  const [current, setCurrent] = useState("notverified");
 
   const items: MenuProps["items"] = [
     {
@@ -22,8 +23,6 @@ export default function ProjectManage() {
       key: "verified",
     },
   ];
-
-  const [current, setCurrent] = useState("notverified");
 
   const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);

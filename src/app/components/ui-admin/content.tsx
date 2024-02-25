@@ -7,9 +7,13 @@ export default function MyContent({ children }: { children: React.ReactNode }) {
   const currentHeader = headerTitle[headerTitle.length - 1];
   return (
     <Content className="py-20">
-      <div className="bg-main p-5 text-xl uppercase text-white ">
-        {currentHeader.title}
-      </div>
+      {currentHeader.title ? (
+        <div className="bg-main p-5 text-xl uppercase text-white ">
+          {currentHeader.title}
+        </div>
+      ) : (
+        <></>
+      )}
       <main className="h-full bg-white">{children}</main>
     </Content>
   );
