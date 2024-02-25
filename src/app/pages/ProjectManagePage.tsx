@@ -8,7 +8,7 @@ export default function ProjectManage() {
   useSetHeaderTitle([
     {
       title: `Quản lý project`,
-      path: "/project-manage",
+      path: "/project",
     },
   ]);
   const [current, setCurrent] = useState("notverified");

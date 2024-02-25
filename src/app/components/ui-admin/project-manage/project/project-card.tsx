@@ -2,7 +2,8 @@ import { Avatar, Button, Card, Divider, Space, Tooltip } from "antd";
 import { Project } from "../../../../models/project";
 import {
   formatCurrency,
-  formatToTimeDifference,
+  calculateDateToNow,
+  generateRequirementMsg,
 } from "../../../../utils/utils";
 import {
   EnvironmentOutlined,
@@ -10,7 +11,7 @@ import {
   FolderOpenOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import Link from "antd/es/typography/Link";
+import { Link } from "react-router-dom";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const {
@@ -31,15 +32,11 @@ export default function ProjectCard({ project }: { project: Project }) {
       className="overflow-auto"
       extra={
         <Tooltip title="Xem chi tiết">
-          <Button
-            type="link"
-            href="/"
-            icon={<EyeOutlined />}
-            className="ml-auto"
-            target="_blank"
-          >
-            Chi tiết
-          </Button>
+          <Link to={`${project.id}`}>
+            <Button icon={<EyeOutlined />} className="ml-auto">
+              Chi tiết
+            </Button>
+          </Link>
         </Tooltip>
       }
     >
@@ -47,24 +44,21 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div className="flex gap-5">
           <Space className="whitespace-nowrap">
             <FolderOpenOutlined />
-            {projectField}
+            {projectField.name}
           </Space>
           <Space className="whitespace-nowrap">
             <EnvironmentOutlined />
             {location}
           </Space>
           <div className="whitespace-nowrap">
-            Đã đăng cách đây{" "}
-            {formatToTimeDifference(
-              Math.floor(Date.now() / 1000) - publishedTime,
-            )}
+            Đã đăng cách đây {calculateDateToNow(publishedTime)}
           </div>
         </div>
         <div>{description}</div>
         <div className="flex items-center gap-5">
           <div className="whitespace-nowrap">
             <span className="font-bold">Kinh nghiệm: </span>
-            {freelancerRequirement}
+            {generateRequirementMsg(freelancerRequirement).short}
           </div>
           <Divider type="vertical" />
           <div className="whitespace-nowrap">
@@ -75,8 +69,8 @@ export default function ProjectCard({ project }: { project: Project }) {
           <Avatar size={"default"} icon={<UserOutlined />} />
           <div className="whitespace-nowrap">
             <span className="font-bold">Đăng bởi: </span>
-            <Link href={`/admin/accounts?name=${createdBy}`} target="_blank">
-              {createdBy}
+            <Link to={`/admin/user/${createdBy}`}>
+              <span className="text-blue-500">{createdBy}</span>
             </Link>
           </div>
           <Divider type="vertical" />

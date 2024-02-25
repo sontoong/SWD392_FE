@@ -4,38 +4,47 @@
 //   time: string;
 // };
 
-// type Skill = {
-//   name: string;
-// };
+export type OptionalRequirements = {
+  minimumCompletedProjects: "Tất cả" | "Ít nhất 3" | "Ít nhất 5" | "Ít nhất 10";
+  rating: "Tất cả" | "Trên 3 sao" | "Trên 4 sao";
+  location: "Tất cả" | "HCM";
+  language: "Tất cả" | "English" | "Vietnamese";
+  skills: Skill[];
+  questions?: string[];
+};
 
-// type Field = {
-//   name: string;
-//   skills: Skill[];
-// };
+export type Skill = {
+  name: string;
+};
 
-// type Requirement = {
-//   location: "Tất cả" | "location2";
-//   skills?: Skill[];
-//   experience: Experience;
-// };
+export type Field = {
+  name: string;
+  skills: Skill[];
+};
 
 export interface Project {
+  id: string;
   title: string;
   language: "English" | "Vietnamese";
   location: "Tất cả" | string;
-  projectField: string;
+  projectField: Field;
   description: string;
   contract?: string;
-  funding?: "hourly" | "fixed";
-  initialFunding?: number;
+  funding: "hourly" | "fixed";
+  initialFunding: number;
   freelancerRequirement: "junior" | "senior" | "expert";
+  optionalRequirements: OptionalRequirements;
   timeToComplete: 1 | 2 | 3;
   publishedTime: number;
   createdBy: string;
   paidAmount: number;
+  projectType: "longterm" | "shortterm" | "unknown";
   isCompleted: boolean;
   isVerified: boolean;
+  privacy: "public" | "private" | "freelancer";
   applicationCount: number;
+  inviteSent: number;
+  inviteAccepted: number;
 }
 
 export interface CreateProject {

@@ -1,12 +1,17 @@
-import { EllipsisOutlined } from "@ant-design/icons";
-import { Dropdown, MenuProps } from "antd";
+import {
+  EllipsisOutlined,
+  ExclamationCircleFilled,
+  WarningTwoTone,
+} from "@ant-design/icons";
+import { Dropdown, MenuProps, Modal } from "antd";
 import { UserDetail } from "../../models/user";
 import { Key } from "react";
+import { useNavigate } from "react-router-dom";
 
 export type CustomDropdownProps = {
   items: {
     key: Key;
-    label: string;
+    label: React.ReactNode;
     disabled?: boolean;
     dashed?: boolean;
     type?: "item" | "divider";
@@ -23,23 +28,59 @@ export function CustomDropdown({
   record,
   checkDisabled,
 }: CustomDropdownProps) {
+  const navigate = useNavigate();
+  const [modal, contextHolder] = Modal.useModal();
+
   const onMenuClick: MenuProps["onClick"] = (e) => {
     const { key } = e;
     switch (key) {
       case "activate": {
-        console.log(`${key}: ${record.name}`);
+        modal.confirm({
+          title: "Lưu ý",
+          icon: <ExclamationCircleFilled />,
+          content: <div>Bạn muốn kích hoạt tài khoản {record.name}</div>,
+          okText: "Đồng ý",
+          okType: "danger",
+          cancelText: "Hủy",
+          onOk() {
+            console.log(`${key}: ${record.name}`);
+          },
+          onCancel() {},
+        });
         break;
       }
       case "unactivate": {
-        console.log(`${key}: ${record.name}`);
+        modal.confirm({
+          title: "Lưu ý",
+          icon: <ExclamationCircleFilled />,
+          content: <div>Bạn muốn hủy kích hoạt tài khoản {record.name}</div>,
+          okText: "Đồng ý",
+          okType: "danger",
+          cancelText: "Hủy",
+          onOk() {
+            console.log(`${key}: ${record.name}`);
+          },
+          onCancel() {},
+        });
         break;
       }
       case "terminate": {
-        console.log(`${key}: ${record.name}`);
+        modal.confirm({
+          title: "Lưu ý",
+          icon: <WarningTwoTone twoToneColor="red" />,
+          content: <div>Bạn muốn cấm tài khoản {record.name}</div>,
+          okText: "Đồng ý",
+          okType: "danger",
+          cancelText: "Hủy",
+          onOk() {
+            console.log(`${key}: ${record.name}`);
+          },
+          onCancel() {},
+        });
         break;
       }
       case "edit": {
-        console.log(`${key}: ${record.name}`);
+        navigate(`user/edit/${record.id}`);
         break;
       }
 
@@ -49,18 +90,21 @@ export function CustomDropdown({
   };
 
   return (
-    <Dropdown
-      menu={{
-        items: items.map((item) => ({
-          ...item,
-          disabled: checkDisabled(item?.key, record),
-        })),
-        onClick: (e) => onMenuClick(e),
-      }}
-      placement="bottomLeft"
-      trigger={["click"]}
-    >
-      <EllipsisOutlined />
-    </Dropdown>
+    <>
+      <Dropdown
+        menu={{
+          items: items.map((item) => ({
+            ...item,
+            disabled: checkDisabled(item?.key, record),
+          })),
+          onClick: (e) => onMenuClick(e),
+        }}
+        placement="bottomLeft"
+        trigger={["click"]}
+      >
+        <EllipsisOutlined />
+      </Dropdown>
+      {contextHolder}
+    </>
   );
 }

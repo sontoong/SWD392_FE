@@ -79,11 +79,11 @@ export default function MyHeader() {
 
   const navItems = [
     {
-      key: "/admin/user-manage",
+      key: "/admin/user",
       label: "Quản Lý Tài Khoản",
     },
     {
-      key: "/admin/project-manage",
+      key: "/admin/project",
       label: "Quản Lý Project",
     },
     {
@@ -100,7 +100,9 @@ export default function MyHeader() {
         items={navItems}
         style={{ flex: 1, minWidth: 0 }}
         onClick={onClick}
-        selectedKeys={[location.pathname]}
+        selectedKeys={[
+          `/${location.pathname.split("/").slice(1, 3).join("/")}`,
+        ]}
       />
       <Dropdown
         menu={{ items }}

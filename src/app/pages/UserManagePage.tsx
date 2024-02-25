@@ -12,7 +12,7 @@ export default function UserManage() {
   useSetHeaderTitle([
     {
       title: `Quản lý tài khoản`,
-      path: "/user-manage",
+      path: "/user",
     },
   ]);
 
@@ -23,7 +23,7 @@ export default function UserManage() {
       icon: <SmileOutlined />,
     },
     { key: "unactivate", label: "Hủy kích hoạt tài khoản" },
-    { key: "terminate", label: "Cấm tài khoản" },
+    { key: "terminate", label: "Cấm tài khoản", danger: true },
     { key: "edit", label: "Chỉnh sửa tài khoản" },
   ];
 

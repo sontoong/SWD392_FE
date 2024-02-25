@@ -1,6 +1,7 @@
 import { Table, TableProps } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
+import { Link } from "react-router-dom";
 
 export default function VerifyUserPage() {
   useSetHeaderTitle([
@@ -84,9 +85,9 @@ export default function VerifyUserPage() {
       title: "",
       key: "actions",
       render: (_, record) => (
-        <a href={`/user/${record.id}`} target="_blank">
+        <Link to={`/user/${record.id}`}>
           <EyeOutlined />
-        </a>
+        </Link>
       ),
     },
   ];

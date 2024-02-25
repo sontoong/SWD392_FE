@@ -5,11 +5,14 @@ import { ROLE } from "../../constants/role";
 const Layout = lazy(() => import("../components/layout/public-layout"));
 const Layout2 = lazy(() => import("../components/layout/admin-layout"));
 
+//public
 const HomePage = lazy(() => import("../pages/HomePage"));
 
+//admin
 const UserManagePage = lazy(() => import("../pages/UserManagePage"));
 const ProjectManagePage = lazy(() => import("../pages/ProjectManagePage"));
 const VerifyUserPage = lazy(() => import("../pages/VerifyUserPage"));
+const ProjectDetail = lazy(() => import("../pages/ProjectDetailAdminPage"));
 
 const Forbidden = lazy(() => import("../pages/ForbiddenPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -38,7 +41,11 @@ const AdminLayout = () => {
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <UserLayout />,
+    element: (
+      <Suspense fallback={<></>}>
+        <UserLayout />
+      </Suspense>
+    ),
     children: [
       {
         path: "",
@@ -93,25 +100,29 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <PrivateRoute inverted={true}>
-        <LoginPage />
-      </PrivateRoute>
+      <Suspense fallback={<></>}>
+        <PrivateRoute inverted={true}>
+          <LoginPage />
+        </PrivateRoute>
+      </Suspense>
     ),
   },
   {
     path: "/admin",
     element: (
-      <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
-        <AdminLayout />
-      </PrivateRoute>
+      <Suspense fallback={<></>}>
+        <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
+          <AdminLayout />
+        </PrivateRoute>
+      </Suspense>
     ),
     children: [
       {
         path: "",
-        element: <Navigate to={"user-manage"} />,
+        element: <Navigate to={"user"} />,
       },
       {
-        path: "user-manage",
+        path: "user",
         element: (
           <Suspense fallback={<></>}>
             <UserManagePage />
@@ -119,7 +130,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "project-manage",
+        path: "project",
         element: (
           <Suspense fallback={<></>}>
             <ProjectManagePage />
@@ -131,6 +142,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<></>}>
             <VerifyUserPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "project/:projectId",
+        element: (
+          <Suspense fallback={<></>}>
+            <ProjectDetail />
           </Suspense>
         ),
       },
