@@ -9,7 +9,7 @@ export default function BackButton() {
     <Button type="text" className="mb-3" onClick={() => navigate(-1)}>
       <Space className="font-semibold text-blue-500">
         <LeftOutlined />
-        <span>Back</span>
+        <span>Quay lại</span>
       </Space>
     </Button>
   );
