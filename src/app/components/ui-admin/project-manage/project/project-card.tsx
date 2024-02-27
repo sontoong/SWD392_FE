@@ -1,10 +1,7 @@
 import { Avatar, Button, Card, Divider, Space, Tooltip } from "antd";
 import { Project } from "../../../../models/project";
-import {
-  formatCurrency,
-  calculateDateToNow,
-  generateRequirementMsg,
-} from "../../../../utils/utils";
+import { formatCurrency, calculateDateToNow } from "../../../../utils/utils";
+import { generateRequirementMsg } from "../../../../utils/generators";
 import {
   EnvironmentOutlined,
   EyeOutlined,
@@ -24,6 +21,7 @@ export default function ProjectCard({ project }: { project: Project }) {
     paidAmount,
     applicationCount,
     createdBy,
+    createdById,
   } = project;
   return (
     <Card
@@ -69,7 +67,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           <Avatar size={"default"} icon={<UserOutlined />} />
           <div className="whitespace-nowrap">
             <span className="font-bold">Đăng bởi: </span>
-            <Link to={`/admin/user/${createdBy}`}>
+            <Link to={`/admin/user/${createdById}`}>
               <span className="text-blue-500">{createdBy}</span>
             </Link>
           </div>

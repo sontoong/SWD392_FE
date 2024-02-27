@@ -4,7 +4,7 @@ import {
   WarningTwoTone,
 } from "@ant-design/icons";
 import { Dropdown, MenuProps, Modal } from "antd";
-import { UserDetail } from "../../models/user";
+import { UserDetailTable } from "../../models/user";
 import { Key } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -19,8 +19,8 @@ export type CustomDropdownProps = {
     className?: string;
     [key: string]: any;
   }[];
-  record: UserDetail;
-  checkDisabled: (key: Key | undefined, record: UserDetail) => boolean;
+  record: UserDetailTable;
+  checkDisabled: (key: Key | undefined, record: UserDetailTable) => boolean;
 };
 
 export function CustomDropdown({
@@ -34,6 +34,10 @@ export function CustomDropdown({
   const onMenuClick: MenuProps["onClick"] = (e) => {
     const { key } = e;
     switch (key) {
+      case "information": {
+        navigate(`${record.id}`);
+        break;
+      }
       case "activate": {
         modal.confirm({
           title: "Lưu ý",

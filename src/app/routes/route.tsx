@@ -11,8 +11,9 @@ const HomePage = lazy(() => import("../pages/HomePage"));
 //admin
 const UserManagePage = lazy(() => import("../pages/UserManagePage"));
 const ProjectManagePage = lazy(() => import("../pages/ProjectManagePage"));
-const VerifyUserPage = lazy(() => import("../pages/VerifyUserPage"));
+const VerifyUserPage = lazy(() => import("../pages/UserVerifyPage"));
 const ProjectDetail = lazy(() => import("../pages/ProjectDetailAdminPage"));
+const UserDetailAdminPage = lazy(() => import("../pages/UserDetailAdminPage"));
 
 const Forbidden = lazy(() => import("../pages/ForbiddenPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -130,10 +131,26 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "user/:userId",
+        element: (
+          <Suspense fallback={<></>}>
+            <UserDetailAdminPage />
+          </Suspense>
+        ),
+      },
+      {
         path: "project",
         element: (
           <Suspense fallback={<></>}>
             <ProjectManagePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "project/:projectId",
+        element: (
+          <Suspense fallback={<></>}>
+            <ProjectDetail />
           </Suspense>
         ),
       },
@@ -146,10 +163,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "project/:projectId",
+        path: "verify-user/:userId",
         element: (
           <Suspense fallback={<></>}>
-            <ProjectDetail />
+            <UserDetailAdminPage verify={true} />
           </Suspense>
         ),
       },

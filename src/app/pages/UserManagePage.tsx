@@ -1,12 +1,13 @@
 import { Table, TableProps } from "antd";
-import { SmileOutlined } from "@ant-design/icons";
-import { UserDetail } from "../models/user";
+import { UserDetailTable } from "../models/user";
 import {
   CustomDropdown,
   CustomDropdownProps,
 } from "../components/ui-admin/dropdown";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 import { Key } from "react";
+import { user } from "../../constants/testData";
+import { generateVerifyMsg } from "../utils/generators";
 
 export default function UserManage() {
   useSetHeaderTitle([
@@ -18,63 +19,54 @@ export default function UserManage() {
 
   const dropdownItems: CustomDropdownProps["items"] = [
     {
+      key: "information",
+      label: "Xem thông tin tài khoản",
+    },
+    {
       key: "activate",
       label: "Kích hoạt tài khoản",
-      icon: <SmileOutlined />,
     },
     { key: "unactivate", label: "Hủy kích hoạt tài khoản" },
     { key: "terminate", label: "Cấm tài khoản", danger: true },
     { key: "edit", label: "Chỉnh sửa tài khoản" },
   ];
 
-  const checkDisabled = (key: Key | undefined, record: UserDetail): boolean => {
-    const { status } = record;
+  const checkDisabled = (
+    key: Key | undefined,
+    record: UserDetailTable,
+  ): boolean => {
+    const { isVerified } = record;
     switch (key) {
       case "activate": {
-        return status === "Đã xác thực";
+        return isVerified === true;
       }
       case "unactivate": {
-        return status === "Chưa xác thực";
+        return isVerified === false;
       }
       default:
         return false;
     }
   };
 
-  const data: UserDetail[] = [
+  const data: UserDetailTable[] = [
     {
       key: "1",
-      id: "01",
-      name: "Nguyen van a",
-      email: "a@gmail.com",
-      phone: "0123456789",
-      dob: "01/01/2000",
-      accountType: "Nhà tuyển dụng",
-      status: "Đã xác thực",
+      ...user,
+      status: generateVerifyMsg(user.isVerified),
     },
     {
       key: "2",
-      id: "01",
-      name: "Nguyen van b",
-      email: "a@gmail.com",
-      phone: "0123456789",
-      dob: "01/01/2000",
-      accountType: "Nhà tuyển dụng",
-      status: "Đã xác thực",
+      ...user,
+      status: generateVerifyMsg(user.isVerified),
     },
     {
       key: "3",
-      id: "01",
-      name: "Nguyen van b",
-      email: "a@gmail.com",
-      phone: "0123456789",
-      dob: "01/01/2000",
-      accountType: "Nhà tuyển dụng",
-      status: "Chưa xác thực",
+      ...user,
+      status: generateVerifyMsg(user.isVerified),
     },
   ];
 
-  const columns: TableProps<UserDetail>["columns"] = [
+  const columns: TableProps<UserDetailTable>["columns"] = [
     {
       title: "ID",
       dataIndex: "id",

@@ -37,6 +37,7 @@ export interface Project {
   timeToComplete: 1 | 2 | 3;
   publishedTime: number;
   createdBy: string;
+  createdById: string;
   paidAmount: number;
   projectType: "longterm" | "shortterm" | "unknown";
   isCompleted: boolean;

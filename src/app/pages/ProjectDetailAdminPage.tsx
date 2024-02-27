@@ -19,12 +19,11 @@ import {
   theme,
   Typography,
 } from "antd";
+import { calculateDateToNow, formatCurrency } from "../utils/utils";
 import {
-  calculateDateToNow,
-  formatCurrency,
-  generateProjectTypeMsg,
   generateRequirementMsg,
-} from "../utils/utils";
+  generateProjectTypeMsg,
+} from "../utils/generators";
 import { useLocation, useNavigate } from "react-router-dom";
 import { project } from "../../constants/testData";
 import TextArea from "antd/es/input/TextArea";

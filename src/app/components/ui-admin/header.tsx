@@ -94,7 +94,12 @@ export default function MyHeader() {
 
   return (
     <Header className="fixed z-50 flex w-full border-b border-gray-200 bg-white px-5">
-      <img src={logo} alt="" className="px-10 py-1" />
+      <img
+        src={logo}
+        alt=""
+        className="px-10 py-1 hover:cursor-pointer"
+        onClick={() => navigate("/admin")}
+      />
       <Menu
         mode="horizontal"
         items={navItems}

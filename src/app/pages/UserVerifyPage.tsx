@@ -1,6 +1,9 @@
 import { Table, TableProps } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
+import { UserDetailTable } from "../models/user";
+import { user } from "../../constants/testData";
+import { generateVerifyMsg } from "../utils/generators";
 import { Link } from "react-router-dom";
 
 export default function VerifyUserPage() {
@@ -11,41 +14,25 @@ export default function VerifyUserPage() {
     },
   ]);
 
-  interface DataType {
-    key: string;
-    id: string;
-    name: string;
-    email: string;
-    phone: string;
-    dob: string;
-    accountType: "Nhà tuyển dụng" | "Nguời ứng tuyển";
-    status: "Đã xác thực" | "Chưa xác thực";
-  }
-
-  const data: DataType[] = [
+  const data: UserDetailTable[] = [
     {
       key: "1",
-      id: "01",
-      name: "Nguyen van a",
-      email: "a@gmail.com",
-      phone: "0123456789",
-      dob: "01/01/2000",
-      accountType: "Nhà tuyển dụng",
-      status: "Đã xác thực",
+      ...user,
+      status: generateVerifyMsg(user.isVerified),
     },
     {
       key: "2",
-      id: "01",
-      name: "Nguyen van b",
-      email: "a@gmail.com",
-      phone: "0123456789",
-      dob: "01/01/2000",
-      accountType: "Nhà tuyển dụng",
-      status: "Đã xác thực",
+      ...user,
+      status: generateVerifyMsg(user.isVerified),
+    },
+    {
+      key: "3",
+      ...user,
+      status: generateVerifyMsg(user.isVerified),
     },
   ];
 
-  const columns: TableProps<DataType>["columns"] = [
+  const columns: TableProps<UserDetailTable>["columns"] = [
     {
       title: "ID",
       dataIndex: "id",
@@ -85,7 +72,7 @@ export default function VerifyUserPage() {
       title: "",
       key: "actions",
       render: (_, record) => (
-        <Link to={`/user/${record.id}`}>
+        <Link to={`${record.id}`}>
           <EyeOutlined />
         </Link>
       ),
