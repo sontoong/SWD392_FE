@@ -36,6 +36,8 @@ import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 import { generateVerifyMsg } from "../utils/generators";
 import { formatCurrency } from "../utils/utils";
 import TextArea from "antd/es/input/TextArea";
+import { qualityFactors } from "../../constants/quality";
+import { OkButton } from "../components/button/buttons";
 
 const { Content, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
@@ -443,13 +445,13 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
           <Space direction="vertical" size={"large"}>
             {verify ? (
               <Space direction="vertical" size={"middle"}>
-                <Button
+                <OkButton
                   block
                   onClick={() => {
                     modal.confirm({
                       title: "Lưu ý",
                       icon: <ExclamationCircleFilled />,
-                      content: <div>Bạn muốn duyệt dự án</div>,
+                      content: <div>Bạn muốn duyệt hồ sơ</div>,
                       okText: "Đồng ý",
                       okType: "default",
                       cancelText: "Hủy",
@@ -461,7 +463,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
                   }}
                 >
                   Xác nhận hồ sơ
-                </Button>
+                </OkButton>
                 <Button
                   danger
                   type="default"
@@ -548,11 +550,3 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
     </>
   );
 }
-
-const qualityFactors = [
-  { name: "Chất lượng", rating: 5, ratingCount: 59 },
-  { name: "Chi phí", rating: 4.5, ratingCount: 59 },
-  { name: "Chất lượng", rating: 1, ratingCount: 59 },
-  { name: "Chất lượng", rating: 2, ratingCount: 59 },
-  { name: "Chất lượng", rating: 3, ratingCount: 59 },
-];

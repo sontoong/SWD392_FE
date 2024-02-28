@@ -18,7 +18,7 @@ export function useAuth() {
     dispatch(loginStart());
     try {
       const { data } = await baseApi.post(`/auth/login`, {
-        input: value,
+        ...value,
       });
       const { link, access_token, ...user } = data.data;
       dispatch(loginSuccess(user));
