@@ -9,38 +9,20 @@ import {
   notification,
 } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import apiJWT from "../../utils/api";
-import { fetchLogo, fetchDefaultAvatar } from "../../../constants/images";
+import { useImageFetcher } from "../../hooks/useGetImg";
 
 export default function MyHeader() {
   const location = useLocation();
   const navigate = useNavigate();
+  const logo = useImageFetcher("logo");
+  const defaultAvatar = useImageFetcher("avatar");
+
   const { state } = useAuth();
-
   const [loading, setLoading] = useState(false);
-  const [logo, setLogo] = useState<string>("");
-  const [avatar, setAvatar] = useState<string>("");
-
-  const logoImg = async () => {
-    const imageUrl = await fetchLogo();
-    if (imageUrl) {
-      setLogo(imageUrl);
-    }
-  };
-  const defaultAvatar = async () => {
-    const imageUrl = await fetchDefaultAvatar();
-    if (imageUrl) {
-      setAvatar(imageUrl);
-    }
-  };
-
-  useEffect(() => {
-    logoImg();
-    defaultAvatar();
-  }, []);
 
   const logOut = async () => {
     setLoading(true);
@@ -119,7 +101,7 @@ export default function MyHeader() {
           className="fixed right-4 top-3 cursor-pointer"
           size={"large"}
           icon={<UserOutlined />}
-          src={state.currentUser.avatar || avatar}
+          src={state.currentUser.avatar || defaultAvatar}
         />
       </Dropdown>
       <Modal footer={null} closable={false} open={loading}>

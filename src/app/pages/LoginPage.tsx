@@ -12,6 +12,7 @@ import {
   LANGUAGE_OPTIONS,
   LOGIN_PAGE_TEXT,
 } from "../utils/language";
+import { useImageFetcher } from "../hooks/useGetImg";
 
 export interface FormValues {
   email: string;
@@ -40,6 +41,7 @@ const SelectCustom = ({ onChangeLanguage }: SelectCustomProps) => {
   );
 };
 function LoginPage() {
+  const logo = useImageFetcher("logo");
   const initialValues = {
     email: "",
     password: "",
@@ -68,7 +70,7 @@ function LoginPage() {
       .email(validate.email.invalid)
       .required(validate.email.required),
     password: Yup.string()
-      .min(6, validate.password.length)
+      .min(4, validate.password.length)
       .required(validate.password.required),
   });
 
@@ -127,13 +129,8 @@ function LoginPage() {
         </Formik>
       </div>
       <div className="hidden sm:block sm:w-[70%]">
-        {/* <img
-          src="https://firebasestorage.googleapis.com/v0/b/class-project-08.appspot.com/o/pngwing.com.png?alt=media&token=8d3d167e-17d5-4062-a3ba-9b0aedbb0e47"
-          alt="logo"
-          className="absolute right-1 w-[100px]"
-        /> */}
-
-        <MyCarousel></MyCarousel>
+        <img src={logo} alt="logo" className="absolute right-1 w-[100px]" />
+        <MyCarousel />
       </div>
     </div>
   );

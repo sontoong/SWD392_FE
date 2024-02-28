@@ -5,35 +5,17 @@ import { Menu } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import apiJWT from "../../utils/api";
 import { useAuth } from "../../hooks/useAuth";
-import { useEffect, useState } from "react";
-import { fetchDefaultAvatar, fetchLogo } from "../../../constants/images";
+import { useState } from "react";
+import { useGetImg } from "../../hooks/useGetImg";
 
 export default function MyHeader() {
   const location = useLocation();
   const navigate = useNavigate();
+  const logo = useGetImg("logo");
+  const defaultAvatar = useGetImg("defaultAvatar");
+
   const { state } = useAuth();
-
   const [loading, setLoading] = useState(false);
-  const [logo, setLogo] = useState<string>("");
-  const [avatar, setAvatar] = useState<string>("");
-
-  const logoImg = async () => {
-    const imageUrl = await fetchLogo();
-    if (imageUrl) {
-      setLogo(imageUrl);
-    }
-  };
-  const defaultAvatar = async () => {
-    const imageUrl = await fetchDefaultAvatar();
-    if (imageUrl) {
-      setAvatar(imageUrl);
-    }
-  };
-
-  useEffect(() => {
-    logoImg();
-    defaultAvatar();
-  }, []);
 
   const logOut = async () => {
     setLoading(true);
@@ -112,7 +94,7 @@ export default function MyHeader() {
           className="fixed right-4 top-3 cursor-pointer"
           size={"large"}
           icon={<UserOutlined />}
-          src={state.currentUser.avatar || avatar}
+          src={state.currentUser.avatar || defaultAvatar}
         />
       </Dropdown>
       <Modal footer={null} closable={false} open={loading}>
