@@ -73,15 +73,11 @@ export default function MyHeader() {
   const navItems = [
     {
       key: "/projects",
-      label: "Tìm Dự Án",
+      label: "Tìm Project",
     },
     {
       key: "/username/projects",
-      label: "Quản Lý Dự án",
-    },
-    {
-      key: "/username",
-      label: "Thống Kê",
+      label: "Đăng Project",
     },
   ];
 

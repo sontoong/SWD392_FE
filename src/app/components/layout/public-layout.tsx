@@ -1,4 +1,4 @@
-import MyHeader from "../ui/header";
+import GuestHeader from "../ui/header";
 import MyFooter from "../ui/footer";
 import MyContent from "../ui/content";
 import { Layout, Spin } from "antd";
@@ -36,7 +36,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Layout className="min-h-screen">
       <Layout className="bg-white">
-        <MyHeader />
+        <GuestHeader />
         <MyContent children={children} />
         <MyFooter />
       </Layout>
