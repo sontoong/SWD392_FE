@@ -10,4 +10,6 @@ export const Envs = {
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_APP_FIREBASE_ID,
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+
+  clientId: import.meta.env.VITE_GOOGLEOAUTH_CLIENT_ID,
 };

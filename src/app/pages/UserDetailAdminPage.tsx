@@ -88,7 +88,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
             borderRadius: borderRadiusLG,
           }}
         >
-          <BackButton />
+          <BackButton className="mb-3" />
           <Space direction="vertical" className="w-full" size={"large"}>
             {/* overview */}
             <Card
