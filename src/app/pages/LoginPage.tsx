@@ -80,7 +80,6 @@ function LoginPage() {
         <div className="float-right">
           <SelectCustom onChangeLanguage={changeLanguage} />
         </div>
-
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
