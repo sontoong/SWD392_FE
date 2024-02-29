@@ -22,7 +22,6 @@ import {
   Select,
   Skeleton,
   Space,
-  Tag,
   Typography,
   theme,
 } from "antd";
@@ -38,6 +37,7 @@ import { formatCurrency } from "../utils/utils";
 import TextArea from "antd/es/input/TextArea";
 import { qualityFactors } from "../../constants/quality";
 import { OkButton } from "../components/button/buttons";
+import CustomTag from "../components/ui/tag";
 
 const { Content, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
@@ -232,11 +232,11 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
             >
               <Space direction="vertical" size={"middle"} className="w-full">
                 <Row className="flex items-center">
-                  <Tag color="#ffa500">
+                  <CustomTag>
                     <Title level={5} style={{ margin: "0", color: "white" }}>
                       {averageRating}
                     </Title>
-                  </Tag>
+                  </CustomTag>
                   <Rate disabled defaultValue={averageRating} allowHalf />
                 </Row>
                 <Row
@@ -342,9 +342,9 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
               type="inner"
             >
               <Space size={[0, 8]} wrap>
-                <Tag color="#87d068">Front-end Developing</Tag>
-                <Tag color="#87d068">Back-end Developing</Tag>
-                <Tag color="#87d068">UI/UX Design</Tag>
+                <CustomTag>Front-end Developing</CustomTag>
+                <CustomTag>Back-end Developing</CustomTag>
+                <CustomTag>UI/UX Design</CustomTag>
               </Space>
             </Card>
             {/* languages */}
@@ -361,9 +361,9 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
             >
               <Space size={[0, 8]} wrap>
                 {language.map((language, index) => (
-                  <Tag key={index} color="#87d068">
+                  <CustomTag key={index} color="#87d068">
                     {language}
-                  </Tag>
+                  </CustomTag>
                 ))}
               </Space>
             </Card>
