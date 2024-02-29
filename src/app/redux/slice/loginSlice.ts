@@ -5,7 +5,7 @@ export interface CurrentUser {
   email: string;
   avatar?: string;
   name: string;
-  role_id: string;
+  role: string;
   isFirstLogin: boolean;
 }
 

@@ -31,12 +31,7 @@ const Admin = {
     requests.patch(`admin/deactivate/${username}`, data),
 };
 
-const Role = {
-  checkRole: () => requests.get("role/get-role"),
-};
-
 const agent = {
-  Role,
   Admin,
 };
 export default agent;

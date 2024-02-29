@@ -13,7 +13,7 @@ export default function UserManage() {
   useSetHeaderTitle([
     {
       title: `Quản lý tài khoản`,
-      path: "/user",
+      path: "/users",
     },
   ]);
 
