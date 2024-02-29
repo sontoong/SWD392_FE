@@ -1,5 +1,6 @@
-import AdminHeader from "../ui/header";
-import AdminContent from "../ui-admin/content";
+import FreelancerHeader from "../ui/header";
+import FreelanceFooter from "../ui/footer";
+import FreelanceContent from "../ui-freelancer/content";
 import { Layout } from "antd";
 // import { useCallback, useEffect, useState } from "react";
 // import agent from "../../utils/agent";
@@ -35,8 +36,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Layout className="min-h-screen">
       <Layout className="bg-white">
-        <AdminHeader />
-        <AdminContent children={children} />
+        <FreelancerHeader />
+        <FreelanceContent children={children} />
+        <FreelanceFooter />
       </Layout>
     </Layout>
   );

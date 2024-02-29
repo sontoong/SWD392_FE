@@ -1,5 +1,6 @@
-import AdminHeader from "../ui/header";
-import AdminContent from "../ui-admin/content";
+import EnterpriseHeader from "../ui/header";
+import EnterpriseFooter from "../ui/footer";
+import EnterpriseContent from "../ui-enterprise/content";
 import { Layout } from "antd";
 // import { useCallback, useEffect, useState } from "react";
 // import agent from "../../utils/agent";
@@ -35,8 +36,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Layout className="min-h-screen">
       <Layout className="bg-white">
-        <AdminHeader />
-        <AdminContent children={children} />
+        <EnterpriseHeader />
+        <EnterpriseContent children={children} />
+        <EnterpriseFooter />
       </Layout>
     </Layout>
   );

@@ -1,6 +1,6 @@
 import GuestHeader from "../ui/header";
-import MyFooter from "../ui/footer";
-import MyContent from "../ui/content";
+import GuestFooter from "../ui/footer";
+import GuestContent from "../ui/content";
 import { Layout } from "antd";
 // import { useCallback, useEffect, useState } from "react";
 // import agent from "../../utils/agent";
@@ -37,8 +37,8 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <Layout className="min-h-screen">
       <Layout className="bg-white">
         <GuestHeader />
-        <MyContent children={children} />
-        <MyFooter />
+        <GuestContent children={children} />
+        <GuestFooter />
       </Layout>
     </Layout>
   );

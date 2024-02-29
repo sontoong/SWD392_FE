@@ -134,7 +134,7 @@ export const router = createBrowserRouter([
         element: <Navigate to={"user"} />,
       },
       {
-        path: "user",
+        path: "users",
         element: (
           <Suspense fallback={<></>}>
             <UserManagePage />
@@ -142,7 +142,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "user/:userId",
+        path: "users/:userId",
         element: (
           <Suspense fallback={<></>}>
             <UserDetailAdminPage />
@@ -150,7 +150,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "project",
+        path: "projects",
         element: (
           <Suspense fallback={<></>}>
             <ProjectManagePage />
@@ -158,7 +158,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "project/:projectId",
+        path: "projects/:projectId",
         element: (
           <Suspense fallback={<></>}>
             <ProjectDetail />
