@@ -1,5 +1,5 @@
-import { UploadInput } from "../components/input/upload-input";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
+import EnterpriseDetailPage from "./EnterpriseDetailPage";
 
 export default function TestPage() {
   useSetHeaderTitle([
@@ -11,10 +11,7 @@ export default function TestPage() {
 
   return (
     <div>
-      Logo img:
-      <UploadInput name={"logo"} />
-      Default avatar img:
-      <UploadInput name={"default_avatar"} />
+        <EnterpriseDetailPage/>
     </div>
   );
 }
