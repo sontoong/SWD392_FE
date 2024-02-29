@@ -48,14 +48,13 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const [reason, setReason] = useState<string>();
   useSetHeaderTitle([
     {
       title: `Thông tin tài khoản`,
       path: location.pathname,
     },
   ]);
-
-  const [reason, setReason] = useState<string>();
 
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);

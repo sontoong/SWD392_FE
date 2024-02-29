@@ -24,9 +24,9 @@ export function useAuth() {
       const { data } = await baseApi.post(`/auth/login`, {
         ...value,
       });
-      const { link, access_token, ...user } = data.data;
+      const { link, token, ...user } = data.data;
       dispatch(loginSuccess(user));
-      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("link", JSON.stringify(link));
       navigate(link);
@@ -54,9 +54,9 @@ export function useAuth() {
       const { data } = await baseApi.post(`/auth/signup`, {
         ...value,
       });
-      const { link, access_token, ...user } = data.data;
+      const { link, token, ...user } = data.data;
       dispatch(loginSuccess(user));
-      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("link", JSON.stringify(link));
       navigate(link);
