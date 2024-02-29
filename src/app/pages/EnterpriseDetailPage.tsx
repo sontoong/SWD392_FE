@@ -131,7 +131,7 @@ export default function EnterpriseDetailPage() {
                     color: "#74BA7B",
                   }}
                 >
-                  Thông tin công ti
+                  Thông tin công ty
                 </Title>
               }
               type="inner"
@@ -236,7 +236,7 @@ export default function EnterpriseDetailPage() {
                       <div>33333333333333</div>
                     </div>
                     <div>
-                      <Title level={3}>Mã số thuế</Title>
+                      <Title level={3}>Địa chỉ</Title>
                       <div className="w-[40%]">Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Hồ Chí Minh, Việt Nam</div>
                     </div>
                   </Space>
