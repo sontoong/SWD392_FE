@@ -56,8 +56,8 @@ export default function MyHeader() {
       key,
       icon,
       children,
-      label: <Link to={`${key}`}>{label}</Link>,
-    } as ItemType;
+      label,
+    };
   }
 
   const getConditionalItems = (): ItemType[] => {
@@ -65,27 +65,27 @@ export default function MyHeader() {
       case "freelancer":
         return [
           getItem("Tìm Project", "/projects"),
-          getItem("Quản Lý Project", "/name/projects"),
-          getItem("Thống Kê", "", "", [
+          getItem("Quản Lý Project", "/fd/projects"),
+          getItem("Thống Kê", "/fd/report", "", [
             {
               label: "Thống Kê Thu Nhập",
-              key: "",
+              key: "/fd/report/earnings",
             },
             {
               label: "Lịch Sử Giao Dịch",
-              key: "",
+              key: "/fd/report/transactions",
             },
           ]),
         ];
       case "enterprise":
         return [
-          getItem("Tìm Hồ Sơ", ""),
-          getItem("Quản Lý Project", "", "", [
-            { label: "Danh Sách Project", key: "" },
-            { label: "Đăng Tuyển Dụng", key: "new-project" },
+          getItem("Tìm Hồ Sơ", "/freelancers"),
+          getItem("Quản Lý Project", "/ed", "", [
+            { label: "Danh Sách Project", key: "/ed/projects" },
+            { label: "Đăng Tuyển Dụng", key: "/ed/new-project" },
           ]),
-          getItem("Thống Kê", "", "", [
-            { label: "Thống Kê Thu Nhập", key: "" },
+          getItem("Thống Kê", "/ed/report", "", [
+            { label: "Lịch Sử Giao Dịch", key: "/ed/report/transactions" },
           ]),
         ];
       case "admin":
@@ -97,23 +97,57 @@ export default function MyHeader() {
       default:
         return [
           getItem("Tìm Project", "/projects"),
-          getItem("Đăng Tuyển Dụng", "/new-project"),
+          getItem("Tìm Hồ Sơ", "/freelancers"),
         ];
     }
   };
 
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      icon: <UserOutlined />,
-      label: <Link to={`/account`}>Thông tin cá nhân</Link>,
-    },
-    {
-      key: "2",
-      icon: <LogoutOutlined />,
-      label: <div onClick={logOut}>Đăng xuất</div>,
-    },
-  ];
+  const getConditionalDropdown = (): ItemType[] => {
+    switch (role) {
+      case "freelancer":
+        return [
+          getItem(
+            <Link to={`/fd/account`}>Thông tin cá nhân</Link>,
+            "/account",
+            <UserOutlined />,
+          ),
+          getItem(
+            <div onClick={logOut}>Đăng xuất</div>,
+            "",
+            <LogoutOutlined />,
+          ),
+        ];
+      case "enterprise":
+        return [
+          getItem(
+            <Link to={`/ed/account`}>Thông tin cá nhân</Link>,
+            "/account",
+            <UserOutlined />,
+          ),
+          getItem(
+            <div onClick={logOut}>Đăng xuất</div>,
+            "",
+            <LogoutOutlined />,
+          ),
+        ];
+      case "admin":
+        return [
+          getItem(
+            <div onClick={logOut}>Đăng xuất</div>,
+            "",
+            <LogoutOutlined />,
+          ),
+        ];
+      default:
+        return [];
+    }
+  };
+
+  const items: ItemType[] = getConditionalDropdown();
+
+  const onClick: MenuProps["onClick"] = (e) => {
+    if (e.key) navigate(e.key);
+  };
 
   return (
     <Header className="fixed z-50 flex w-full border-b border-gray-200 bg-white px-5">
@@ -130,6 +164,7 @@ export default function MyHeader() {
         selectedKeys={[
           `/${location.pathname.split("/").slice(1, 3).join("/")}`,
         ]}
+        onClick={onClick}
       />
       {Object.values(state.currentUser).length ? (
         <Dropdown

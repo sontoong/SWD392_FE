@@ -13,9 +13,9 @@ const PrivateRoute = ({
   children,
   requiredRoles,
 }: PrivateRouteProps) => {
-  const access_token = localStorage.getItem("access_token");
-  const isAuth = access_token ? true : false;
-  const { role: currentRole } = useAppSelector((state) => state.roleCheck);
+  const token = localStorage.getItem("token");
+  const isAuth = token ? true : false;
+  const { role } = useAppSelector((state) => state.auth.currentUser);
   // const user = localStorage.getItem('user');
   // const userObj = user ? JSON.parse(user) : {};
   // const isFirstLogin = userObj.user.isFirstLogin;
@@ -28,8 +28,7 @@ const PrivateRoute = ({
     return isAuth ? <Navigate to="/home" /> : children;
   }
 
-  if (currentRole.role && !requiredRoles?.some((r) => currentRole.role === r))
-    return <Forbidden />;
+  if (role && !requiredRoles?.some((r) => role === r)) return <Forbidden />;
 
   return isAuth ? children : <Navigate to="/login" />;
 };

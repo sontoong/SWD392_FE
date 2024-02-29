@@ -10,12 +10,19 @@ const LoginPage = lazy(() => import("../pages/LoginPage"));
 const SignupPage = lazy(() => import("../pages/SignupPage"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 
+//freelancer
+const FreelancerDetailPage = lazy(
+  () => import("../pages/FreelancerDetailPage"),
+);
+
 //admin
 const UserManagePage = lazy(() => import("../pages/UserManagePage"));
 const ProjectManagePage = lazy(() => import("../pages/ProjectManagePage"));
 const VerifyUserPage = lazy(() => import("../pages/UserVerifyPage"));
 const ProjectDetail = lazy(() => import("../pages/ProjectDetailAdminPage"));
-const UserDetailAdminPage = lazy(() => import("../pages/UserDetailAdminPage"));
+const UserDetailAdminPage = lazy(
+  () => import("../pages/FreelancerDetailAdminPage"),
+);
 
 const Forbidden = lazy(() => import("../pages/ForbiddenPage"));
 const PrivateRoute = lazy(() => import("./proute"));
@@ -24,7 +31,7 @@ const ErrorPage = lazy(() => import("../pages/404Page"));
 
 const Template = lazy(() => import("../pages/template"));
 
-const UserLayout = () => {
+const PublicLayout = () => {
   return (
     <Layout>
       <Outlet />
@@ -45,7 +52,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: (
       <Suspense fallback={<></>}>
-        <UserLayout />
+        <PublicLayout />
       </Suspense>
     ),
     children: [
@@ -60,6 +67,26 @@ export const router = createBrowserRouter([
       {
         path: "home",
         element: <Navigate to={"/"} />,
+      },
+      {
+        path: "fd/account",
+        element: (
+          <Suspense fallback={<></>}>
+            <PrivateRoute inverted={false} requiredRoles={[ROLE.FREELANCER]}>
+              <FreelancerDetailPage />
+            </PrivateRoute>
+          </Suspense>
+        ),
+      },
+      {
+        path: "ed/account",
+        element: (
+          <Suspense fallback={<></>}>
+            <PrivateRoute inverted={false} requiredRoles={[ROLE.FREELANCER]}>
+              <FreelancerDetailPage />
+            </PrivateRoute>
+          </Suspense>
+        ),
       },
       {
         path: "forbidden",
@@ -91,9 +118,7 @@ export const router = createBrowserRouter([
         path: "*",
         element: (
           <Suspense fallback={<></>}>
-            <PrivateRoute inverted={false}>
-              <ErrorPage />
-            </PrivateRoute>
+            <ErrorPage />
           </Suspense>
         ),
       },
@@ -193,9 +218,7 @@ export const router = createBrowserRouter([
         path: "*",
         element: (
           <Suspense fallback={<></>}>
-            <PrivateRoute inverted={false}>
-              <ErrorPage />
-            </PrivateRoute>
+            <ErrorPage />
           </Suspense>
         ),
       },

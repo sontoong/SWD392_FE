@@ -1,9 +1,9 @@
 import { LeftOutlined } from "@ant-design/icons";
 import { Button, Space } from "antd";
-import { BaseButtonProps } from "antd/es/button/button";
+import { ButtonProps } from "antd/es/button/button";
 import { useNavigate } from "react-router-dom";
 
-export default function BackButton(props: BaseButtonProps) {
+export default function BackButton(props: ButtonProps) {
   const { className } = props;
   const navigate = useNavigate();
 

@@ -125,9 +125,9 @@ function SignupPage() {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form className="mt-10 flex flex-col items-center justify-center space-y-5">
+          <Form className="flex flex-col items-center justify-center space-y-5">
             <section className="w-[70%] space-y-5 ">
-              <div className="mb-12 ml-1 mt-[40%] ">
+              <div className="mb-12 ml-1 mt-[20%] ">
                 <h1 className="text-3xl">{languageText.title}</h1>
                 <div className="mt-3 w-full">
                   Đã có tài khoản? Đăng nhập tại{" "}
