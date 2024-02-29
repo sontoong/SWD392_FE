@@ -6,13 +6,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import apiJWT from "../../utils/api";
 import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
-import { useGetImg } from "../../hooks/useGetImg";
+import { useImageFetcher } from "../../hooks/useGetImg";
 
 export default function MyHeader() {
   const location = useLocation();
   const navigate = useNavigate();
-  const logo = useGetImg("logo");
-  const defaultAvatar = useGetImg("defaultAvatar");
+  const logo = useImageFetcher("logo");
+  const defaultAvatar = useImageFetcher("avatar");
 
   const { state } = useAuth();
   const [loading, setLoading] = useState(false);
