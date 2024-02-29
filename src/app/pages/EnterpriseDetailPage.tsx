@@ -1,11 +1,24 @@
 import { EditOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Card, Col, Divider, Layout, Row, Space, theme } from "antd";
+import {
+  Avatar,
+  Col,
+  Divider,
+  Flex,
+  Image,
+  Layout,
+  Row,
+  Space,
+  theme,
+} from "antd";
 import { Typography } from "antd";
 import { Content } from "antd/es/layout/layout";
+import CustomCard from "../components/ui/card";
+import { EmailCensored } from "../components/ui/email-censored";
 import { Link } from "react-router-dom";
+import CustomTag from "../components/ui/tag";
 
 export default function EnterpriseDetailPage() {
-  const { Title, Paragraph, Text } = Typography;
+  const { Title, Text } = Typography;
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -24,38 +37,40 @@ export default function EnterpriseDetailPage() {
           }}
         >
           <Space direction="vertical" className="w-full" size={"large"}>
-            <Card
+            <CustomCard
               title={
                 <Title
                   level={4}
-                  style={{ margin: 0, textTransform: "uppercase"}}
+                  style={{
+                    margin: 0,
+                    textTransform: "uppercase",
+                    color: "#74BA7B",
+                  }}
                 >
                   Nhà tuyển dụng
                   <EditOutlined className="ml-[1rem]" />
                 </Title>
               }
-              style={{boxShadow:'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px'}}
-            //   style={{boxShadow:''}}
               type="inner"
             >
               <Space className="w-full" direction="vertical" size={"large"}>
                 <Avatar size={80} icon={<UserOutlined />} />
                 <Row>
                   <Col span={10}>
-                    <Space className="w-full" size={90}>
-                      <div>
+                    <Row>
+                      <Col span={2}>
                         <Title level={3}>Họ</Title>
                         <div>Nguyễn</div>
-                      </div>
-                      <div>
+                      </Col>
+                      <Col span={6} offset={4}>
                         <Title level={3}>Tên đệm</Title>
                         <div>Nguyễn</div>
-                      </div>
-                      <div>
+                      </Col>
+                      <Col span={3} offset={4}>
                         <Title level={3}>Tên</Title>
                         <div>Nguyễn</div>
-                      </div>
-                    </Space>
+                      </Col>
+                    </Row>
                   </Col>
                   <Col span={10} offset={4}>
                     <Title level={3}>Ngày sinh của bạn</Title>
@@ -63,36 +78,194 @@ export default function EnterpriseDetailPage() {
                   </Col>
                 </Row>
               </Space>
-              <Divider/>
+              <Divider />
               <Row>
-                <Space className="w-full" size={420}>
-                    <Col>
-                        <Space direction="vertical" size={'large'}>
-                            <div>
-                                <Title level={3}>Quốc gia</Title>
-                                <div>Việt Nam</div>
-                            </div>
-                            <div>
-                                <Title level={3}>Loại giấy tờ</Title>
-                                <div>Hộ chiếu</div>
-                            </div>
-                        </Space>
-                    </Col>
-                    <Col >
-                        <Space direction="vertical" size={'large'}>
-                            <div>
-                                <Title level={3}>Giấy tờ</Title>
-                                <Link to={'/'} className="text-[#1890FF]">FunnyMemeFrom9GAG.png</Link>
-                            </div>
-                            <div>
-                                <Title level={3}>Số</Title>
-                                <div>33333333333333</div>
-                            </div>
-                        </Space>
-                    </Col>
-                </Space>
+                <Col span={10}>
+                  <Space direction="vertical" size={"large"}>
+                    <div>
+                      <Title level={3}>Quốc gia</Title>
+                      <div>Việt Nam</div>
+                    </div>
+                    <div>
+                      <Title level={3}>Loại giấy tờ</Title>
+                      <div>Hộ chiếu</div>
+                    </div>
+                  </Space>
+                </Col>
+                <Col span={10} offset={4}>
+                  <Space direction="vertical" size={"large"}>
+                    <div>
+                      <Title level={3}>Giấy tờ</Title>
+                      <Text className="text-[#1890FF] underline">
+                        FunnyMemeFrom9GAG.png
+                      </Text>
+                    </div>
+                    <div>
+                      <Title level={3}>Số</Title>
+                      <div>33333333333333</div>
+                    </div>
+                  </Space>
+                </Col>
               </Row>
-            </Card>
+              <Divider />
+              <Row className="mb-[3%]">
+                <Col span={10}>
+                  <Title level={3}>Email</Title>
+                  <EmailCensored suffixCount={12}>
+                    CoolMathGame@gmail.com
+                  </EmailCensored>
+                </Col>
+                <Col span={10} offset={4}>
+                  <Title level={3}>SĐT</Title>
+                  <div>33333333333333</div>
+                </Col>
+              </Row>
+            </CustomCard>
+            <CustomCard
+              title={
+                <Title
+                  level={4}
+                  style={{
+                    margin: 0,
+                    textTransform: "uppercase",
+                    color: "#74BA7B",
+                  }}
+                >
+                  Thông tin công ti
+                </Title>
+              }
+              type="inner"
+            >
+              <Space className="w-full" direction="vertical" size={"large"}>
+                <Row>
+                  <Col span={2}>
+                    <Avatar size={80} icon={<UserOutlined />} />
+                  </Col>
+                  <Col span={2} offset={20}>
+                    <Title level={2}>
+                      <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
+                    </Title>
+                  </Col>
+                </Row>
+                <Flex justify="center">
+                  <Image
+                    width={500}
+                    height={200}
+                    src="error"
+                    fallback="data:image/png;base64,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"
+                  />
+                </Flex>
+                <Row>
+                  <Col span={10}>
+                    <Space direction="vertical" size={"large"}>
+                      <div>
+                        <Title level={3}>Tên công ti</Title>
+                        <div>FPT Software</div>
+                      </div>
+                      <div>
+                        <Title level={3}>Trang web công ti</Title>
+                        <Link to={"/"} className="text-[#1890FF] underline">
+                          http://domainexpansion.com
+                        </Link>
+                      </div>
+                    </Space>
+                  </Col>
+                  <Col span={10} offset={4}>
+                    <Space direction="vertical" size={"large"}>
+                      <div>
+                        <Title level={3}>Qui mô công ti</Title>
+                        <div>10-20</div>
+                      </div>
+                      <div>
+                        <Title level={3}>Giấy tờ</Title>
+                        <Link to={"/"} className="text-[#1890FF] underline">
+                          https://youtu.be/dQw4w9WgXcQ?si=kCbyzyW8_XaVT8-j
+                        </Link>
+                      </div>
+                    </Space>
+                  </Col>
+                </Row>
+                <div>
+                  <Title level={3}>Giới thiệu công ti</Title>
+                  <div>
+                    This is the place for cooking, like Gordon's grilled cheese
+                    sandwich.
+                  </div>
+                </div>
+                <div>
+                  <Title
+                    level={3}
+                  >
+                    Ngành nghề
+                  </Title>
+                  <Space size={[0, 8]} wrap>
+                    <CustomTag>Front-end Developing</CustomTag>
+                    <CustomTag>Back-end Developing</CustomTag>
+                    <CustomTag>UI/UX Design</CustomTag>
+                  </Space>
+                </div>
+              </Space>
+              <Divider />
+              <Row>
+                <Col span={8}>
+                  <Space direction="vertical" size={"large"}>
+                    <div>
+                      <Title level={3}>Loại giấy tờ</Title>
+                      <div>Giấy phép ĐKKD</div>
+                    </div>
+                    <div>
+                      <Title level={3}>Mã số doanh nghiệp</Title>
+                      <div>333333333333333</div>
+                    </div>
+                    <div>
+                      <Title level={3}>Quốc gia</Title>
+                      <div>Việt Nam</div>
+                    </div>
+                  </Space>
+                </Col>
+                <Col span={8} offset={6}>
+                  <Space direction="vertical" size={"large"}>
+                    <div>
+                      <Title level={3}>Giấy tờ</Title>
+                      <Text className="text-[#1890FF] underline">
+                        FunnyMemeFrom9GAG.png
+                      </Text>
+                    </div>
+                    <div>
+                      <Title level={3}>Mã số thuế</Title>
+                      <div>33333333333333</div>
+                    </div>
+                    <div>
+                      <Title level={3}>Mã số thuế</Title>
+                      <div className="w-[40%]">Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Hồ Chí Minh, Việt Nam</div>
+                    </div>
+                  </Space>
+                </Col>
+                <Col span={2}>
+                    <Title level={2}>
+                      <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
+                    </Title>
+                </Col>
+              </Row>
+              <Divider />
+              <Row className="mb-[3%]">
+                <Col span={10}>
+                  <Title level={3}>Email</Title>
+                  <EmailCensored suffixCount={12}>
+                    CoolMathGame@gmail.com
+                  </EmailCensored>
+                </Col>
+                <Col span={8} offset={4}>
+                  <Title level={3}>SĐT</Title>
+                  <div>33333333333333</div>
+                </Col>
+                <Col span={2}>
+                    <Title level={2}>
+                      <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
+                    </Title>
+                </Col>
+              </Row>
+            </CustomCard>
           </Space>
         </Content>
       </Layout>
