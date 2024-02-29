@@ -16,12 +16,43 @@ import CustomCard from "../components/ui/card";
 import { EmailCensored } from "../components/ui/email-censored";
 import { Link } from "react-router-dom";
 import CustomTag from "../components/ui/tag";
+import { companyDetail, enterpriseInfo } from "../../constants/testData";
 
 export default function EnterpriseDetailPage() {
   const { Title, Text } = Typography;
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const {
+    firstName,
+    middleName,
+    lastName,
+    dateOfBirth,
+    enterpriseCountry,
+    documentType,
+    enterpriseDocument,
+    documentNumber,
+    enterpriseEmail,
+    enterprisePhone,
+  } = enterpriseInfo;
+
+  const {
+    companyName,
+    website,
+    videoLink,
+    companySize,
+    introduction,
+    industry,
+    companyDocument,
+    registrationDocumentType,
+    registrationNumber,
+    companyCountry,
+    taxNumber,
+    address,
+    companyEmail,
+    companyPhone,
+  } = companyDetail;
 
   return (
     <>
@@ -60,21 +91,21 @@ export default function EnterpriseDetailPage() {
                     <Row>
                       <Col span={2}>
                         <Title level={3}>Họ</Title>
-                        <div>Nguyễn</div>
+                        <div>{lastName}</div>
                       </Col>
                       <Col span={6} offset={4}>
                         <Title level={3}>Tên đệm</Title>
-                        <div>Nguyễn</div>
+                        <div>{middleName}</div>
                       </Col>
                       <Col span={3} offset={4}>
                         <Title level={3}>Tên</Title>
-                        <div>Nguyễn</div>
+                        <div>{firstName}</div>
                       </Col>
                     </Row>
                   </Col>
                   <Col span={10} offset={4}>
                     <Title level={3}>Ngày sinh của bạn</Title>
-                    <div>13/11/2003</div>
+                    <div>{dateOfBirth}</div>
                   </Col>
                 </Row>
               </Space>
@@ -84,11 +115,11 @@ export default function EnterpriseDetailPage() {
                   <Space direction="vertical" size={"large"}>
                     <div>
                       <Title level={3}>Quốc gia</Title>
-                      <div>Việt Nam</div>
+                      <div>{enterpriseCountry}</div>
                     </div>
                     <div>
                       <Title level={3}>Loại giấy tờ</Title>
-                      <div>Hộ chiếu</div>
+                      <div>{documentType}</div>
                     </div>
                   </Space>
                 </Col>
@@ -97,12 +128,12 @@ export default function EnterpriseDetailPage() {
                     <div>
                       <Title level={3}>Giấy tờ</Title>
                       <Text className="text-[#1890FF] underline">
-                        FunnyMemeFrom9GAG.png
+                        {enterpriseDocument}
                       </Text>
                     </div>
                     <div>
                       <Title level={3}>Số</Title>
-                      <div>33333333333333</div>
+                      <div>{documentNumber}</div>
                     </div>
                   </Space>
                 </Col>
@@ -112,12 +143,12 @@ export default function EnterpriseDetailPage() {
                 <Col span={10}>
                   <Title level={3}>Email</Title>
                   <EmailCensored suffixCount={12}>
-                    CoolMathGame@gmail.com
+                    {enterpriseEmail}
                   </EmailCensored>
                 </Col>
                 <Col span={10} offset={4}>
                   <Title level={3}>SĐT</Title>
-                  <div>33333333333333</div>
+                  <div>{enterprisePhone}</div>
                 </Col>
               </Row>
             </CustomCard>
@@ -159,13 +190,13 @@ export default function EnterpriseDetailPage() {
                   <Col span={10}>
                     <Space direction="vertical" size={"large"}>
                       <div>
-                        <Title level={3}>Tên công ti</Title>
-                        <div>FPT Software</div>
+                        <Title level={3}>Tên công ty</Title>
+                        <div>{companyName}</div>
                       </div>
                       <div>
-                        <Title level={3}>Trang web công ti</Title>
+                        <Title level={3}>Trang web công ty</Title>
                         <Link to={"/"} className="text-[#1890FF] underline">
-                          http://domainexpansion.com
+                          {website}
                         </Link>
                       </div>
                     </Space>
@@ -174,12 +205,12 @@ export default function EnterpriseDetailPage() {
                     <Space direction="vertical" size={"large"}>
                       <div>
                         <Title level={3}>Qui mô công ti</Title>
-                        <div>10-20</div>
+                        <div>{companySize}</div>
                       </div>
                       <div>
-                        <Title level={3}>Giấy tờ</Title>
+                        <Title level={3}>Video công ty</Title>
                         <Link to={"/"} className="text-[#1890FF] underline">
-                          https://youtu.be/dQw4w9WgXcQ?si=kCbyzyW8_XaVT8-j
+                          {videoLink}
                         </Link>
                       </div>
                     </Space>
@@ -187,21 +218,14 @@ export default function EnterpriseDetailPage() {
                 </Row>
                 <div>
                   <Title level={3}>Giới thiệu công ti</Title>
-                  <div>
-                    This is the place for cooking, like Gordon's grilled cheese
-                    sandwich.
-                  </div>
+                  <div>{introduction}</div>
                 </div>
                 <div>
-                  <Title
-                    level={3}
-                  >
-                    Ngành nghề
-                  </Title>
+                  <Title level={3}>Ngành nghề</Title>
                   <Space size={[0, 8]} wrap>
-                    <CustomTag>Front-end Developing</CustomTag>
-                    <CustomTag>Back-end Developing</CustomTag>
-                    <CustomTag>UI/UX Design</CustomTag>
+                    {industry.map((item, index) => (
+                      <CustomTag key={index}>{item}</CustomTag>
+                    ))}
                   </Space>
                 </div>
               </Space>
@@ -211,15 +235,15 @@ export default function EnterpriseDetailPage() {
                   <Space direction="vertical" size={"large"}>
                     <div>
                       <Title level={3}>Loại giấy tờ</Title>
-                      <div>Giấy phép ĐKKD</div>
+                      <div>{registrationDocumentType}</div>
                     </div>
                     <div>
                       <Title level={3}>Mã số doanh nghiệp</Title>
-                      <div>333333333333333</div>
+                      <div>{registrationNumber}</div>
                     </div>
                     <div>
                       <Title level={3}>Quốc gia</Title>
-                      <div>Việt Nam</div>
+                      <div>{companyCountry}</div>
                     </div>
                   </Space>
                 </Col>
@@ -228,41 +252,39 @@ export default function EnterpriseDetailPage() {
                     <div>
                       <Title level={3}>Giấy tờ</Title>
                       <Text className="text-[#1890FF] underline">
-                        FunnyMemeFrom9GAG.png
+                        {companyDocument}
                       </Text>
                     </div>
                     <div>
                       <Title level={3}>Mã số thuế</Title>
-                      <div>33333333333333</div>
+                      <div>{taxNumber}</div>
                     </div>
                     <div>
                       <Title level={3}>Địa chỉ</Title>
-                      <div className="w-[40%]">Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Hồ Chí Minh, Việt Nam</div>
+                      <div className="w-[40%]">{address}</div>
                     </div>
                   </Space>
                 </Col>
                 <Col span={2}>
-                    <Title level={2}>
-                      <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
-                    </Title>
+                  <Title level={2}>
+                    <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
+                  </Title>
                 </Col>
               </Row>
               <Divider />
               <Row className="mb-[3%]">
                 <Col span={10}>
                   <Title level={3}>Email</Title>
-                  <EmailCensored suffixCount={12}>
-                    CoolMathGame@gmail.com
-                  </EmailCensored>
+                  <EmailCensored suffixCount={12}>{companyEmail}</EmailCensored>
                 </Col>
                 <Col span={8} offset={4}>
                   <Title level={3}>SĐT</Title>
-                  <div>33333333333333</div>
+                  <div>{companyPhone}</div>
                 </Col>
                 <Col span={2}>
-                    <Title level={2}>
-                      <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
-                    </Title>
+                  <Title level={2}>
+                    <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
+                  </Title>
                 </Col>
               </Row>
             </CustomCard>

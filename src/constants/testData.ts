@@ -96,6 +96,35 @@ const comment2: Comment = {
 
 export const comments: Comment[] = [comment, comment2];
 
+export const companyDetail: CompanyDetail ={
+  companyName: "FPT Software",
+  website: "http://domainexpansion.com",
+  videoLink: "https://youtu.be/dQw4w9WgXcQ?si=kCbyzyW8_XaVT8-j",
+  companySize: "10-20",
+  introduction: "This is the place for cooking, like Gordon's grilled cheese sandwich.",
+  industry: ["Front-end Developing", "Back-end Developing", "UI/UX Design"],
+  companyDocument:'FunnyMemeFrom9GAG.png',
+  registrationDocumentType: "Giấy phép ĐKKD",
+  registrationNumber: "333333333333333",
+  companyCountry: "Việt Nam",
+  taxNumber: "33333333333333",
+  address: "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Hồ Chí Minh, Việt Nam",
+  companyEmail: "CoolMathGame@gmail.com",
+  companyPhone: "33333333333333",
 
+}
+
+export const enterpriseInfo: EnterpriseInfo ={
+  firstName: "Nguyễn",
+  middleName: "Văn",
+  lastName: "A",
+  dateOfBirth: "13/11/2003",
+  enterpriseCountry: "Việt Nam",
+  documentType: "Hộ chiếu",
+  enterpriseDocument: "FunnyMemeFrom9GAG.png",
+  documentNumber: "33333333333333",
+  enterpriseEmail: "CoolMathGame@gmail.com",
+  enterprisePhone: "33333333333333",
+}
 
 

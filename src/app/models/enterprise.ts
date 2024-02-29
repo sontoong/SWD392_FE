@@ -1,12 +1,12 @@
-interface EnterpriseDetail {
+interface EnterpriseInfo {
     firstName: string;
     middleName: string;
     lastName: string;
     dateOfBirth: string;
-    country: string;
+    enterpriseCountry: string;
     documentType: string;
-    documentName: string;
+    enterpriseDocument: string;
     documentNumber: string;
-    email: string;
-    phoneNumber: string;
+    enterpriseEmail: string;
+    enterprisePhone: string;
   }
