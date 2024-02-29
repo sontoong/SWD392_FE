@@ -5,8 +5,15 @@ type ErrorMessage = {
 };
 
 type LanguageErrors = {
-  email: ErrorMessage;
-  password: ErrorMessage;
+  email?: ErrorMessage;
+  password?: ErrorMessage;
+  confirmPassword?: ErrorMessage;
+  address?: ErrorMessage;
+  firstName?: ErrorMessage;
+  middleName?: ErrorMessage;
+  lastName?: ErrorMessage;
+  nation?: ErrorMessage;
+  phone?: ErrorMessage;
 };
 
 export const LANGUAGES = {
@@ -26,7 +33,7 @@ export const LANGUAGE_OPTIONS = [
 export const LOGIN_PAGE_TEXT: Record<string, Record<string, string>> = {
   vn: {
     title: "Đăng nhập",
-    description: "Mừng trở lại!. Vui lòng điền thông tin bên dưới để tiếp tục",
+    description: "Mừng trở lại! Vui lòng điền thông tin bên dưới để tiếp tục",
     emailPlaceholder: "Địa chỉ Email",
     passwordPlaceholder: "Mật khẩu",
     loginButton: "Đăng nhập",
@@ -41,6 +48,37 @@ export const LOGIN_PAGE_TEXT: Record<string, Record<string, string>> = {
   },
 };
 
+export const SIGNUP_PAGE_TEXT: Record<string, Record<string, string>> = {
+  vn: {
+    title: "Đăng Ký",
+    description: "Vui lòng điền thông tin bên dưới để tiếp tục",
+    emailPlaceholder: "Địa chỉ Email",
+    passwordPlaceholder: "Mật khẩu",
+    confirmPasswordPlaceholder: "Nhập lại mật khẩu",
+    firstNamePlaceholder: "Họ",
+    middleNamePlaceholder: "Tên đệm",
+    lastNamePlaceholder: "Tên",
+    addressPlaceholder: "Địa chỉ",
+    nationPlaceholder: "Quốc gia",
+    phonePlaceholder: "Số điện thoại",
+    signupButton: "Đăng Ký",
+  },
+  eng: {
+    title: "Sign up",
+    description: "Please enter your information below to continue",
+    emailPlaceholder: "Email address",
+    passwordPlaceholder: "Password",
+    confirmPasswordPlaceholder: "Confirm password",
+    firstNamePlaceholder: "First name",
+    middleNamePlaceholder: "Middle name",
+    lastNamePlaceholder: "Last name",
+    addressPlaceholder: "Address",
+    nationPlaceholder: "Nation",
+    phonePlaceholder: "Phone number",
+    signupButton: "Sign up",
+  },
+};
+
 export const ERROR_MESSAGES: Record<string, LanguageErrors> = {
   vn: {
     email: {
@@ -50,6 +88,29 @@ export const ERROR_MESSAGES: Record<string, LanguageErrors> = {
     password: {
       length: "Mật khẩu phải ít nhất 6 kí tự",
       required: "Mật khẩu không được để trống",
+    },
+    confirmPassword: {
+      required: "Vui lòng nhập lại mật khẩu",
+    },
+    firstName: {
+      required: "Họ không được để trống",
+    },
+    middleName: {
+      required: "Tên đệm không được để trống",
+    },
+    lastName: {
+      required: "Tên không được để trống",
+    },
+    address: {
+      required: "Địa chỉ không được để trống",
+    },
+    nation: {
+      required: "Quốc gia không được để trống",
+    },
+    phone: {
+      invalid: "Số điện thoại không hợp lệ",
+      length: "Vui lòng nhập số điện thoại hợp lệ",
+      required: "Số điện thoại không được để trống",
     },
   },
   eng: {

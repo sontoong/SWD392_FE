@@ -6,6 +6,8 @@ const Layout = lazy(() => import("../components/layout/public-layout"));
 const Layout2 = lazy(() => import("../components/layout/admin-layout"));
 
 //public
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const SignupPage = lazy(() => import("../pages/SignupPage"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 
 //admin
@@ -16,7 +18,6 @@ const ProjectDetail = lazy(() => import("../pages/ProjectDetailAdminPage"));
 const UserDetailAdminPage = lazy(() => import("../pages/UserDetailAdminPage"));
 
 const Forbidden = lazy(() => import("../pages/ForbiddenPage"));
-const LoginPage = lazy(() => import("../pages/LoginPage"));
 const PrivateRoute = lazy(() => import("./proute"));
 const TestPage = lazy(() => import("../pages/TestPage"));
 const ErrorPage = lazy(() => import("../pages/404Page"));
@@ -104,6 +105,16 @@ export const router = createBrowserRouter([
       <Suspense fallback={<></>}>
         <PrivateRoute inverted={true}>
           <LoginPage />
+        </PrivateRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/sign-up",
+    element: (
+      <Suspense fallback={<></>}>
+        <PrivateRoute inverted={true}>
+          <SignupPage />
         </PrivateRoute>
       </Suspense>
     ),
