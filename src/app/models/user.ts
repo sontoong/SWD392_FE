@@ -4,7 +4,7 @@ export interface UserDetail {
   email: string;
   phone: string;
   dob: string;
-  accountType: "Nhà tuyển dụng" | "Nguời ứng tuyển";
+  role: "freelancer" | "enterprise" | "admin";
   address: string;
   nation: string;
   isVerified: boolean;

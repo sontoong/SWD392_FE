@@ -1,4 +1,6 @@
 import { Comment } from "../app/models/comment";
+import { CompanyDetail } from "../app/models/company";
+import { EnterpriseInfo } from "../app/models/enterprise";
 import {
   Field,
   Project,
@@ -57,7 +59,7 @@ export const project: Project = {
 
 export const user: UserDetail = {
   id: "1",
-  accountType: "Nguời ứng tuyển",
+  role: "freelancer",
   dob: "01/01/2000",
   email: "nguyena@gmail.com",
   name: "Nguyễn Văn A",
@@ -96,14 +98,15 @@ const comment2: Comment = {
 
 export const comments: Comment[] = [comment, comment2];
 
-export const companyDetail: CompanyDetail ={
+export const companyDetail: CompanyDetail = {
   companyName: "FPT Software",
   website: "http://domainexpansion.com",
   videoLink: "https://youtu.be/dQw4w9WgXcQ?si=kCbyzyW8_XaVT8-j",
   companySize: "10-20",
-  introduction: "This is the place for cooking, like Gordon's grilled cheese sandwich.",
+  introduction:
+    "This is the place for cooking, like Gordon's grilled cheese sandwich.",
   industry: ["Front-end Developing", "Back-end Developing", "UI/UX Design"],
-  companyDocument:'FunnyMemeFrom9GAG.png',
+  companyDocument: "FunnyMemeFrom9GAG.png",
   registrationDocumentType: "Giấy phép ĐKKD",
   registrationNumber: "333333333333333",
   companyCountry: "Việt Nam",
@@ -111,10 +114,9 @@ export const companyDetail: CompanyDetail ={
   address: "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Hồ Chí Minh, Việt Nam",
   companyEmail: "CoolMathGame@gmail.com",
   companyPhone: "33333333333333",
+};
 
-}
-
-export const enterpriseInfo: EnterpriseInfo ={
+export const enterpriseInfo: EnterpriseInfo = {
   firstName: "Nguyễn",
   middleName: "Văn",
   lastName: "A",
@@ -125,6 +127,4 @@ export const enterpriseInfo: EnterpriseInfo ={
   documentNumber: "33333333333333",
   enterpriseEmail: "CoolMathGame@gmail.com",
   enterprisePhone: "33333333333333",
-}
-
-
+};
