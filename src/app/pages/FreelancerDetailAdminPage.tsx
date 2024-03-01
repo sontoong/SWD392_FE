@@ -36,7 +36,7 @@ import { generateVerifyMsg } from "../utils/generators";
 import { formatCurrency } from "../utils/utils";
 import TextArea from "antd/es/input/TextArea";
 import { qualityFactors } from "../../constants/quality";
-import { OkButton } from "../components/button/buttons";
+import { PrimaryButton } from "../components/button/buttons";
 import CustomTag from "../components/ui/tag";
 
 const { Content, Sider } = Layout;
@@ -444,7 +444,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
           <Space direction="vertical" size={"large"}>
             {verify ? (
               <Space direction="vertical" size={"middle"}>
-                <OkButton
+                <PrimaryButton
                   block
                   onClick={() => {
                     modal.confirm({
@@ -462,7 +462,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
                   }}
                 >
                   Xác nhận hồ sơ
-                </OkButton>
+                </PrimaryButton>
                 <Button
                   danger
                   type="default"
