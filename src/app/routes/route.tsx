@@ -82,7 +82,7 @@ export const router = createBrowserRouter([
         path: "ed/account",
         element: (
           <Suspense fallback={<></>}>
-            <PrivateRoute inverted={false} requiredRoles={[ROLE.FREELANCER]}>
+            <PrivateRoute inverted={false} requiredRoles={[ROLE.ENTERPRISE]}>
               <FreelancerDetailPage />
             </PrivateRoute>
           </Suspense>

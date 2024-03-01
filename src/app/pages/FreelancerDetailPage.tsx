@@ -32,7 +32,7 @@ import { formatCurrency } from "../utils/utils";
 import { defaultImage } from "../../constants/images";
 import { qualityFactors } from "../../constants/quality";
 import Meta from "antd/es/card/Meta";
-import { OkButton } from "../components/button/buttons";
+import { PrimaryButton } from "../components/button/buttons";
 import { CustomCard } from "../components/ui/card";
 
 const { Content, Sider } = Layout;
@@ -430,7 +430,7 @@ export default function FreelancerDetailPage() {
           style={{ background: colorBgContainer, padding: 24 }}
         >
           <Space direction="vertical" size={"large"}>
-            <OkButton
+            <PrimaryButton
               block
               onClick={() => {
                 modal.confirm({
@@ -448,7 +448,7 @@ export default function FreelancerDetailPage() {
               }}
             >
               Gửi xác nhận
-            </OkButton>
+            </PrimaryButton>
             <div>
               <Title level={4}>Thông tin liên hệ</Title>
               <CustomCard>
