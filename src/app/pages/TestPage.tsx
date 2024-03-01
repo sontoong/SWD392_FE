@@ -1,5 +1,5 @@
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
-import EnterpriseDetailPage from "./EnterpriseDetailPage";
+import EnterpriseModalEditGeneralInfo from "./EnterpriseModalEditGeneralInfo";
 
 export default function TestPage() {
   useSetHeaderTitle([
@@ -10,8 +10,6 @@ export default function TestPage() {
   ]);
 
   return (
-    <div>
-        <EnterpriseDetailPage/>
-    </div>
+    <EnterpriseModalEditGeneralInfo/>
   );
 }
