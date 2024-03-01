@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { DatePicker, DatePickerProps, Input, Select, SelectProps } from "antd";
 import { ErrorMessage } from "formik";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -16,6 +16,24 @@ export interface MyInputProps {
   placeholder: string;
 }
 
+export interface MyDatePickerProps {
+  id: string;
+  field: {
+    name: string;
+    value: string;
+    onChange: DatePickerProps['onChange']
+  };
+  placeholder: string; 
+}
+
+export interface MySelectProps extends SelectProps {
+  id: string;
+  field: {
+    name: string;
+  };
+  placeholder: string; 
+}
+
 // const handleInputFocusBlur = (id: string, focused: boolean) => {
 //   const element = document.getElementById(id);
 //   if (element) {
@@ -26,6 +44,50 @@ export interface MyInputProps {
 //     }
 //   }
 // };
+
+function MySelectInput({ field, placeholder, ...props }: MySelectProps) {
+  const { name } = field;
+
+  return (
+    <div className="relative">
+      <Select
+        size="large"
+        {...props}
+      />
+      <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
+        {placeholder}
+      </p>
+      <ErrorMessage
+        name={name}
+        component="p"
+        className="ml-2 text-sm text-red-500"
+      />
+    </div>
+  );
+}
+
+function MyDateInput({ field, placeholder }: MyDatePickerProps) {
+  const { name, value, onChange } = field;
+
+  return (
+    <div className="relative">
+      <DatePicker
+        onChange={onChange}
+        allowClear
+        size="large"
+        className="px-5 py- w-full"
+      />
+      <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
+        {placeholder}
+      </p>
+      <ErrorMessage
+        name={name}
+        component="p"
+        className="ml-2 text-sm text-red-500"
+      />
+    </div>
+  );
+}
 
 function MyInput({ field, placeholder }: MyInputProps) {
   const { name, value, onChange } = field;
@@ -83,4 +145,4 @@ function MyInputPassword({ field, placeholder }: MyInputProps) {
   );
 }
 
-export { MyInput, MyInputPassword };
+export { MyInput, MyInputPassword, MyDateInput, MySelectInput};
