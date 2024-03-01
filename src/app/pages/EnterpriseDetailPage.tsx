@@ -43,10 +43,10 @@ export default function EnterpriseDetailPage() {
     videoLink,
     companySize,
     introduction,
-    industry,
+    industryFields,
     companyDocument,
     registrationDocumentType,
-    registrationNumber,
+    identificationNumber,
     companyCountry,
     taxNumber,
     address,
@@ -223,8 +223,8 @@ export default function EnterpriseDetailPage() {
                 <div>
                   <Title level={3}>Ngành nghề</Title>
                   <Space size={[0, 8]} wrap>
-                    {industry.map((item, index) => (
-                      <CustomTag key={index}>{item}</CustomTag>
+                    {industryFields.map((item, index) => (
+                      <CustomTag key={index}>{item.name}</CustomTag>
                     ))}
                   </Space>
                 </div>
@@ -239,7 +239,7 @@ export default function EnterpriseDetailPage() {
                     </div>
                     <div>
                       <Title level={3}>Mã số doanh nghiệp</Title>
-                      <div>{registrationNumber}</div>
+                      <div>{identificationNumber}</div>
                     </div>
                     <div>
                       <Title level={3}>Quốc gia</Title>
