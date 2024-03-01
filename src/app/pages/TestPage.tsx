@@ -1,5 +1,5 @@
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
-import EnterpriseModalEditGeneralInfo from "./EnterpriseModalEditGeneralInfo";
+import EnterpriseModalEditGeneralInfo from "../components/ui-enterprise/EnterpriseModalEditGeneralInfo";
 
 export default function TestPage() {
   useSetHeaderTitle([

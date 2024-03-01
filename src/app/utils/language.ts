@@ -4,7 +4,7 @@ type ErrorMessage = {
   length?: string;
 };
 
-type LanguageErrors = {
+type SignUpLanguageErrors = {
   email?: ErrorMessage;
   password?: ErrorMessage;
   confirmPassword?: ErrorMessage;
@@ -15,6 +15,19 @@ type LanguageErrors = {
   nation?: ErrorMessage;
   phone?: ErrorMessage;
 };
+
+type EnterpriseInfoLanguageErrors = {
+  firstName?: ErrorMessage;
+  middleName?: ErrorMessage;
+  lastName?: ErrorMessage;
+  dateOfBirth?: ErrorMessage;
+  enterpriseCountry?: ErrorMessage;
+  documentType?: ErrorMessage;
+  enterpriseDocument?: ErrorMessage;
+  documentNumber?: ErrorMessage;
+  enterpriseEmail?: ErrorMessage;
+  enterprisePhone?: ErrorMessage;
+}
 
 export const LANGUAGES = {
   VIETNAMESE: "vn",
@@ -79,7 +92,7 @@ export const SIGNUP_PAGE_TEXT: Record<string, Record<string, string>> = {
   },
 };
 
-export const ERROR_MESSAGES: Record<string, LanguageErrors> = {
+export const SIGNUP_ERROR_MESSAGES: Record<string, SignUpLanguageErrors> = {
   vn: {
     email: {
       invalid: "Email không hợp lệ",
@@ -121,6 +134,81 @@ export const ERROR_MESSAGES: Record<string, LanguageErrors> = {
     password: {
       length: "Password must be at least 6 characters",
       required: "Password is required",
+    },
+  },
+};
+
+export const ENTERPRISE_INFO_TEXT: Record<string, Record<string, string>> = {
+  vn: {
+    firstName: "Tên",
+    middleName: "Tên đệm",
+    lastName: "Họ",
+    dateOfBirth: "Ngày sinh",
+    enterpriseCountry: "Quốc gia",
+    documentType: "Loại giấy tờ",
+    enterpriseDocument: "Giấy tờ",
+    documentNumber: "Số",
+    enterpriseEmail: "Email",
+    enterprisePhone: "SĐT",
+  },
+  eng: {
+    firstName: "First Name",
+    middleName: "Middle Name",
+    lastName: "Last Name",
+    dateOfBirth: "Date of Birth",
+    enterpriseCountry: "Enterprise Country",
+    documentType: "Document Type",
+    enterpriseDocument: "Enterprise Document",
+    documentNumber: "Document Number",
+    enterpriseEmail: "Email",
+    enterprisePhone: "Phone",
+
+  },
+};
+
+export const ENTERPRISE_ERROR_MESSAGES: Record<string, EnterpriseInfoLanguageErrors> = {
+  vn: {
+      firstName: {
+        required: "First name is required",
+      },
+      middleName: {
+        required: "Middle name is required",
+      },
+      lastName: {
+        required: "Last name is required",
+      },
+      dateOfBirth: {
+        invalid: "Invalid Date of Birth",
+        required: "Date of Birth is required",
+      },
+      enterpriseCountry: {
+        required: "Enterprise Country is required",
+      },
+      documentType: {
+        required: "Document Type is required"
+      },
+      enterpriseDocument: {
+        required: "Enterprise Document is required"
+      },
+      documentNumber: {
+        required: "Document Number is required",
+        invalid: "Invalid Document Number",
+      },
+      enterpriseEmail: {
+        required: "Email Address is required",
+        invalid: "Invalid Email Address",
+      },
+      enterprisePhone: {
+        required: "Phone Number is required",
+        invalid: "Invalid Phone Number",
+      },
+  },
+  eng: {
+    firstName: {
+      required: "First name is required",
+    },
+    middleName: {
+      required: "Middle name is required",
     },
   },
 };

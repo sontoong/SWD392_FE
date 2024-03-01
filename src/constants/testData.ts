@@ -24,6 +24,11 @@ const field: Field = {
   skills: skills,
 };
 
+const field1: Field ={
+  name: "name",
+  skills: skills,
+}
+
 const optionalRequirements: OptionalRequirements = {
   minimumCompletedProjects: "Tất cả",
   language: "Tất cả",
@@ -105,12 +110,12 @@ export const companyDetail: CompanyDetail = {
   companySize: "10-20",
   introduction:
     "This is the place for cooking, like Gordon's grilled cheese sandwich.",
-  industry: ["Front-end Developing", "Back-end Developing", "UI/UX Design"],
+  industryFields: [field1, field],
   companyDocument: "FunnyMemeFrom9GAG.png",
   registrationDocumentType: "Giấy phép ĐKKD",
-  registrationNumber: "333333333333333",
+  identificationNumber: 333333333333333,
   companyCountry: "Việt Nam",
-  taxNumber: "33333333333333",
+  taxNumber: 33333333333333,
   address: "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Hồ Chí Minh, Việt Nam",
   companyEmail: "CoolMathGame@gmail.com",
   companyPhone: "33333333333333",
@@ -120,11 +125,12 @@ export const enterpriseInfo: EnterpriseInfo = {
   firstName: "Nguyễn",
   middleName: "Văn",
   lastName: "A",
-  dateOfBirth: "13/11/2003",
+  dateOfBirth: 1708532861,
   enterpriseCountry: "Việt Nam",
   documentType: "Hộ chiếu",
   enterpriseDocument: "FunnyMemeFrom9GAG.png",
-  documentNumber: "33333333333333",
+  documentNumber: 33333333333333,
   enterpriseEmail: "CoolMathGame@gmail.com",
   enterprisePhone: "33333333333333",
 };
+
