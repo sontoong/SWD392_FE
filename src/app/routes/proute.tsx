@@ -33,7 +33,7 @@ const PrivateRoute = ({
   }
 
   if (inverted) {
-    return isAuth ? <Navigate to="/home" /> : children;
+    return isAuth ? <Navigate to="/" /> : children;
   }
 
   if (role && !requiredRoles?.some((r) => role === r)) return <ErrorPage />;

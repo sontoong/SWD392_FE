@@ -3,7 +3,7 @@ export interface UserDetail {
   name: string;
   email: string;
   phone: string;
-  dob: string;
+  dob: number;
   role: "freelancer" | "enterprise" | "admin";
   address: string;
   nation: string;
@@ -11,7 +11,7 @@ export interface UserDetail {
   averageRating: number;
   ratingCount: number;
   projectCount: number;
-  createdAt: string;
+  createdAt: number;
   desireSalary: number;
   language: string[];
   description: string;
@@ -19,5 +19,6 @@ export interface UserDetail {
 
 export interface UserDetailTable extends UserDetail {
   key: string;
+  dobString: string;
   status: string;
 }

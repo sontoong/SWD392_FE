@@ -95,7 +95,7 @@ function LoginPage() {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form className="mt-10 flex flex-col items-center justify-center space-y-5">
+          <Form className="clear-both flex flex-col items-center justify-center space-y-5">
             <section className="w-[70%] space-y-5 ">
               <div className="mb-12 ml-1 mt-[40%] ">
                 <h1 className="text-3xl">{languageText.title}</h1>

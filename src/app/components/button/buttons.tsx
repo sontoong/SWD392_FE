@@ -1,7 +1,5 @@
-import { Button, Typography } from "antd";
+import { Button } from "antd";
 import { ButtonProps } from "antd/es/button/button";
-
-const { Title } = Typography;
 
 export function PrimaryButton(props: ButtonProps) {
   const { children } = props;
@@ -21,10 +19,13 @@ export function OutlineButton(props: ButtonProps) {
   );
 }
 
-export function IconButton(props: ButtonProps) {
+interface IconButtonProps extends Omit<ButtonProps, "icon"> {
+  icon: React.ReactNode;
+}
+export function IconButton(props: IconButtonProps) {
   const { icon, children } = props;
   return (
-    <Button type="text" {...props} size="large" icon={<Title level={2} style={{margin: 0}}>{icon}</Title>}>
+    <Button type="text" {...props} size="large" icon={icon}>
       {children}
     </Button>
   );

@@ -8,6 +8,7 @@ import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 import { Key } from "react";
 import { user } from "../../constants/testData";
 import { generateVerifyMsg } from "../utils/generators";
+import { formatUnixToLocal } from "../utils/utils";
 
 export default function UserManage() {
   useSetHeaderTitle([
@@ -52,16 +53,19 @@ export default function UserManage() {
     {
       key: "1",
       ...user,
+      dobString: formatUnixToLocal(user.dob),
       status: generateVerifyMsg(user.isVerified),
     },
     {
       key: "2",
       ...user,
+      dobString: formatUnixToLocal(user.dob),
       status: generateVerifyMsg(user.isVerified),
     },
     {
       key: "3",
       ...user,
+      dobString: formatUnixToLocal(user.dob),
       status: generateVerifyMsg(user.isVerified),
     },
   ];
@@ -89,13 +93,13 @@ export default function UserManage() {
     },
     {
       title: "Ngày sinh",
-      dataIndex: "dob",
-      key: "dob",
+      dataIndex: "dobString",
+      key: "dobString",
     },
     {
       title: "Loại tài khoản",
-      dataIndex: "accountType",
-      key: "accountType",
+      dataIndex: "role",
+      key: "role",
     },
     {
       title: "Trạng thái",

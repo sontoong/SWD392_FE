@@ -60,7 +60,7 @@ export const project: Project = {
 export const user: UserDetail = {
   id: "1",
   role: "freelancer",
-  dob: "01/01/2000",
+  dob: 1708532861,
   email: "nguyena@gmail.com",
   name: "Nguyễn Văn A",
   phone: "0123456789",
@@ -70,7 +70,7 @@ export const user: UserDetail = {
   isVerified: true,
   averageRating: 3.5,
   ratingCount: 10,
-  createdAt: "01/01/2000",
+  createdAt: 1708532861,
   description: `20 năm trong Full-Stack Development + UI/UX
 Facebook: fb.com/user/JoeBiden`,
   desireSalary: 50000,

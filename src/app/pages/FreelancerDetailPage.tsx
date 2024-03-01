@@ -22,6 +22,7 @@ import { comments, user } from "../../constants/testData";
 import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
+  EditOutlined,
   EnvironmentOutlined,
   ExclamationCircleFilled,
   StarFilled,
@@ -32,7 +33,7 @@ import { formatCurrency } from "../utils/utils";
 import { defaultImage } from "../../constants/images";
 import { qualityFactors } from "../../constants/quality";
 import Meta from "antd/es/card/Meta";
-import { PrimaryButton } from "../components/button/buttons";
+import { IconButton, PrimaryButton } from "../components/button/buttons";
 import { CustomCard } from "../components/ui/card";
 
 const { Content, Sider } = Layout;
@@ -80,12 +81,15 @@ export default function FreelancerDetailPage() {
             {/* overview */}
             <CustomCard
               title={
-                <Title
-                  level={4}
-                  style={{ margin: 0, textTransform: "uppercase" }}
-                >
-                  Tổng quan
-                </Title>
+                <Space>
+                  <Title
+                    level={4}
+                    style={{ margin: 0, textTransform: "uppercase" }}
+                  >
+                    Tổng quan
+                  </Title>
+                  <IconButton icon={<EditOutlined />} />
+                </Space>
               }
               type="inner"
             >
