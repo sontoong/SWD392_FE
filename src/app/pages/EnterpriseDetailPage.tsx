@@ -12,7 +12,7 @@ import {
 } from "antd";
 import { Typography } from "antd";
 import { Content } from "antd/es/layout/layout";
-import CustomCard from "../components/ui/card";
+import {CustomCard} from "../components/ui/card";
 import { EmailCensored } from "../components/ui/email-censored";
 import { Link } from "react-router-dom";
 import CustomTag from "../components/ui/tag";
