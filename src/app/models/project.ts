@@ -14,11 +14,13 @@ export type OptionalRequirements = {
 };
 
 export type Skill = {
-  name: string;
+  label: string;
+  value: string;
 };
 
-export type Field = {
-  name: string;
+export type SkillField = {
+  label: string;
+  value: string;
   skills: Skill[];
 };
 
@@ -27,7 +29,7 @@ export interface Project {
   title: string;
   language: "English" | "Vietnamese";
   location: "Tất cả" | string;
-  projectField: Field;
+  projectField: SkillField;
   description: string;
   contract?: string;
   funding: "hourly" | "fixed";

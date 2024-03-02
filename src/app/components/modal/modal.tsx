@@ -1,4 +1,4 @@
-import { Modal, ModalProps } from "antd";
+import { Modal, ModalProps, Typography } from "antd";
 import { OutlineButton, PrimaryButton } from "../button/buttons";
 
 interface CustomModalProps extends Omit<ModalProps, "onOk" | "onCancel"> {
@@ -8,6 +8,7 @@ interface CustomModalProps extends Omit<ModalProps, "onOk" | "onCancel"> {
 
 export default function CustomModal(props: CustomModalProps) {
   const { children, handleCancel, handleOk, open, title } = props;
+  const { Title } = Typography;
 
   const handleClickOk = () => {
     if (handleOk) {
@@ -26,7 +27,18 @@ export default function CustomModal(props: CustomModalProps) {
       open={open}
       onCancel={handleCancel}
       onOk={handleOk}
-      title={title}
+      title={
+        <Title
+          level={4}
+          style={{
+            margin: 0,
+            textTransform: "uppercase",
+            color: "#74BA7B",
+          }}
+        >
+          {title}
+        </Title>
+      }
       footer={[
         <OutlineButton key="cancel" onClick={handleClickCancel}>
           Cancel

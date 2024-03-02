@@ -42,7 +42,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div className="flex gap-5">
           <Space className="whitespace-nowrap">
             <FolderOpenOutlined />
-            {projectField.name}
+            {projectField.label}
           </Space>
           <Space className="whitespace-nowrap">
             <EnvironmentOutlined />
