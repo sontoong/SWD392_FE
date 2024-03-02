@@ -7,7 +7,7 @@ import { useAuth } from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
-  ERROR_MESSAGES,
+  SIGNUP_ERROR_MESSAGES,
   LANGUAGES,
   LANGUAGE_OPTIONS,
   LOGIN_PAGE_TEXT,
@@ -65,7 +65,7 @@ function LoginPage() {
   };
 
   const languageText = LOGIN_PAGE_TEXT[selectedLanguage];
-  const validate = ERROR_MESSAGES[selectedLanguage];
+  const validate = SIGNUP_ERROR_MESSAGES[selectedLanguage];
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()

@@ -2,7 +2,7 @@ import { Comment } from "../app/models/comment";
 import { CompanyDetail } from "../app/models/company";
 import { EnterpriseInfo } from "../app/models/enterprise";
 import {
-  Field,
+  SkillField,
   Project,
   Skill,
   OptionalRequirements,
@@ -10,22 +10,24 @@ import {
 import { UserDetail } from "../app/models/user";
 
 const skills: Skill[] = [
-  { name: "Front-end Developer" },
-  { name: "Back-end Developer" },
-  { name: "Full-stack Developer" },
-  { name: "Mobile Developer" },
-  { name: "UI/UX Designer" },
-  { name: "Data Scientist" },
-  { name: "Data Engineer" },
+  { label: "Front-end Developer", value:'Front-end Developer' },
+  { label: "Back-end Developer", value:'Back-end Developer' },
+  { label: "Full-stack Developer", value:'Full-stack Developer' },
+  { label: "Mobile Developer" , value:'Mobile Developer'},
+  { label: "UI/UX Designer",  value:'UI/UX Designer'},
+  { label: "Data Scientist", value:'Data Scientist'},
+  { label: "Data Engineer", value:'Data Engineer'},
 ];
 
-const field: Field = {
-  name: "name",
+const field: SkillField = {
+  label: "name",
+  value: 'name',
   skills: skills,
 };
 
-const field1: Field ={
-  name: "name",
+const field1: SkillField ={
+  label: "name",
+  value: 'name',
   skills: skills,
 }
 
