@@ -17,6 +17,10 @@ import { EmailCensored } from "../components/ui/email-censored";
 import { Link } from "react-router-dom";
 import CustomTag from "../components/ui/tag";
 import { companyDetail, enterpriseInfo } from "../../constants/testData";
+import EnterpriseModalEditGeneralInfo from "../components/ui-enterprise/EnterpriseModalEditGeneralInfo";
+import CompanyModalEditGeneralInfo from "../components/ui-enterprise/CompanyModalEditGeneralInfo";
+import CompanyModalEditDocument from "../components/ui-enterprise/CompanyModalEditDocument";
+import CompanyModalEditContact from "../components/ui-enterprise/CompanyModalEditContact";
 
 export default function EnterpriseDetailPage() {
   const { Title, Text } = Typography;
@@ -79,7 +83,7 @@ export default function EnterpriseDetailPage() {
                   }}
                 >
                   Nhà tuyển dụng
-                  <EditOutlined className="ml-[1rem]" />
+                  <EnterpriseModalEditGeneralInfo/>
                 </Title>
               }
               type="inner"
@@ -173,9 +177,7 @@ export default function EnterpriseDetailPage() {
                     <Avatar size={80} icon={<UserOutlined />} />
                   </Col>
                   <Col span={2} offset={20}>
-                    <Title level={2}>
-                      <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
-                    </Title>
+                  <CompanyModalEditGeneralInfo/>
                   </Col>
                 </Row>
                 <Flex justify="center">
@@ -224,7 +226,7 @@ export default function EnterpriseDetailPage() {
                   <Title level={3}>Ngành nghề</Title>
                   <Space size={[0, 8]} wrap>
                     {industryFields.map((item, index) => (
-                      <CustomTag key={index}>{item.name}</CustomTag>
+                      <CustomTag key={index}>{item.label}</CustomTag>
                     ))}
                   </Space>
                 </div>
@@ -266,9 +268,7 @@ export default function EnterpriseDetailPage() {
                   </Space>
                 </Col>
                 <Col span={2}>
-                  <Title level={2}>
-                    <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
-                  </Title>
+                  <CompanyModalEditDocument/>
                 </Col>
               </Row>
               <Divider />
@@ -282,9 +282,7 @@ export default function EnterpriseDetailPage() {
                   <div>{companyPhone}</div>
                 </Col>
                 <Col span={2}>
-                  <Title level={2}>
-                    <EditOutlined className="ml-[1rem] text-[#74BA7B]" />
-                  </Title>
+                    <CompanyModalEditContact/>
                 </Col>
               </Row>
             </CustomCard>

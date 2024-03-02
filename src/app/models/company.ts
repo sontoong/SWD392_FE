@@ -1,4 +1,4 @@
-import { Field } from "./project";
+import { SkillField } from "./project";
 
 export interface CompanyDetail {
   companyName: string;
@@ -6,7 +6,7 @@ export interface CompanyDetail {
   videoLink: string;
   companySize: string;
   introduction: string;
-  industryFields: Field[];
+  industryFields: SkillField[];
   companyDocument: string;
   registrationDocumentType: string;
   identificationNumber: number;

@@ -24,7 +24,7 @@ export function OutlineButton(props: ButtonProps) {
 export function IconButton(props: ButtonProps) {
   const { icon, children } = props;
   return (
-    <Button type="text" {...props} size="large" icon={<Title level={2} style={{margin: 0}}>{icon}</Title>}>
+    <Button type="text" {...props} size="large" icon={<Title level={2} style={{margin: 0, color:"#74BA7B"}}>{icon}</Title>}>
       {children}
     </Button>
   );
