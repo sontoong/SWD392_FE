@@ -69,7 +69,7 @@ function SignupPage() {
     firstName: "",
     middleName: "",
     lastName: "",
-    nation: "",
+    nation: { label: "", value: "" },
     phone: "",
   };
 

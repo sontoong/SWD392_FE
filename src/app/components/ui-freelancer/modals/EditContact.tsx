@@ -4,8 +4,8 @@ import { EditButton } from "../../button/buttons";
 import { FormInput } from "../../input/inputs";
 import { CustomFormModal } from "../../modal/modal";
 import { UserDetail } from "../../../models/user";
-import { SelectFix } from "../../select/select";
 import { nations } from "../../../../constants/testData";
+import { SelectFix } from "../../select/select";
 
 export default function EditContact() {
   const [open, setOpen] = useState(false);
@@ -35,7 +35,7 @@ export default function EditContact() {
       <EditButton onClick={() => setOpen(true)} />
       <CustomFormModal
         open={open}
-        title="Tổng quan"
+        title="Thông tin liên hệ"
         onCancel={() => {
           handleCancel();
           form.resetFields();
@@ -54,7 +54,7 @@ export default function EditContact() {
         <Form
           form={form}
           layout="vertical"
-          name="EditOverview"
+          name="EditContact"
           initialValues={initialValues}
         >
           <Form.Item
@@ -74,6 +74,7 @@ export default function EditContact() {
             rules={[
               {
                 required: true,
+                type: "email",
               },
             ]}
           >
@@ -83,7 +84,6 @@ export default function EditContact() {
             <Col span={12}>
               <Form.Item name="nation" label="Múi giờ">
                 <SelectFix
-                  defaultValue="vn"
                   onChange={() => {}}
                   options={Object.values(nations)}
                 />
@@ -96,6 +96,7 @@ export default function EditContact() {
                 rules={[
                   {
                     required: true,
+                    type: "number",
                   },
                 ]}
               >

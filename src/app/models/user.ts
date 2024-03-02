@@ -1,3 +1,5 @@
+import { Nation } from "./language";
+
 export interface UserDetail {
   id: string;
   name: string;
@@ -6,7 +8,7 @@ export interface UserDetail {
   dob: number;
   role: "freelancer" | "enterprise" | "admin";
   address: string;
-  nation: string;
+  nation: Nation[string];
   isVerified: boolean;
   averageRating: number;
   ratingCount: number;

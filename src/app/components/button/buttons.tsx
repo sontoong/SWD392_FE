@@ -1,3 +1,4 @@
+import { EditTwoTone } from "@ant-design/icons";
 import { Button } from "antd";
 import { ButtonProps } from "antd/es/button/button";
 
@@ -26,6 +27,19 @@ export function IconButton(props: IconButtonProps) {
   const { icon, children } = props;
   return (
     <Button type="text" {...props} size="large" icon={icon}>
+      {children}
+    </Button>
+  );
+}
+
+export function EditButton(props: ButtonProps) {
+  const { children } = props;
+  return (
+    <Button
+      type="text"
+      icon={<EditTwoTone twoToneColor="#74BA7B" />}
+      {...props}
+    >
       {children}
     </Button>
   );

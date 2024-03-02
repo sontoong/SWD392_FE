@@ -1,32 +1,15 @@
 import { Modal, ModalProps, Typography } from "antd";
 import { OutlineButton, PrimaryButton } from "../button/buttons";
 
-interface CustomModalProps extends Omit<ModalProps, "onOk" | "onCancel"> {
-  handleCancel?: () => void;
-  handleOk?: () => void;
-}
-
-export default function CustomModal(props: CustomModalProps) {
-  const { children, handleCancel, handleOk, open, title } = props;
+export function CustomFormModal(props: ModalProps) {
+  const { children, open, title, onCancel, onOk } = props;
   const { Title } = Typography;
-
-  const handleClickOk = () => {
-    if (handleOk) {
-      handleOk();
-    }
-  };
-
-  const handleClickCancel = () => {
-    if (handleCancel) {
-      handleCancel();
-    }
-  };
 
   return (
     <Modal
       open={open}
-      onCancel={handleCancel}
-      onOk={handleOk}
+      onCancel={onCancel}
+      onOk={onOk}
       title={
         <Title
           level={4}
@@ -39,16 +22,18 @@ export default function CustomModal(props: CustomModalProps) {
           {title}
         </Title>
       }
+      maskClosable={false}
+      destroyOnClose={true}
       footer={[
-        <OutlineButton key="cancel" onClick={handleClickCancel}>
-          Cancel
+        <OutlineButton key="cancel" onClick={onCancel}>
+          Hủy
         </OutlineButton>,
-        <PrimaryButton key="ok" onClick={handleClickOk}>
-          Accept
+        <PrimaryButton key="sumbit" onClick={onOk}>
+          Lưu
         </PrimaryButton>,
       ]}
     >
-      {children}
+      <div className="pb-3 pt-5">{children}</div>
     </Modal>
   );
 }
