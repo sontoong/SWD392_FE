@@ -2,9 +2,8 @@ import { EditOutlined } from "@ant-design/icons";
 import { IconButton } from "../button/buttons";
 import { useState } from "react";
 import CustomModal from "../modal/modal";
-import { Field, Formik } from "formik";
+import { Field, Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Form } from "react-router-dom";
 import {
   MyInput,
   MySelectInput,
