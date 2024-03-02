@@ -109,7 +109,6 @@ function MySelectSkillFieldInput({ field, placeholder, ...props }: MySkillFieldS
         size="large"
         {...props}
         style={{ width: '100%' }}
-        defaultValue={[]}
       />
       <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
         {placeholder}

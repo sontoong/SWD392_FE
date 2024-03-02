@@ -1,4 +1,4 @@
-import { EditOutlined, UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import {
   Avatar,
   Col,
