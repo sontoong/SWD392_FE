@@ -17,7 +17,7 @@ export default function TestPage() {
     // <EnterpriseModalEditGeneralInfo/>
     // <EnterpriseDetailPage/>
     // <FreelancerProjectList/>
-    <FreeLancerIncomeList/>
+    <FreeLancerIncomeList />
     // <ViewSignContract/>
   );
 }
