@@ -7,6 +7,8 @@ import {
   Project,
   Skill,
   OptionalRequirements,
+  FreelancerProject,
+  FreelancerProjectContract
 } from "../app/models/project";
 import { UserDetail } from "../app/models/user";
 
@@ -142,4 +144,17 @@ export const enterpriseInfo: EnterpriseInfo = {
   documentNumber: 33333333333333,
   enterpriseEmail: "CoolMathGame@gmail.com",
   enterprisePhone: "33333333333333",
+};
+
+export const FreelancerProjects: FreelancerProject[] = [
+  {...project, startDate:1708532861, endDate:1708532861, status: "stopped"},
+  {...project, startDate:1708532861, endDate:1708532861, status: "doing"},
+  {...project, startDate:1708532861, endDate:1708532861, status: "contracting"},
+  {...project, startDate:1708532861, endDate:1708532861, status: "verifying"},
+  {...project, startDate:1708532861, endDate:1708532861, status: "denied"},
+]
+
+export const FreelancerProjectContractForm: FreelancerProjectContract = {
+  ...FreelancerProjects[3], 
+  signature: 'Thuan' 
 };

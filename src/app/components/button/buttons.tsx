@@ -23,6 +23,7 @@ export function OutlineButton(props: ButtonProps) {
 interface IconButtonProps extends Omit<ButtonProps, "icon"> {
   icon: React.ReactNode;
 }
+
 export function IconButton(props: IconButtonProps) {
   const { icon, children } = props;
   return (

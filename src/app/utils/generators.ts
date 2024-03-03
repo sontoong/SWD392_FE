@@ -1,4 +1,4 @@
-import { Project } from "../models/project";
+import { FreelancerProject, Project } from "../models/project";
 import { UserDetail } from "../models/user";
 
 export function generateRequirementMsg(role: Project["freelancerRequirement"]) {
@@ -43,6 +43,46 @@ export function generateProjectTypeMsg(type: Project["projectType"]) {
   }
 }
 
+export function generateProjectFundingType(type: Project["funding"]) {
+  switch (type) {
+    case "fixed":
+      return "Theo dự án";
+    case "hourly":
+      return "Theo giờ";
+    default:
+      return '';
+  }
+}
+
+export function generateProjectFunding(
+  type: Project["funding"],
+  freelancerRequirement?: Project["freelancerRequirement"],
+  initialFunding?: Project["initialFunding"]
+) {
+  switch (type) {
+    case "fixed":
+      return { initialFunding: initialFunding ? initialFunding.toString() : '' };
+    case "hourly":
+      if (freelancerRequirement) {
+        switch (freelancerRequirement) {
+          case "junior":
+            return "Dưới 100.000VND";
+          case "senior":
+            return "100.000VND - 500.000VND";
+          case "expert":
+            return "Trên 500.000VND";
+          default:
+            return '';
+        }
+      } else {
+        return ''; // Handle case when freelancerRequirement is undefined
+      }
+    default:
+      return '';
+  }
+}
+
+
 export function generateVerifyMsg(verified: UserDetail["isVerified"]) {
   switch (verified) {
     case true:
@@ -65,3 +105,21 @@ export function generateRoleMsg(role: UserDetail["role"]) {
       return "Chưa xác định";
   }
 }
+
+export function generateStatus(status: FreelancerProject["status"]) {
+  switch (status) {
+    case "doing":
+      return "Đang làm việc";
+    case "stopped":
+      return "Đã ngưng làm";
+    case "contracting":
+        return "Chờ kí hợp đồng";
+    case "verifying":
+        return "Đang duyệt";
+    case "denied":
+        return "Từ chối";
+    default:
+      return '';
+  }
+}
+
