@@ -14,6 +14,9 @@ const HomePage = lazy(() => import("../pages/HomePage"));
 const FreelancerDetailPage = lazy(
   () => import("../pages/FreelancerDetailPage"),
 );
+const FreelancerProjectList = lazy(
+  () => import("../pages/FreelancerProjectList"),
+);
 
 //enterprise
 const EnterpriseDetailPage = lazy(
@@ -101,7 +104,7 @@ export const router = createBrowserRouter([
             path: "projects",
             element: (
               <Suspense fallback={<></>}>
-                <Template />
+                <FreelancerProjectList />
               </Suspense>
             ),
           },
