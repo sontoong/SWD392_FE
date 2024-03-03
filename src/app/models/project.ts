@@ -4,6 +4,8 @@
 //   time: string;
 // };
 
+import { Income } from "./income";
+
 export type OptionalRequirements = {
   minimumCompletedProjects: "Tất cả" | "Ít nhất 3" | "Ít nhất 5" | "Ít nhất 10";
   rating: "Tất cả" | "Trên 3 sao" | "Trên 4 sao";
@@ -78,4 +80,5 @@ export interface FreelancerProject extends Project{
 export interface FreelancerProjectContract extends FreelancerProject {
   signature?: string;
 }
+
 

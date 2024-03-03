@@ -1,8 +1,9 @@
 // import ViewSignContract from "../components/ui-freelancer/modals/ViewSignContract";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
+import FreeLancerIncomeList from "./FreelancerIncomeList";
 // import EnterpriseModalEditGeneralInfo from "../components/ui-enterprise/EnterpriseModalEditGeneralInfo";
 // import EnterpriseDetailPage from "./EnterpriseDetailPage";
-import FreelancerProjectList from "./FreelancerProjectList";
+// import FreelancerProjectList from "./FreelancerProjectList";
 
 export default function TestPage() {
   useSetHeaderTitle([
@@ -15,7 +16,8 @@ export default function TestPage() {
   return (
     // <EnterpriseModalEditGeneralInfo/>
     // <EnterpriseDetailPage/>
-    <FreelancerProjectList/>
+    // <FreelancerProjectList/>
+    <FreeLancerIncomeList/>
     // <ViewSignContract/>
   );
 }
