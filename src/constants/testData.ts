@@ -1,6 +1,7 @@
 import { Comment } from "../app/models/comment";
 import { CompanyDetail } from "../app/models/company";
 import { EnterpriseInfo } from "../app/models/enterprise";
+import { Income } from "../app/models/income";
 import { Nation } from "../app/models/language";
 import {
   SkillField,
@@ -154,7 +155,14 @@ export const FreelancerProjects: FreelancerProject[] = [
   {...project, startDate:1708532861, endDate:1708532861, status: "denied"},
 ]
 
-export const FreelancerProjectContractForm: FreelancerProjectContract = {
-  ...FreelancerProjects[3], 
+export const ContractForm: FreelancerProjectContract = {
+  ...FreelancerProjects[1], 
   signature: 'Thuan' 
 };
+
+export const Incomes: Income[] = [
+  {...ContractForm, income:5000000, serviceFee:15000000},
+  {...ContractForm, income:5000000, serviceFee:15000000},
+  {...ContractForm, income:5000000, serviceFee:15000000},
+  {...ContractForm, income:5000000, serviceFee:15000000},
+];
