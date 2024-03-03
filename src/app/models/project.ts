@@ -75,3 +75,7 @@ export interface FreelancerProject extends Project{
   status: "doing" | "stopped" | "contracting" | "verifying" | "denied";
 };
 
+export interface FreelancerProjectContract extends FreelancerProject {
+  signature?: string;
+}
+

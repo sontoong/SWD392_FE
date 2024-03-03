@@ -95,6 +95,17 @@ export function generateVerifyMsg(verified: UserDetail["isVerified"]) {
   }
 }
 
+export function generateRoleMsg(role: UserDetail["role"]) {
+  switch (role) {
+    case "freelancer":
+      return "Nhà tuyển dụng";
+    case "enterprise":
+      return "Nguời ứng tuyển";
+    default:
+      return "Chưa xác định";
+  }
+}
+
 export function generateStatus(status: FreelancerProject["status"]) {
   switch (status) {
     case "doing":

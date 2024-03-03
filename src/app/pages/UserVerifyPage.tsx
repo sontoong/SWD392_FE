@@ -5,6 +5,7 @@ import { UserDetailTable } from "../models/user";
 import { user } from "../../constants/testData";
 import { generateVerifyMsg } from "../utils/generators";
 import { Link } from "react-router-dom";
+import { formatUnixToLocal } from "../utils/utils";
 
 export default function VerifyUserPage() {
   useSetHeaderTitle([
@@ -18,16 +19,19 @@ export default function VerifyUserPage() {
     {
       key: "1",
       ...user,
+      dobString: formatUnixToLocal(user.dob),
       status: generateVerifyMsg(user.isVerified),
     },
     {
       key: "2",
       ...user,
+      dobString: formatUnixToLocal(user.dob),
       status: generateVerifyMsg(user.isVerified),
     },
     {
       key: "3",
       ...user,
+      dobString: formatUnixToLocal(user.dob),
       status: generateVerifyMsg(user.isVerified),
     },
   ];
@@ -55,13 +59,13 @@ export default function VerifyUserPage() {
     },
     {
       title: "Ngày sinh",
-      dataIndex: "dob",
-      key: "dob",
+      dataIndex: "dobString",
+      key: "dobString",
     },
     {
       title: "Loại tài khoản",
-      dataIndex: "accountType",
-      key: "accountType",
+      dataIndex: "role",
+      key: "role",
     },
     {
       title: "Trạng thái",

@@ -1,36 +1,44 @@
 import { Comment } from "../app/models/comment";
 import { CompanyDetail } from "../app/models/company";
 import { EnterpriseInfo } from "../app/models/enterprise";
+import { Nation } from "../app/models/language";
 import {
   SkillField,
   Project,
   Skill,
   OptionalRequirements,
   FreelancerProject,
+  FreelancerProjectContract
 } from "../app/models/project";
 import { UserDetail } from "../app/models/user";
 
+export const nations: Nation = {
+  vn: { label: "Việt Nam", value: "vn" },
+  us: { label: "United States", value: "us" },
+  cn: { label: "China", value: "cn" },
+};
+
 const skills: Skill[] = [
-  { label: "Front-end Developer", value:'Front-end Developer' },
-  { label: "Back-end Developer", value:'Back-end Developer' },
-  { label: "Full-stack Developer", value:'Full-stack Developer' },
-  { label: "Mobile Developer" , value:'Mobile Developer'},
-  { label: "UI/UX Designer",  value:'UI/UX Designer'},
-  { label: "Data Scientist", value:'Data Scientist'},
-  { label: "Data Engineer", value:'Data Engineer'},
+  { label: "Front-end Developer", value: "Front-end Developer" },
+  { label: "Back-end Developer", value: "Back-end Developer" },
+  { label: "Full-stack Developer", value: "Full-stack Developer" },
+  { label: "Mobile Developer", value: "Mobile Developer" },
+  { label: "UI/UX Designer", value: "UI/UX Designer" },
+  { label: "Data Scientist", value: "Data Scientist" },
+  { label: "Data Engineer", value: "Data Engineer" },
 ];
 
 const field: SkillField = {
   label: "name",
-  value: 'name',
+  value: "name",
   skills: skills,
 };
 
-const field1: SkillField ={
+const field1: SkillField = {
   label: "name",
-  value: 'name',
+  value: "name",
   skills: skills,
-}
+};
 
 const optionalRequirements: OptionalRequirements = {
   minimumCompletedProjects: "Tất cả",
@@ -68,17 +76,17 @@ export const project: Project = {
 export const user: UserDetail = {
   id: "1",
   role: "freelancer",
-  dob: "01/01/2000",
+  dob: 1708532861,
   email: "nguyena@gmail.com",
   name: "Nguyễn Văn A",
   phone: "0123456789",
   address:
     "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh 715650",
-  nation: "vietnam",
+  nation: nations["vn"],
   isVerified: true,
   averageRating: 3.5,
   ratingCount: 10,
-  createdAt: "01/01/2000",
+  createdAt: 1708532861,
   description: `20 năm trong Full-Stack Development + UI/UX
 Facebook: fb.com/user/JoeBiden`,
   desireSalary: 50000,
@@ -107,6 +115,7 @@ const comment2: Comment = {
 export const comments: Comment[] = [comment, comment2];
 
 export const companyDetail: CompanyDetail = {
+  enterpriseCountry: { label: "Việt Nam", value: "vn" },
   companyName: "FPT Software",
   website: "http://domainexpansion.com",
   videoLink: "https://youtu.be/dQw4w9WgXcQ?si=kCbyzyW8_XaVT8-j",
@@ -138,5 +147,14 @@ export const enterpriseInfo: EnterpriseInfo = {
 };
 
 export const FreelancerProjects: FreelancerProject[] = [
-  {...project, startDate:1708532861, endDate:1708532861, status: "stopped"}
+  {...project, startDate:1708532861, endDate:1708532861, status: "stopped"},
+  {...project, startDate:1708532861, endDate:1708532861, status: "doing"},
+  {...project, startDate:1708532861, endDate:1708532861, status: "contracting"},
+  {...project, startDate:1708532861, endDate:1708532861, status: "verifying"},
+  {...project, startDate:1708532861, endDate:1708532861, status: "denied"},
 ]
+
+export const FreelancerProjectContractForm: FreelancerProjectContract = {
+  ...FreelancerProjects[3], 
+  signature: 'Thuan' 
+};

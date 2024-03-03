@@ -1,19 +1,23 @@
-import { DatePicker, DatePickerProps, Input, Select, SelectProps } from "antd";
+import {
+  DatePicker,
+  DatePickerProps,
+  Input,
+  InputProps,
+  Select,
+  SelectProps,
+} from "antd";
 import { ErrorMessage } from "formik";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import TextArea from "antd/es/input/TextArea";
+import { TextAreaProps } from "antd/es/input";
 
+const { TextArea } = Input;
 export interface MyInputProps {
   id: string;
   field: {
     name: string;
     value: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    // onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   };
-  // form: {
-  //   setFieldTouched: (field: string, touched?: boolean, shouldValidate?: boolean) => void;
-  // };
   placeholder: string;
 }
 
@@ -22,9 +26,9 @@ export interface MyDatePickerProps {
   field: {
     name: string;
     value: string;
-    onChange: DatePickerProps['onChange']
+    onChange: DatePickerProps["onChange"];
   };
-  placeholder: string; 
+  placeholder: string;
 }
 
 export interface MySelectProps extends SelectProps {
@@ -32,7 +36,7 @@ export interface MySelectProps extends SelectProps {
   field: {
     name: string;
   };
-  placeholder: string; 
+  placeholder: string;
 }
 
 export interface MySkillFieldSelectProps extends SelectProps {
@@ -40,7 +44,7 @@ export interface MySkillFieldSelectProps extends SelectProps {
   field: {
     name: string;
   };
-  placeholder: string; 
+  placeholder: string;
 }
 
 export interface MyTextAreaProps {
@@ -48,27 +52,12 @@ export interface MyTextAreaProps {
   field: {
     name: string;
     value: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    // onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+    onChange: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => void;
   };
-  // form: {
-  //   setFieldTouched: (field: string, touched?: boolean, shouldValidate?: boolean) => void;
-  // };
   placeholder: string;
 }
-
-
-
-// const handleInputFocusBlur = (id: string, focused: boolean) => {
-//   const element = document.getElementById(id);
-//   if (element) {
-//     if (focused) {
-//       element.classList.add('border-blue-500');
-//     } else {
-//       element.classList.remove('border-blue-500');
-//     }
-//   }
-// };
 
 function MyTextArea({ field, placeholder }: MyTextAreaProps) {
   const { name, value, onChange } = field;
@@ -77,14 +66,12 @@ function MyTextArea({ field, placeholder }: MyTextAreaProps) {
     <div className="relative">
       <TextArea
         {...field}
-        // placeholder={placeholder}
         value={value || ""}
         onChange={onChange}
-        // bordered={false}
         allowClear
         size="large"
         className="px-5 py-3"
-        style={{width:"100%"}}
+        style={{ width: "100%" }}
       />
       <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
         {placeholder}
@@ -98,7 +85,11 @@ function MyTextArea({ field, placeholder }: MyTextAreaProps) {
   );
 }
 
-function MySelectSkillFieldInput({ field, placeholder, ...props }: MySkillFieldSelectProps) {
+function MySelectSkillFieldInput({
+  field,
+  placeholder,
+  ...props
+}: MySkillFieldSelectProps) {
   const { name } = field;
 
   return (
@@ -108,7 +99,7 @@ function MySelectSkillFieldInput({ field, placeholder, ...props }: MySkillFieldS
         allowClear
         size="large"
         {...props}
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
       />
       <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
         {placeholder}
@@ -127,11 +118,7 @@ function MySelectInput({ field, placeholder, ...props }: MySelectProps) {
 
   return (
     <div className="relative">
-      <Select
-        size="large"
-        {...props}
-        style={{width:'100%'}}
-      />
+      <Select size="large" {...props} style={{ width: "100%" }} />
       <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
         {placeholder}
       </p>
@@ -153,7 +140,7 @@ function MyDateInput({ field, placeholder }: MyDatePickerProps) {
         onChange={onChange}
         allowClear
         size="large"
-        className="px-5 py-3 w-full"
+        className="w-full px-5 py-3"
       />
       <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
         {placeholder}
@@ -174,14 +161,12 @@ function MyInput({ field, placeholder }: MyInputProps) {
     <div className="relative">
       <Input
         {...field}
-        // placeholder={placeholder}
         value={value || ""}
         onChange={onChange}
-        // bordered={false}
         allowClear
         size="large"
         className="px-5 py-3"
-        style={{width:"100%"}}
+        style={{ width: "100%" }}
       />
       <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
         {placeholder}
@@ -202,10 +187,8 @@ function MyInputPassword({ field, placeholder }: MyInputProps) {
     <div className="relative">
       <Input.Password
         {...field}
-        // placeholder={placeholder}
         value={value || ""}
         onChange={onChange}
-        // bordered={false}
         size="large"
         className="px-5 py-3 "
         iconRender={(visible) =>
@@ -224,4 +207,34 @@ function MyInputPassword({ field, placeholder }: MyInputProps) {
   );
 }
 
-export { MyInput, MyInputPassword, MyDateInput, MySelectInput, MySelectSkillFieldInput, MyTextArea};
+function InputFix(props: InputProps) {
+  return (
+    <Input {...props} className="rounded-[6px] border-[1px] border-[#d9d9d9]" />
+  );
+}
+
+function FormInput(props: InputProps) {
+  return <InputFix {...props} allowClear={true} style={{ height: "42px" }} />;
+}
+
+function FormTextArea(props: TextAreaProps) {
+  return <TextArea {...props} autoSize />;
+}
+
+function FormDatePicker(props: DatePickerProps) {
+  const dateFormat = "DD/MM/YYYY";
+  return <DatePicker {...props} format={dateFormat} allowClear={false} />;
+}
+
+export {
+  FormTextArea,
+  FormDatePicker,
+  InputFix,
+  FormInput,
+  MyInput,
+  MyInputPassword,
+  MyDateInput,
+  MySelectInput,
+  MySelectSkillFieldInput,
+  MyTextArea,
+};

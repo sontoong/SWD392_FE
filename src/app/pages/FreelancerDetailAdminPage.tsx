@@ -114,7 +114,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
                       <div className="font-semibold">
                         <Space>
                           <EnvironmentOutlined />
-                          <span className="capitalize">{nation}</span>
+                          <span className="capitalize">{nation.label}</span>
                         </Space>
                       </div>
                     </Col>
@@ -519,7 +519,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
                   </div>
                   <div>
                     <Title level={4}>Múi giờ</Title>
-                    {nation}
+                    {nation.label}
                   </div>
                   <div>
                     <Title level={4}>SĐT</Title>

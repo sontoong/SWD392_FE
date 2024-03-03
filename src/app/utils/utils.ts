@@ -5,6 +5,21 @@ export const formatCurrency = (amount: number) => {
   });
 };
 
+export const formatUnixToLocal = (
+  unixTimestamp: number,
+  locale: string = "vi-VN",
+) => {
+  const milliseconds = unixTimestamp * 1000;
+  const date = new Date(milliseconds);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  };
+  const formatter = new Intl.DateTimeFormat(locale, options);
+  return formatter.format(date);
+};
+
 export const formatDateToLocal = (
   dateStr: string,
   locale: string = "vi-VN",

@@ -1,17 +1,19 @@
+import { Nation } from "./language";
+
 export interface UserDetail {
   id: string;
   name: string;
   email: string;
   phone: string;
-  dob: string;
+  dob: number;
   role: "freelancer" | "enterprise" | "admin";
   address: string;
-  nation: string;
+  nation: Nation[string];
   isVerified: boolean;
   averageRating: number;
   ratingCount: number;
   projectCount: number;
-  createdAt: string;
+  createdAt: number;
   desireSalary: number;
   language: string[];
   description: string;
@@ -19,5 +21,6 @@ export interface UserDetail {
 
 export interface UserDetailTable extends UserDetail {
   key: string;
+  dobString: string;
   status: string;
 }

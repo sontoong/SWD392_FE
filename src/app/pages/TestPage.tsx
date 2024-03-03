@@ -1,3 +1,4 @@
+// import ViewSignContract from "../components/ui-freelancer/modals/ViewSignContract";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 // import EnterpriseModalEditGeneralInfo from "../components/ui-enterprise/EnterpriseModalEditGeneralInfo";
 // import EnterpriseDetailPage from "./EnterpriseDetailPage";
@@ -15,5 +16,6 @@ export default function TestPage() {
     // <EnterpriseModalEditGeneralInfo/>
     // <EnterpriseDetailPage/>
     <FreelancerProjectList/>
+    // <ViewSignContract/>
   );
 }

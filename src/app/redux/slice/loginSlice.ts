@@ -17,7 +17,7 @@ export interface User {
 }
 
 const initialState: User = {
-  currentUser: { role: "freelancer" } as CurrentUser,
+  currentUser: { role: "enterprise" } as CurrentUser,
   isFetching: false,
   error: false,
   displayError: "",

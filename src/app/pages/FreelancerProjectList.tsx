@@ -2,6 +2,7 @@ import { Table, TableProps } from "antd";
 import { FreelancerProject } from "../models/project";
 import { generateProjectFunding, generateProjectFundingType, generateStatus } from "../utils/generators";
 import { FreelancerProjects } from "../../constants/testData";
+import ViewSignContract from "../components/ui-freelancer/modals/ViewSignContract";
 
 export interface TableData extends
 FreelancerProject {
@@ -47,8 +48,14 @@ const columns: TableProps<TableData>["columns"] = [
     },
     {
         title: "Hợp đồng",
-        dataIndex: "",
-        key: "",
+        render: (_, record) => {
+            // Check if status is "denied" or "verifying", if so, return null (don't render anything)
+            if (record.status === "denied" || record.status === "verifying") {
+                return null;
+            }
+            // Otherwise, render the ViewSignContract component
+            return <ViewSignContract />;
+        }
     },
   ];
 

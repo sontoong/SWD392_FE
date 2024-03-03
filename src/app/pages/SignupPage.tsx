@@ -16,19 +16,19 @@ import { useImageFetcher } from "../hooks/useGetImg";
 import { GoogleLoginButton } from "../components/button/google-button";
 import Title from "antd/es/typography/Title";
 import { LeftOutlined } from "@ant-design/icons";
+import { UserDetail } from "../models/user";
+import { generateRoleMsg } from "../utils/generators";
 
-export interface SignupFormValues {
-  accountType: "Nhà tuyển dụng" | "Nguời ứng tuyển";
-  email: string;
+export type SignupFormValues = Pick<
+  UserDetail,
+  "role" | "email" | "address" | "nation" | "phone"
+> & {
   password: string;
   confirmPassword: string;
   firstName: string;
   middleName: string;
   lastName: string;
-  address: string;
-  nation: string;
-  phone: string;
-}
+};
 
 interface SelectCustomProps {
   onChangeLanguage: (value: string) => void;
@@ -61,7 +61,7 @@ function SignupPage() {
   );
 
   const initialValues: SignupFormValues = {
-    accountType: "Nguời ứng tuyển",
+    role: "freelancer",
     email: "",
     password: "",
     confirmPassword: "",
@@ -69,7 +69,7 @@ function SignupPage() {
     firstName: "",
     middleName: "",
     lastName: "",
-    nation: "",
+    nation: { label: "", value: "" },
     phone: "",
   };
 
@@ -125,7 +125,7 @@ function SignupPage() {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form className="flex flex-col items-center justify-center space-y-5">
+          <Form className="clear-both flex flex-col items-center justify-center space-y-5">
             <section className="w-[70%] space-y-5 ">
               <div className="mb-12 ml-1 mt-[20%] ">
                 <h1 className="text-3xl">{languageText.title}</h1>
@@ -139,14 +139,16 @@ function SignupPage() {
               <div>
                 <Title level={5}>Bạn muốn tạo tài khoản cho</Title>
                 <Radio.Group
-                  name="accountType"
+                  name="role"
                   onChange={() => {}}
-                  defaultValue={initialValues.accountType}
+                  defaultValue={initialValues.role}
                 >
-                  <Radio.Button value="Nguời ứng tuyển">
-                    Freelancer
+                  <Radio.Button value="freelancer">
+                    {generateRoleMsg("freelancer")}
                   </Radio.Button>
-                  <Radio.Button value="Nhà tuyển dụng">Enterprise</Radio.Button>
+                  <Radio.Button value="enterprise">
+                    {generateRoleMsg("enterprise")}
+                  </Radio.Button>
                 </Radio.Group>
               </div>
               <Field

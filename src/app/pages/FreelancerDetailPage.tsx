@@ -4,7 +4,6 @@ import {
   Divider,
   Flex,
   Image,
-  Input,
   Layout,
   Modal,
   Rate,
@@ -34,6 +33,8 @@ import { qualityFactors } from "../../constants/quality";
 import Meta from "antd/es/card/Meta";
 import { PrimaryButton } from "../components/button/buttons";
 import { CustomCard } from "../components/ui/card";
+import { EditContact, EditOverview } from "../components/ui-freelancer/modals";
+import { InputFix } from "../components/input/inputs";
 
 const { Content, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
@@ -80,12 +81,15 @@ export default function FreelancerDetailPage() {
             {/* overview */}
             <CustomCard
               title={
-                <Title
-                  level={4}
-                  style={{ margin: 0, textTransform: "uppercase" }}
-                >
-                  Tổng quan
-                </Title>
+                <Space>
+                  <Title
+                    level={4}
+                    style={{ margin: 0, textTransform: "uppercase" }}
+                  >
+                    Tổng quan
+                  </Title>
+                  <EditOverview />
+                </Space>
               }
               type="inner"
             >
@@ -102,7 +106,7 @@ export default function FreelancerDetailPage() {
                       <div className="font-semibold">
                         <Space>
                           <EnvironmentOutlined />
-                          <span className="capitalize">{nation}</span>
+                          <span className="capitalize">{nation.label}</span>
                         </Space>
                       </div>
                     </Col>
@@ -425,6 +429,7 @@ export default function FreelancerDetailPage() {
             </CustomCard>
           </Space>
         </Content>
+
         <Sider
           width={350}
           style={{ background: colorBgContainer, padding: 24 }}
@@ -449,8 +454,11 @@ export default function FreelancerDetailPage() {
             >
               Gửi xác nhận
             </PrimaryButton>
-            <div>
-              <Title level={4}>Thông tin liên hệ</Title>
+            <Space direction="vertical">
+              <Space>
+                <Title level={4}>Thông tin liên hệ</Title>
+                <EditContact />
+              </Space>
               <CustomCard>
                 <Space direction="vertical" size={"large"}>
                   <div>
@@ -463,7 +471,7 @@ export default function FreelancerDetailPage() {
                   </div>
                   <div>
                     <Title level={4}>Múi giờ</Title>
-                    {nation}
+                    {nation.label}
                   </div>
                   <div>
                     <Title level={4}>SĐT</Title>
@@ -471,7 +479,7 @@ export default function FreelancerDetailPage() {
                   </div>
                 </Space>
               </CustomCard>
-            </div>
+            </Space>
             <div>
               <Title
                 level={4}
@@ -481,10 +489,7 @@ export default function FreelancerDetailPage() {
               >
                 Sao chép đường dẫn hồ sơ
               </Title>
-              <Input
-                defaultValue="https://freelancerviet.vn/ho-so/thang-vo-minh-3.html"
-                className="rounded-[6px] border-[1px] border-[#d9d9d9]"
-              />
+              <InputFix defaultValue="https://freelancerviet.vn/ho-so/thang-vo-minh-3.html" />
             </div>
           </Space>
         </Sider>

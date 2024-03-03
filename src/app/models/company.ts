@@ -1,3 +1,4 @@
+import { Nation } from "./language";
 import { SkillField } from "./project";
 
 export interface CompanyDetail {
@@ -13,6 +14,7 @@ export interface CompanyDetail {
   companyCountry: string;
   taxNumber: number;
   address: string;
+  enterpriseCountry: Nation[string];
   companyEmail: string;
   companyPhone: string;
 }
