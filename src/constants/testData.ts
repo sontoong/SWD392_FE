@@ -6,6 +6,7 @@ import {
   Project,
   Skill,
   OptionalRequirements,
+  FreelancerProject,
 } from "../app/models/project";
 import { UserDetail } from "../app/models/user";
 
@@ -136,3 +137,6 @@ export const enterpriseInfo: EnterpriseInfo = {
   enterprisePhone: "33333333333333",
 };
 
+export const FreelancerProjects: FreelancerProject[] = [
+  {...project, startDate:1708532861, endDate:1708532861, status: "stopped"}
+]

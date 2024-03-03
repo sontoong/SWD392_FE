@@ -68,3 +68,10 @@ export interface CreateProject {
   isCompleted: boolean;
   isVerified: boolean;
 }
+
+export interface FreelancerProject extends Project{
+  startDate: number;
+  endDate?: number;
+  status: "doing" | "stopped" | "contracting" | "verifying" | "denied";
+};
+
