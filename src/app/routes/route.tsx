@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
 import { ROLE } from "../../constants/role";
+import TransactionList from "../pages/TransactionList";
 
 const Layout = lazy(() => import("../components/layout/public-layout"));
 const Layout2 = lazy(() => import("../components/layout/admin-layout"));
@@ -117,7 +118,7 @@ export const router = createBrowserRouter([
             path: "report/transactions",
             element: (
               <Suspense fallback={<></>}>
-                <Template />
+                <TransactionList role={'freelancer'}/>
               </Suspense>
             ),
           },
@@ -159,7 +160,7 @@ export const router = createBrowserRouter([
             path: "report/transactions",
             element: (
               <Suspense fallback={<></>}>
-                <Template />
+                <TransactionList role={'enterprise'}/>
               </Suspense>
             ),
           },

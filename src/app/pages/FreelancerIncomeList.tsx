@@ -1,41 +1,44 @@
 import { Table, TableProps } from "antd";
 import { Incomes } from "../../constants/testData";
-import ViewSignContract from "../components/ui-freelancer/modals/ViewSignContract";
 import { Income } from "../models/income";
+import { DownloadOutlined } from "@ant-design/icons";
+import { formatCurrency } from "../utils/utils";
 
 
 export default function FreeLancerIncomeList() {
+  interface IncomeTable extends Income{
+    IncomeAmountFormat: string;
+    ServiceFeeFormat: string;
+  }
 
-const data: Income[] = Incomes
+const data: IncomeTable[] = Incomes.map((item)=>(
+  {...item, IncomeAmountFormat:formatCurrency(item.incomeAmount), ServiceFeeFormat:formatCurrency(item.serviceFee)}
+))
 
-const columns: TableProps<Income>["columns"] = [
+const columns: TableProps<IncomeTable>["columns"] = [
     {
       title: "Khách hàng",
-      dataIndex: "createdBy",
-      key: "createdBy",
+      dataIndex: "customer",
+      key: "customer",
     },
     {
       title: "Hợp đồng",
-      render: (_, record) => {
-          // Check if status is "denied" or "verifying", if so, return null (don't render anything)
-          if (record.status === "denied" || record.status === "verifying") {
-              return null;
-          }
-          // Otherwise, render the ViewSignContract component
-          return <ViewSignContract />;
-      }
+      render: () => {
+          return <DownloadOutlined/>
+      },
+      align:'center'
     },
     {
       title: "Thu nhập",
-      dataIndex: "income",
-      key: "income",
+      dataIndex: "IncomeAmountFormat",
+      key: "IncomeAmountFormat",
     },
     {
       title: "Phí hoa hồng",
-      dataIndex: "serviceFee",
-      key: "serviceFee",
+      dataIndex: "ServiceFeeFormat",
+      key: "ServiceFeeFormat",
     },
   ];
 
- return <Table columns={columns} dataSource={data} />;
+ return <Table columns={columns} dataSource={data} pagination={{position:["bottomCenter"]}}/>;
 }

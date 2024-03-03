@@ -59,5 +59,5 @@ const columns: TableProps<TableData>["columns"] = [
     },
   ];
 
- return <Table columns={columns} dataSource={data} />;
+ return <Table columns={columns} dataSource={data} pagination={{position:["bottomCenter"]}}/>;
 }

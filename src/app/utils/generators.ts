@@ -1,4 +1,5 @@
 import { FreelancerProject, Project } from "../models/project";
+import { Transaction } from "../models/transaction";
 import { UserDetail } from "../models/user";
 
 export function generateRequirementMsg(role: Project["freelancerRequirement"]) {
@@ -123,3 +124,13 @@ export function generateStatus(status: FreelancerProject["status"]) {
   }
 }
 
+export function generateTransactionType(type: Transaction["type"]){
+  switch (type) {
+    case "cash-out":
+      return "Rút tiền";
+    case "transaction":
+      return "Chuyển tiền";
+    default:
+        return '';
+  }
+}
