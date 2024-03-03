@@ -1,6 +1,7 @@
-import { FreelancerProjectContract } from "./project";
-
-export interface Income extends FreelancerProjectContract{
-    income: number;
+export interface Income{
+    customer: string;
+    customerId: string;
+    incomeAmount: number;
+    projectId: string;
     serviceFee: number;
 }
