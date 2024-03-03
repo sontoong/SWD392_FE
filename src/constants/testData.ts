@@ -11,6 +11,7 @@ import {
   FreelancerProject,
   FreelancerProjectContract
 } from "../app/models/project";
+import { Transaction } from "../app/models/transaction";
 import { UserDetail } from "../app/models/user";
 
 export const nations: Nation = {
@@ -161,8 +162,13 @@ export const ContractForm: FreelancerProjectContract = {
 };
 
 export const Incomes: Income[] = [
-  {...ContractForm, income:5000000, serviceFee:15000000},
-  {...ContractForm, income:5000000, serviceFee:15000000},
-  {...ContractForm, income:5000000, serviceFee:15000000},
-  {...ContractForm, income:5000000, serviceFee:15000000},
+  {customer:"Nguyễn Văn Cường", customerId:"", projectId:"", incomeAmount:5000000, serviceFee:15000000},
+  {customer:"Nguyễn Văn Cường", customerId:"", projectId:"", incomeAmount:5000000, serviceFee:15000000},
+  {customer:"Nguyễn Văn Cường", customerId:"", projectId:"", incomeAmount:5000000, serviceFee:15000000},
+  {customer:"Nguyễn Văn Cường", customerId:"", projectId:"", incomeAmount:5000000, serviceFee:15000000},
+];
+
+export const Transactions: Transaction[] = [
+  {name:"Nguyễn Văn Cường", date:1708532861, id:"#15XE335NME", moneyAmount:5000000, type:"cash-out"},
+  {name:"Nguyễn Văn Cường", date:1708532861, id:"#15XE335NME", moneyAmount:5000000, type:"transaction"},
 ];
