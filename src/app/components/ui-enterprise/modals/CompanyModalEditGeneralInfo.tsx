@@ -7,7 +7,7 @@ import { IdDocuments } from "../../../../constants/id-documents";
 import { CompanyDetail } from "../../../models/company";
 import { skills } from "../../../../constants/skill";
 import { SelectFix, SelectMultiple } from "../../select/select";
-import { UploadImgCircle, UploadImgRectangle } from "../../input/upload-img";
+import { UploadImg } from "../../input/upload-img";
 
 export default function CompanyModalEditGeneralInfo() {
   const [open, setOpen] = useState(false);
@@ -105,8 +105,8 @@ export default function CompanyModalEditGeneralInfo() {
           name="CompanyEditGeneralInfo"
           initialValues={initialValues}
         >
-          <UploadImgCircle />
-          <UploadImgRectangle />
+          <UploadImg listType="picture-circle" maxCount={1} />
+          <UploadImg listType="picture-card" maxCount={1} />
           <Row>
             <Col span={10}>
               <Form.Item

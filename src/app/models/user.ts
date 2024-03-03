@@ -1,8 +1,9 @@
 import { Nation } from "./language";
+import { ExperienceLevel } from "./project";
 
 export interface UserDetail {
   id: string;
-  name: string;
+  username: string;
   email: string;
   phone: string;
   dob: number;
@@ -14,28 +15,18 @@ export interface UserDetail {
   ratingCount: number;
   projectCount: number;
   createdAt: number;
-  desireSalary: number;
   language: string[];
   description: string;
 }
 
-export interface Freelancer extends UserDetail {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  dob: number;
-  role: "freelancer";
-  address: string;
-  nation: Nation[string];
-  isVerified: boolean;
-  averageRating: number;
-  ratingCount: number;
-  projectCount: number;
-  createdAt: number;
+export interface FreelancerDetail extends UserDetail {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  profilePicture: string;
   desireSalary: number;
-  language: string[];
-  description: string;
+  experienceLevel: ExperienceLevel;
+  jobRole: string;
 }
 
 export interface UserDetailTable extends UserDetail {

@@ -17,7 +17,7 @@ import {
 } from "antd";
 import React from "react";
 import BackButton from "../components/button/back-button";
-import { comments, user } from "../../constants/testData";
+import { comments, freelancer } from "../../constants/testData";
 import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
@@ -50,7 +50,7 @@ export default function FreelancerDetailPage() {
   };
 
   const {
-    name,
+    username,
     nation,
     isVerified,
     averageRating,
@@ -62,7 +62,7 @@ export default function FreelancerDetailPage() {
     email,
     address,
     phone,
-  } = user;
+  } = freelancer;
 
   return (
     <>
@@ -99,7 +99,7 @@ export default function FreelancerDetailPage() {
                   <Row>
                     <Col span={8}>
                       <Title level={3} ellipsis style={{ margin: 0 }}>
-                        {name}
+                        {username}
                       </Title>
                     </Col>
                     <Col span={5} className="flex items-center">

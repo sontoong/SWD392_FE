@@ -9,7 +9,7 @@ import { DocumentUploadInput } from "../../input/upload-document-input";
 import { SelectFix } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import dayjs from "dayjs";
-import { UploadImgCircle } from "../../input/upload-img";
+import { UploadImg } from "../../input/upload-img";
 
 export default function EnterpriseModalEditGeneralInfo() {
   const [open, setOpen] = useState(false);
@@ -67,7 +67,7 @@ export default function EnterpriseModalEditGeneralInfo() {
             dateOfBirth: dayjs(initialValues.dateOfBirth * 1000),
           }}
         >
-          <UploadImgCircle />
+          <UploadImg listType="picture-circle" maxCount={1} />
           <Row>
             <Col span={6}>
               <Form.Item

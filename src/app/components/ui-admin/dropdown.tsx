@@ -42,12 +42,12 @@ export function CustomDropdown({
         modal.confirm({
           title: "Lưu ý",
           icon: <ExclamationCircleFilled />,
-          content: <div>Bạn muốn kích hoạt tài khoản {record.name}</div>,
+          content: <div>Bạn muốn kích hoạt tài khoản {record.username}</div>,
           okText: "Đồng ý",
           okType: "danger",
           cancelText: "Hủy",
           onOk() {
-            console.log(`${key}: ${record.name}`);
+            console.log(`${key}: ${record.username}`);
           },
           onCancel() {},
         });
@@ -57,12 +57,14 @@ export function CustomDropdown({
         modal.confirm({
           title: "Lưu ý",
           icon: <ExclamationCircleFilled />,
-          content: <div>Bạn muốn hủy kích hoạt tài khoản {record.name}</div>,
+          content: (
+            <div>Bạn muốn hủy kích hoạt tài khoản {record.username}</div>
+          ),
           okText: "Đồng ý",
           okType: "danger",
           cancelText: "Hủy",
           onOk() {
-            console.log(`${key}: ${record.name}`);
+            console.log(`${key}: ${record.username}`);
           },
           onCancel() {},
         });
@@ -72,12 +74,12 @@ export function CustomDropdown({
         modal.confirm({
           title: "Lưu ý",
           icon: <WarningTwoTone twoToneColor="red" />,
-          content: <div>Bạn muốn cấm tài khoản {record.name}</div>,
+          content: <div>Bạn muốn cấm tài khoản {record.username}</div>,
           okText: "Đồng ý",
           okType: "danger",
           cancelText: "Hủy",
           onOk() {
-            console.log(`${key}: ${record.name}`);
+            console.log(`${key}: ${record.username}`);
           },
           onCancel() {},
         });

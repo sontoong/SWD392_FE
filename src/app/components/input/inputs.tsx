@@ -3,6 +3,8 @@ import {
   DatePickerProps,
   Input,
   InputProps,
+  Radio,
+  RadioGroupProps,
   Select,
   SelectProps,
 } from "antd";
@@ -218,7 +220,7 @@ function FormInput(props: InputProps) {
 }
 
 function FormTextArea(props: TextAreaProps) {
-  return <TextArea {...props} autoSize />;
+  return <TextArea {...props} autoSize allowClear={true} showCount />;
 }
 
 function FormDatePicker(props: DatePickerProps) {
@@ -226,11 +228,16 @@ function FormDatePicker(props: DatePickerProps) {
   return <DatePicker {...props} format={dateFormat} allowClear={false} />;
 }
 
+function FormRadioGroup(props: RadioGroupProps) {
+  return <Radio.Group {...props} optionType="button" buttonStyle="solid" />;
+}
+
 export {
   FormTextArea,
   FormDatePicker,
   InputFix,
   FormInput,
+  FormRadioGroup,
   MyInput,
   MyInputPassword,
   MyDateInput,

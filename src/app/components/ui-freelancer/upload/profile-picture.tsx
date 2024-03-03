@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { UploadImg } from "../components/input/upload-img";
-import { App, Button, GetProp, UploadFile, UploadProps } from "antd";
+import { UploadImg } from "../../input/upload-img";
+import { App, GetProp, UploadFile, UploadProps } from "antd";
+import { PrimaryButton } from "../../button/buttons";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
-export default function TestPage() {
+export default function UploadProfilePicture() {
   const { message } = App.useApp();
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -23,10 +24,10 @@ export default function TestPage() {
     })
       .then((res) => res.json())
       .then(() => {
-        message.success("upload successfully.");
+        message.success("Upload thành công.");
       })
       .catch(() => {
-        message.error("upload failed.");
+        message.error("Upload thất bại.");
       })
       .finally(() => {
         setUploading(false);
@@ -43,15 +44,14 @@ export default function TestPage() {
         maxCount={1}
         onChange={handleChange}
       />
-      <Button
-        type="primary"
+      <PrimaryButton
         onClick={handleUpload}
         disabled={fileList.length === 0}
         loading={uploading}
         style={{ marginTop: 16 }}
       >
-        {uploading ? "Uploading" : "Start Upload"}
-      </Button>
+        {uploading ? "Đang upload ảnh" : "Upload ảnh"}
+      </PrimaryButton>
     </div>
   );
 }

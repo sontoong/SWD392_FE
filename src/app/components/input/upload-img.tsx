@@ -2,10 +2,16 @@ import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Modal, Upload, message } from "antd";
 import type { GetProp, UploadFile, UploadProps } from "antd";
+import { RequiredFields } from "../../utils/helper";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
-export function UploadImgCircle(props: UploadProps) {
+export function UploadImg(
+  props: RequiredFields<
+    Omit<UploadProps, "beforeUpload" | "onPreview">,
+    "listType" | "maxCount"
+  >,
+) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
@@ -27,7 +33,7 @@ export function UploadImgCircle(props: UploadProps) {
     if (!isLt2M) {
       message.error("Image must smaller than 2MB!");
     }
-    return isJpgOrPng && isLt2M;
+    return false;
   };
 
   const handleCancel = () => setPreviewOpen(false);
@@ -44,22 +50,13 @@ export function UploadImgCircle(props: UploadProps) {
     );
   };
 
-  const uploadButton = (
-    <button style={{ border: 0, background: "none" }} type="button">
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </button>
-  );
   return (
     <>
-      <Upload
-        {...props}
-        listType="picture-circle"
-        onPreview={handlePreview}
-        maxCount={1}
-        beforeUpload={beforeUpload}
-      >
-        {uploadButton}
+      <Upload {...props} onPreview={handlePreview} beforeUpload={beforeUpload}>
+        <button style={{ border: 0, background: "none" }} type="button">
+          <PlusOutlined />
+          <div style={{ marginTop: 8 }}>Upload</div>
+        </button>
       </Upload>
       <Modal
         open={previewOpen}
@@ -71,8 +68,4 @@ export function UploadImgCircle(props: UploadProps) {
       </Modal>
     </>
   );
-}
-
-export function UploadImgRectangle(props: UploadProps) {
-  return <UploadImgCircle {...props} listType="picture-card" />;
 }
