@@ -50,6 +50,7 @@ export interface Project {
   applicationCount: number;
   inviteSent: number;
   inviteAccepted: number;
+  freelancerCount: number;
 }
 
 export interface CreateProject {
