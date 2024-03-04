@@ -29,7 +29,7 @@ import Meta from "antd/es/card/Meta";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { defaultImage } from "../../constants/images";
-import { comments, user } from "../../constants/testData";
+import { comments, freelancer } from "../../constants/testData";
 import BackButton from "../components/button/back-button";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 import { generateVerifyMsg } from "../utils/generators";
@@ -61,7 +61,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
   };
 
   const {
-    name,
+    username,
     nation,
     isVerified,
     averageRating,
@@ -73,7 +73,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
     email,
     address,
     phone,
-  } = user;
+  } = freelancer;
 
   return (
     <>
@@ -107,7 +107,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
                   <Row>
                     <Col span={8}>
                       <Title level={3} ellipsis style={{ margin: 0 }}>
-                        {name}
+                        {username}
                       </Title>
                     </Col>
                     <Col span={5} className="flex items-center">

@@ -1,6 +1,5 @@
 import { EditButton } from "../../button/buttons";
 import { useState } from "react";
-import { UploadShowIcon, UploadShowImage } from "../../input/upload-input";
 import { CustomFormModal } from "../../modal/modal";
 import { FormInput, FormTextArea } from "../../input/inputs";
 import { Col, Form, Row } from "antd";
@@ -8,6 +7,7 @@ import { IdDocuments } from "../../../../constants/id-documents";
 import { CompanyDetail } from "../../../models/company";
 import { skills } from "../../../../constants/skill";
 import { SelectFix, SelectMultiple } from "../../select/select";
+import { UploadImg } from "../../input/upload-img";
 
 export default function CompanyModalEditGeneralInfo() {
   const [open, setOpen] = useState(false);
@@ -105,8 +105,8 @@ export default function CompanyModalEditGeneralInfo() {
           name="CompanyEditGeneralInfo"
           initialValues={initialValues}
         >
-          <UploadShowIcon />
-          <UploadShowImage />
+          <UploadImg listType="picture-circle" maxCount={1} />
+          <UploadImg listType="picture-card" maxCount={1} />
           <Row>
             <Col span={10}>
               <Form.Item

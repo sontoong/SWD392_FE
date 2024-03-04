@@ -9,10 +9,10 @@ import {
   Skill,
   OptionalRequirements,
   FreelancerProject,
-  FreelancerProjectContract
+  FreelancerProjectContract,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
-import { UserDetail } from "../app/models/user";
+import { FreelancerDetail } from "../app/models/user";
 
 export const nations: Nation = {
   vn: { label: "Việt Nam", value: "vn" },
@@ -75,12 +75,12 @@ export const project: Project = {
   inviteAccepted: 3,
 };
 
-export const user: UserDetail = {
+export const freelancer: FreelancerDetail = {
   id: "1",
   role: "freelancer",
   dob: 1708532861,
   email: "nguyena@gmail.com",
-  name: "Nguyễn Văn A",
+  username: "Nguyễn Văn A",
   phone: "0123456789",
   address:
     "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh 715650",
@@ -94,6 +94,12 @@ Facebook: fb.com/user/JoeBiden`,
   desireSalary: 50000,
   language: ["English", "Vietnamese"],
   projectCount: 5,
+  experienceLevel: "junior",
+  firstName: "Nguyễn",
+  middleName: "Văn",
+  lastName: "A",
+  jobRole: "Front-end Developer",
+  profilePicture: "",
 };
 
 export const projects: Project[] = [project];
@@ -149,26 +155,72 @@ export const enterpriseInfo: EnterpriseInfo = {
 };
 
 export const FreelancerProjects: FreelancerProject[] = [
-  {...project, startDate:1708532861, endDate:1708532861, status: "stopped"},
-  {...project, startDate:1708532861, endDate:1708532861, status: "doing"},
-  {...project, startDate:1708532861, endDate:1708532861, status: "contracting"},
-  {...project, startDate:1708532861, endDate:1708532861, status: "verifying"},
-  {...project, startDate:1708532861, endDate:1708532861, status: "denied"},
-]
+  { ...project, startDate: 1708532861, endDate: 1708532861, status: "stopped" },
+  { ...project, startDate: 1708532861, endDate: 1708532861, status: "doing" },
+  {
+    ...project,
+    startDate: 1708532861,
+    endDate: 1708532861,
+    status: "contracting",
+  },
+  {
+    ...project,
+    startDate: 1708532861,
+    endDate: 1708532861,
+    status: "verifying",
+  },
+  { ...project, startDate: 1708532861, endDate: 1708532861, status: "denied" },
+];
 
 export const ContractForm: FreelancerProjectContract = {
-  ...FreelancerProjects[1], 
-  signature: 'Thuan' 
+  ...FreelancerProjects[1],
+  signature: "Thuan",
 };
 
 export const Incomes: Income[] = [
-  {customer:"Nguyễn Văn Cường", customerId:"", projectId:"", incomeAmount:5000000, serviceFee:15000000},
-  {customer:"Nguyễn Văn Cường", customerId:"", projectId:"", incomeAmount:5000000, serviceFee:15000000},
-  {customer:"Nguyễn Văn Cường", customerId:"", projectId:"", incomeAmount:5000000, serviceFee:15000000},
-  {customer:"Nguyễn Văn Cường", customerId:"", projectId:"", incomeAmount:5000000, serviceFee:15000000},
+  {
+    customer: "Nguyễn Văn Cường",
+    customerId: "",
+    projectId: "",
+    incomeAmount: 5000000,
+    serviceFee: 15000000,
+  },
+  {
+    customer: "Nguyễn Văn Cường",
+    customerId: "",
+    projectId: "",
+    incomeAmount: 5000000,
+    serviceFee: 15000000,
+  },
+  {
+    customer: "Nguyễn Văn Cường",
+    customerId: "",
+    projectId: "",
+    incomeAmount: 5000000,
+    serviceFee: 15000000,
+  },
+  {
+    customer: "Nguyễn Văn Cường",
+    customerId: "",
+    projectId: "",
+    incomeAmount: 5000000,
+    serviceFee: 15000000,
+  },
 ];
 
 export const Transactions: Transaction[] = [
-  {name:"Nguyễn Văn Cường", date:1708532861, id:"#15XE335NME", moneyAmount:5000000, type:"cash-out"},
-  {name:"Nguyễn Văn Cường", date:1708532861, id:"#15XE335NME", moneyAmount:5000000, type:"transaction"},
+  {
+    name: "Nguyễn Văn Cường",
+    date: 1708532861,
+    id: "#15XE335NME",
+    moneyAmount: 5000000,
+    type: "cash-out",
+  },
+  {
+    name: "Nguyễn Văn Cường",
+    date: 1708532861,
+    id: "#15XE335NME",
+    moneyAmount: 5000000,
+    type: "transaction",
+  },
 ];

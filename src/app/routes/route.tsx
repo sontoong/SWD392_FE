@@ -1,7 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
 import { ROLE } from "../../constants/role";
-import TransactionList from "../pages/TransactionList";
 
 const Layout = lazy(() => import("../components/layout/public-layout"));
 const Layout2 = lazy(() => import("../components/layout/admin-layout"));
@@ -15,11 +14,17 @@ const HomePage = lazy(() => import("../pages/HomePage"));
 const FreelancerDetailPage = lazy(
   () => import("../pages/FreelancerDetailPage"),
 );
+const FreelancerProjectList = lazy(
+  () => import("../pages/FreelancerProjectList"),
+);
 
 //enterprise
 const EnterpriseDetailPage = lazy(
   () => import("../pages/EnterpriseDetailPage"),
 );
+
+//both
+import TransactionList from "../pages/TransactionList";
 
 //admin
 const UserManagePage = lazy(() => import("../pages/UserManagePage"));
@@ -102,7 +107,7 @@ export const router = createBrowserRouter([
             path: "projects",
             element: (
               <Suspense fallback={<></>}>
-                <Template />
+                <FreelancerProjectList />
               </Suspense>
             ),
           },
@@ -118,7 +123,7 @@ export const router = createBrowserRouter([
             path: "report/transactions",
             element: (
               <Suspense fallback={<></>}>
-                <TransactionList role={'freelancer'}/>
+                <TransactionList role={"freelancer"} />
               </Suspense>
             ),
           },
@@ -160,7 +165,7 @@ export const router = createBrowserRouter([
             path: "report/transactions",
             element: (
               <Suspense fallback={<></>}>
-                <TransactionList role={'enterprise'}/>
+                <TransactionList role={"enterprise"} />
               </Suspense>
             ),
           },

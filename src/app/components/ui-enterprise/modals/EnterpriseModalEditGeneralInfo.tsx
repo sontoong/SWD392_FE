@@ -1,6 +1,5 @@
 import { EditButton } from "../../button/buttons";
 import { useState } from "react";
-import { UploadShowIcon } from "../../input/upload-input";
 import { CustomFormModal } from "../../modal/modal";
 import { EnterpriseInfo } from "../../../models/enterprise";
 import { FormDatePicker, FormInput } from "../../input/inputs";
@@ -10,6 +9,7 @@ import { DocumentUploadInput } from "../../input/upload-document-input";
 import { SelectFix } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import dayjs from "dayjs";
+import { UploadImg } from "../../input/upload-img";
 
 export default function EnterpriseModalEditGeneralInfo() {
   const [open, setOpen] = useState(false);
@@ -67,7 +67,7 @@ export default function EnterpriseModalEditGeneralInfo() {
             dateOfBirth: dayjs(initialValues.dateOfBirth * 1000),
           }}
         >
-          <UploadShowIcon />
+          <UploadImg listType="picture-circle" maxCount={1} />
           <Row>
             <Col span={6}>
               <Form.Item

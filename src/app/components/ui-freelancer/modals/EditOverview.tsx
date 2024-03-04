@@ -1,25 +1,45 @@
 import { useState } from "react";
-import { Col, Form, Row } from "antd";
+import { Col, Form, Row, Space } from "antd";
 import { EditButton } from "../../button/buttons";
-import { FormInput } from "../../input/inputs";
+import { FormInput, FormRadioGroup, FormTextArea } from "../../input/inputs";
 import { CustomFormModal } from "../../modal/modal";
-import { UserDetail } from "../../../models/user";
 import { SelectFix } from "../../select/select";
 import { nations } from "../../../../constants/testData";
+import UploadProfilePicture from "../upload/profile-picture";
+import { FreelancerDetail } from "../../../models/user";
 
 export default function EditContact() {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
 
   const initialValues: Pick<
-    UserDetail,
-    "address" | "email" | "phone" | "nation"
+    FreelancerDetail,
+    | "firstName"
+    | "middleName"
+    | "lastName"
+    | "desireSalary"
+    | "nation"
+    | "experienceLevel"
+    | "description"
+    | "profilePicture"
+    | "jobRole"
   > = {
-    address: "abc abc",
-    email: "a@gmail.com",
-    phone: "0987654321",
+    firstName: "Nguyen",
+    middleName: "Van",
+    lastName: "A",
+    desireSalary: 1000000,
+    experienceLevel: "junior",
+    description: "abc",
     nation: { label: "Việt Nam", value: "vn" },
+    profilePicture: "",
+    jobRole: "ceo",
   };
+
+  const experienceLevels = [
+    { label: "Mới đi làm", value: "junior" },
+    { label: "Chuyên nghiệp", value: "senior" },
+    { label: "Chuyên gia", value: "expert" },
+  ];
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
@@ -58,44 +78,72 @@ export default function EditContact() {
           initialValues={initialValues}
         >
           <Form.Item
-            name="address"
-            label="Địa chỉ"
+            name="profilePicture"
+            label="Ảnh đại diện"
             rules={[
               {
-                required: true,
+                required: false,
               },
             ]}
           >
-            <FormInput />
+            <UploadProfilePicture />
           </Form.Item>
-          <Form.Item
-            name="email"
-            label="Mail"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <FormInput />
-          </Form.Item>
+          <Space>
+            <Form.Item
+              name="firstName"
+              label="Họ"
+              rules={[
+                {
+                  required: true,
+                  type: "string",
+                },
+              ]}
+            >
+              <FormInput />
+            </Form.Item>
+            <Form.Item
+              name="middleName"
+              label="Tên đệm"
+              rules={[
+                {
+                  required: true,
+                  type: "string",
+                },
+              ]}
+            >
+              <FormInput />
+            </Form.Item>
+            <Form.Item
+              name="lastName"
+              label="Tên"
+              rules={[
+                {
+                  required: true,
+                  type: "string",
+                },
+              ]}
+            >
+              <FormInput />
+            </Form.Item>
+          </Space>
           <Row gutter={10}>
             <Col span={12}>
-              <Form.Item name="nation" label="Múi giờ">
-                <SelectFix
-                  defaultValue="vn"
-                  onChange={() => {}}
-                  options={Object.values(nations)}
-                />
+              <Form.Item
+                name="jobRole"
+                label="Chức danh"
+                rules={[{ required: true, type: "string" }]}
+              >
+                <FormInput />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name="phone"
-                label="SĐT"
+                name="desireSalary"
+                label="Chi phí/giờ"
                 rules={[
                   {
                     required: true,
+                    type: "number",
                   },
                 ]}
               >
@@ -103,6 +151,23 @@ export default function EditContact() {
               </Form.Item>
             </Col>
           </Row>
+          <Form.Item name="nation" label="Quốc gia">
+            <SelectFix
+              defaultValue="vn"
+              onChange={() => {}}
+              options={Object.values(nations)}
+            />
+          </Form.Item>
+          <Form.Item name="experienceLevel" label="Cấp độ kinh nghiệm">
+            <FormRadioGroup options={experienceLevels} />
+          </Form.Item>
+          <Form.Item
+            name="description"
+            label="Miêu tả"
+            rules={[{ required: true, type: "string", max: 180 }]}
+          >
+            <FormTextArea maxLength={180} />
+          </Form.Item>
         </Form>
       </CustomFormModal>
     </>

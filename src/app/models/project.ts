@@ -4,7 +4,7 @@
 //   time: string;
 // };
 
-import { Income } from "./income";
+export type ExperienceLevel = "junior" | "senior" | "expert";
 
 export type OptionalRequirements = {
   minimumCompletedProjects: "Tất cả" | "Ít nhất 3" | "Ít nhất 5" | "Ít nhất 10";
@@ -36,7 +36,7 @@ export interface Project {
   contract?: string;
   funding: "hourly" | "fixed";
   initialFunding: number;
-  freelancerRequirement: "junior" | "senior" | "expert";
+  freelancerRequirement: ExperienceLevel;
   optionalRequirements: OptionalRequirements;
   timeToComplete: 1 | 2 | 3;
   publishedTime: number;
@@ -62,7 +62,7 @@ export interface CreateProject {
   contract?: string;
   funding?: "hourly" | "fixed";
   initialFunding?: number;
-  freelancerRequirement?: "junior" | "senior" | "expert";
+  freelancerRequirement?: ExperienceLevel;
   timeToComplete: 1 | 2 | 3;
   publishTime: number;
   createdBy: string;
@@ -72,14 +72,12 @@ export interface CreateProject {
   isVerified: boolean;
 }
 
-export interface FreelancerProject extends Project{
+export interface FreelancerProject extends Project {
   startDate: number;
   endDate?: number;
   status: "doing" | "stopped" | "contracting" | "verifying" | "denied";
-};
+}
 
 export interface FreelancerProjectContract extends FreelancerProject {
   signature?: string;
 }
-
-
