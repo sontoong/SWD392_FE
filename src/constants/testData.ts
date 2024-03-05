@@ -1,3 +1,4 @@
+import { Applicant } from "../app/models/applicant";
 import { Comment } from "../app/models/comment";
 import { CompanyDetail } from "../app/models/company";
 import { EnterpriseInfo } from "../app/models/enterprise";
@@ -9,7 +10,7 @@ import {
   Skill,
   OptionalRequirements,
   FreelancerProject,
-  FreelancerProjectContract,
+  EnterpriseProject,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
 import { FreelancerDetail } from "../app/models/user";
@@ -73,6 +74,7 @@ export const project: Project = {
   applicationCount: 5,
   inviteSent: 6,
   inviteAccepted: 3,
+  freelancerCount: 10,
 };
 
 export const freelancer: FreelancerDetail = {
@@ -155,27 +157,50 @@ export const enterpriseInfo: EnterpriseInfo = {
 };
 
 export const FreelancerProjects: FreelancerProject[] = [
-  { ...project, startDate: 1708532861, endDate: 1708532861, status: "stopped" },
-  { ...project, startDate: 1708532861, endDate: 1708532861, status: "doing" },
+  {
+    ...project,
+    startDate: 1708532861,
+    endDate: 1708532861,
+    status: "stopped",
+    signature: "Thuan",
+  },
+  {
+    ...project,
+    startDate: 1708532861,
+    endDate: 1708532861,
+    status: "doing",
+    signature: "Thuan",
+
+  },
   {
     ...project,
     startDate: 1708532861,
     endDate: 1708532861,
     status: "contracting",
+    signature: "",
   },
   {
     ...project,
     startDate: 1708532861,
     endDate: 1708532861,
     status: "verifying",
+    signature: "",
   },
-  { ...project, startDate: 1708532861, endDate: 1708532861, status: "denied" },
+  {
+    ...project,
+    startDate: 1708532861,
+    endDate: 1708532861,
+    status: "denied",
+    signature: "",
+  },
 ];
 
-export const ContractForm: FreelancerProjectContract = {
-  ...FreelancerProjects[1],
-  signature: "Thuan",
-};
+export const EnterpriseProjects: EnterpriseProject[] = [
+  { ...project, applicationCount: 5, freelancerCount: 10, status: "hiring" },
+  { ...project, applicationCount: 5, freelancerCount: 10, status: "closed" },
+  { ...project, applicationCount: 5, freelancerCount: 10, status: "doing" },
+];
+
 
 export const Incomes: Income[] = [
   {
@@ -222,5 +247,54 @@ export const Transactions: Transaction[] = [
     id: "#15XE335NME",
     moneyAmount: 5000000,
     type: "transaction",
+  },
+];
+
+export const Applicants: Applicant[] = [
+  {
+    id: "",
+    name: "Nguyễn Văn A",
+    date: 1708532861,
+    file: "",
+    question: [
+      {
+        question: "Câu 1",
+        answer:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+      },
+      {
+        question: "Câu 2",
+        answer:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+      },
+      {
+        question: "Câu 3",
+        answer:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+      },
+    ],
+  },
+  {
+    id: "",
+    name: "Nguyễn Văn A",
+    date: 1708532861,
+    file: "",
+    question: [
+      {
+        question: "Câu 1",
+        answer:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+      },
+      {
+        question: "Câu 2",
+        answer:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+      },
+      {
+        question: "Câu 3",
+        answer:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+      },
+    ],
   },
 ];

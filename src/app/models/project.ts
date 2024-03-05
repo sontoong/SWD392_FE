@@ -76,8 +76,9 @@ export interface FreelancerProject extends Project {
   startDate: number;
   endDate?: number;
   status: "doing" | "stopped" | "contracting" | "verifying" | "denied";
+  signature?: string;
 }
 
-export interface FreelancerProjectContract extends FreelancerProject {
-  signature?: string;
+export interface EnterpriseProject extends Project{
+  status: "hiring" | "closed" | "doing";
 }

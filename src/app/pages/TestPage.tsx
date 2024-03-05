@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { UploadImg } from "../components/input/upload-img";
 import { App, Button, GetProp, UploadFile, UploadProps } from "antd";
+import ProjectApplicationList from "../components/ui-enterprise/ProjectApplicationList";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -37,21 +38,22 @@ export default function TestPage() {
     setFileList(newFileList);
 
   return (
-    <div>
-      <UploadImg
-        listType="picture-circle"
-        maxCount={1}
-        onChange={handleChange}
-      />
-      <Button
-        type="primary"
-        onClick={handleUpload}
-        disabled={fileList.length === 0}
-        loading={uploading}
-        style={{ marginTop: 16 }}
-      >
-        {uploading ? "Uploading" : "Start Upload"}
-      </Button>
-    </div>
+    // <div>
+    //   <UploadImg
+    //     listType="picture-circle"
+    //     maxCount={1}
+    //     onChange={handleChange}
+    //   />
+    //   <Button
+    //     type="primary"
+    //     onClick={handleUpload}
+    //     disabled={fileList.length === 0}
+    //     loading={uploading}
+    //     style={{ marginTop: 16 }}
+    //   >
+    //     {uploading ? "Uploading" : "Start Upload"}
+    //   </Button>
+    // </div>
+    <ProjectApplicationList/>
   );
 }
