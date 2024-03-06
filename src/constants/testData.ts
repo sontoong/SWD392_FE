@@ -45,10 +45,10 @@ const field1: SkillField = {
 };
 
 const optionalRequirements: OptionalRequirements = {
-  minimumCompletedProjects: "Tất cả",
-  language: "Tất cả",
-  location: "Tất cả",
-  rating: "Tất cả",
+  minimumCompletedProjects: "all",
+  language: "all",
+  location: "all",
+  rating: "all",
   skills: skills,
 };
 
@@ -63,8 +63,8 @@ export const project: Project = {
   projectField: field,
   publishedTime: 1708532861,
   isCompleted: false,
-  language: "English",
-  location: "Tất cả",
+  language: "en",
+  location: "all",
   timeToComplete: 1,
   freelancerRequirement: "junior",
   optionalRequirements: optionalRequirements,
