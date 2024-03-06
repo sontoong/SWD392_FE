@@ -10,3 +10,7 @@ export interface Applicant{
     question: Question[];
     file: string;
 }
+
+export interface QuestionCreate{
+    question: string;
+}

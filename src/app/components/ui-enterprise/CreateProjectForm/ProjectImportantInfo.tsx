@@ -1,13 +1,13 @@
 import { CheckboxOptionType, Col, Form, Row, Typography } from "antd";
-import { CreateProject } from "../../models/project";
-import { CustomCard } from "../ui/card";
-import { FormInput, FormRadioGroup, FormTextArea, InputNumberFix } from "../input/inputs";
-import { FormSelect, FormTreeSelect } from "../select/select";
-import { language } from "../../../constants/language";
-import { DocumentUploadInput } from "../input/upload-document-input";
-import { OutlineButton, PrimaryButton } from "../button/buttons";
-import { location } from "../../../constants/location";
-import { projectField } from "../../../constants/project-field";
+import { CreateProject } from "../../../models/project";
+import { CustomCard } from "../../ui/card";
+import { FormInput, FormRadioGroup, FormTextArea, InputNumberFix } from "../../input/inputs";
+import { FormSelect, FormTreeSelect } from "../../select/select";
+import { language } from "../../../../constants/language";
+import { DocumentUploadInput } from "../../input/upload-document-input";
+import { OutlineButton, PrimaryButton } from "../../button/buttons";
+import { location } from "../../../../constants/location";
+import { projectField } from "../../../../constants/project-field";
 import { useState } from "react";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 
@@ -31,6 +31,20 @@ export default function ProjectImportantInfo() {
     applicantCount: 0,
     paidAmount: 0,
     isCompleted: false,
+    privacy: "public",
+    projectType: "unknown",
+    optionalRequirements: {
+        language:"all",
+        location: "all",
+        minimumCompletedProjects:"all",
+        rating:"all",
+        skills:[
+            { label: "Front-end Developer", value: "Front-end Developer" },
+            { label: "Back-end Developer", value: "Back-end Developer" },
+            { label: "Full-stack Developer", value: "Full-stack Developer" },
+        ],
+        questions: [],
+    }
   };
 
   const [renderFunding, setRenderFunding] = useState<string>(initialValues.funding);
@@ -274,7 +288,7 @@ export default function ProjectImportantInfo() {
   );
 }
 
-export const ProjectFundingTypes: CheckboxOptionType<CheckboxValueType>[] =[
+const ProjectFundingTypes: CheckboxOptionType<CheckboxValueType>[] =[
   {
     label: "Tính theo giờ",
     value: "hourly",
@@ -286,7 +300,7 @@ export const ProjectFundingTypes: CheckboxOptionType<CheckboxValueType>[] =[
 ]
 
 
-export const ProjectTimeToComplete: CheckboxOptionType<CheckboxValueType>[] =[
+const ProjectTimeToComplete: CheckboxOptionType<CheckboxValueType>[] =[
   {
     label: "Ít hơn 1 tháng",
     value: "1",
