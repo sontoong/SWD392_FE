@@ -3,21 +3,21 @@ import { FreelancerProject } from "../models/project";
 import {
   generateProjectFunding,
   generateProjectFundingType,
-  generateStatus,
+  generateFreelancerProjectStatus,
 } from "../utils/generators";
 import { FreelancerProjects } from "../../constants/testData";
 import { ViewSignContract } from "../components/ui-freelancer/modals/";
 
 export interface TableData extends FreelancerProject {
-  statusGenerator: string;
-  fundingTypeGenerator: string;
-  fundingGenerator: string | { initialFunding: string };
+  statusGenerator?: string;
+  fundingTypeGenerator?: string;
+  fundingGenerator?: string | { initialFunding: string };
 }
 
 export default function FreelancerProjectList() {
   const data: TableData[] = FreelancerProjects.map((project) => ({
     ...project,
-    statusGenerator: generateStatus(project.status),
+    statusGenerator: generateFreelancerProjectStatus(project.status),
     fundingTypeGenerator: generateProjectFundingType(project.funding),
     fundingGenerator: generateProjectFunding(
       project.funding,
@@ -64,8 +64,14 @@ export default function FreelancerProjectList() {
         if (record.status === "denied" || record.status === "verifying") {
           return null;
         }
+        const {
+          statusGenerator: __,
+          fundingGenerator: ___,
+          fundingTypeGenerator: ____,
+          ...rest
+        } = record;
         // Otherwise, render the ViewSignContract component
-        return <ViewSignContract />;
+        return <ViewSignContract record={rest} />;
       },
     },
   ];

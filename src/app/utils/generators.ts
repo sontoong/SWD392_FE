@@ -1,4 +1,4 @@
-import { FreelancerProject, Project } from "../models/project";
+import { EnterpriseProject, FreelancerProject, Project } from "../models/project";
 import { Transaction } from "../models/transaction";
 import { UserDetail } from "../models/user";
 
@@ -107,7 +107,7 @@ export function generateRoleMsg(role: UserDetail["role"]) {
   }
 }
 
-export function generateStatus(status: FreelancerProject["status"]) {
+export function generateFreelancerProjectStatus(status: FreelancerProject["status"]) {
   switch (status) {
     case "doing":
       return "Đang làm việc";
@@ -119,6 +119,19 @@ export function generateStatus(status: FreelancerProject["status"]) {
         return "Đang duyệt";
     case "denied":
         return "Từ chối";
+    default:
+      return '';
+  }
+}
+
+export function generateEnterpriseProjectStatus(status: EnterpriseProject["status"]) {
+  switch (status) {
+    case "doing":
+      return "Đang làm việc";
+    case "closed":
+      return "Đã đóng";
+    case "hiring":
+        return "Đang tuyển dụng";
     default:
       return '';
   }

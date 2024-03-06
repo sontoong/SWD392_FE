@@ -1,22 +1,19 @@
 import { EyeOutlined } from "@ant-design/icons";
 import { IconButton } from "../../button/buttons";
-import { useState } from "react";
+import React, { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Form, Typography } from "antd";
-import { FormInput } from "../../input/inputs";
-import { FreelancerProject } from "../../../models/project";
+import { Applicant } from "../../../models/applicant";
 
-interface ViewSignContractProp{
-  record: FreelancerProject
+interface ApplicationAcceptFormProp{
+  record: Applicant
 }
-export default function ViewSignContract(props: ViewSignContractProp) {
+
+export default function ApplicationAcceptForm(props: ApplicationAcceptFormProp) {
   const {record}= props
   const [open, setOpen] = useState(false);
   const { Title, Paragraph } = Typography;
   const [form] = Form.useForm();
-
-  const isStatusWorkingOrStopped =
-  record?.status === "doing" || record?.status === "stopped";
 
   const handleCancel = () => {
     setOpen(false);
@@ -32,7 +29,7 @@ export default function ViewSignContract(props: ViewSignContractProp) {
       <IconButton icon={<EyeOutlined />} onClick={() => setOpen(true)} />
       <CustomFormModal
         open={open}
-        title="Ký hợp đồng"
+        title={`Báo giá của ${record.name}`}
         onCancel={() => {
           handleCancel();
           form.resetFields();
@@ -54,30 +51,18 @@ export default function ViewSignContract(props: ViewSignContractProp) {
           name="ViewSignContract"
           initialValues={record}
         >
-          <Title level={4}>Tải hợp đồng tại đây</Title>
-          <Paragraph className="text-[#1890FF] underline">
-            {record?.contract}
-          </Paragraph>
-          <Paragraph className="">Lưu ý:</Paragraph>
-          <Paragraph>
-            Hãy xem rõ hợp đồng trước khi ký kết, website này sẽ không chịu
-            trách nhiệm khi hợp đồng đã ký
-          </Paragraph>
-          <Form.Item
-            name="signature"
-            label="Ký tên"
-            rules={[
-              {
-                type: "string",
-                required: true,
-              },
-            ]}
-          >
-            <FormInput
-              value={record?.signature}
-              disabled={isStatusWorkingOrStopped}
-            />
-          </Form.Item>
+        {record.question.map((qna, index) => (
+            <React.Fragment key={index}>
+              <Title level={3}>{qna.question}</Title>
+                <Paragraph>{qna.answer}</Paragraph>
+            </React.Fragment>
+        ))}
+
+        <Title level={3}>
+            Xem báo giá tại đây: 
+        </Title>
+        <Paragraph className="text-[#1890FF] underline">{record.file}</Paragraph>
+        
         </Form>
       </CustomFormModal>
     </>

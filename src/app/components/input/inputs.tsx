@@ -1,7 +1,10 @@
 import {
+  CheckboxOptionType,
   DatePicker,
   DatePickerProps,
   Input,
+  InputNumber,
+  InputNumberProps,
   InputProps,
   Radio,
   RadioGroupProps,
@@ -11,6 +14,7 @@ import {
 import { ErrorMessage } from "formik";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { TextAreaProps } from "antd/es/input";
+import { CheckboxValueType } from "antd/es/checkbox/Group";
 
 const { TextArea } = Input;
 export interface MyInputProps {
@@ -50,6 +54,18 @@ export interface MySkillFieldSelectProps extends SelectProps {
 }
 
 export interface MyTextAreaProps {
+  id: string;
+  field: {
+    name: string;
+    value: string;
+    onChange: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => void;
+  };
+  placeholder: string;
+}
+
+export interface MyNumberInputProps{
   id: string;
   field: {
     name: string;
@@ -215,8 +231,29 @@ function InputFix(props: InputProps) {
   );
 }
 
+function InputNumberFix(props: InputNumberProps) {
+  return (
+    <InputNumber {...props} formatter={(value) => {
+        return `${value} VND`
+      }
+    } 
+    parser={(value) => value!.replace('VND', '')}
+    className="rounded-[6px] border-[1px] border-[#d9d9d9] w-full" />
+  );
+}
+
+function InputPasswordFix(props: InputProps) {
+  return (
+    <Input.Password {...props} className="rounded-[6px] border-[1px] border-[#d9d9d9]" />
+  );
+}
+
 function FormInput(props: InputProps) {
   return <InputFix {...props} allowClear={true} style={{ height: "42px" }} />;
+}
+
+function FormInputPassword(props: InputProps) {
+  return <InputPasswordFix {...props} allowClear={true} style={{ height: "42px" }} />;
 }
 
 function FormTextArea(props: TextAreaProps) {
@@ -228,8 +265,23 @@ function FormDatePicker(props: DatePickerProps) {
   return <DatePicker {...props} format={dateFormat} allowClear={false} />;
 }
 
-function FormRadioGroup(props: RadioGroupProps) {
-  return <Radio.Group {...props} optionType="button" buttonStyle="solid" />;
+interface FormRadioGroupProps extends Omit<RadioGroupProps, "options">{
+  options: CheckboxOptionType<CheckboxValueType>[]
+}
+
+function FormRadioGroup(props: FormRadioGroupProps) {
+  const {options, ...rest} = props
+
+  return <Radio.Group {...rest} optionType="button" buttonStyle="solid">
+    {options?.map((option, index) => (
+      <Radio.Button key={index} value={option.value} style={{
+        textAlign:"center",
+        padding:"5px 20px 5px 20px",
+        height:"5%"
+      }}
+      >{option.label}</Radio.Button>
+    ))}
+  </Radio.Group>
 }
 
 export {
@@ -244,4 +296,7 @@ export {
   MySelectInput,
   MySelectSkillFieldInput,
   MyTextArea,
+  InputPasswordFix,
+  FormInputPassword,
+  InputNumberFix
 };

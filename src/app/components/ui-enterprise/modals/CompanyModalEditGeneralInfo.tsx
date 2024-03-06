@@ -6,7 +6,7 @@ import { Col, Form, Row } from "antd";
 import { IdDocuments } from "../../../../constants/id-documents";
 import { CompanyDetail } from "../../../models/company";
 import { skills } from "../../../../constants/skill";
-import { SelectFix, SelectMultiple } from "../../select/select";
+import { FormSelect, SelectMultiple } from "../../select/select";
 import { UploadImg } from "../../input/upload-img";
 
 export default function CompanyModalEditGeneralInfo() {
@@ -133,7 +133,7 @@ export default function CompanyModalEditGeneralInfo() {
                   },
                 ]}
               >
-                <SelectFix
+                <FormSelect
                   defaultValue="passport"
                   onChange={() => {}}
                   options={IdDocuments}

@@ -50,16 +50,17 @@ export interface Project {
   applicationCount: number;
   inviteSent: number;
   inviteAccepted: number;
+  freelancerCount: number;
 }
 
 export interface CreateProject {
   title: string;
-  language: "English" | "Vietnamese";
+  language: "en" | "vn" | "cn";
   location: "Tất cả" | string;
   projectField: string;
   description: string;
   contract?: string;
-  funding?: "hourly" | "fixed";
+  funding: "hourly" | "fixed";
   initialFunding?: number;
   freelancerRequirement?: ExperienceLevel;
   timeToComplete: 1 | 2 | 3;
@@ -68,16 +69,12 @@ export interface CreateProject {
   applicantCount: number;
   paidAmount: number;
   isCompleted: boolean;
-  isVerified: boolean;
 }
 
 export interface FreelancerProject extends Project {
   startDate: number;
   endDate?: number;
   status: "doing" | "stopped" | "contracting" | "verifying" | "denied";
-}
-
-export interface FreelancerProjectContract extends FreelancerProject {
   signature?: string;
 }
 
@@ -89,4 +86,8 @@ export interface OutsideProject {
   endDate?: number;
   images?: string[];
   projectProfileImages?: [{ image: string; description: string }];
+}
+
+export interface EnterpriseProject extends Project {
+  status: "hiring" | "closed" | "doing";
 }

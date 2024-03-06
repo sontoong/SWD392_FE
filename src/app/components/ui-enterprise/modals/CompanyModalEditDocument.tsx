@@ -7,7 +7,7 @@ import { CompanyDetail } from "../../../models/company";
 import { companyDocument } from "../../../../constants/company-doc";
 import { DocumentUploadInput } from "../../input/upload-document-input";
 
-import { SelectFix } from "../../select/select";
+import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 
 export default function CompanyModalEditDocument() {
@@ -117,7 +117,7 @@ export default function CompanyModalEditDocument() {
                   },
                 ]}
               >
-                <SelectFix
+                <FormSelect
                   defaultValue="DKKD"
                   onChange={() => {}}
                   options={companyDocument}
@@ -171,7 +171,7 @@ export default function CompanyModalEditDocument() {
                   },
                 ]}
               >
-                <SelectFix
+                <FormSelect
                   defaultValue={"VN"}
                   onChange={() => {}}
                   options={Object.values(nations)}
