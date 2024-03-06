@@ -1,21 +1,32 @@
 import { Table, TableProps } from "antd";
 import { FreelancerProject } from "../models/project";
-import { generateProjectFunding, generateProjectFundingType, generateStatus } from "../utils/generators";
+import {
+  generateProjectFunding,
+  generateProjectFundingType,
+  generateStatus,
+} from "../utils/generators";
 import { FreelancerProjects } from "../../constants/testData";
-import ViewSignContract from "../components/ui-freelancer/modals/ViewSignContract";
+import { ViewSignContract } from "../components/ui-freelancer/modals/";
 
-export interface TableData extends
-FreelancerProject {
-    statusGenerator: string;
-    fundingTypeGenerator: string;
-    fundingGenerator: string | { initialFunding: string };
+export interface TableData extends FreelancerProject {
+  statusGenerator: string;
+  fundingTypeGenerator: string;
+  fundingGenerator: string | { initialFunding: string };
 }
 
-export default function FreelancerProjectList() {const data: TableData[] = FreelancerProjects.map((project) => (
-    {...project, statusGenerator: generateStatus(project.status), fundingTypeGenerator: generateProjectFundingType(project.funding), fundingGenerator: generateProjectFunding(project.funding, project.freelancerRequirement, project.initialFunding)}
-));
+export default function FreelancerProjectList() {
+  const data: TableData[] = FreelancerProjects.map((project) => ({
+    ...project,
+    statusGenerator: generateStatus(project.status),
+    fundingTypeGenerator: generateProjectFundingType(project.funding),
+    fundingGenerator: generateProjectFunding(
+      project.funding,
+      project.freelancerRequirement,
+      project.initialFunding,
+    ),
+  }));
 
-const columns: TableProps<TableData>["columns"] = [
+  const columns: TableProps<TableData>["columns"] = [
     {
       title: "Tên Project",
       dataIndex: "description",
@@ -47,17 +58,23 @@ const columns: TableProps<TableData>["columns"] = [
       key: "statusGenerator",
     },
     {
-        title: "Hợp đồng",
-        render: (_, record) => {
-            // Check if status is "denied" or "verifying", if so, return null (don't render anything)
-            if (record.status === "denied" || record.status === "verifying") {
-                return null;
-            }
-            // Otherwise, render the ViewSignContract component
-            return <ViewSignContract />;
+      title: "Hợp đồng",
+      render: (_, record) => {
+        // Check if status is "denied" or "verifying", if so, return null (don't render anything)
+        if (record.status === "denied" || record.status === "verifying") {
+          return null;
         }
+        // Otherwise, render the ViewSignContract component
+        return <ViewSignContract />;
+      },
     },
   ];
 
- return <Table columns={columns} dataSource={data} pagination={{position:["bottomCenter"]}}/>;
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={{ position: ["bottomCenter"] }}
+    />
+  );
 }

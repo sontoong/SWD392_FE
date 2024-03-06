@@ -1,5 +1,5 @@
 import { Nation } from "./language";
-import { ExperienceLevel } from "./project";
+import { ExperienceLevel, OutsideProject } from "./project";
 
 export interface UserDetail {
   id: string;
@@ -27,6 +27,7 @@ export interface FreelancerDetail extends UserDetail {
   desireSalary: number;
   experienceLevel: ExperienceLevel;
   jobRole: string;
+  outsideProjects?: OutsideProject[];
 }
 
 export interface UserDetailTable extends UserDetail {

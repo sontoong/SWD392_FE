@@ -80,3 +80,13 @@ export interface FreelancerProject extends Project {
 export interface FreelancerProjectContract extends FreelancerProject {
   signature?: string;
 }
+
+export interface OutsideProject {
+  title: string;
+  jobRole: string;
+  description: string;
+  startDate?: number;
+  endDate?: number;
+  images?: string[];
+  projectProfileImages?: [{ image: string; description: string }];
+}

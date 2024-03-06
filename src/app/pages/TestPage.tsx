@@ -1,57 +1,107 @@
+import { TreeSelect, TreeSelectProps } from "antd";
 import { useState } from "react";
-import { UploadImg } from "../components/input/upload-img";
-import { App, Button, GetProp, UploadFile, UploadProps } from "antd";
 
-type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
+const treeData: TreeSelectProps["treeData"] = [
+  {
+    title: "parent 100",
+    value: "parent 1",
+    children: [
+      {
+        value: "parent 1-0",
+        title: "parent 1-0",
+        children: [
+          {
+            value: "leaf1",
+            title: "leaf1",
+          },
+          {
+            value: "leaf2",
+            title: "leaf2",
+          },
+        ],
+      },
+      {
+        value: "parent 1-1",
+        title: "parent 1-1",
+        children: [
+          {
+            value: "leaf3",
+            title: <b style={{ color: "#08c" }}>leaf3</b>,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: "leaf10",
+    title: "leaf10",
+    children: [
+      {
+        value: "leaf11",
+        title: "leaf11",
+        children: [
+          {
+            value: "leaf12",
+            title: "leaf12",
+            children: [
+              {
+                value: "leaf13",
+                title: "leaf13",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
 
 export default function TestPage() {
-  const { message } = App.useApp();
+  const [value, setValue] = useState<string>();
+  console.log(value);
 
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const [uploading, setUploading] = useState(false);
+  // const makeuncheckable = (dataarr: TreeSelectProps["treeData"]) =>
+  //   dataarr?.map((obj) => ({
+  //     ...obj,
+  //     disabled: Boolean(obj?.children),
+  //     children: obj?.children?.map((cobj) => ({
+  //       ...cobj,
+  //       disabled: Boolean(cobj?.children),
+  //     })),
+  //   }));
 
-  const handleUpload = () => {
-    const formData = new FormData();
-    fileList.forEach((file) => {
-      formData.append("files[]", file as FileType);
-    });
-    setUploading(true);
-    // You can use any AJAX library you like
-    fetch("https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then(() => {
-        message.success("upload successfully.");
-      })
-      .catch(() => {
-        message.error("upload failed.");
-      })
-      .finally(() => {
-        setUploading(false);
-      });
+  const onChange = (newValue: string) => {
+    setValue(newValue);
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
-    setFileList(newFileList);
+  const addDisabledField = (
+    data: TreeSelectProps["treeData"],
+  ): TreeSelectProps["treeData"] => {
+    return data?.map((node) => {
+      if (node.children && node.children.length > 0) {
+        return {
+          ...node,
+          disabled: true,
+          children: addDisabledField(node.children),
+        };
+      } else {
+        return node;
+      }
+    });
+  };
+
+  const modifiedTreeData = addDisabledField(treeData);
+  console.log(modifiedTreeData);
 
   return (
-    <div>
-      <UploadImg
-        listType="picture-circle"
-        maxCount={1}
-        onChange={handleChange}
-      />
-      <Button
-        type="primary"
-        onClick={handleUpload}
-        disabled={fileList.length === 0}
-        loading={uploading}
-        style={{ marginTop: 16 }}
-      >
-        {uploading ? "Uploading" : "Start Upload"}
-      </Button>
-    </div>
+    <TreeSelect
+      showSearch
+      style={{ width: "100%" }}
+      value={value}
+      dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+      placeholder="Please select"
+      onChange={onChange}
+      treeData={addDisabledField(treeData)}
+    />
   );
 }

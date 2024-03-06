@@ -10,6 +10,7 @@ import {
   OptionalRequirements,
   FreelancerProject,
   FreelancerProjectContract,
+  OutsideProject,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
 import { FreelancerDetail } from "../app/models/user";
@@ -224,3 +225,11 @@ export const Transactions: Transaction[] = [
     type: "transaction",
   },
 ];
+
+export const oproject1: OutsideProject = {
+  title: "FPT Fap",
+  description: "Tôi tạo và quản lý database và flow cho project",
+  jobRole: "Back-end Developer",
+  startDate: 1708532861,
+  endDate: 1708532861,
+};
