@@ -3,7 +3,6 @@ import { IconButton } from "../../button/buttons";
 import React, { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Form, Typography } from "antd";
-import { FormInput } from "../../input/inputs";
 import { Applicant } from "../../../models/applicant";
 
 interface ApplicationAcceptFormProp{

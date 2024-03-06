@@ -5,7 +5,7 @@ import { FormInput } from "../../input/inputs";
 import { CustomFormModal } from "../../modal/modal";
 import { UserDetail } from "../../../models/user";
 import { nations } from "../../../../constants/testData";
-import { SelectFix } from "../../select/select";
+import { FormSelect } from "../../select/select";
 
 export default function EditContact() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function EditContact() {
     address: "abc abc",
     email: "a@gmail.com",
     phone: "0987654321",
-    nation: { label: "Việt Nam", value: "vn" },
+    nation: nations['us']
   };
 
   const handleSubmit = async (values: typeof initialValues) => {
@@ -83,7 +83,7 @@ export default function EditContact() {
           <Row gutter={10}>
             <Col span={12}>
               <Form.Item name="nation" label="Múi giờ">
-                <SelectFix
+                <FormSelect
                   onChange={() => {}}
                   options={Object.values(nations)}
                 />

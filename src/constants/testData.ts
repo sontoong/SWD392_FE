@@ -21,6 +21,8 @@ export const nations: Nation = {
   cn: { label: "China", value: "cn" },
 };
 
+
+
 const skills: Skill[] = [
   { label: "Front-end Developer", value: "Front-end Developer" },
   { label: "Back-end Developer", value: "Back-end Developer" },
@@ -298,3 +300,5 @@ export const Applicants: Applicant[] = [
     ],
   },
 ];
+
+

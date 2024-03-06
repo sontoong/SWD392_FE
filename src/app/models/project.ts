@@ -55,12 +55,12 @@ export interface Project {
 
 export interface CreateProject {
   title: string;
-  language: "English" | "Vietnamese";
+  language: "en" | "vn" | "cn";
   location: "Tất cả" | string;
   projectField: string;
   description: string;
   contract?: string;
-  funding?: "hourly" | "fixed";
+  funding: "hourly" | "fixed";
   initialFunding?: number;
   freelancerRequirement?: ExperienceLevel;
   timeToComplete: 1 | 2 | 3;
@@ -69,7 +69,6 @@ export interface CreateProject {
   applicantCount: number;
   paidAmount: number;
   isCompleted: boolean;
-  isVerified: boolean;
 }
 
 export interface FreelancerProject extends Project {
