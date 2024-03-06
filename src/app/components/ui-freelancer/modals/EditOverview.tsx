@@ -3,7 +3,7 @@ import { Col, Form, Row, Space } from "antd";
 import { EditButton } from "../../button/buttons";
 import { FormInput, FormRadioGroup, FormTextArea } from "../../input/inputs";
 import { CustomFormModal } from "../../modal/modal";
-import { SelectFix } from "../../select/select";
+import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import UploadProfilePicture from "../upload/profile-picture";
 import { FreelancerDetail } from "../../../models/user";
@@ -152,7 +152,7 @@ export default function EditContact() {
             </Col>
           </Row>
           <Form.Item name="nation" label="Quốc gia">
-            <SelectFix
+            <FormSelect
               defaultValue="vn"
               onChange={() => {}}
               options={Object.values(nations)}

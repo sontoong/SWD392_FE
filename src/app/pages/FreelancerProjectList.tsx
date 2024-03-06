@@ -1,18 +1,18 @@
 import { Table, TableProps } from "antd";
 import { FreelancerProject } from "../models/project";
-import { generateProjectFunding, generateProjectFundingType, generateStatus } from "../utils/generators";
+import { generateProjectFunding, generateProjectFundingType, generateFreelancerProjectStatus } from "../utils/generators";
 import { FreelancerProjects } from "../../constants/testData";
 import ViewSignContract from "../components/ui-freelancer/modals/ViewSignContract";
 
 export interface TableData extends
 FreelancerProject {
-    statusGenerator: string;
-    fundingTypeGenerator: string;
-    fundingGenerator: string | { initialFunding: string };
+    statusGenerator?: string;
+    fundingTypeGenerator?: string;
+    fundingGenerator?: string | { initialFunding: string };
 }
 
 export default function FreelancerProjectList() {const data: TableData[] = FreelancerProjects.map((project) => (
-    {...project, statusGenerator: generateStatus(project.status), fundingTypeGenerator: generateProjectFundingType(project.funding), fundingGenerator: generateProjectFunding(project.funding, project.freelancerRequirement, project.initialFunding)}
+    {...project, statusGenerator: generateFreelancerProjectStatus(project.status), fundingTypeGenerator: generateProjectFundingType(project.funding), fundingGenerator: generateProjectFunding(project.funding, project.freelancerRequirement, project.initialFunding)}
 ));
 
 const columns: TableProps<TableData>["columns"] = [
@@ -53,8 +53,9 @@ const columns: TableProps<TableData>["columns"] = [
             if (record.status === "denied" || record.status === "verifying") {
                 return null;
             }
+            const {statusGenerator: __, fundingGenerator: ___, fundingTypeGenerator: ____, ...rest} = record
             // Otherwise, render the ViewSignContract component
-            return <ViewSignContract />;
+            return <ViewSignContract record={rest}/>;
         }
     },
   ];

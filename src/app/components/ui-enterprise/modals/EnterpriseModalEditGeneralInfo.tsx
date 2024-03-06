@@ -6,7 +6,7 @@ import { FormDatePicker, FormInput } from "../../input/inputs";
 import { Col, Form, Row } from "antd";
 import { IdDocuments } from "../../../../constants/id-documents";
 import { DocumentUploadInput } from "../../input/upload-document-input";
-import { SelectFix } from "../../select/select";
+import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import dayjs from "dayjs";
 import { UploadImg } from "../../input/upload-img";
@@ -138,7 +138,7 @@ export default function EnterpriseModalEditGeneralInfo() {
                   },
                 ]}
               >
-                <SelectFix
+                <FormSelect
                   onChange={() => {}}
                   options={Object.values(nations)}
                 />
@@ -154,7 +154,7 @@ export default function EnterpriseModalEditGeneralInfo() {
                   },
                 ]}
               >
-                <SelectFix onChange={() => {}} options={IdDocuments} />
+                <FormSelect onChange={() => {}} options={IdDocuments} />
               </Form.Item>
             </Col>
             <Col span={6} offset={3}>

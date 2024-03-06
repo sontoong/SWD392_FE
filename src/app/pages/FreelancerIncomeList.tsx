@@ -3,6 +3,7 @@ import { Incomes } from "../../constants/testData";
 import { Income } from "../models/income";
 import { DownloadOutlined } from "@ant-design/icons";
 import { formatCurrency } from "../utils/utils";
+import { IconButton } from "../components/button/buttons";
 
 
 export default function FreeLancerIncomeList() {
@@ -24,7 +25,7 @@ const columns: TableProps<IncomeTable>["columns"] = [
     {
       title: "Hợp đồng",
       render: () => {
-          return <DownloadOutlined/>
+          return <IconButton icon={<DownloadOutlined/>}/>
       },
       align:'center'
     },
