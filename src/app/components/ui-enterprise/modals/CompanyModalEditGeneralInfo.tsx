@@ -33,38 +33,10 @@ export default function CompanyModalEditGeneralInfo() {
       {
         label: "name",
         value: "name",
-        skills: [
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-        ],
       },
       {
-        label: "name",
-        value: "name",
-        skills: [
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-        ],
+        label: "name1",
+        value: "name1",
       },
     ],
     enterpriseCountry: { label: "Việt Nam", value: "vn" },
@@ -202,9 +174,6 @@ export default function CompanyModalEditGeneralInfo() {
               >
                 <SelectMultiple
                   options={skills}
-                  defaultValue={initialValues.industryFields.map(
-                    (field) => field.value,
-                  )}
                 />
               </Form.Item>
             </Col>

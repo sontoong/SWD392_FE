@@ -18,8 +18,8 @@ export default function FreelancerProjectList() {const data: TableData[] = Freel
 const columns: TableProps<TableData>["columns"] = [
     {
       title: "Tên Project",
-      dataIndex: "description",
-      key: "description",
+      dataIndex: "title",
+      key: "title",
     },
     {
       title: "Ngày bắt đầu",

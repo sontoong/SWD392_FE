@@ -38,6 +38,11 @@ export type SkillField = {
   skills: Skill[];
 };
 
+export type Field = {
+  label: string;
+  value: string;
+};
+
 export interface Project {
   id: string;
   title: string;
