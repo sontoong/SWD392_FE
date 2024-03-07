@@ -1,4 +1,4 @@
-import { Applicant } from "../app/models/applicant";
+import { Applicant, Question } from "../app/models/applicant";
 import { Comment } from "../app/models/comment";
 import { CompanyDetail } from "../app/models/company";
 import { EnterpriseInfo } from "../app/models/enterprise";
@@ -57,6 +57,9 @@ const optionalRequirements: OptionalRequirements = {
   location: "all",
   rating: "all",
   skills: skills,
+  questions: [
+    "Câu 1", "Câu 2", "Câu 3"
+  ],
 };
 
 export const project: Project = {
@@ -71,7 +74,6 @@ export const project: Project = {
   publishedTime: 1708532861,
   isCompleted: false,
   language: "en",
-  location: "all",
   timeToComplete: 1,
   freelancerRequirement: "junior",
   optionalRequirements: optionalRequirements,
@@ -157,14 +159,15 @@ export const enterpriseInfo: EnterpriseInfo = {
   middleName: "Văn",
   lastName: "A",
   dateOfBirth: 1708532861,
-  enterpriseCountry: "Việt Nam",
+  enterpriseCountry: { label: "Việt Nam", value: "vn" },
   documentType: "Hộ chiếu",
   enterpriseDocument: "FunnyMemeFrom9GAG.png",
   documentNumber: 33333333333333,
   enterpriseEmail: "CoolMathGame@gmail.com",
   enterprisePhone: "33333333333333",
   companyDetail: companyDetail,
-  projectList: projects
+  projectList: projects,
+  currentHiringProject: 3,
 };
 
 export const FreelancerProjects: FreelancerProject[] = [
@@ -262,6 +265,7 @@ export const Transactions: Transaction[] = [
 export const Applicants: Applicant[] = [
   {
     id: "",
+    projectId: "",
     name: "Nguyễn Văn A",
     date: 1708532861,
     file: "",
@@ -285,6 +289,7 @@ export const Applicants: Applicant[] = [
   },
   {
     id: "",
+    projectId: "",
     name: "Nguyễn Văn A",
     date: 1708532861,
     file: "",

@@ -5,6 +5,7 @@ export interface Question{
 
 export interface Applicant{
     id: string;
+    projectId: string;
     name: string;
     date: number;
     question: Question[];

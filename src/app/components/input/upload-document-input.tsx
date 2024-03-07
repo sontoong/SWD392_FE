@@ -18,11 +18,10 @@ const props: UploadProps = {
   };
 
   export function DocumentUploadInput({ name }: { name: string }) {
-    const { Title, Paragraph } = Typography;
     console.log(name);
     return (
       <Space size={'small'} direction="vertical">
-        <Title level={3}>Giấy tờ</Title>
+
           <Upload
             {...props}
             customRequest={({ file }) => {
@@ -30,11 +29,10 @@ const props: UploadProps = {
               handleUpload(name, file as File);
             }}
           >
-            <Button icon={<UploadOutlined />}>Tải lên tài liệu xác thực</Button>
+            <Button icon={<UploadOutlined />}>Tải lên tài liệu</Button>
           </Upload>
         <div>
-            <Paragraph>* Định dạng tệp được chấp nhận: .jpg, .png</Paragraph>
-            <Paragraph>* Kích thước tệp phải nhỏ hơn 4M</Paragraph>
+
         </div>
       </Space>
     );

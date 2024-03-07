@@ -30,7 +30,7 @@ export default function EnterpriseModalEditGeneralInfo() {
     middleName: "Văn",
     lastName: "A",
     dateOfBirth: 1708532861,
-    enterpriseCountry: "Việt Nam",
+    enterpriseCountry: { label: "Việt Nam", value: "vn" },
     documentType: "Hộ chiếu",
     enterpriseDocument: "FunnyMemeFrom9GAG.png",
     documentNumber: 33333333333333,
@@ -38,6 +38,7 @@ export default function EnterpriseModalEditGeneralInfo() {
     enterprisePhone: "33333333333333",
     companyDetail: companyDetail,
     projectList: projects,
+    currentHiringProject: 3
   };
 
   return (

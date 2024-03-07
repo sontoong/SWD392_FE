@@ -12,7 +12,6 @@ export default function ProjectDetailInfo() {
   const initialValues: CreateProject = {
     title: "",
     language: "vn",
-    location: "hcm",
     projectField: "",
     description: "",
     contract: "",

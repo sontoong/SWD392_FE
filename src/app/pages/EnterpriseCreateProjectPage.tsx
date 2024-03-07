@@ -1,4 +1,4 @@
-import { Layout, Steps, message, theme } from "antd";
+import { Form, Layout, Steps, message, theme } from "antd";
 import ProjectImportantInfo from "../components/ui-enterprise/CreateProjectForm/ProjectImportantInfo";
 import { Content } from "antd/es/layout/layout";
 import ProjectDetailInfo from "../components/ui-enterprise/CreateProjectForm/ProjectDetailInfo";
@@ -48,8 +48,16 @@ export default function CreateProject() {
           borderRadius: borderRadiusLG,
         }}
       >
-        <Steps current={current} items={items} className="mb-[2rem]"/>
-        <div>{steps[current].content}</div>
+        <Steps current={current} items={items} className="mb-[2rem]" />
+        <Form.Provider
+          onFormFinish={(name) => {
+            if (name === "form1") {
+              // Do something...
+            }
+          }}
+        >
+          <div>{steps[current].content}</div>
+        </Form.Provider>
 
         <div style={{ marginTop: 24 }}>
           {current < steps.length - 1 && (

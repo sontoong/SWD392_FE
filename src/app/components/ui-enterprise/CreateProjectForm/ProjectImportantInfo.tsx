@@ -24,7 +24,6 @@ export default function ProjectImportantInfo() {
   const initialValues: CreateProject = {
     title: "",
     language: "vn",
-    location: "hcm",
     projectField: "",
     description: "",
     contract: "",
@@ -233,6 +232,14 @@ export default function ProjectImportantInfo() {
           </Row>
           <Row>
             <Col span={24}>
+                <Paragraph>Gợi ý thông tin mô tả</Paragraph>
+                <Paragraph>1/ Bạn cần làm project gì?</Paragraph>
+                <Paragraph>
+                  2/ Mô tả cụ thể yêu cầu cho project mà bạn cần làm
+                </Paragraph>
+                <Paragraph>
+                  3/ Thông tin về thời gian hoàn thành hoặc các thông tin khác
+                </Paragraph>
               <Form.Item
                 name="description"
                 label="Miêu tả"
@@ -243,19 +250,14 @@ export default function ProjectImportantInfo() {
                   },
                 ]}
               >
-                <Paragraph>Gợi ý thông tin mô tả</Paragraph>
-                <Paragraph>1/ Bạn cần làm project gì?</Paragraph>
-                <Paragraph>
-                  2/ Mô tả cụ thể yêu cầu cho project mà bạn cần làm
-                </Paragraph>
-                <Paragraph>
-                  3/ Thông tin về thời gian hoàn thành hoặc các thông tin khác
-                </Paragraph>
                 <FormTextArea maxLength={100} />
               </Form.Item>
             </Col>
           </Row>
+          <Title level={3}>Tải lên hợp đồng</Title>
           <DocumentUploadInput name="contract" />
+          <Paragraph>* Định dạng tệp được chấp nhận: .jpg, .png</Paragraph>
+          <Paragraph>* Kích thước tệp phải nhỏ hơn 4M</Paragraph>
           <Row className="mt-[5%]">
             <Form.Item
               name="funding"

@@ -1,4 +1,4 @@
-import { EnterpriseProject, FreelancerProject, Project } from "../models/project";
+import { EnterpriseProject, FreelancerProject, OptionalRequirements, Project } from "../models/project";
 import { Transaction } from "../models/transaction";
 import { UserDetail } from "../models/user";
 import { formatCurrency } from "./utils";
@@ -33,7 +33,7 @@ export function generateRequirementMsg(role: Project["freelancerRequirement"]) {
 
 
 
-export function generatorLocationType(type: Project["location"]){
+export function generatorLocationType(type: OptionalRequirements["location"]){
   switch(type){
     case "all":
       return "Tất cả";

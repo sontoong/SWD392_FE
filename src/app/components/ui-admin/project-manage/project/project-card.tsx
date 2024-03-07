@@ -14,7 +14,6 @@ export default function ProjectCard({ project }: { project: Project }) {
   const {
     title,
     projectField,
-    location,
     publishedTime,
     description,
     freelancerRequirement,
@@ -22,6 +21,7 @@ export default function ProjectCard({ project }: { project: Project }) {
     applicationCount,
     createdBy,
     createdById,
+    optionalRequirements,
   } = project;
   return (
     <Card
@@ -46,7 +46,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           </Space>
           <Space className="whitespace-nowrap">
             <EnvironmentOutlined />
-            {location}
+            {optionalRequirements.location}
           </Space>
           <div className="whitespace-nowrap">
             Đã đăng cách đây {calculateDateToNow(publishedTime)}

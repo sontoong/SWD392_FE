@@ -2,7 +2,7 @@ import { EditButton } from "../../button/buttons";
 import { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { FormInput } from "../../input/inputs";
-import { Col, Form, Row } from "antd";
+import { Col, Form, Row, Typography } from "antd";
 import { CompanyDetail } from "../../../models/company";
 import { companyDocument } from "../../../../constants/company-doc";
 import { DocumentUploadInput } from "../../input/upload-document-input";
@@ -11,6 +11,7 @@ import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 
 export default function CompanyModalEditDocument() {
+  const {Title, Paragraph} =Typography
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
 
@@ -93,7 +94,10 @@ export default function CompanyModalEditDocument() {
           </Row>
           <Row>
             <Col span={24}>
+            <Title level={3}>Giấy tờ</Title>
               <DocumentUploadInput name="enterpriseDocument" />
+            <Paragraph>* Định dạng tệp được chấp nhận: .jpg, .png</Paragraph>
+            <Paragraph>* Kích thước tệp phải nhỏ hơn 4M</Paragraph>
             </Col>
           </Row>
           <Row>
