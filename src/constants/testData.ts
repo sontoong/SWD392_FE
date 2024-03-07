@@ -64,7 +64,6 @@ export const project: Project = {
   publishedTime: 1708532861,
   isCompleted: false,
   language: "en",
-  location: "all",
   timeToComplete: 1,
   freelancerRequirement: "junior",
   optionalRequirements: optionalRequirements,
