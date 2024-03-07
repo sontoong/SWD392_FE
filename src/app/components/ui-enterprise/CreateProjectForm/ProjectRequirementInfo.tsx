@@ -1,4 +1,4 @@
-import { Button, Col, Form, Row, Typography } from "antd";
+import { Button, Col, Form, FormInstance, Row, Typography } from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import { FormInput } from "../../input/inputs";
@@ -9,14 +9,16 @@ import { location } from "../../../../constants/location";
 import { skills } from "../../../../constants/skill";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 
-export default function ProjectRequirementInfo() {
+export default function ProjectRequirementInfo({
+  form,
+}: {
+  form: FormInstance<any>;
+}) {
   const { Title } = Typography;
-  const [form] = Form.useForm();
 
   const initialValues: CreateProject = {
     title: "",
     language: "vn",
-    location: "hcm",
     projectField: "",
     description: "",
     contract: "",

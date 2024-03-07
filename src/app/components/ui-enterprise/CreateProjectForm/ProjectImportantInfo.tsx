@@ -1,4 +1,11 @@
-import { CheckboxOptionType, Col, Form, Row, Typography } from "antd";
+import {
+  CheckboxOptionType,
+  Col,
+  Form,
+  FormInstance,
+  Row,
+  Typography,
+} from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import {
@@ -17,14 +24,16 @@ import { useState } from "react";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { DataNode } from "antd/es/tree";
 
-export default function ProjectImportantInfo() {
+export default function ProjectImportantInfo({
+  form,
+}: {
+  form: FormInstance<any>;
+}) {
   const { Title, Paragraph } = Typography;
-  const [form] = Form.useForm();
 
   const initialValues: CreateProject = {
     title: "",
     language: "vn",
-    location: "hcm",
     projectField: "",
     description: "",
     contract: "",

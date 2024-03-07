@@ -44,11 +44,16 @@ const useResetFormOnCloseModal = ({
   const prevOpenRef = useRef<boolean>();
   const prevOpen = prevOpenRef.current;
 
+  console.log(prevOpenRef);
+  console.log(prevOpen);
+
   useEffect(() => {
     prevOpenRef.current = open;
+    console.log(prevOpenRef);
   }, [open]);
 
   useEffect(() => {
+    console.log(prevOpenRef);
     if (!open && prevOpen) {
       form.resetFields();
     }

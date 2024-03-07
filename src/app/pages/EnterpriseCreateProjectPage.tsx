@@ -1,4 +1,4 @@
-import { Form, Layout, Steps, message, theme } from "antd";
+import { App, Form, Layout, Steps, theme } from "antd";
 import ProjectImportantInfo from "../components/ui-enterprise/CreateProjectForm/ProjectImportantInfo";
 import { Content } from "antd/es/layout/layout";
 import ProjectDetailInfo from "../components/ui-enterprise/CreateProjectForm/ProjectDetailInfo";
@@ -7,6 +7,9 @@ import { useState } from "react";
 import { OutlineButton, PrimaryButton } from "../components/button/buttons";
 
 export default function CreateProject() {
+  const { message } = App.useApp();
+  const [form] = Form.useForm();
+
   const [current, setCurrent] = useState(0);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -15,19 +18,20 @@ export default function CreateProject() {
   const steps = [
     {
       title: "Thông tin",
-      content: <ProjectImportantInfo />,
+      content: <ProjectImportantInfo form={form} />,
     },
     {
       title: "Chi tiết",
-      content: <ProjectDetailInfo />,
+      content: <ProjectDetailInfo form={form} />,
     },
     {
       title: "Năng lực",
-      content: <ProjectRequirementInfo />,
+      content: <ProjectRequirementInfo form={form} />,
     },
   ];
 
   const next = () => {
+    form.submit();
     setCurrent(current + 1);
   };
 
@@ -36,6 +40,11 @@ export default function CreateProject() {
   };
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
+
+  const onFinish = (values: any) => {
+    console.log("Finish:", values);
+    message.success("Processing complete!");
+  };
 
   return (
     <Layout>
@@ -50,35 +59,43 @@ export default function CreateProject() {
       >
         <Steps current={current} items={items} className="mb-[2rem]" />
         <Form.Provider
-          onFormFinish={(name) => {
-            if (name === "form1") {
+          onFormFinish={(name, { values, forms }) => {
+            const { mainForm } = forms;
+            if (name === "ProjectDetailInfo") {
+              mainForm.setFieldsValue({ ...values });
+            }
+            if (name === "EnterpriseEditGeneralInfo") {
+              // Do something...
+            }
+            if (name === "ProjectRequirementInfo") {
               // Do something...
             }
           }}
         >
           <div>{steps[current].content}</div>
+          <Form name="mainForm" onFinish={onFinish}>
+            <div style={{ marginTop: 24 }}>
+              {current < steps.length - 1 && (
+                <PrimaryButton type="primary" onClick={() => next()}>
+                  Tiếp tục
+                </PrimaryButton>
+              )}
+              {current === steps.length - 1 && (
+                <PrimaryButton type="primary" htmlType="submit">
+                  Gửi ngay
+                </PrimaryButton>
+              )}
+              {current > 0 && (
+                <OutlineButton
+                  style={{ margin: "0 8px" }}
+                  onClick={() => prev()}
+                >
+                  Quay lại
+                </OutlineButton>
+              )}
+            </div>
+          </Form>
         </Form.Provider>
-
-        <div style={{ marginTop: 24 }}>
-          {current < steps.length - 1 && (
-            <PrimaryButton type="primary" onClick={() => next()}>
-              Tiếp tục
-            </PrimaryButton>
-          )}
-          {current === steps.length - 1 && (
-            <PrimaryButton
-              type="primary"
-              onClick={() => message.success("Processing complete!")}
-            >
-              Gửi ngay
-            </PrimaryButton>
-          )}
-          {current > 0 && (
-            <OutlineButton style={{ margin: "0 8px" }} onClick={() => prev()}>
-              Quay lại
-            </OutlineButton>
-          )}
-        </div>
       </Content>
     </Layout>
   );

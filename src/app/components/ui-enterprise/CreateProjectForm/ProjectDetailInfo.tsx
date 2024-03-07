@@ -1,13 +1,23 @@
-import { CheckboxOptionType, Col, Form, Row, Typography } from "antd";
+import {
+  CheckboxOptionType,
+  Col,
+  Form,
+  FormInstance,
+  Row,
+  Typography,
+} from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import { FormRadioGroup } from "../../input/inputs";
 import { OutlineButton, PrimaryButton } from "../../button/buttons";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 
-export default function ProjectDetailInfo() {
+export default function ProjectDetailInfo({
+  form,
+}: {
+  form: FormInstance<any>;
+}) {
   const { Title } = Typography;
-  const [form] = Form.useForm();
 
   const initialValues: CreateProject = {
     title: "",
