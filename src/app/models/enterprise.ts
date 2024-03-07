@@ -1,4 +1,8 @@
+import { CompanyDetail } from "./company";
+import { Project } from "./project";
+
 export interface EnterpriseInfo {
+  id: string;
   firstName: string;
   middleName: string;
   lastName: string;
@@ -9,4 +13,6 @@ export interface EnterpriseInfo {
   documentNumber: number;
   enterpriseEmail: string;
   enterprisePhone: string;
+  companyDetail: CompanyDetail;
+  projectList: Project[];
 }

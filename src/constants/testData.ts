@@ -12,14 +12,16 @@ import {
   FreelancerProject,
   EnterpriseProject,
   OutsideProject,
+  Field,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
 import { FreelancerDetail } from "../app/models/user";
 
 export const nations: Nation = {
-  vn: { label: "Việt Nam", value: "vn" },
-  us: { label: "United States", value: "us" },
-  cn: { label: "China", value: "cn" },
+  all: { label: "Tất cả", value:"all"},
+  vn:  { label: "Việt Nam", value: "vn" },
+  us:  { label: "Hoa Kì", value: "us" },
+  cn:  { label: "Trung Quốc", value: "cn" },
 };
 
 const skills: Skill[] = [
@@ -32,15 +34,20 @@ const skills: Skill[] = [
   { label: "Data Engineer", value: "Data Engineer" },
 ];
 
+export const fields: Field[] = [
+  { label: "IT", value: "it" },
+  { label: "Nấu ăn", value: "cook" },
+];
+
 const field: SkillField = {
-  label: "name",
-  value: "name",
+  label: "IT", 
+  value: "it",
   skills: skills,
 };
 
 const field1: SkillField = {
-  label: "name",
-  value: "name",
+  label: "Nấu ăn", 
+  value: "cook",
   skills: skills,
 };
 
@@ -145,6 +152,7 @@ export const companyDetail: CompanyDetail = {
 };
 
 export const enterpriseInfo: EnterpriseInfo = {
+  id:"1",
   firstName: "Nguyễn",
   middleName: "Văn",
   lastName: "A",
@@ -155,6 +163,8 @@ export const enterpriseInfo: EnterpriseInfo = {
   documentNumber: 33333333333333,
   enterpriseEmail: "CoolMathGame@gmail.com",
   enterprisePhone: "33333333333333",
+  companyDetail: companyDetail,
+  projectList: projects
 };
 
 export const FreelancerProjects: FreelancerProject[] = [
