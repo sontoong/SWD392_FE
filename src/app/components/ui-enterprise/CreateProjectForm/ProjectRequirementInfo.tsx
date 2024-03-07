@@ -1,4 +1,4 @@
-import { Button, Col, Form, Row, Space, Typography } from "antd";
+import { Button, Col, Form, Row, Typography } from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import { FormInput } from "../../input/inputs";
@@ -80,13 +80,13 @@ export default function ProjectRequirementInfo() {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           initialValues={{
-            ...initialValues.optionalRequirements,
+            ...initialValues,
           }}
         >
           <Row>
             <Col span={10}>
               <Form.Item
-                name="minimumCompletedProjects"
+                name={["optionalRequirements", "minimumCompletedProjects"]}
                 label="Số lượng project Freelancer đã hoàn thành trên Wellancer"
                 rules={[
                   {
@@ -94,17 +94,14 @@ export default function ProjectRequirementInfo() {
                   },
                 ]}
               >
-                <FormSelect
-                  onChange={() => {}}
-                  options={Object.values(freelancerProjectAmount)}
-                />
+                <FormSelect options={Object.values(freelancerProjectAmount)} />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={10}>
               <Form.Item
-                name="rating"
+                name={["optionalRequirements", "rating"]}
                 label="Điểm chất lượng"
                 rules={[
                   {
@@ -112,17 +109,14 @@ export default function ProjectRequirementInfo() {
                   },
                 ]}
               >
-                <FormSelect
-                  onChange={() => {}}
-                  options={Object.values(freelancerRating)}
-                />
+                <FormSelect options={Object.values(freelancerRating)} />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={10}>
               <Form.Item
-                name="language"
+                name={["optionalRequirements", "language"]}
                 label="Ngôn ngữ"
                 rules={[
                   {
@@ -130,15 +124,12 @@ export default function ProjectRequirementInfo() {
                   },
                 ]}
               >
-                <FormSelect
-                  onChange={() => {}}
-                  options={Object.values(language)}
-                />
+                <FormSelect options={Object.values(language)} />
               </Form.Item>
             </Col>
             <Col span={10} offset={4}>
               <Form.Item
-                name="location"
+                name={["optionalRequirements", "location"]}
                 label="Địa điểm"
                 rules={[
                   {
@@ -146,17 +137,14 @@ export default function ProjectRequirementInfo() {
                   },
                 ]}
               >
-                <FormSelect
-                  onChange={() => {}}
-                  options={Object.values(location)}
-                />
+                <FormSelect options={Object.values(location)} />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={24}>
               <Form.Item
-                name="industryFields"
+                name={["optionalRequirements", "skills"]}
                 label="Ngành nghề"
                 rules={[
                   {
@@ -164,56 +152,58 @@ export default function ProjectRequirementInfo() {
                   },
                 ]}
               >
-                <SelectMultiple
-                  options={skills}
-                  defaultValue={initialValues.optionalRequirements.skills.map(
-                    (field) => field.value,
-                  )}
-                />
+                <SelectMultiple options={skills} />
               </Form.Item>
             </Col>
           </Row>
-
           <Row>
             <Title level={3}>Câu hỏi sàng lọc ứng viên (tùy chọn)</Title>
             <Col span={24}>
               <Form.List
-                name="questions"
+                name={["optionalRequirements", "questions"]}
                 rules={[
                   {
                     validator: async (_, names) => {
                       if (names.length >= 5) {
-                        return Promise.reject(
-                          new Error("Tối đa 5 câu hỏi"),
-                        );
+                        return Promise.reject(new Error("Tối đa 5 câu hỏi"));
                       }
                     },
                   },
                 ]}
               >
-                {(fields, { add, remove }, { errors }) => (
+                {(fields, { add, remove }) => (
                   <>
                     {fields.map(({ key, name, ...restField }) => (
-                      <Space
+                      <Row
                         key={key}
-                        style={{ display: "flex", marginBottom: 8 }}
-                        align="baseline"
+                        style={{
+                          marginTop: 8,
+                          marginBottom: 8,
+                        }}
                       >
-                        <Form.Item
-                          {...restField}
-                          name={[name, "question"]}
-                          rules={[{ required: true, type: "string" }]}
-                            style={{width:"55rem"}}
-                        >
-                          <FormInput />
-                        </Form.Item>
-                        <IconButton
-                          icon={<DeleteOutlined />}
-                          onClick={() => remove(name)}
-                        />
-                      </Space>
+                        <Col span={18}>
+                          <Form.Item
+                            {...restField}
+                            name={[name, "question"]}
+                            rules={[
+                              {
+                                required: true,
+                                type: "string",
+                                message: "Vui lòng nhập câu hỏi",
+                              },
+                            ]}
+                          >
+                            <FormInput />
+                          </Form.Item>
+                        </Col>
+                        <Col span={6}>
+                          <IconButton
+                            icon={<DeleteOutlined />}
+                            onClick={() => remove(name)}
+                          />
+                        </Col>
+                      </Row>
                     ))}
-                    <Form.ErrorList errors={errors} className="text-[red]"/>
                     <Form.Item>
                       <Button
                         type="dashed"

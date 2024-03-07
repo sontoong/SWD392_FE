@@ -35,6 +35,7 @@ import { PrimaryButton } from "../components/button/buttons";
 import { CustomCard } from "../components/ui/card";
 import { EditContact, EditOverview } from "../components/ui-freelancer/modals";
 import { InputFix } from "../components/input/inputs";
+import AddOutsideProject from "../components/ui-freelancer/modals/add-outside-project";
 
 const { Content, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
@@ -62,6 +63,7 @@ export default function FreelancerDetailPage() {
     email,
     address,
     phone,
+    jobRole,
   } = freelancer;
 
   return (
@@ -131,7 +133,7 @@ export default function FreelancerDetailPage() {
                     </Col>
                   </Row>
                   <Row>
-                    <Text type="secondary">IT Developer</Text>
+                    <Text type="secondary">{jobRole}</Text>
                   </Row>
                   <Row className="items-center">
                     <Space>
@@ -166,6 +168,7 @@ export default function FreelancerDetailPage() {
                   Project làm ngoài Wellancer
                 </Title>
               }
+              extra={<AddOutsideProject />}
               type="inner"
             >
               <Flex justify="space-between">
@@ -189,26 +192,6 @@ export default function FreelancerDetailPage() {
                 />
               </Flex>
               <Divider />
-              <Flex justify="space-between">
-                <Space direction="vertical">
-                  <Title level={4}>FPT Fap</Title>
-                  <Space>
-                    <Title level={5}>Back-end Developer</Title>
-                    <Title level={5} style={{ fontWeight: "400" }}>
-                      09/2023 - 12/2023
-                    </Title>
-                  </Space>
-                  <Paragraph>
-                    Tôi tạo và quản lý database và flow cho project
-                  </Paragraph>
-                </Space>
-                <Image
-                  width={200}
-                  height={200}
-                  src="error"
-                  fallback={defaultImage}
-                />
-              </Flex>
             </CustomCard>
             {/* rating */}
             <CustomCard

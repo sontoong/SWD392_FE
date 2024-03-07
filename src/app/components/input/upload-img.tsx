@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Modal, Upload, message } from "antd";
 import type { GetProp, UploadFile, UploadProps } from "antd";
-import { RequiredFields } from "../../utils/helper";
+import { RequiredFields } from "../../utils/helpers";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 

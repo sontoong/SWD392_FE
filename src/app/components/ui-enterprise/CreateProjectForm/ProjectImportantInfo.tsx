@@ -1,7 +1,12 @@
 import { CheckboxOptionType, Col, Form, Row, Typography } from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
-import { FormInput, FormRadioGroup, FormTextArea, InputNumberFix } from "../../input/inputs";
+import {
+  FormInput,
+  FormRadioGroup,
+  FormTextArea,
+  InputNumberFix,
+} from "../../input/inputs";
 import { FormSelect, FormTreeSelect } from "../../select/select";
 import { language } from "../../../../constants/language";
 import { DocumentUploadInput } from "../../input/upload-document-input";
@@ -10,6 +15,7 @@ import { location } from "../../../../constants/location";
 import { projectField } from "../../../../constants/project-field";
 import { useState } from "react";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
+import { DataNode } from "antd/es/tree";
 
 export default function ProjectImportantInfo() {
   const { Title, Paragraph } = Typography;
@@ -34,56 +40,54 @@ export default function ProjectImportantInfo() {
     privacy: "public",
     projectType: "unknown",
     optionalRequirements: {
-        language:"all",
-        location: "all",
-        minimumCompletedProjects:"all",
-        rating:"all",
-        skills:[
-            { label: "Front-end Developer", value: "Front-end Developer" },
-            { label: "Back-end Developer", value: "Back-end Developer" },
-            { label: "Full-stack Developer", value: "Full-stack Developer" },
-        ],
-        questions: [],
-    }
+      language: "all",
+      location: "all",
+      minimumCompletedProjects: "all",
+      rating: "all",
+      skills: [
+        { label: "Front-end Developer", value: "Front-end Developer" },
+        { label: "Back-end Developer", value: "Back-end Developer" },
+        { label: "Full-stack Developer", value: "Full-stack Developer" },
+      ],
+      questions: [],
+    },
   };
 
-  const [renderFunding, setRenderFunding] = useState<string>(initialValues.funding);
+  const [renderFunding, setRenderFunding] = useState<string>(
+    initialValues.funding,
+  );
 
   const renderContentBasedOnFundingType = () => {
     switch (renderFunding) {
       case "hourly":
         return (
           <>
-          <Row className="mt-[5%]">
-            <Form.Item
-              name="freelancerRequirement"
-              label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-                <FormRadioGroup
-                  options={projectFreelancerRequirementHourly}
-                />
-            </Form.Item>
-          </Row>
-          <Row className="mt-[5%]">
-            <Form.Item
-              name="freelancerRequirement"
-              label="Project của bạn dự kiến kéo dài bao lâu?"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-                <FormRadioGroup
-                  options={ProjectTimeToComplete}
-                />
-            </Form.Item>
-          </Row>
+            <Row className="mt-[5%]">
+              <Form.Item
+                name="freelancerRequirement"
+                label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <FormRadioGroup options={projectFreelancerRequirementHourly} />
+              </Form.Item>
+            </Row>
+            <Row className="mt-[5%]">
+              <Form.Item
+                name="timeToComplete"
+                label="Project của bạn dự kiến kéo dài bao lâu?"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <FormRadioGroup options={ProjectTimeToComplete} />
+              </Form.Item>
+            </Row>
           </>
         );
       case "fixed":
@@ -105,22 +109,20 @@ export default function ProjectImportantInfo() {
                   <InputNumberFix />
                 </Form.Item>
               </Col>
-          </Row>
-          <Row className="mt-[5%]">
-            <Form.Item
-              name="timeToComplete"
-              label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-                <FormRadioGroup
-                  options={projectFreelancerRequirementFixed}
-                />
-            </Form.Item>
-          </Row>
+            </Row>
+            <Row className="mt-[5%]">
+              <Form.Item
+                name="freelancerRequirement"
+                label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <FormRadioGroup options={projectFreelancerRequirementFixed} />
+              </Form.Item>
+            </Row>
           </>
         );
       default:
@@ -216,7 +218,7 @@ export default function ProjectImportantInfo() {
             <Col span={24}>
               <Form.Item
                 name="projectField"
-                label="Chọn lĩnh vực ngành"
+                label="Lĩnh vực ngành"
                 rules={[
                   {
                     required: true,
@@ -224,8 +226,7 @@ export default function ProjectImportantInfo() {
                 ]}
               >
                 <FormTreeSelect
-                  onChange={() => {}}
-                  treeData={Object.values(projectField)}
+                  treeData={Object.values(projectField) as DataNode[]}
                 />
               </Form.Item>
             </Col>
@@ -250,7 +251,7 @@ export default function ProjectImportantInfo() {
                 <Paragraph>
                   3/ Thông tin về thời gian hoàn thành hoặc các thông tin khác
                 </Paragraph>
-                <FormTextArea />
+                <FormTextArea maxLength={100} />
               </Form.Item>
             </Col>
           </Row>
@@ -265,17 +266,17 @@ export default function ProjectImportantInfo() {
                 },
               ]}
             >
-                <FormRadioGroup
-                  options={ProjectFundingTypes}
-                  onChange={(e) => setRenderFunding(e.target.value)}
-                />
+              <FormRadioGroup
+                options={ProjectFundingTypes}
+                onChange={(e) => setRenderFunding(e.target.value)}
+              />
             </Form.Item>
           </Row>
 
           {renderContentBasedOnFundingType()}
 
-          <Row gutter={10} justify={'end'}>
-            <Form.Item wrapperCol={{span: 5}}>
+          <Row gutter={10} justify={"end"}>
+            <Form.Item wrapperCol={{ span: 5 }}>
               <PrimaryButton htmlType="submit">Tiếp tục</PrimaryButton>
             </Form.Item>
             <Col span={4}>
@@ -288,75 +289,75 @@ export default function ProjectImportantInfo() {
   );
 }
 
-const ProjectFundingTypes: CheckboxOptionType<CheckboxValueType>[] =[
+const ProjectFundingTypes: CheckboxOptionType<CheckboxValueType>[] = [
   {
     label: "Tính theo giờ",
     value: "hourly",
   },
   {
     label: "Tính theo dự án",
-    value: "fixed"
-  }
-]
+    value: "fixed",
+  },
+];
 
-
-const ProjectTimeToComplete: CheckboxOptionType<CheckboxValueType>[] =[
+const ProjectTimeToComplete: CheckboxOptionType<CheckboxValueType>[] = [
   {
     label: "Ít hơn 1 tháng",
-    value: "1",
+    value: 1,
   },
   {
     label: "1-3 tháng",
-    value: "2"
+    value: 2,
   },
   {
     label: "3 tháng",
-    value: "3"
-  },
-]
-
-const projectFreelancerRequirementFixed: CheckboxOptionType<CheckboxValueType>[] = [
-  {
-    label: "Mới đi làm",
-    value: "junior",
-  },
-  {
-    label: "Chuyên nghiệp",
-    value: "senior",
-  },
-  {
-    label: "Chuyên gia",
-    value: "expert",
+    value: 3,
   },
 ];
 
+const projectFreelancerRequirementFixed: CheckboxOptionType<CheckboxValueType>[] =
+  [
+    {
+      label: "Mới đi làm",
+      value: "junior",
+    },
+    {
+      label: "Chuyên nghiệp",
+      value: "senior",
+    },
+    {
+      label: "Chuyên gia",
+      value: "expert",
+    },
+  ];
 
-const projectFreelancerRequirementHourly: CheckboxOptionType<CheckboxValueType>[] = [
-  {
-    label: (
-      <div>
-        <div>Mới đi làm</div>
-        <div>Dưới 100,000VND/giờ</div>
-      </div>
-    ),
-    value: "junior",
-  },
-  {
-    label: (
-      <div>
-        <div>Chuyên nghiệp</div>
-        <p>100,000VND - 500,000VND/giờ</p>
-      </div>
-    ),
-    value: "senior",
-  },
-  {
-    label: (
-      <div>
-        <div>Chuyên gia</div>
-        <div>Trên 500,000/giờ</div>
-      </div>
-    ),
-    value: "expert",
-  },
-];
+const projectFreelancerRequirementHourly: CheckboxOptionType<CheckboxValueType>[] =
+  [
+    {
+      label: (
+        <div>
+          <div>Mới đi làm</div>
+          <div>Dưới 100,000VND/giờ</div>
+        </div>
+      ),
+      value: "junior",
+    },
+    {
+      label: (
+        <div>
+          <div>Chuyên nghiệp</div>
+          <p>100,000VND - 500,000VND/giờ</p>
+        </div>
+      ),
+      value: "senior",
+    },
+    {
+      label: (
+        <div>
+          <div>Chuyên gia</div>
+          <div>Trên 500,000/giờ</div>
+        </div>
+      ),
+      value: "expert",
+    },
+  ];

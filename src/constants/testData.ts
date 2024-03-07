@@ -11,6 +11,7 @@ import {
   OptionalRequirements,
   FreelancerProject,
   EnterpriseProject,
+  OutsideProject,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
 import { FreelancerDetail } from "../app/models/user";
@@ -20,8 +21,6 @@ export const nations: Nation = {
   us: { label: "United States", value: "us" },
   cn: { label: "China", value: "cn" },
 };
-
-
 
 const skills: Skill[] = [
   { label: "Front-end Developer", value: "Front-end Developer" },
@@ -172,7 +171,6 @@ export const FreelancerProjects: FreelancerProject[] = [
     endDate: 1708532861,
     status: "doing",
     signature: "Thuan",
-
   },
   {
     ...project,
@@ -202,7 +200,6 @@ export const EnterpriseProjects: EnterpriseProject[] = [
   { ...project, applicationCount: 5, freelancerCount: 10, status: "closed" },
   { ...project, applicationCount: 5, freelancerCount: 10, status: "doing" },
 ];
-
 
 export const Incomes: Income[] = [
   {
@@ -301,4 +298,10 @@ export const Applicants: Applicant[] = [
   },
 ];
 
-
+export const oproject1: OutsideProject = {
+  title: "FPT Fap",
+  description: "Tôi tạo và quản lý database và flow cho project",
+  jobRole: "Back-end Developer",
+  startDate: 1708532861,
+  endDate: 1708532861,
+};

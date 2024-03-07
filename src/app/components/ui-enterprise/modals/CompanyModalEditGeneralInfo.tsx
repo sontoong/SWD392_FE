@@ -157,7 +157,7 @@ export default function CompanyModalEditGeneralInfo() {
                   },
                 ]}
               >
-                <FormTextArea />
+                <FormTextArea maxLength={100} />
               </Form.Item>
             </Col>
           </Row>

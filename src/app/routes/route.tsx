@@ -22,6 +22,9 @@ const FreelancerProjectList = lazy(
 const EnterpriseDetailPage = lazy(
   () => import("../pages/EnterpriseDetailPage"),
 );
+const EnterpriseCreateProjectPage = lazy(
+  () => import("../pages/EnterpriseCreateProjectPage"),
+);
 
 //both
 import TransactionList from "../pages/TransactionList";
@@ -157,7 +160,7 @@ export const router = createBrowserRouter([
             path: "new-project",
             element: (
               <Suspense fallback={<></>}>
-                <Template />
+                <EnterpriseCreateProjectPage />
               </Suspense>
             ),
           },

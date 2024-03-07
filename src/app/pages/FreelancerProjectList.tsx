@@ -1,21 +1,32 @@
 import { Table, TableProps } from "antd";
 import { FreelancerProject } from "../models/project";
-import { generateProjectFunding, generateProjectFundingType, generateFreelancerProjectStatus } from "../utils/generators";
+import {
+  generateProjectFunding,
+  generateProjectFundingType,
+  generateFreelancerProjectStatus,
+} from "../utils/generators";
 import { FreelancerProjects } from "../../constants/testData";
-import ViewSignContract from "../components/ui-freelancer/modals/ViewSignContract";
+import { ViewSignContract } from "../components/ui-freelancer/modals/";
 
-export interface TableData extends
-FreelancerProject {
-    statusGenerator?: string;
-    fundingTypeGenerator?: string;
-    fundingGenerator?: string | { initialFunding: string };
+export interface TableData extends FreelancerProject {
+  statusGenerator?: string;
+  fundingTypeGenerator?: string;
+  fundingGenerator?: string | { initialFunding: string };
 }
 
-export default function FreelancerProjectList() {const data: TableData[] = FreelancerProjects.map((project) => (
-    {...project, statusGenerator: generateFreelancerProjectStatus(project.status), fundingTypeGenerator: generateProjectFundingType(project.funding), fundingGenerator: generateProjectFunding(project.funding, project.freelancerRequirement, project.initialFunding)}
-));
+export default function FreelancerProjectList() {
+  const data: TableData[] = FreelancerProjects.map((project) => ({
+    ...project,
+    statusGenerator: generateFreelancerProjectStatus(project.status),
+    fundingTypeGenerator: generateProjectFundingType(project.funding),
+    fundingGenerator: generateProjectFunding(
+      project.funding,
+      project.freelancerRequirement,
+      project.initialFunding,
+    ),
+  }));
 
-const columns: TableProps<TableData>["columns"] = [
+  const columns: TableProps<TableData>["columns"] = [
     {
       title: "Tên Project",
       dataIndex: "title",
@@ -47,18 +58,27 @@ const columns: TableProps<TableData>["columns"] = [
       key: "statusGenerator",
     },
     {
-        title: "Hợp đồng",
-        render: (_, record) => {
-            // Check if status is "denied" or "verifying", if so, return null (don't render anything)
-            if (record.status === "denied" || record.status === "verifying") {
-                return null;
-            }
-            const {statusGenerator: __, fundingGenerator: ___, fundingTypeGenerator: ____, ...rest} = record
-            // Otherwise, render the ViewSignContract component
-            return <ViewSignContract record={rest}/>;
+      title: "Hợp đồng",
+      render: (_, record) => {
+        if (record.status === "denied" || record.status === "verifying") {
+          return null;
         }
+        // const {
+        //   statusGenerator: __,
+        //   fundingGenerator: ___,
+        //   fundingTypeGenerator: ____,
+        //   ...rest
+        // } = record;
+        return <ViewSignContract record={record} />;
+      },
     },
   ];
 
- return <Table columns={columns} dataSource={data} pagination={{position:["bottomCenter"]}}/>;
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={{ position: ["bottomCenter"] }}
+    />
+  );
 }

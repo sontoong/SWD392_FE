@@ -98,6 +98,16 @@ export interface FreelancerProject extends Project {
   signature?: string;
 }
 
-export interface EnterpriseProject extends Project{
+export interface OutsideProject {
+  title: string;
+  jobRole: string;
+  description: string;
+  startDate?: number;
+  endDate?: number;
+  images?: string[];
+  projectProfileImages?: [{ image: string; description: string }];
+}
+
+export interface EnterpriseProject extends Project {
   status: "hiring" | "closed" | "doing";
 }
