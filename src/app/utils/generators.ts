@@ -1,6 +1,7 @@
-import { EnterpriseProject, FreelancerProject, Project } from "../models/project";
+import { EnterpriseProject, FreelancerProject, OptionalRequirements, Project } from "../models/project";
 import { Transaction } from "../models/transaction";
 import { UserDetail } from "../models/user";
+import { formatCurrency } from "./utils";
 
 export function generateRequirementMsg(role: Project["freelancerRequirement"]) {
   switch (role) {
@@ -27,6 +28,34 @@ export function generateRequirementMsg(role: Project["freelancerRequirement"]) {
       };
     default:
       return {};
+  }
+}
+
+
+
+export function generatorLocationType(type: OptionalRequirements["location"]){
+  switch(type){
+    case "all":
+      return "Tất cả";
+    case "vn":
+      return "Việt Nam";
+    case "us":
+      return "Hoa Kì";
+    case "cn":
+      return "Trung Quốc";
+  }
+}
+
+export function generateTimeToComplete(type: Project["timeToComplete"]){
+  switch (type){
+    case 1:
+      return "Ít hơn 1 tháng";
+    case 2:
+      return "1-3 tháng";
+    case 3:
+      return "Hơn 3 tháng";
+    default:
+      return ""
   }
 }
 
@@ -57,12 +86,12 @@ export function generateProjectFundingType(type: Project["funding"]) {
 
 export function generateProjectFunding(
   type: Project["funding"],
-  freelancerRequirement?: Project["freelancerRequirement"],
-  initialFunding?: Project["initialFunding"]
+  freelancerRequirement: Project["freelancerRequirement"],
+  initialFunding: Project["initialFunding"],
 ) {
   switch (type) {
     case "fixed":
-      return { initialFunding: initialFunding ? initialFunding.toString() : '' };
+      return  formatCurrency(initialFunding) ;
     case "hourly":
       if (freelancerRequirement) {
         switch (freelancerRequirement) {

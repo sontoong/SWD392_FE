@@ -18,8 +18,8 @@ export default function EnterpriseProjectList() {
 const columns: TableProps<TableData>["columns"] = [
     {
       title: "Tên Project",
-      dataIndex: "description",
-      key: "description",
+      dataIndex: "title",
+      key: "title",
     },
     {
       title: "Báo giá",

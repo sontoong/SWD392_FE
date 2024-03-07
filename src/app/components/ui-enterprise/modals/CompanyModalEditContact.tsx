@@ -17,42 +17,8 @@ export default function CompanyModalEditContact() {
     introduction:
       "This is the place for cooking, like Gordon's grilled cheese sandwich.",
     industryFields: [
-      {
-        label: "name",
-        value: "name",
-        skills: [
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-        ],
-      },
-      {
-        label: "name",
-        value: "name",
-        skills: [
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-        ],
-      },
+      { label: "IT", value: "it" },
+      { label: "Nấu ăn", value: "cook" },
     ],
     enterpriseCountry: { label: "Việt Nam", value: "vn" },
     companyDocument: "FunnyMemeFrom9GAG.png",

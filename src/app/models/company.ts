@@ -1,5 +1,5 @@
 import { Nation } from "./language";
-import { SkillField } from "./project";
+import { Field } from "./project";
 
 export interface CompanyDetail {
   companyName: string;
@@ -7,7 +7,7 @@ export interface CompanyDetail {
   videoLink: string;
   companySize: string;
   introduction: string;
-  industryFields: SkillField[];
+  industryFields: Field[];
   companyDocument: string;
   registrationDocumentType: string;
   identificationNumber: number;
