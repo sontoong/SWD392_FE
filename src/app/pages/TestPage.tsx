@@ -1,10 +1,9 @@
-import { TreeSelect, TreeSelectProps } from "antd";
-import { useState } from "react";
+import { ConfigProvider, TreeSelect, TreeSelectProps } from "antd";
 
 const treeData: TreeSelectProps["treeData"] = [
   {
     title: "parent 100",
-    value: "parent 1",
+    value: "parent 100",
     children: [
       {
         value: "parent 1-0",
@@ -32,48 +31,9 @@ const treeData: TreeSelectProps["treeData"] = [
       },
     ],
   },
-  {
-    value: "leaf10",
-    title: "leaf10",
-    children: [
-      {
-        value: "leaf11",
-        title: "leaf11",
-        children: [
-          {
-            value: "leaf12",
-            title: "leaf12",
-            children: [
-              {
-                value: "leaf13",
-                title: "leaf13",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 export default function TestPage() {
-  const [value, setValue] = useState<string>();
-  console.log(value);
-
-  // const makeuncheckable = (dataarr: TreeSelectProps["treeData"]) =>
-  //   dataarr?.map((obj) => ({
-  //     ...obj,
-  //     disabled: Boolean(obj?.children),
-  //     children: obj?.children?.map((cobj) => ({
-  //       ...cobj,
-  //       disabled: Boolean(cobj?.children),
-  //     })),
-  //   }));
-
-  const onChange = (newValue: string) => {
-    setValue(newValue);
-  };
-
   const addDisabledField = (
     data: TreeSelectProps["treeData"],
   ): TreeSelectProps["treeData"] => {
@@ -90,18 +50,21 @@ export default function TestPage() {
     });
   };
 
-  const modifiedTreeData = addDisabledField(treeData);
-  console.log(modifiedTreeData);
-
   return (
-    <TreeSelect
-      showSearch
-      style={{ width: "100%" }}
-      value={value}
-      dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-      placeholder="Please select"
-      onChange={onChange}
-      treeData={addDisabledField(treeData)}
-    />
+    <ConfigProvider
+      theme={{
+        token: {
+          colorTextDisabled: "black",
+        },
+      }}
+    >
+      <TreeSelect
+        showSearch
+        style={{ width: "100%" }}
+        dropdownStyle={{ maxHeight: 400, overflow: "auto", cursor: "default" }}
+        placeholder="Please select"
+        treeData={addDisabledField(treeData)}
+      />
+    </ConfigProvider>
   );
 }

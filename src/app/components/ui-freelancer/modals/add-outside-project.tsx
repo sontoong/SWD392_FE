@@ -4,7 +4,7 @@ import { Col, Form, Row } from "antd";
 import { UserDetail } from "../../../models/user";
 import { CustomFormModal } from "../../modal/modal";
 import { FormInput } from "../../input/inputs";
-import { SelectFix } from "../../select/select";
+import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import { OutsideProject } from "../../../models/project";
 
@@ -89,7 +89,7 @@ export default function AddOutsideProject(props: AddOutsideProject) {
           <Row gutter={10}>
             <Col span={12}>
               <Form.Item name="nation" label="Múi giờ">
-                <SelectFix
+                <FormSelect
                   onChange={() => {}}
                   options={Object.values(nations)}
                 />

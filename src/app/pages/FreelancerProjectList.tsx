@@ -60,18 +60,16 @@ export default function FreelancerProjectList() {
     {
       title: "Hợp đồng",
       render: (_, record) => {
-        // Check if status is "denied" or "verifying", if so, return null (don't render anything)
         if (record.status === "denied" || record.status === "verifying") {
           return null;
         }
-        const {
-          statusGenerator: __,
-          fundingGenerator: ___,
-          fundingTypeGenerator: ____,
-          ...rest
-        } = record;
-        // Otherwise, render the ViewSignContract component
-        return <ViewSignContract record={rest} />;
+        // const {
+        //   statusGenerator: __,
+        //   fundingGenerator: ___,
+        //   fundingTypeGenerator: ____,
+        //   ...rest
+        // } = record;
+        return <ViewSignContract record={record} />;
       },
     },
   ];

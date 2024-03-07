@@ -1,5 +1,6 @@
 import {
   CheckboxOptionType,
+  ConfigProvider,
   DatePicker,
   DatePickerProps,
   Input,
@@ -10,11 +11,15 @@ import {
   RadioGroupProps,
   Select,
   SelectProps,
+  TreeProps,
+  TreeSelect,
+  TreeSelectProps,
 } from "antd";
 import { ErrorMessage } from "formik";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { TextAreaProps } from "antd/es/input";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
+import { RequiredFields } from "../../utils/helpers";
 
 const { TextArea } = Input;
 export interface MyInputProps {
@@ -65,7 +70,7 @@ export interface MyTextAreaProps {
   placeholder: string;
 }
 
-export interface MyNumberInputProps{
+export interface MyNumberInputProps {
   id: string;
   field: {
     name: string;
@@ -233,18 +238,23 @@ function InputFix(props: InputProps) {
 
 function InputNumberFix(props: InputNumberProps) {
   return (
-    <InputNumber {...props} formatter={(value) => {
-        return `${value} VND`
-      }
-    } 
-    parser={(value) => value!.replace('VND', '')}
-    className="rounded-[6px] border-[1px] border-[#d9d9d9] w-full" />
+    <InputNumber
+      {...props}
+      formatter={(value) => {
+        return `${value} VND`;
+      }}
+      parser={(value) => value!.replace("VND", "")}
+      className="w-full rounded-[6px] border-[1px] border-[#d9d9d9]"
+    />
   );
 }
 
 function InputPasswordFix(props: InputProps) {
   return (
-    <Input.Password {...props} className="rounded-[6px] border-[1px] border-[#d9d9d9]" />
+    <Input.Password
+      {...props}
+      className="rounded-[6px] border-[1px] border-[#d9d9d9]"
+    />
   );
 }
 
@@ -253,10 +263,12 @@ function FormInput(props: InputProps) {
 }
 
 function FormInputPassword(props: InputProps) {
-  return <InputPasswordFix {...props} allowClear={true} style={{ height: "42px" }} />;
+  return (
+    <InputPasswordFix {...props} allowClear={true} style={{ height: "42px" }} />
+  );
 }
 
-function FormTextArea(props: TextAreaProps) {
+function FormTextArea(props: RequiredFields<TextAreaProps, "maxLength">) {
   return <TextArea {...props} autoSize allowClear={true} showCount />;
 }
 
@@ -265,23 +277,66 @@ function FormDatePicker(props: DatePickerProps) {
   return <DatePicker {...props} format={dateFormat} allowClear={false} />;
 }
 
-interface FormRadioGroupProps extends Omit<RadioGroupProps, "options">{
-  options: CheckboxOptionType<CheckboxValueType>[]
+interface FormRadioGroupProps extends Omit<RadioGroupProps, "options"> {
+  options: CheckboxOptionType<CheckboxValueType>[];
 }
 
 function FormRadioGroup(props: FormRadioGroupProps) {
-  const {options, ...rest} = props
+  const { options, ...rest } = props;
 
-  return <Radio.Group {...rest} optionType="button" buttonStyle="solid">
-    {options?.map((option, index) => (
-      <Radio.Button key={index} value={option.value} style={{
-        textAlign:"center",
-        padding:"5px 20px 5px 20px",
-        height:"5%"
-      }}
-      >{option.label}</Radio.Button>
-    ))}
-  </Radio.Group>
+  return (
+    <Radio.Group {...rest} optionType="button" buttonStyle="solid">
+      {options?.map((option, index) => (
+        <Radio.Button
+          key={index}
+          value={option.value}
+          style={{
+            textAlign: "center",
+            padding: "5px 20px 5px 20px",
+            height: "5%",
+          }}
+        >
+          {option.label}
+        </Radio.Button>
+      ))}
+    </Radio.Group>
+  );
+}
+
+function FormTreeSelect(props: TreeProps) {
+  const { treeData } = props;
+
+  const addDisabledField = (
+    data: TreeSelectProps["treeData"],
+  ): TreeSelectProps["treeData"] => {
+    return data?.map((node) => {
+      if (node.children && node.children.length > 0) {
+        return {
+          ...node,
+          disabled: true,
+          children: addDisabledField(node.children),
+        };
+      } else {
+        return node;
+      }
+    });
+  };
+
+  <ConfigProvider
+    theme={{
+      token: {
+        colorTextDisabled: "black",
+      },
+    }}
+  >
+    <TreeSelect
+      showSearch
+      style={{ width: "100%" }}
+      dropdownStyle={{ maxHeight: 400, overflow: "auto", cursor: "default" }}
+      placeholder="Please select"
+      treeData={addDisabledField(treeData as TreeSelectProps["treeData"])}
+    />
+  </ConfigProvider>;
 }
 
 export {
@@ -289,7 +344,9 @@ export {
   FormDatePicker,
   InputFix,
   FormInput,
+  FormInputPassword,
   FormRadioGroup,
+  FormTreeSelect,
   MyInput,
   MyInputPassword,
   MyDateInput,
@@ -297,6 +354,5 @@ export {
   MySelectSkillFieldInput,
   MyTextArea,
   InputPasswordFix,
-  FormInputPassword,
-  InputNumberFix
+  InputNumberFix,
 };
