@@ -4,7 +4,7 @@
 //   time: string;
 // };
 
-import { Question, QuestionCreate } from "./applicant";
+import { QuestionCreate } from "./applicant";
 
 export type ExperienceLevel = "junior" | "senior" | "expert";
 
@@ -28,10 +28,10 @@ export type OptionalRequirements = {
     | "5-10 projects"
     | ">10 projects";
   rating: "all" | ">3 stars" | ">4 stars";
-  location: "all" | "hcm";
+  location: "all" | "us" | "vn" | "cn";
   language: "all" | "en" | "vn" | "cn";
   skills: Skill[];
-  questions?: Question[];
+  questions?: string[];
 };
 
 export type Skill = {
@@ -43,6 +43,11 @@ export type SkillField = {
   label: string;
   value: string;
   skills: Skill[];
+};
+
+export type Field = {
+  label: string;
+  value: string;
 };
 
 export interface Project {

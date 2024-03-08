@@ -1,4 +1,4 @@
-import { Applicant } from "../app/models/applicant";
+import { Applicant, Question } from "../app/models/applicant";
 import { Comment } from "../app/models/comment";
 import { CompanyDetail } from "../app/models/company";
 import { EnterpriseInfo } from "../app/models/enterprise";
@@ -12,14 +12,16 @@ import {
   FreelancerProject,
   EnterpriseProject,
   OutsideProject,
+  Field,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
 import { FreelancerDetail } from "../app/models/user";
 
 export const nations: Nation = {
-  vn: { label: "Việt Nam", value: "vn" },
-  us: { label: "United States", value: "us" },
-  cn: { label: "China", value: "cn" },
+  all: { label: "Tất cả", value:"all"},
+  vn:  { label: "Việt Nam", value: "vn" },
+  us:  { label: "Hoa Kì", value: "us" },
+  cn:  { label: "Trung Quốc", value: "cn" },
 };
 
 const skills: Skill[] = [
@@ -32,15 +34,20 @@ const skills: Skill[] = [
   { label: "Data Engineer", value: "Data Engineer" },
 ];
 
+export const fields: Field[] = [
+  { label: "IT", value: "it" },
+  { label: "Nấu ăn", value: "cook" },
+];
+
 const field: SkillField = {
-  label: "name",
-  value: "name",
+  label: "IT", 
+  value: "it",
   skills: skills,
 };
 
 const field1: SkillField = {
-  label: "name",
-  value: "name",
+  label: "Nấu ăn", 
+  value: "cook",
   skills: skills,
 };
 
@@ -50,6 +57,9 @@ const optionalRequirements: OptionalRequirements = {
   location: "all",
   rating: "all",
   skills: skills,
+  questions: [
+    "Câu 1", "Câu 2", "Câu 3"
+  ],
 };
 
 export const project: Project = {
@@ -144,16 +154,20 @@ export const companyDetail: CompanyDetail = {
 };
 
 export const enterpriseInfo: EnterpriseInfo = {
+  id:"1",
   firstName: "Nguyễn",
   middleName: "Văn",
   lastName: "A",
   dateOfBirth: 1708532861,
-  enterpriseCountry: "Việt Nam",
+  enterpriseCountry: { label: "Việt Nam", value: "vn" },
   documentType: "Hộ chiếu",
   enterpriseDocument: "FunnyMemeFrom9GAG.png",
   documentNumber: 33333333333333,
   enterpriseEmail: "CoolMathGame@gmail.com",
   enterprisePhone: "33333333333333",
+  companyDetail: companyDetail,
+  projectList: projects,
+  currentHiringProject: 3,
 };
 
 export const FreelancerProjects: FreelancerProject[] = [
@@ -251,6 +265,7 @@ export const Transactions: Transaction[] = [
 export const Applicants: Applicant[] = [
   {
     id: "",
+    projectId: "",
     name: "Nguyễn Văn A",
     date: 1708532861,
     file: "",
@@ -274,6 +289,7 @@ export const Applicants: Applicant[] = [
   },
   {
     id: "",
+    projectId: "",
     name: "Nguyễn Văn A",
     date: 1708532861,
     file: "",

@@ -121,7 +121,7 @@ export default function EnterpriseDetailPage() {
                   <Space direction="vertical" size={"large"}>
                     <div>
                       <Title level={3}>Quốc gia</Title>
-                      <div>{enterpriseCountry}</div>
+                      <div>{enterpriseCountry.label}</div>
                     </div>
                     <div>
                       <Title level={3}>Loại giấy tờ</Title>

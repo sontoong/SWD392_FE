@@ -5,9 +5,9 @@ import { FormInput, FormTextArea } from "../../input/inputs";
 import { Col, Form, Row } from "antd";
 import { IdDocuments } from "../../../../constants/id-documents";
 import { CompanyDetail } from "../../../models/company";
-import { skills } from "../../../../constants/skill";
 import { FormSelect, SelectMultiple } from "../../select/select";
 import { UploadImg } from "../../input/upload-img";
+import { fields } from "../../../../constants/testData";
 
 export default function CompanyModalEditGeneralInfo() {
   const [open, setOpen] = useState(false);
@@ -30,42 +30,8 @@ export default function CompanyModalEditGeneralInfo() {
     introduction:
       "This is the place for cooking, like Gordon's grilled cheese sandwich.",
     industryFields: [
-      {
-        label: "name",
-        value: "name",
-        skills: [
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-        ],
-      },
-      {
-        label: "name",
-        value: "name",
-        skills: [
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-          {
-            label: "Front-end Developer",
-            value: "Front-end Developer",
-          },
-        ],
-      },
+      { label: "IT", value: "it" },
+      { label: "Nấu ăn", value: "cook" },
     ],
     enterpriseCountry: { label: "Việt Nam", value: "vn" },
     companyDocument: "FunnyMemeFrom9GAG.png",
@@ -201,10 +167,7 @@ export default function CompanyModalEditGeneralInfo() {
                 ]}
               >
                 <SelectMultiple
-                  options={skills}
-                  defaultValue={initialValues.industryFields.map(
-                    (field) => field.value,
-                  )}
+                  options={fields}
                 />
               </Form.Item>
             </Col>
