@@ -4,6 +4,7 @@ import { CustomFormModal } from "../../modal/modal";
 import { FormInput } from "../../input/inputs";
 import { Col, Form, Row } from "antd";
 import { CompanyDetail } from "../../../models/company";
+import DefaultForm from "../../form/form";
 
 export default function CompanyModalEditContact() {
   const [open, setOpen] = useState(false);
@@ -61,9 +62,8 @@ export default function CompanyModalEditContact() {
             });
         }}
       >
-        <Form
+        <DefaultForm
           form={form}
-          layout="vertical"
           name="CompanyEditContact"
           initialValues={initialValues}
         >
@@ -99,7 +99,7 @@ export default function CompanyModalEditContact() {
               </Form.Item>
             </Col>
           </Row>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );

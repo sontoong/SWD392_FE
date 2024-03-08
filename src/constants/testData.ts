@@ -1,4 +1,4 @@
-import { Applicant, Question } from "../app/models/applicant";
+import { Applicant } from "../app/models/applicant";
 import { Comment } from "../app/models/comment";
 import { CompanyDetail } from "../app/models/company";
 import { EnterpriseInfo } from "../app/models/enterprise";
@@ -18,10 +18,10 @@ import { Transaction } from "../app/models/transaction";
 import { FreelancerDetail } from "../app/models/user";
 
 export const nations: Nation = {
-  all: { label: "Tất cả", value:"all"},
-  vn:  { label: "Việt Nam", value: "vn" },
-  us:  { label: "Hoa Kì", value: "us" },
-  cn:  { label: "Trung Quốc", value: "cn" },
+  all: { label: "Tất cả", value: "all" },
+  vn: { label: "Việt Nam", value: "vn" },
+  us: { label: "Hoa Kì", value: "us" },
+  cn: { label: "Trung Quốc", value: "cn" },
 };
 
 const skills: Skill[] = [
@@ -40,13 +40,13 @@ export const fields: Field[] = [
 ];
 
 const field: SkillField = {
-  label: "IT", 
+  label: "IT",
   value: "it",
   skills: skills,
 };
 
 const field1: SkillField = {
-  label: "Nấu ăn", 
+  label: "Nấu ăn",
   value: "cook",
   skills: skills,
 };
@@ -57,9 +57,7 @@ const optionalRequirements: OptionalRequirements = {
   location: "all",
   rating: "all",
   skills: skills,
-  questions: [
-    "Câu 1", "Câu 2", "Câu 3"
-  ],
+  questions: ["Câu 100", "Câu 2", "Câu 3"],
 };
 
 export const project: Project = {
@@ -154,7 +152,7 @@ export const companyDetail: CompanyDetail = {
 };
 
 export const enterpriseInfo: EnterpriseInfo = {
-  id:"1",
+  id: "1",
   firstName: "Nguyễn",
   middleName: "Văn",
   lastName: "A",

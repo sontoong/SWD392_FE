@@ -9,9 +9,10 @@ import { DocumentUploadInput } from "../../input/upload-document-input";
 
 import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
+import DefaultForm from "../../form/form";
 
 export default function CompanyModalEditDocument() {
-  const {Title, Paragraph} =Typography
+  const { Title, Paragraph } = Typography;
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
 
@@ -67,9 +68,8 @@ export default function CompanyModalEditDocument() {
             });
         }}
       >
-        <Form
+        <DefaultForm
           form={form}
-          layout="vertical"
           name="CompanyEditDocument"
           initialValues={initialValues}
         >
@@ -94,10 +94,10 @@ export default function CompanyModalEditDocument() {
           </Row>
           <Row>
             <Col span={24}>
-            <Title level={3}>Giấy tờ</Title>
+              <Title level={3}>Giấy tờ</Title>
               <DocumentUploadInput name="enterpriseDocument" />
-            <Paragraph>* Định dạng tệp được chấp nhận: .jpg, .png</Paragraph>
-            <Paragraph>* Kích thước tệp phải nhỏ hơn 4M</Paragraph>
+              <Paragraph>* Định dạng tệp được chấp nhận: .jpg, .png</Paragraph>
+              <Paragraph>* Kích thước tệp phải nhỏ hơn 4M</Paragraph>
             </Col>
           </Row>
           <Row>
@@ -165,7 +165,7 @@ export default function CompanyModalEditDocument() {
               </Form.Item>
             </Col>
           </Row>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );

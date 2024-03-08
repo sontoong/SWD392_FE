@@ -1,5 +1,5 @@
 import { Button, Divider, Radio, Select, Space } from "antd";
-import { Formik, Field, Form } from "formik";
+import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import { MyInput, MyInputPassword } from "../components/input/inputs";
 import MyCarousel from "../components/ui/carousel";
@@ -18,6 +18,7 @@ import Title from "antd/es/typography/Title";
 import { LeftOutlined } from "@ant-design/icons";
 import { UserDetail } from "../models/user";
 import { generateRoleMsg } from "../utils/generators";
+import DefaultForm from "../components/form/form";
 
 export type SignupFormValues = Pick<
   UserDetail,
@@ -125,7 +126,11 @@ function SignupPage() {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form className="clear-both flex flex-col items-center justify-center space-y-5">
+          <DefaultForm
+            initialValues={{}}
+            name="SignupPage"
+            className="clear-both flex flex-col items-center justify-center space-y-5"
+          >
             <section className="w-[70%] space-y-5 ">
               <div className="mb-12 ml-1 mt-[20%] ">
                 <h1 className="text-3xl">{languageText.title}</h1>
@@ -217,7 +222,7 @@ function SignupPage() {
                 Login Failed, Please try later!
               </article>
             )}
-          </Form>
+          </DefaultForm>
         </Formik>
         <Divider>hoặc</Divider>
         <div className="flex justify-center">

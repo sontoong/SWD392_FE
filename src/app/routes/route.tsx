@@ -9,6 +9,9 @@ const Layout2 = lazy(() => import("../components/layout/admin-layout"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const SignupPage = lazy(() => import("../pages/SignupPage"));
 const HomePage = lazy(() => import("../pages/HomePage"));
+const FreelancerProjectDetailPage = lazy(
+  () => import("../pages/FreelancerProjectDetailPage"),
+);
 
 //freelancer
 const FreelancerDetailPage = lazy(
@@ -98,6 +101,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<></>}>
             <Template />
+          </Suspense>
+        ),
+      },
+      {
+        path: "projects/:projectId",
+        element: (
+          <Suspense fallback={<></>}>
+            <FreelancerProjectDetailPage />
           </Suspense>
         ),
       },

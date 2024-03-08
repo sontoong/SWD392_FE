@@ -17,12 +17,11 @@ import {
 import { FormSelect, FormTreeSelect } from "../../select/select";
 import { language } from "../../../../constants/language";
 import { DocumentUploadInput } from "../../input/upload-document-input";
-import { OutlineButton, PrimaryButton } from "../../button/buttons";
 import { location } from "../../../../constants/location";
-import { projectField } from "../../../../constants/project-field";
+import { projectFields } from "../../../../constants/project-field";
 import { useState } from "react";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
-import { DataNode } from "antd/es/tree";
+import DefaultForm from "../../form/form";
 
 export default function ProjectImportantInfo({
   form,
@@ -37,7 +36,7 @@ export default function ProjectImportantInfo({
     projectField: "",
     description: "",
     contract: "",
-    funding: "fixed",
+    funding: "hourly",
     initialFunding: 0,
     freelancerRequirement: "junior",
     timeToComplete: 1,
@@ -71,7 +70,7 @@ export default function ProjectImportantInfo({
       case "hourly":
         return (
           <>
-            <Row className="mt-[5%]">
+            <Row>
               <Form.Item
                 name="freelancerRequirement"
                 label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
@@ -84,7 +83,7 @@ export default function ProjectImportantInfo({
                 <FormRadioGroup options={projectFreelancerRequirementHourly} />
               </Form.Item>
             </Row>
-            <Row className="mt-[5%]">
+            <Row>
               <Form.Item
                 name="timeToComplete"
                 label="Project của bạn dự kiến kéo dài bao lâu?"
@@ -119,7 +118,7 @@ export default function ProjectImportantInfo({
                 </Form.Item>
               </Col>
             </Row>
-            <Row className="mt-[5%]">
+            <Row>
               <Form.Item
                 name="freelancerRequirement"
                 label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
@@ -163,15 +162,12 @@ export default function ProjectImportantInfo({
           </Title>
         }
       >
-        <Form
+        <DefaultForm
           form={form}
-          layout="vertical"
-          name="EnterpriseEditGeneralInfo"
+          name="ProjectImportantInfo"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          initialValues={{
-            ...initialValues,
-          }}
+          initialValues={initialValues}
         >
           <Row>
             <Col span={24}>
@@ -208,7 +204,7 @@ export default function ProjectImportantInfo({
             </Col>
             <Col span={10} offset={4}>
               <Form.Item
-                name="location"
+                name={["optionalRequirements", "location"]}
                 label="Địa điểm"
                 rules={[
                   {
@@ -234,22 +230,20 @@ export default function ProjectImportantInfo({
                   },
                 ]}
               >
-                <FormTreeSelect
-                  treeData={Object.values(projectField) as DataNode[]}
-                />
+                <FormTreeSelect treeData={Object.values(projectFields)} />
               </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={24}>
-                <Paragraph>Gợi ý thông tin mô tả</Paragraph>
-                <Paragraph>1/ Bạn cần làm project gì?</Paragraph>
-                <Paragraph>
-                  2/ Mô tả cụ thể yêu cầu cho project mà bạn cần làm
-                </Paragraph>
-                <Paragraph>
-                  3/ Thông tin về thời gian hoàn thành hoặc các thông tin khác
-                </Paragraph>
+              <Paragraph>Gợi ý thông tin mô tả</Paragraph>
+              <Paragraph>1/ Bạn cần làm project gì?</Paragraph>
+              <Paragraph>
+                2/ Mô tả cụ thể yêu cầu cho project mà bạn cần làm
+              </Paragraph>
+              <Paragraph>
+                3/ Thông tin về thời gian hoàn thành hoặc các thông tin khác
+              </Paragraph>
               <Form.Item
                 name="description"
                 label="Miêu tả"
@@ -268,7 +262,7 @@ export default function ProjectImportantInfo({
           <DocumentUploadInput name="contract" />
           <Paragraph>* Định dạng tệp được chấp nhận: .jpg, .png</Paragraph>
           <Paragraph>* Kích thước tệp phải nhỏ hơn 4M</Paragraph>
-          <Row className="mt-[5%]">
+          <Row>
             <Form.Item
               name="funding"
               label="Chọn loại ngân sách"
@@ -286,16 +280,7 @@ export default function ProjectImportantInfo({
           </Row>
 
           {renderContentBasedOnFundingType()}
-
-          <Row gutter={10} justify={"end"}>
-            <Form.Item wrapperCol={{ span: 5 }}>
-              <PrimaryButton htmlType="submit">Tiếp tục</PrimaryButton>
-            </Form.Item>
-            <Col span={4}>
-              <OutlineButton htmlType="submit">Quay lại</OutlineButton>
-            </Col>
-          </Row>
-        </Form>
+        </DefaultForm>
       </CustomCard>
     </>
   );

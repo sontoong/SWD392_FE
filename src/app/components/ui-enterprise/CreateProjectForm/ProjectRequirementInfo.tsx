@@ -2,12 +2,13 @@ import { Button, Col, Form, FormInstance, Row, Typography } from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import { FormInput } from "../../input/inputs";
-import { IconButton, OutlineButton, PrimaryButton } from "../../button/buttons";
+import { IconButton } from "../../button/buttons";
 import { FormSelect, SelectMultiple } from "../../select/select";
 import { language } from "../../../../constants/language";
 import { location } from "../../../../constants/location";
 import { skills } from "../../../../constants/skill";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import DefaultForm from "../../form/form";
 
 export default function ProjectRequirementInfo({
   form,
@@ -75,26 +76,19 @@ export default function ProjectRequirementInfo({
           </Title>
         }
       >
-        <Form
+        <DefaultForm
           form={form}
-          layout="vertical"
           name="ProjectRequirementInfo"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          initialValues={{
-            ...initialValues,
-          }}
+          initialValues={initialValues}
         >
           <Row>
             <Col span={10}>
               <Form.Item
                 name={["optionalRequirements", "minimumCompletedProjects"]}
                 label="Số lượng project Freelancer đã hoàn thành trên Wellancer"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+                rules={[{}]}
               >
                 <FormSelect options={Object.values(freelancerProjectAmount)} />
               </Form.Item>
@@ -105,11 +99,7 @@ export default function ProjectRequirementInfo({
               <Form.Item
                 name={["optionalRequirements", "rating"]}
                 label="Điểm chất lượng"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+                rules={[{}]}
               >
                 <FormSelect options={Object.values(freelancerRating)} />
               </Form.Item>
@@ -120,11 +110,7 @@ export default function ProjectRequirementInfo({
               <Form.Item
                 name={["optionalRequirements", "language"]}
                 label="Ngôn ngữ"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+                rules={[{}]}
               >
                 <FormSelect options={Object.values(language)} />
               </Form.Item>
@@ -133,11 +119,7 @@ export default function ProjectRequirementInfo({
               <Form.Item
                 name={["optionalRequirements", "location"]}
                 label="Địa điểm"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+                rules={[{}]}
               >
                 <FormSelect options={Object.values(location)} />
               </Form.Item>
@@ -151,6 +133,7 @@ export default function ProjectRequirementInfo({
                 rules={[
                   {
                     required: true,
+                    message: "Vui lòng chọn ngành nghề",
                   },
                 ]}
               >
@@ -222,16 +205,7 @@ export default function ProjectRequirementInfo({
               </Form.List>
             </Col>
           </Row>
-
-          <Row gutter={10} justify={"end"}>
-            <Form.Item wrapperCol={{ span: 5 }}>
-              <PrimaryButton htmlType="submit">Gửi ngay</PrimaryButton>
-            </Form.Item>
-            <Col span={4}>
-              <OutlineButton htmlType="submit">Quay lại</OutlineButton>
-            </Col>
-          </Row>
-        </Form>
+        </DefaultForm>
       </CustomCard>
     </>
   );

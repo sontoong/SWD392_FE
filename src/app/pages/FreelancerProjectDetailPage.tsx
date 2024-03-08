@@ -134,7 +134,7 @@ export default function FreelancerProjectDetail() {
           <Space direction="vertical" size={"large"}>
             <Row>
               <Col span={24}>
-                  <ApplyForm />
+                <ApplyForm project={data} />
               </Col>
             </Row>
             <Title level={3}>Khách hàng</Title>
@@ -194,12 +194,12 @@ export default function FreelancerProjectDetail() {
                 </Title>
               </Row>
               <Row>
-                  <Col>
-                    <Text className="font-normal">
-                      {data.freelancerCount} đã tuyển
-                    </Text>
-                  </Col>
-                </Row>
+                <Col>
+                  <Text className="font-normal">
+                    {data.freelancerCount} đã tuyển
+                  </Text>
+                </Col>
+              </Row>
             </div>
           </Space>
         </Sider>

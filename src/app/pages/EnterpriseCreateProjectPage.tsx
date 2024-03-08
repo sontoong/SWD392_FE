@@ -31,7 +31,6 @@ export default function CreateProject() {
   ];
 
   const next = () => {
-    form.submit();
     setCurrent(current + 1);
   };
 
@@ -61,14 +60,17 @@ export default function CreateProject() {
         <Form.Provider
           onFormFinish={(name, { values, forms }) => {
             const { mainForm } = forms;
+            if (name === "ProjectImportantInfo") {
+              mainForm.setFieldsValue({ ...values });
+              next();
+            }
             if (name === "ProjectDetailInfo") {
               mainForm.setFieldsValue({ ...values });
-            }
-            if (name === "EnterpriseEditGeneralInfo") {
-              // Do something...
+              next();
             }
             if (name === "ProjectRequirementInfo") {
-              // Do something...
+              mainForm.setFieldsValue({ ...values });
+              mainForm.submit();
             }
           }}
         >
@@ -76,12 +78,20 @@ export default function CreateProject() {
           <Form name="mainForm" onFinish={onFinish}>
             <div style={{ marginTop: 24 }}>
               {current < steps.length - 1 && (
-                <PrimaryButton type="primary" onClick={() => next()}>
+                <PrimaryButton
+                  onClick={() => {
+                    form.submit();
+                  }}
+                >
                   Tiếp tục
                 </PrimaryButton>
               )}
               {current === steps.length - 1 && (
-                <PrimaryButton type="primary" htmlType="submit">
+                <PrimaryButton
+                  onClick={() => {
+                    form.submit();
+                  }}
+                >
                   Gửi ngay
                 </PrimaryButton>
               )}

@@ -4,13 +4,16 @@ import React, { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Form, Typography } from "antd";
 import { Applicant } from "../../../models/applicant";
+import DefaultForm from "../../form/form";
 
-interface ApplicationAcceptFormProp{
-  record: Applicant
+interface ApplicationAcceptFormProp {
+  record: Applicant;
 }
 
-export default function ApplicationAcceptForm(props: ApplicationAcceptFormProp) {
-  const {record}= props
+export default function ApplicationAcceptForm(
+  props: ApplicationAcceptFormProp,
+) {
+  const { record } = props;
   const [open, setOpen] = useState(false);
   const { Title, Paragraph } = Typography;
   const [form] = Form.useForm();
@@ -45,25 +48,19 @@ export default function ApplicationAcceptForm(props: ApplicationAcceptFormProp) 
             });
         }}
       >
-        <Form
-          form={form}
-          layout="vertical"
-          name="ViewSignContract"
-          initialValues={record}
-        >
-        {record.question.map((qna, index) => (
+        <DefaultForm form={form} name="ViewSignContract" initialValues={record}>
+          {record.question.map((qna, index) => (
             <React.Fragment key={index}>
               <Title level={3}>{qna.question}</Title>
-                <Paragraph>{qna.answer}</Paragraph>
+              <Paragraph>{qna.answer}</Paragraph>
             </React.Fragment>
-        ))}
+          ))}
 
-        <Title level={3}>
-            Xem báo giá tại đây: 
-        </Title>
-        <Paragraph className="text-[#1890FF] underline">{record.file}</Paragraph>
-        
-        </Form>
+          <Title level={3}>Xem báo giá tại đây:</Title>
+          <Paragraph className="text-[#1890FF] underline">
+            {record.file}
+          </Paragraph>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );

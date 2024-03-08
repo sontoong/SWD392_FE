@@ -1,5 +1,5 @@
 import { Button, Divider, Select, Space } from "antd";
-import { Formik, Field, Form } from "formik";
+import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import { MyInput, MyInputPassword } from "../components/input/inputs";
 import MyCarousel from "../components/ui/carousel";
@@ -15,6 +15,7 @@ import {
 import { useImageFetcher } from "../hooks/useGetImg";
 import { GoogleLoginButton } from "../components/button/google-button";
 import { LeftOutlined } from "@ant-design/icons";
+import DefaultForm from "../components/form/form";
 
 export interface LoginFormValues {
   email: string;
@@ -95,7 +96,11 @@ function LoginPage() {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form className="clear-both flex flex-col items-center justify-center space-y-5">
+          <DefaultForm
+            name="LoginPage"
+            initialValues={{}}
+            className="clear-both flex flex-col items-center justify-center space-y-5"
+          >
             <section className="w-[70%] space-y-5 ">
               <div className="mb-12 ml-1 mt-[40%] ">
                 <h1 className="text-3xl">{languageText.title}</h1>
@@ -137,7 +142,7 @@ function LoginPage() {
                 Login Failed, Please try later!
               </article>
             )}
-          </Form>
+          </DefaultForm>
         </Formik>
         <Divider>hoặc</Divider>
         <div className="flex justify-center">

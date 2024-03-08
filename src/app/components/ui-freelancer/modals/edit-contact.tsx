@@ -6,6 +6,7 @@ import { CustomFormModal } from "../../modal/modal";
 import { UserDetail } from "../../../models/user";
 import { nations } from "../../../../constants/testData";
 import { FormSelect } from "../../select/select";
+import DefaultForm from "../../form/form";
 
 export default function EditContact() {
   const [open, setOpen] = useState(false);
@@ -18,7 +19,7 @@ export default function EditContact() {
     address: "abc abc",
     email: "a@gmail.com",
     phone: "0987654321",
-    nation: nations['us']
+    nation: nations["us"],
   };
 
   const handleSubmit = async (values: typeof initialValues) => {
@@ -51,9 +52,8 @@ export default function EditContact() {
             });
         }}
       >
-        <Form
+        <DefaultForm
           form={form}
-          layout="vertical"
           name="EditContact"
           initialValues={initialValues}
         >
@@ -104,7 +104,7 @@ export default function EditContact() {
               </Form.Item>
             </Col>
           </Row>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );

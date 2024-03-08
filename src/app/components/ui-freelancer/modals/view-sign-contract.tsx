@@ -5,18 +5,19 @@ import { CustomFormModal } from "../../modal/modal";
 import { Form, Typography } from "antd";
 import { FormInput } from "../../input/inputs";
 import { FreelancerProject } from "../../../models/project";
+import DefaultForm from "../../form/form";
 
-interface ViewSignContractProp{
-  record: FreelancerProject
+interface ViewSignContractProp {
+  record: FreelancerProject;
 }
 export default function ViewSignContract(props: ViewSignContractProp) {
-  const {record}= props
+  const { record } = props;
   const [open, setOpen] = useState(false);
   const { Title, Paragraph } = Typography;
   const [form] = Form.useForm();
 
   const isStatusWorkingOrStopped =
-  record?.status === "doing" || record?.status === "stopped";
+    record?.status === "doing" || record?.status === "stopped";
 
   const handleCancel = () => {
     setOpen(false);
@@ -48,12 +49,7 @@ export default function ViewSignContract(props: ViewSignContractProp) {
             });
         }}
       >
-        <Form
-          form={form}
-          layout="vertical"
-          name="ViewSignContract"
-          initialValues={record}
-        >
+        <DefaultForm form={form} name="ViewSignContract" initialValues={record}>
           <Title level={4}>Tải hợp đồng tại đây</Title>
           <Paragraph className="text-[#1890FF] underline">
             {record?.contract}
@@ -78,7 +74,7 @@ export default function ViewSignContract(props: ViewSignContractProp) {
               disabled={isStatusWorkingOrStopped}
             />
           </Form.Item>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );
