@@ -83,6 +83,11 @@ export const project: Project = {
   inviteSent: 6,
   inviteAccepted: 3,
   freelancerCount: 10,
+  contract:{
+    date: 1708532861,
+    depositType: "full",
+    fund: 0,
+  }
 };
 
 export const freelancer: FreelancerDetail = {
@@ -266,8 +271,9 @@ export const Applicants: Applicant[] = [
     projectId: "",
     name: "Nguyễn Văn A",
     date: 1708532861,
-    file: "",
-    question: [
+    money: 0,
+    time: 0,
+    questions: [
       {
         question: "Câu 1",
         answer:
@@ -290,8 +296,9 @@ export const Applicants: Applicant[] = [
     projectId: "",
     name: "Nguyễn Văn A",
     date: 1708532861,
-    file: "",
-    question: [
+    money: 0,
+    time: 0,
+    questions: [
       {
         question: "Câu 1",
         answer:

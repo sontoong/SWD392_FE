@@ -1,5 +1,5 @@
 import { Table, TableProps } from "antd";
-import { formatCurrency } from "../utils/utils";
+import { formatCurrency, formatUnixToLocal } from "../utils/utils";
 import { Transaction } from "../models/transaction";
 import { Transactions } from "../../constants/testData";
 import { generateTransactionType } from "../utils/generators";
@@ -9,17 +9,18 @@ export default function TransactionList(props:{role: string}) {
   interface TransactionTable extends Transaction{
     MoneyFormat: string;
     TypeFormat: string
+    DateFormat: string
   }
 
 const data: TransactionTable[] = Transactions.map((item)=>(
-  {...item, MoneyFormat:formatCurrency(item.moneyAmount), TypeFormat:generateTransactionType(item.type)}
+  {...item, MoneyFormat:formatCurrency(item.moneyAmount), TypeFormat:generateTransactionType(item.type), DateFormat:formatUnixToLocal(item.date)}
 ))
 
 const columns: TableProps<TransactionTable>["columns"] = [
     {
       title: "Ngày",
-      dataIndex: "date",
-      key: "date",
+      dataIndex: "DateFormat",
+      key: "DateFormat",
     },
     {
       title: "Loại",

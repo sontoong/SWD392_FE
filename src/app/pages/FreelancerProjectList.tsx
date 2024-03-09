@@ -7,16 +7,21 @@ import {
 } from "../utils/generators";
 import { FreelancerProjects } from "../../constants/testData";
 import { ViewSignContract } from "../components/ui-freelancer/modals/";
+import { formatUnixToLocal } from "../utils/utils";
 
 export interface TableData extends FreelancerProject {
   statusGenerator?: string;
   fundingTypeGenerator?: string;
   fundingGenerator?: string | { initialFunding: string };
+  startDateGenerator?: string;
+  enDateGenerator?: string;
 }
 
 export default function FreelancerProjectList() {
   const data: TableData[] = FreelancerProjects.map((project) => ({
     ...project,
+    startDateGenerator: formatUnixToLocal(project.startDate),
+    enDateGenerator: project.endDate ? formatUnixToLocal(project.endDate) : undefined,
     statusGenerator: generateFreelancerProjectStatus(project.status),
     fundingTypeGenerator: generateProjectFundingType(project.funding),
     fundingGenerator: generateProjectFunding(
@@ -34,13 +39,13 @@ export default function FreelancerProjectList() {
     },
     {
       title: "Ngày bắt đầu",
-      dataIndex: "startDate",
-      key: "startDate",
+      dataIndex: "startDateGenerator",
+      key: "startDateGenerator",
     },
     {
       title: "Ngày kết thúc",
-      dataIndex: "endDate",
-      key: "endDate",
+      dataIndex: "enDateGenerator",
+      key: "enDateGenerator",
     },
     {
       title: "Lương",

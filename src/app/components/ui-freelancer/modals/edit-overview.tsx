@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Col, Form, Row, Space } from "antd";
 import { EditButton } from "../../button/buttons";
-import { FormInput, FormRadioGroup, FormTextArea } from "../../input/inputs";
+import { FormInput, FormRadioButtonGroup, FormTextArea } from "../../input/inputs";
 import { CustomFormModal } from "../../modal/modal";
 import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
@@ -159,7 +159,7 @@ export default function EditContact() {
             />
           </Form.Item>
           <Form.Item name="experienceLevel" label="Cấp độ kinh nghiệm">
-            <FormRadioGroup options={experienceLevels} />
+            <FormRadioButtonGroup options={experienceLevels} />
           </Form.Item>
           <Form.Item
             name="description"

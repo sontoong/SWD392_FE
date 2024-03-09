@@ -2,11 +2,19 @@ import { Table, TableProps } from "antd";
 import { Applicants } from "../../../constants/testData";
 import { Applicant } from "../../models/applicant";
 import ApplicationAcceptForm from "./modals/ApplicationAcceptForm";
+import { formatUnixToLocal } from "../../utils/utils";
 
 
 export default function ProjectApplicationList() {
 
-const data: Applicant[] = Applicants
+interface ApplicantTable extends Applicant{
+
+  dateFormat: string;
+}
+
+const data: ApplicantTable[] = Applicants.map((applicant) => (
+  {...applicant, dateFormat:formatUnixToLocal(applicant.date) }
+))
 
 const columns: TableProps<Applicant>["columns"] = [
     {
@@ -16,8 +24,8 @@ const columns: TableProps<Applicant>["columns"] = [
     },
     {
       title: "Ngày",
-      dataIndex: "date",
-      key: "date",
+      dataIndex: "dateFormat",
+      key: "dateFormat",
     },
     {
         title: "Báo giá",

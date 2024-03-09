@@ -1,3 +1,4 @@
+
 export interface Question{
     question: string;
     answer: string;
@@ -8,8 +9,9 @@ export interface Applicant{
     projectId: string;
     name: string;
     date: number;
-    question: Question[];
-    file: string;
+    questions?: Question[];
+    money: number;
+    time: number;
 }
 
 export interface QuestionCreate{
