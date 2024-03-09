@@ -7,9 +7,13 @@ import { Col, Form, Row } from "antd";
 import { IdDocuments } from "../../../../constants/id-documents";
 import { DocumentUploadInput } from "../../input/upload-document-input";
 import { FormSelect } from "../../select/select";
-import { companyDetail, nations, projects } from "../../../../constants/testData";
-import dayjs from "dayjs";
+import {
+  companyDetail,
+  nations,
+  projects,
+} from "../../../../constants/testData";
 import { UploadImg } from "../../input/upload-img";
+import DefaultForm from "../../form/form";
 
 export default function EnterpriseModalEditGeneralInfo() {
   const [open, setOpen] = useState(false);
@@ -25,7 +29,7 @@ export default function EnterpriseModalEditGeneralInfo() {
   };
 
   const initialValues: EnterpriseInfo = {
-    id:"1",
+    id: "1",
     firstName: "Nguyễn",
     middleName: "Văn",
     lastName: "A",
@@ -38,7 +42,7 @@ export default function EnterpriseModalEditGeneralInfo() {
     enterprisePhone: "33333333333333",
     companyDetail: companyDetail,
     projectList: projects,
-    currentHiringProject: 3
+    currentHiringProject: 3,
   };
 
   return (
@@ -62,14 +66,10 @@ export default function EnterpriseModalEditGeneralInfo() {
             });
         }}
       >
-        <Form
+        <DefaultForm
           form={form}
-          layout="vertical"
           name="EnterpriseEditGeneralInfo"
-          initialValues={{
-            ...initialValues,
-            dateOfBirth: dayjs(initialValues.dateOfBirth * 1000),
-          }}
+          initialValues={initialValues}
         >
           <UploadImg listType="picture-circle" maxCount={1} />
           <Row>
@@ -208,7 +208,7 @@ export default function EnterpriseModalEditGeneralInfo() {
               </Form.Item>
             </Col>
           </Row>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );

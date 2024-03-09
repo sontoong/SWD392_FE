@@ -8,8 +8,10 @@ import {
   InputNumberTimeFix,
 } from "../../input/inputs";
 import { Applicant } from "../../../models/applicant";
+import { Project } from "../../../models/project";
+import DefaultForm from "../../form/form";
 
-export default function ApplyForm() {
+export default function ApplyForm({ project }: { project: Project }) {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const { Title } = Typography;
@@ -21,21 +23,13 @@ export default function ApplyForm() {
     money: 0,
     time: 0,
     projectId: "",
-    questions: [
-      {
-        question: "Câu 1",
-        answer: "",
-      },
-      {
-        question: "Câu 2",
-        answer: "",
-      },
-      {
-        question: "Câu 3",
-        answer: "",
-      },
-    ],
+    questions: project.optionalRequirements.questions?.map((question)=> ({
+      question: question,
+      answer: "",
+    })),
   };
+
+  console.log(initialValues)
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
@@ -67,16 +61,11 @@ export default function ApplyForm() {
             });
         }}
       >
-        <Form
-          form={form}
-          layout="vertical"
-          name="ApplyForm"
-          initialValues={initialValues}
-        >
-          <Form.List name={["questions"]}>
+        <DefaultForm form={form} name="ApplyForm" initialValues={initialValues}>
+          <Form.List name={"questions"}>
             {(fields) => (
               <>
-                {fields.map(({ key, name, ...restField }, index) => (
+                {fields.map(({ key, name, ...restField }) => (
                   <Row
                     key={key}
                     style={{
@@ -85,12 +74,13 @@ export default function ApplyForm() {
                     }}
                   >
                     <Col span={18}>
-                      <Form.Item>
-                        <Title level={5}>
-                          {initialValues.questions[index].question}
-                        </Title>
-                        {/* <FormInput/> */}
-                      </Form.Item>
+                      <Title level={5}>
+                        {form.getFieldValue([
+                          "questions",
+                          "question",
+                          name
+                        ])}
+                      </Title>
                       <Form.Item
                         {...restField}
                         name={[name, "answer"]}
@@ -139,7 +129,7 @@ export default function ApplyForm() {
               <InputNumberTimeFix />
             </Form.Item>
           </Row>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );

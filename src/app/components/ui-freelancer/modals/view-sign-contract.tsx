@@ -5,6 +5,7 @@ import { CustomFormModal } from "../../modal/modal";
 import { Col, Form, Row, Space, Typography } from "antd";
 import { FormInput } from "../../input/inputs";
 import { FreelancerProject } from "../../../models/project";
+import DefaultForm from "../../form/form";
 import { generateDepositType } from "../../../utils/generators";
 import { formatUnixToLocal } from "../../../utils/utils";
 
@@ -18,6 +19,7 @@ export default function ViewSignContract(props: ViewSignContractProp) {
   const [form] = Form.useForm();
 
   const isStatusWorkingOrStopped =
+    record?.status === "doing" || record?.status === "stopped";
     record?.status === "doing" || record?.status === "stopped";
 
   const handleCancel = () => {
@@ -50,12 +52,7 @@ export default function ViewSignContract(props: ViewSignContractProp) {
             });
         }}
       >
-        <Form
-          form={form}
-          layout="vertical"
-          name="ViewSignContract"
-          initialValues={record}
-        >
+        <DefaultForm form={form} name="ViewSignContract" initialValues={record}>
           <Title level={4}>Hợp đồng</Title>
           <Space size="large" direction="vertical">
             <Row>
@@ -102,7 +99,7 @@ export default function ViewSignContract(props: ViewSignContractProp) {
               </Form.Item>
             </Row>
           </Space>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );

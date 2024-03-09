@@ -1,7 +1,7 @@
 import { TreeSelectProps } from "antd";
 import { ArrayElement } from "../app/utils/helpers";
 
-export const projectField: Record<
+export const projectFields: Record<
   string,
   ArrayElement<TreeSelectProps["treeData"]>
 > = {

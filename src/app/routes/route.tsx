@@ -9,6 +9,9 @@ const Layout2 = lazy(() => import("../components/layout/admin-layout"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const SignupPage = lazy(() => import("../pages/SignupPage"));
 const HomePage = lazy(() => import("../pages/HomePage"));
+const FreelancerProjectDetailPage = lazy(
+  () => import("../pages/FreelancerProjectDetailPage"),
+);
 
 //freelancer
 const FreelancerDetailPage = lazy(
@@ -24,6 +27,9 @@ const EnterpriseDetailPage = lazy(
 );
 const EnterpriseCreateProjectPage = lazy(
   () => import("../pages/EnterpriseCreateProjectPage"),
+);
+const EnterpriseProjectListPage = lazy(
+  () => import("../pages/EnterpriseProjectListpage"),
 );
 
 //both
@@ -99,6 +105,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "projects/:projectId",
+        element: (
+          <Suspense fallback={<></>}>
+            <FreelancerProjectDetailPage />
+          </Suspense>
+        ),
+      },
+      {
         path: "fd",
         element: (
           <PrivateRoute inverted={false} requiredRoles={[ROLE.FREELANCER]}>
@@ -152,7 +166,7 @@ export const router = createBrowserRouter([
             path: "projects",
             element: (
               <Suspense fallback={<></>}>
-                <Template />
+                <EnterpriseProjectListPage />
               </Suspense>
             ),
           },

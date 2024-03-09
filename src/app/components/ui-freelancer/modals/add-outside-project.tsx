@@ -7,6 +7,7 @@ import { FormInput } from "../../input/inputs";
 import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import { OutsideProject } from "../../../models/project";
+import DefaultForm from "../../form/form";
 
 interface AddOutsideProject {
   project?: OutsideProject;
@@ -57,9 +58,8 @@ export default function AddOutsideProject(props: AddOutsideProject) {
             });
         }}
       >
-        <Form
+        <DefaultForm
           form={form}
-          layout="vertical"
           name="EditContact"
           initialValues={initialValues}
         >
@@ -110,7 +110,7 @@ export default function AddOutsideProject(props: AddOutsideProject) {
               </Form.Item>
             </Col>
           </Row>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Form, Typography } from "antd";
 import { Applicant } from "../../../models/applicant";
+import DefaultForm from "../../form/form";
 
 interface ApplicationAcceptFormProp {
   record: Applicant;
@@ -47,19 +48,14 @@ export default function ApplicationAcceptForm(
             });
         }}
       >
-        <Form
-          form={form}
-          layout="vertical"
-          name="ViewSignContract"
-          initialValues={record}
-        >
-          {record.questions.map((qna, index) => (
+        <DefaultForm form={form} name="ViewSignContract" initialValues={record}>
+            {record.questions.map((qna, index) => (
             <React.Fragment key={index}>
               <Title level={3}>{qna.question}</Title>
               <Paragraph>{qna.answer}</Paragraph>
+              <Paragraph>{qna.answer}</Paragraph>
             </React.Fragment>
           ))}
-
           <Title level={3}>Báo giá:</Title>
           <Paragraph>
             {record.money}VND
@@ -68,8 +64,9 @@ export default function ApplicationAcceptForm(
           <Paragraph>
             {record.time} giờ
           </Paragraph>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );
 }
+

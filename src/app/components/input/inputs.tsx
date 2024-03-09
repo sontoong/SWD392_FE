@@ -21,6 +21,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { TextAreaProps } from "antd/es/input";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { RequiredFields } from "../../utils/helpers";
+import dayjs from "dayjs";
 
 const { TextArea } = Input;
 export interface MyInputProps {
@@ -287,8 +288,10 @@ function FormTextArea(props: RequiredFields<TextAreaProps, "maxLength">) {
 }
 
 function FormDatePicker(props: DatePickerProps) {
+  let {value} = props;
+  if(value && typeof value === 'number') value = dayjs(value * 1000)
   const dateFormat = "DD/MM/YYYY";
-  return <DatePicker {...props} format={dateFormat} allowClear={false} />;
+  return <DatePicker {...props} format={dateFormat} allowClear={false} value={value}/>;
 }
 
 interface FormRadioGroupProps extends Omit<RadioGroupProps, "options"> {

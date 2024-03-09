@@ -7,6 +7,7 @@ import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import UploadProfilePicture from "../upload/profile-picture";
 import { FreelancerDetail } from "../../../models/user";
+import DefaultForm from "../../form/form";
 
 export default function EditContact() {
   const [open, setOpen] = useState(false);
@@ -71,9 +72,8 @@ export default function EditContact() {
             });
         }}
       >
-        <Form
+        <DefaultForm
           form={form}
-          layout="vertical"
           name="EditOverview"
           initialValues={initialValues}
         >
@@ -168,7 +168,7 @@ export default function EditContact() {
           >
             <FormTextArea maxLength={180} />
           </Form.Item>
-        </Form>
+        </DefaultForm>
       </CustomFormModal>
     </>
   );

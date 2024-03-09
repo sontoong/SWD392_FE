@@ -9,7 +9,7 @@ export interface Applicant{
     projectId: string;
     name: string;
     date: number;
-    questions: Question[];
+    questions?: Question[];
     money: number;
     time: number;
 }

@@ -1,13 +1,23 @@
-import { CheckboxOptionType, Col, Form, Row, Typography } from "antd";
+import {
+  CheckboxOptionType,
+  Col,
+  Form,
+  FormInstance,
+  Row,
+  Typography,
+} from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import { FormRadioButtonGroup } from "../../input/inputs";
-import { OutlineButton, PrimaryButton } from "../../button/buttons";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
+import DefaultForm from "../../form/form";
 
-export default function ProjectDetailInfo() {
+export default function ProjectDetailInfo({
+  form,
+}: {
+  form: FormInstance<any>;
+}) {
   const { Title } = Typography;
-  const [form] = Form.useForm();
 
   const initialValues: CreateProject = {
     title: "",
@@ -68,17 +78,14 @@ export default function ProjectDetailInfo() {
           </Title>
         }
       >
-        <Form
+        <DefaultForm
           form={form}
-          layout="vertical"
           name="ProjectDetailInfo"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          initialValues={{
-            ...initialValues,
-          }}
+          initialValues={initialValues}
         >
-          <Row className="mt-[5%]">
+          <Row>
             <Col span={24}>
               <Form.Item
                 name="privacy"
@@ -93,7 +100,7 @@ export default function ProjectDetailInfo() {
               </Form.Item>
             </Col>
           </Row>
-          <Row className="mt-[5%]">
+          <Row>
             <Col span={24}>
               <Form.Item
                 name="projectType"
@@ -108,16 +115,7 @@ export default function ProjectDetailInfo() {
               </Form.Item>
             </Col>
           </Row>
-
-          <Row gutter={10} justify={"end"}>
-            <Form.Item wrapperCol={{ span: 5 }}>
-              <PrimaryButton htmlType="submit">Tiếp tục</PrimaryButton>
-            </Form.Item>
-            <Col span={4}>
-              <OutlineButton htmlType="submit">Quay lại</OutlineButton>
-            </Col>
-          </Row>
-        </Form>
+        </DefaultForm>
       </CustomCard>
     </>
   );

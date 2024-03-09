@@ -2,7 +2,6 @@ import {
   ConfigProvider,
   Select,
   SelectProps,
-  TreeProps,
   TreeSelect,
   TreeSelectProps,
 } from "antd";
@@ -11,8 +10,13 @@ export function FormSelect(props: SelectProps) {
   return <Select style={{ height: "42px" }} {...props} />;
 }
 
-export function FormTreeSelect(props: TreeProps) {
-  const { treeData } = props;
+interface FormTreeSelectProps {
+  treeData: TreeSelectProps["treeData"];
+}
+
+export function FormTreeSelect(props: FormTreeSelectProps) {
+  //form also pass value and id besides treeData
+  const { treeData, ...rest } = props;
 
   const addDisabledField = (
     data: TreeSelectProps["treeData"],
@@ -43,7 +47,8 @@ export function FormTreeSelect(props: TreeProps) {
         style={{ width: "100%", height: "42px" }}
         dropdownStyle={{ maxHeight: 400, overflow: "auto", cursor: "default" }}
         placeholder="Please select"
-        treeData={addDisabledField(treeData as TreeSelectProps["treeData"])}
+        treeData={addDisabledField(treeData)}
+        {...rest}
       />
     </ConfigProvider>
   );
