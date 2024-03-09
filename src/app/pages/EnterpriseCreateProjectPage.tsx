@@ -61,14 +61,17 @@ export default function CreateProject() {
           onFormFinish={(name, { values, forms }) => {
             const { mainForm } = forms;
             if (name === "ProjectImportantInfo") {
+              console.log(values);
               mainForm.setFieldsValue({ ...values });
               next();
             }
             if (name === "ProjectDetailInfo") {
+              console.log(values);
               mainForm.setFieldsValue({ ...values });
               next();
             }
             if (name === "ProjectRequirementInfo") {
+              console.log(values);
               mainForm.setFieldsValue({ ...values });
               mainForm.submit();
             }

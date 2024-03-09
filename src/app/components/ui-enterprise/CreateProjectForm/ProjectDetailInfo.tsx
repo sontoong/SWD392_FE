@@ -86,11 +86,7 @@ export default function ProjectDetailInfo({
               <Form.Item
                 name="privacy"
                 label="Ai có thể xem project này?"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+                rules={[{}]}
               >
                 <FormRadioGroup options={projectPrivacy} />
               </Form.Item>
@@ -101,11 +97,7 @@ export default function ProjectDetailInfo({
               <Form.Item
                 name="projectType"
                 label="Chọn loại hình project"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+                rules={[{}]}
               >
                 <FormRadioGroup options={projectType} />
               </Form.Item>
