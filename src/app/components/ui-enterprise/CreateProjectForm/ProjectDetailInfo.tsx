@@ -1,7 +1,7 @@
 import { CheckboxOptionType, Col, Form, Row, Typography } from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
-import { FormRadioButtonGroup, FormRadioGroup } from "../../input/inputs";
+import { FormRadioButtonGroup } from "../../input/inputs";
 import { OutlineButton, PrimaryButton } from "../../button/buttons";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 
