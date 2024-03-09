@@ -4,22 +4,7 @@
 //   time: string;
 // };
 
-import { QuestionCreate } from "./applicant";
-
 export type ExperienceLevel = "junior" | "senior" | "expert";
-
-export type OptionalRequirementsCreate = {
-  minimumCompletedProjects:
-    | "all"
-    | "<3 projects"
-    | "5-10 projects"
-    | ">10 projects";
-  rating: "all" | ">3 stars" | ">4 stars";
-  location: "all" | "hcm";
-  language: "all" | "en" | "vn" | "cn";
-  skills: Skill[];
-  questions?: QuestionCreate[];
-};
 
 export type OptionalRequirements = {
   minimumCompletedProjects:
@@ -50,10 +35,10 @@ export type Field = {
   value: string;
 };
 
-export interface Contract{
+export interface Contract {
   fund: number;
   depositType: "full" | "period ";
-  date: number
+  date: number;
 }
 
 export interface Project {
@@ -99,7 +84,7 @@ export interface CreateProject {
   isCompleted: boolean;
   privacy: "public" | "private" | "freelancer";
   projectType: "longterm" | "shortterm" | "unknown";
-  optionalRequirements: OptionalRequirementsCreate;
+  optionalRequirements: OptionalRequirements;
 }
 
 export interface FreelancerProject extends Project {

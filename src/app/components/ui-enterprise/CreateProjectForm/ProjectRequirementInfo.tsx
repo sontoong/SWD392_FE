@@ -12,49 +12,12 @@ import DefaultForm from "../../form/form";
 
 export default function ProjectRequirementInfo({
   form,
+  initialValues,
 }: {
   form: FormInstance<any>;
+  initialValues: CreateProject;
 }) {
   const { Title } = Typography;
-
-  const initialValues: CreateProject = {
-    title: "",
-    language: "vn",
-    projectField: "",
-    description: "",
-    contract: {
-      date: 1708532861,
-      fund: 0,
-      depositType: "full"
-    },
-    funding: "fixed",
-    initialFunding: 0,
-    freelancerRequirement: "junior",
-    timeToComplete: 1,
-    publishTime: 0,
-    createdBy: "",
-    applicantCount: 0,
-    paidAmount: 0,
-    isCompleted: false,
-    privacy: "public",
-    projectType: "unknown",
-    optionalRequirements: {
-      language: "all",
-      location: "all",
-      minimumCompletedProjects: "all",
-      rating: "all",
-      skills: [
-        { label: "Front-end Developer", value: "Front-end Developer" },
-        { label: "Back-end Developer", value: "Back-end Developer" },
-        { label: "Full-stack Developer", value: "Full-stack Developer" },
-      ],
-      questions: [
-        {
-          question: "",
-        },
-      ],
-    },
-  };
 
   const onFinish = (values: any) => {
     console.log("Success:", values);
@@ -123,7 +86,6 @@ export default function ProjectRequirementInfo({
               <Form.Item
                 name={["optionalRequirements", "location"]}
                 label="Địa điểm"
-                rules={[{}]}
               >
                 <FormSelect options={Object.values(location)} />
               </Form.Item>
@@ -173,16 +135,17 @@ export default function ProjectRequirementInfo({
                         <Col span={18}>
                           <Form.Item
                             {...restField}
-                            name={[name, "question"]}
+                            name={[name]}
                             rules={[
                               {
                                 required: true,
                                 type: "string",
                                 message: "Vui lòng nhập câu hỏi",
+                                whitespace: true,
                               },
                             ]}
                           >
-                            <FormInput />
+                            <FormInput maxLength={100} />
                           </Form.Item>
                         </Col>
                         <Col span={6}>
@@ -193,17 +156,19 @@ export default function ProjectRequirementInfo({
                         </Col>
                       </Row>
                     ))}
-                    <Form.Item>
-                      <Button
-                        type="dashed"
-                        onClick={() => add()}
-                        block
-                        icon={<PlusOutlined />}
-                        disabled={fields.length >= 5}
-                      >
-                        Thêm câu hỏi
-                      </Button>
-                    </Form.Item>
+                    <Col span={18}>
+                      <Form.Item>
+                        <Button
+                          type="dashed"
+                          onClick={() => add()}
+                          block
+                          icon={<PlusOutlined />}
+                          disabled={fields.length >= 5}
+                        >
+                          Thêm câu hỏi
+                        </Button>
+                      </Form.Item>
+                    </Col>
                   </>
                 )}
               </Form.List>

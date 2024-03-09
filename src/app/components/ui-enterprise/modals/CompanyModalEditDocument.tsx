@@ -158,6 +158,7 @@ export default function CompanyModalEditDocument() {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >

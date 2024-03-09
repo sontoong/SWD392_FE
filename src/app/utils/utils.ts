@@ -56,7 +56,7 @@ export const formatToTimeDifference = (
 
 export const calculateDateToNow = (time: number, locale: string = "vi-VN") => {
   //exclude the milisecond from Date
-  const today = Math.floor(Date.now() / 1000);
+  const today = Math.floor(Date.now());
 
   const timeDifference = today - time;
   return formatToTimeDifference(timeDifference, locale);

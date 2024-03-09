@@ -49,7 +49,7 @@ export default function ApplicationAcceptForm(
         }}
       >
         <DefaultForm form={form} name="ViewSignContract" initialValues={record}>
-            {record.questions.map((qna, index) => (
+          {record.questions?.map((qna, index) => (
             <React.Fragment key={index}>
               <Title level={3}>{qna.question}</Title>
               <Paragraph>{qna.answer}</Paragraph>
@@ -57,16 +57,11 @@ export default function ApplicationAcceptForm(
             </React.Fragment>
           ))}
           <Title level={3}>Báo giá:</Title>
-          <Paragraph>
-            {record.money}VND
-          </Paragraph>
+          <Paragraph>{record.money}VND</Paragraph>
           <Title level={3}>Thời gian ước tính:</Title>
-          <Paragraph>
-            {record.time} giờ
-          </Paragraph>
+          <Paragraph>{record.time} giờ</Paragraph>
         </DefaultForm>
       </CustomFormModal>
     </>
   );
 }
-

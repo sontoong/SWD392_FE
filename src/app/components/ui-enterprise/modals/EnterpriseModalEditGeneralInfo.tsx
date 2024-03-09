@@ -33,7 +33,7 @@ export default function EnterpriseModalEditGeneralInfo() {
     firstName: "Nguyễn",
     middleName: "Văn",
     lastName: "A",
-    dateOfBirth: 1708532861,
+    dateOfBirth: 1708532861000,
     enterpriseCountry: { label: "Việt Nam", value: "vn" },
     documentType: "Hộ chiếu",
     enterpriseDocument: "FunnyMemeFrom9GAG.png",
@@ -81,6 +81,7 @@ export default function EnterpriseModalEditGeneralInfo() {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >
@@ -95,6 +96,7 @@ export default function EnterpriseModalEditGeneralInfo() {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >
@@ -109,6 +111,7 @@ export default function EnterpriseModalEditGeneralInfo() {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >
@@ -201,6 +204,7 @@ export default function EnterpriseModalEditGeneralInfo() {
                     type: "string",
                     required: true,
                     len: 11,
+                    whitespace: true,
                   },
                 ]}
               >

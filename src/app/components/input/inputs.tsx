@@ -242,11 +242,8 @@ function InputNumberFix(props: InputNumberProps) {
   return (
     <InputNumber
       {...props}
-      formatter={(value) => {
-        return `${value} VND`;
-      }}
-      parser={(value) => value!.replace("VND", "")}
       className="w-full rounded-[6px] border-[1px] border-[#d9d9d9]"
+      min={0}
     />
   );
 }
@@ -288,10 +285,9 @@ function FormTextArea(props: RequiredFields<TextAreaProps, "maxLength">) {
 }
 
 function FormDatePicker(props: DatePickerProps) {
-  let {value} = props;
-  if(value && typeof value === 'number') value = dayjs(value * 1000)
-  const dateFormat = "DD/MM/YYYY";
-  return <DatePicker {...props} format={dateFormat} allowClear={false} value={value}/>;
+  let { value } = props;
+  if (value && typeof value === "number") value = dayjs(value);
+  return <DatePicker {...props} allowClear={false} value={value} />;
 }
 
 interface FormRadioGroupProps extends Omit<RadioGroupProps, "options"> {
@@ -324,13 +320,10 @@ function FormRadioGroup(props: FormRadioGroupProps) {
   const { options, ...rest } = props;
 
   return (
-    <Radio.Group {...rest} >
+    <Radio.Group {...rest}>
       <Space direction="vertical">
         {options?.map((option, index) => (
-          <Radio
-            key={index}
-            value={option.value}
-          >
+          <Radio key={index} value={option.value}>
             {option.label}
           </Radio>
         ))}
@@ -392,5 +385,5 @@ export {
   InputPasswordFix,
   InputNumberFix,
   FormRadioButtonGroup,
-  InputNumberTimeFix
+  InputNumberTimeFix,
 };

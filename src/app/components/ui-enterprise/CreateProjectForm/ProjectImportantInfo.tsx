@@ -1,4 +1,12 @@
-import { CheckboxOptionType, Col, Divider, Form, FormInstance, Row, Space, Typography } from "antd";
+import {
+  CheckboxOptionType,
+  Col,
+  Divider,
+  Form,
+  FormInstance,
+  Row,
+  Typography,
+} from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import {
@@ -19,8 +27,10 @@ import DefaultForm from "../../form/form";
 
 export default function ProjectImportantInfo({
   form,
+  initialValues,
 }: {
   form: FormInstance<any>;
+  initialValues: CreateProject;
 }) {
   const { Title, Paragraph } = Typography;
   const fundValue = Form.useWatch(["contract", "fund"], form);
@@ -28,52 +38,25 @@ export default function ProjectImportantInfo({
   const ContractDepositOptions: CheckboxOptionType<CheckboxValueType>[] = [
     {
       label: `Đặt cọc ${fundValue}VND cho toàn bộ công việc`,
-      value: "full"
+      value: "full",
     },
     {
       label: "Đặt cọc theo từng hạng mục công việc",
-      value: "period"
+      value: "period",
     },
-  ]
-
-  const initialValues: CreateProject = {
-    title: "",
-    language: "vn",
-    projectField: "",
-    description: "",
-    contract: {
-      date: 1708532861,
-      fund: 0,
-      depositType: "full"
-    },
-    funding: "hourly",
-    initialFunding: 0,
-    freelancerRequirement: "junior",
-    timeToComplete: 1,
-    publishTime: 0,
-    createdBy: "",
-    applicantCount: 0,
-    paidAmount: 0,
-    isCompleted: false,
-    privacy: "public",
-    projectType: "unknown",
-    optionalRequirements: {
-      language: "all",
-      location: "all",
-      minimumCompletedProjects: "all",
-      rating: "all",
-      skills: [
-        { label: "Front-end Developer", value: "Front-end Developer" },
-        { label: "Back-end Developer", value: "Back-end Developer" },
-        { label: "Full-stack Developer", value: "Full-stack Developer" },
-      ],
-      questions: [],
-    },
-  };
+  ];
 
   const [renderFunding, setRenderFunding] = useState<string>(
     initialValues.funding,
   );
+
+  const onFinish = (values: any) => {
+    console.log("Success:", values);
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
 
   const renderContentBasedOnFundingType = () => {
     switch (renderFunding) {
@@ -84,24 +67,16 @@ export default function ProjectImportantInfo({
               <Form.Item
                 name="freelancerRequirement"
                 label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
               >
-                <FormRadioButtonGroup options={projectFreelancerRequirementHourly} />
+                <FormRadioButtonGroup
+                  options={projectFreelancerRequirementHourly}
+                />
               </Form.Item>
             </Row>
             <Row>
               <Form.Item
                 name="timeToComplete"
                 label="Project của bạn dự kiến kéo dài bao lâu?"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
               >
                 <FormRadioButtonGroup options={ProjectTimeToComplete} />
               </Form.Item>
@@ -124,7 +99,7 @@ export default function ProjectImportantInfo({
                     },
                   ]}
                 >
-                  <InputNumberFix />
+                  <InputNumberFix suffix={"VND"} step={1000} />
                 </Form.Item>
               </Col>
             </Row>
@@ -132,13 +107,10 @@ export default function ProjectImportantInfo({
               <Form.Item
                 name="freelancerRequirement"
                 label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
               >
-                <FormRadioButtonGroup options={projectFreelancerRequirementFixed} />
+                <FormRadioButtonGroup
+                  options={projectFreelancerRequirementFixed}
+                />
               </Form.Item>
             </Row>
           </>
@@ -146,14 +118,6 @@ export default function ProjectImportantInfo({
       default:
         return null;
     }
-  };
-
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -188,6 +152,7 @@ export default function ProjectImportantInfo({
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >
@@ -206,10 +171,7 @@ export default function ProjectImportantInfo({
                   },
                 ]}
               >
-                <FormSelect
-                  onChange={() => {}}
-                  options={Object.values(language)}
-                />
+                <FormSelect options={Object.values(language)} />
               </Form.Item>
             </Col>
             <Col span={10} offset={4}>
@@ -222,10 +184,7 @@ export default function ProjectImportantInfo({
                   },
                 ]}
               >
-                <FormSelect
-                  onChange={() => {}}
-                  options={Object.values(location)}
-                />
+                <FormSelect options={Object.values(location)} />
               </Form.Item>
             </Col>
           </Row>
@@ -261,6 +220,7 @@ export default function ProjectImportantInfo({
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >
@@ -268,71 +228,58 @@ export default function ProjectImportantInfo({
               </Form.Item>
             </Col>
           </Row>
-          <Divider/>
+          <Divider />
           <Title level={3}>Hợp đồng</Title>
-          <Space size="large" direction="vertical">
-            <Row>
-                <Col span={15}>
-                  <Form.Item
-                    name={["contract", "fund"]}
-                    label="Tổng ngân sách"
-                    rules={[
-                      {
-                        type: "number",
-                        min: 1000,
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <InputNumberFix />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Row>
-              <Col>
-                <Form.Item
-                  name={["contract", "depositType"]}
-                  label="Chọn loại ngân sách"
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <FormRadioGroup
-                    options={ContractDepositOptions}
-                  />
-                </Form.Item>
-              </Col>
-              </Row>
-            <Row>
-                <Col span={15}>
-                  <Form.Item
-                    name={["contract", "date"]}
-                    label="Ngày hoàn thành"
-                    rules={[
-                      {
-                        type: "number",
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <FormDatePicker/>
-                  </Form.Item>
-                </Col>
-              </Row>
-          </Space>
-          <Divider/>
-          <Row className="mt-[5%]">
-            <Form.Item
-              name="funding"
-              label="Chọn loại ngân sách"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
+          <Row>
+            <Col span={7}>
+              <Form.Item
+                name={["contract", "fund"]}
+                label="Tổng ngân sách"
+                rules={[
+                  {
+                    type: "number",
+                    min: 1000,
+                    required: true,
+                  },
+                ]}
+              >
+                <InputNumberFix suffix={"VND"} step={1000} />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Item
+                name={["contract", "depositType"]}
+                label="Chọn loại ngân sách"
+                rules={[{}]}
+              >
+                <FormRadioGroup options={ContractDepositOptions} />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={15}>
+              <Form.Item
+                name={["contract", "date"]}
+                label="Ngày hoàn thành"
+                rules={[
+                  {
+                    type: "number",
+                    min: 1,
+                    required: true,
+                    message: "Vui lòng chọn ngày hoàn thành",
+                  },
+                ]}
+                getValueFromEvent={(e: any) => e?.valueOf()}
+              >
+                <FormDatePicker />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Divider />
+          <Row>
+            <Form.Item name="funding" label="Chọn loại ngân sách" rules={[{}]}>
               <FormRadioButtonGroup
                 options={ProjectFundingTypes}
                 onChange={(e) => setRenderFunding(e.target.value)}
@@ -346,8 +293,6 @@ export default function ProjectImportantInfo({
     </>
   );
 }
-
-
 
 const ProjectFundingTypes: CheckboxOptionType<CheckboxValueType>[] = [
   {

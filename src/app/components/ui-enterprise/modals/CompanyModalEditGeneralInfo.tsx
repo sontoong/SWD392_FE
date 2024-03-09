@@ -82,6 +82,7 @@ export default function CompanyModalEditGeneralInfo() {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >
@@ -96,6 +97,7 @@ export default function CompanyModalEditGeneralInfo() {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >
@@ -116,6 +118,7 @@ export default function CompanyModalEditGeneralInfo() {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >
@@ -132,6 +135,7 @@ export default function CompanyModalEditGeneralInfo() {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >
@@ -148,6 +152,7 @@ export default function CompanyModalEditGeneralInfo() {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >

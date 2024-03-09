@@ -20,7 +20,7 @@ export default function ViewSignContract(props: ViewSignContractProp) {
 
   const isStatusWorkingOrStopped =
     record?.status === "doing" || record?.status === "stopped";
-    record?.status === "doing" || record?.status === "stopped";
+  record?.status === "doing" || record?.status === "stopped";
 
   const handleCancel = () => {
     setOpen(false);
@@ -89,6 +89,7 @@ export default function ViewSignContract(props: ViewSignContractProp) {
                   {
                     type: "string",
                     required: true,
+                    whitespace: true,
                   },
                 ]}
               >

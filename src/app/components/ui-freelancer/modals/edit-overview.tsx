@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Col, Form, Row, Space } from "antd";
 import { EditButton } from "../../button/buttons";
-import { FormInput, FormRadioButtonGroup, FormTextArea } from "../../input/inputs";
+import {
+  FormInput,
+  FormRadioButtonGroup,
+  FormTextArea,
+} from "../../input/inputs";
 import { CustomFormModal } from "../../modal/modal";
 import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
@@ -96,6 +100,7 @@ export default function EditContact() {
                 {
                   required: true,
                   type: "string",
+                  whitespace: true,
                 },
               ]}
             >
@@ -108,6 +113,7 @@ export default function EditContact() {
                 {
                   required: true,
                   type: "string",
+                  whitespace: true,
                 },
               ]}
             >
@@ -120,6 +126,7 @@ export default function EditContact() {
                 {
                   required: true,
                   type: "string",
+                  whitespace: true,
                 },
               ]}
             >
@@ -131,7 +138,7 @@ export default function EditContact() {
               <Form.Item
                 name="jobRole"
                 label="Chức danh"
-                rules={[{ required: true, type: "string" }]}
+                rules={[{ required: true, type: "string", whitespace: true }]}
               >
                 <FormInput />
               </Form.Item>
@@ -164,7 +171,9 @@ export default function EditContact() {
           <Form.Item
             name="description"
             label="Miêu tả"
-            rules={[{ required: true, type: "string", max: 180 }]}
+            rules={[
+              { required: true, type: "string", max: 180, whitespace: true },
+            ]}
           >
             <FormTextArea maxLength={180} />
           </Form.Item>

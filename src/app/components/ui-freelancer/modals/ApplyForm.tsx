@@ -23,13 +23,13 @@ export default function ApplyForm({ project }: { project: Project }) {
     money: 0,
     time: 0,
     projectId: "",
-    questions: project.optionalRequirements.questions?.map((question)=> ({
+    questions: project.optionalRequirements.questions?.map((question) => ({
       question: question,
       answer: "",
     })),
   };
 
-  console.log(initialValues)
+  console.log(initialValues);
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
@@ -75,11 +75,7 @@ export default function ApplyForm({ project }: { project: Project }) {
                   >
                     <Col span={18}>
                       <Title level={5}>
-                        {form.getFieldValue([
-                          "questions",
-                          "question",
-                          name
-                        ])}
+                        {form.getFieldValue(["questions", "question", name])}
                       </Title>
                       <Form.Item
                         {...restField}
@@ -89,6 +85,7 @@ export default function ApplyForm({ project }: { project: Project }) {
                             required: true,
                             type: "string",
                             message: "Vui lòng nhập câu trả lời",
+                            whitespace: true,
                           },
                         ]}
                       >
@@ -108,6 +105,7 @@ export default function ApplyForm({ project }: { project: Project }) {
                 {
                   type: "string",
                   required: true,
+                  whitespace: true,
                 },
               ]}
             >
@@ -118,11 +116,11 @@ export default function ApplyForm({ project }: { project: Project }) {
             <Form.Item
               name="time"
               label="Số giờ để bạn hoàn thành công việc"
-              
               rules={[
                 {
                   type: "string",
                   required: true,
+                  whitespace: true,
                 },
               ]}
             >
