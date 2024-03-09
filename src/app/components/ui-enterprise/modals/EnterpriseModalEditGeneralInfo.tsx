@@ -13,7 +13,7 @@ import {
   projects,
 } from "../../../../constants/testData";
 import { UploadImg } from "../../input/upload-img";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 export default function EnterpriseModalEditGeneralInfo() {
   const [open, setOpen] = useState(false);

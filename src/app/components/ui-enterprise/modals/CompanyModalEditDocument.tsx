@@ -9,7 +9,7 @@ import { DocumentUploadInput } from "../../input/upload-document-input";
 
 import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 export default function CompanyModalEditDocument() {
   const { Title, Paragraph } = Typography;
@@ -84,11 +84,7 @@ export default function CompanyModalEditDocument() {
                   },
                 ]}
               >
-                <FormSelect
-                  defaultValue="DKKD"
-                  onChange={() => {}}
-                  options={companyDocument}
-                />
+                <FormSelect onChange={() => {}} options={companyDocument} />
               </Form.Item>
             </Col>
           </Row>
@@ -142,7 +138,6 @@ export default function CompanyModalEditDocument() {
                 ]}
               >
                 <FormSelect
-                  defaultValue={"VN"}
                   onChange={() => {}}
                   options={Object.values(nations)}
                 />

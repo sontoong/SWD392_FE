@@ -18,7 +18,7 @@ import Title from "antd/es/typography/Title";
 import { LeftOutlined } from "@ant-design/icons";
 import { UserDetail } from "../models/user";
 import { generateRoleMsg } from "../utils/generators";
-import DefaultForm from "../components/form/form";
+import { DefaultForm } from "../components/form/form";
 
 export type SignupFormValues = Pick<
   UserDetail,
@@ -70,7 +70,7 @@ function SignupPage() {
     firstName: "",
     middleName: "",
     lastName: "",
-    nation: { label: "", value: "" },
+    nation: "",
     phone: "",
   };
 

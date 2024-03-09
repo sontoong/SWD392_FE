@@ -10,7 +10,7 @@ import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import { FormRadioButtonGroup } from "../../input/inputs";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 export default function ProjectDetailInfo({
   form,

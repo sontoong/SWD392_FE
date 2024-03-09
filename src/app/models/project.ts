@@ -98,7 +98,7 @@ export interface OutsideProject {
   title: string;
   jobRole: string;
   description: string;
-  startDate?: number;
+  startDate: number;
   endDate?: number;
   images?: string[];
   projectProfileImages?: [{ image: string; description: string }];

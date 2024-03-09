@@ -15,7 +15,7 @@ import {
 import { useImageFetcher } from "../hooks/useGetImg";
 import { GoogleLoginButton } from "../components/button/google-button";
 import { LeftOutlined } from "@ant-design/icons";
-import DefaultForm from "../components/form/form";
+import { DefaultForm } from "../components/form/form";
 
 export interface LoginFormValues {
   email: string;

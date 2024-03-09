@@ -23,7 +23,7 @@ import { location } from "../../../../constants/location";
 import { projectFields } from "../../../../constants/project-field";
 import { useState } from "react";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 export default function ProjectImportantInfo({
   form,

@@ -9,7 +9,7 @@ import {
 } from "../../input/inputs";
 import { Applicant } from "../../../models/applicant";
 import { Project } from "../../../models/project";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 export default function ApplyForm({ project }: { project: Project }) {
   const [open, setOpen] = useState(false);

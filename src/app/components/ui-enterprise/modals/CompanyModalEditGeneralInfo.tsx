@@ -8,7 +8,7 @@ import { CompanyDetail } from "../../../models/company";
 import { FormSelect, SelectMultiple } from "../../select/select";
 import { UploadImg } from "../../input/upload-img";
 import { fields } from "../../../../constants/testData";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 export default function CompanyModalEditGeneralInfo() {
   const [open, setOpen] = useState(false);
@@ -101,11 +101,7 @@ export default function CompanyModalEditGeneralInfo() {
                   },
                 ]}
               >
-                <FormSelect
-                  defaultValue="passport"
-                  onChange={() => {}}
-                  options={IdDocuments}
-                />
+                <FormSelect onChange={() => {}} options={IdDocuments} />
               </Form.Item>
             </Col>
           </Row>

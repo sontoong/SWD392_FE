@@ -9,6 +9,7 @@ export default function UploadProfilePicture() {
   const { message } = App.useApp();
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  console.log(fileList);
   const [uploading, setUploading] = useState(false);
 
   const handleUpload = () => {
@@ -34,8 +35,16 @@ export default function UploadProfilePicture() {
       });
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
+  const handleChange: UploadProps["onChange"] = ({
+    fileList: newFileList,
+    file,
+  }) => {
+    if (file.type != "image/jpeg") {
+      setFileList([]);
+      return;
+    }
     setFileList(newFileList);
+  };
 
   return (
     <div>

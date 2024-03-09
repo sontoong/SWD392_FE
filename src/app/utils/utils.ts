@@ -9,7 +9,7 @@ export const formatUnixToLocal = (
   unixTimestamp: number,
   locale: string = "vi-VN",
 ) => {
-  const milliseconds = unixTimestamp * 1000;
+  const milliseconds = unixTimestamp;
   const date = new Date(milliseconds);
   const options: Intl.DateTimeFormatOptions = {
     day: "numeric",

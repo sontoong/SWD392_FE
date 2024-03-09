@@ -6,20 +6,21 @@ import { CustomFormModal } from "../../modal/modal";
 import { UserDetail } from "../../../models/user";
 import { nations } from "../../../../constants/testData";
 import { FormSelect } from "../../select/select";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
-export default function EditContact() {
+interface EditContactProps {
+  contact?: Pick<UserDetail, "address" | "email" | "phone" | "nation">;
+}
+export default function EditContact(props: EditContactProps) {
+  console.log(props.contact);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
 
-  const initialValues: Pick<
-    UserDetail,
-    "address" | "email" | "phone" | "nation"
-  > = {
-    address: "abc abc",
-    email: "a@gmail.com",
-    phone: "0987654321",
-    nation: nations["us"],
+  const initialValues: EditContactProps["contact"] = {
+    address: "",
+    email: "",
+    phone: "",
+    nation: "vn",
   };
 
   const handleSubmit = async (values: typeof initialValues) => {
@@ -85,7 +86,9 @@ export default function EditContact() {
               <Form.Item name="nation" label="Múi giờ">
                 <FormSelect
                   onChange={() => {}}
-                  options={Object.values(nations)}
+                  options={Object.values(nations).filter(
+                    (nation) => nation.value !== "all",
+                  )}
                 />
               </Form.Item>
             </Col>

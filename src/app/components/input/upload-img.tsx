@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import { Modal, Upload, message } from "antd";
+import { App, Modal, Upload } from "antd";
 import type { GetProp, UploadFile, UploadProps } from "antd";
 import { RequiredFields } from "../../utils/helpers";
 
@@ -8,10 +8,11 @@ type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
 export function UploadImg(
   props: RequiredFields<
-    Omit<UploadProps, "beforeUpload" | "onPreview">,
+    Omit<UploadProps, "beforeUpload" | "onPreview" | "accept">,
     "listType" | "maxCount"
   >,
 ) {
+  const { message } = App.useApp();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
@@ -52,7 +53,12 @@ export function UploadImg(
 
   return (
     <>
-      <Upload {...props} onPreview={handlePreview} beforeUpload={beforeUpload}>
+      <Upload
+        {...props}
+        onPreview={handlePreview}
+        beforeUpload={beforeUpload}
+        accept="image/png, image/jpeg"
+      >
         <button style={{ border: 0, background: "none" }} type="button">
           <PlusOutlined />
           <div style={{ marginTop: 8 }}>Upload</div>

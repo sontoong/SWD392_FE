@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Form, Typography } from "antd";
 import { Applicant } from "../../../models/applicant";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 interface ApplicationAcceptFormProp {
   record: Applicant;

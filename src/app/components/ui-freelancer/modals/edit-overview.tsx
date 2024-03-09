@@ -11,13 +11,10 @@ import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import UploadProfilePicture from "../upload/profile-picture";
 import { FreelancerDetail } from "../../../models/user";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
-export default function EditContact() {
-  const [open, setOpen] = useState(false);
-  const [form] = Form.useForm();
-
-  const initialValues: Pick<
+interface EditOverviewProps {
+  overview?: Pick<
     FreelancerDetail,
     | "firstName"
     | "middleName"
@@ -28,23 +25,23 @@ export default function EditContact() {
     | "description"
     | "profilePicture"
     | "jobRole"
-  > = {
-    firstName: "Nguyen",
-    middleName: "Van",
-    lastName: "A",
-    desireSalary: 1000000,
-    experienceLevel: "junior",
-    description: "abc",
-    nation: { label: "Việt Nam", value: "vn" },
-    profilePicture: "",
-    jobRole: "ceo",
-  };
+  >;
+}
+export default function EditContact(props: EditOverviewProps) {
+  const [open, setOpen] = useState(false);
+  const [form] = Form.useForm();
 
-  const experienceLevels = [
-    { label: "Mới đi làm", value: "junior" },
-    { label: "Chuyên nghiệp", value: "senior" },
-    { label: "Chuyên gia", value: "expert" },
-  ];
+  const initialValues: EditOverviewProps["overview"] = props.overview ?? {
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    desireSalary: 0,
+    experienceLevel: "junior",
+    description: "",
+    nation: "vn",
+    profilePicture: "",
+    jobRole: "",
+  };
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
@@ -159,11 +156,7 @@ export default function EditContact() {
             </Col>
           </Row>
           <Form.Item name="nation" label="Quốc gia">
-            <FormSelect
-              defaultValue="vn"
-              onChange={() => {}}
-              options={Object.values(nations)}
-            />
+            <FormSelect options={Object.values(nations)} />
           </Form.Item>
           <Form.Item name="experienceLevel" label="Cấp độ kinh nghiệm">
             <FormRadioButtonGroup options={experienceLevels} />
@@ -182,3 +175,9 @@ export default function EditContact() {
     </>
   );
 }
+
+const experienceLevels = [
+  { label: "Mới đi làm", value: "junior" },
+  { label: "Chuyên nghiệp", value: "senior" },
+  { label: "Chuyên gia", value: "expert" },
+];

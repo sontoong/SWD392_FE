@@ -5,7 +5,7 @@ import { CustomFormModal } from "../../modal/modal";
 import { Col, Form, Row, Space, Typography } from "antd";
 import { FormInput } from "../../input/inputs";
 import { FreelancerProject } from "../../../models/project";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 import { generateDepositType } from "../../../utils/generators";
 import { formatUnixToLocal } from "../../../utils/utils";
 

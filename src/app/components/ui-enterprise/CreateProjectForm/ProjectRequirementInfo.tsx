@@ -8,7 +8,7 @@ import { language } from "../../../../constants/language";
 import { location } from "../../../../constants/location";
 import { skills } from "../../../../constants/skill";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 export default function ProjectRequirementInfo({
   form,

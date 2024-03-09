@@ -7,7 +7,7 @@ interface DefaultFormProps
     "layout" | "scrollToFirstError"
   > {}
 
-export default function DefaultForm(props: DefaultFormProps) {
+export function DefaultForm(props: DefaultFormProps) {
   const { children } = props;
   return (
     <Form

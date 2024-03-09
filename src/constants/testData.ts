@@ -90,6 +90,16 @@ export const project: Project = {
   },
 };
 
+export const oproject1: OutsideProject = {
+  title: "FPT Fap",
+  description: "Tôi tạo và quản lý database và flow cho project",
+  jobRole: "Back-end Developer",
+  startDate: 1708532861000,
+  endDate: 1708532861000,
+  images: [],
+  projectProfileImages: [{ image: "", description: "" }],
+};
+
 export const freelancer: FreelancerDetail = {
   id: "1",
   role: "freelancer",
@@ -99,7 +109,7 @@ export const freelancer: FreelancerDetail = {
   phone: "0123456789",
   address:
     "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh 715650",
-  nation: nations["vn"],
+  nation: "vn",
   isVerified: true,
   averageRating: 3.5,
   ratingCount: 10,
@@ -115,6 +125,7 @@ Facebook: fb.com/user/JoeBiden`,
   lastName: "A",
   jobRole: "Front-end Developer",
   profilePicture: "",
+  outsideProjects: [oproject1],
 };
 
 export const projects: Project[] = [project];
@@ -317,11 +328,3 @@ export const Applicants: Applicant[] = [
     ],
   },
 ];
-
-export const oproject1: OutsideProject = {
-  title: "FPT Fap",
-  description: "Tôi tạo và quản lý database và flow cho project",
-  jobRole: "Back-end Developer",
-  startDate: 1708532861000,
-  endDate: 1708532861000,
-};
