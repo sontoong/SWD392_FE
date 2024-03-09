@@ -2,16 +2,40 @@ import { PrimaryButton } from "../../button/buttons";
 import { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Col, Form, Row, Typography } from "antd";
-import { project } from "../../../../constants/testData";
-import { FormTextArea } from "../../input/inputs";
-import { DocumentUploadInput } from "../../input/upload-document-input";
+import {
+  InputNumberFix,
+  FormTextArea,
+  InputNumberTimeFix,
+} from "../../input/inputs";
+import { Applicant } from "../../../models/applicant";
 
 export default function ApplyForm() {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const { Title, Paragraph } = Typography;
+  const { Title } = Typography;
 
-  const initialValues = project;
+  const initialValues: Applicant = {
+    id: "",
+    name: "",
+    date: 0,
+    money: 0,
+    time: 0,
+    projectId: "",
+    questions: [
+      {
+        question: "Câu 1",
+        answer: "",
+      },
+      {
+        question: "Câu 2",
+        answer: "",
+      },
+      {
+        question: "Câu 3",
+        answer: "",
+      },
+    ],
+  };
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
@@ -49,10 +73,10 @@ export default function ApplyForm() {
           name="ApplyForm"
           initialValues={initialValues}
         >
-          <Form.List name={["optionalRequirements", "questions"]}>
+          <Form.List name={["questions"]}>
             {(fields) => (
               <>
-                {fields.map(({ key, name, ...restField }) => (
+                {fields.map(({ key, name, ...restField }, index) => (
                   <Row
                     key={key}
                     style={{
@@ -63,11 +87,7 @@ export default function ApplyForm() {
                     <Col span={18}>
                       <Form.Item>
                         <Title level={5}>
-                          {form.getFieldValue([
-                            "optionalRequirements",
-                            "questions",
-                            name,
-                          ])}
+                          {initialValues.questions[index].question}
                         </Title>
                         {/* <FormInput/> */}
                       </Form.Item>
@@ -91,10 +111,33 @@ export default function ApplyForm() {
             )}
           </Form.List>
           <Row>
-            <Title level={3}>Tải lên báo giá</Title>
-            <DocumentUploadInput name="" />
-            <Paragraph>* Định dạng tệp được chấp nhận: .jpg, .png</Paragraph>
-            <Paragraph>* Kích thước tệp phải nhỏ hơn 4M</Paragraph>
+            <Form.Item
+              name="money"
+              label="Số tiền bạn muốn nhận"
+              rules={[
+                {
+                  type: "string",
+                  required: true,
+                },
+              ]}
+            >
+              <InputNumberFix />
+            </Form.Item>
+          </Row>
+          <Row>
+            <Form.Item
+              name="time"
+              label="Số giờ để bạn hoàn thành công việc"
+              
+              rules={[
+                {
+                  type: "string",
+                  required: true,
+                },
+              ]}
+            >
+              <InputNumberTimeFix />
+            </Form.Item>
           </Row>
         </Form>
       </CustomFormModal>

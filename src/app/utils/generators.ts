@@ -1,4 +1,4 @@
-import { EnterpriseProject, FreelancerProject, OptionalRequirements, Project } from "../models/project";
+import { Contract, EnterpriseProject, FreelancerProject, OptionalRequirements, Project } from "../models/project";
 import { Transaction } from "../models/transaction";
 import { UserDetail } from "../models/user";
 import { formatCurrency } from "./utils";
@@ -174,5 +174,14 @@ export function generateTransactionType(type: Transaction["type"]){
       return "Chuyển tiền";
     default:
         return '';
+  }
+}
+
+export function generateDepositType(type: Contract["depositType"], fund: Contract["fund"]){
+  switch(type){
+    case "full":
+      return `Đặt cọc ${fund} cho toàn bộ công việc`;
+    case "period ":
+      return "Đặt cọc theo từng hạng mục công việc"
   }
 }

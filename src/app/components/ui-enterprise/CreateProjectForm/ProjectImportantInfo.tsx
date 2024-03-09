@@ -1,15 +1,16 @@
-import { CheckboxOptionType, Col, Form, Row, Typography } from "antd";
+import { CheckboxOptionType, Col, Divider, Form, Row, Space, Typography } from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import {
+  FormDatePicker,
   FormInput,
+  FormRadioButtonGroup,
   FormRadioGroup,
   FormTextArea,
   InputNumberFix,
 } from "../../input/inputs";
 import { FormSelect, FormTreeSelect } from "../../select/select";
 import { language } from "../../../../constants/language";
-import { DocumentUploadInput } from "../../input/upload-document-input";
 import { OutlineButton, PrimaryButton } from "../../button/buttons";
 import { location } from "../../../../constants/location";
 import { projectField } from "../../../../constants/project-field";
@@ -20,13 +21,29 @@ import { DataNode } from "antd/es/tree";
 export default function ProjectImportantInfo() {
   const { Title, Paragraph } = Typography;
   const [form] = Form.useForm();
+  const fundValue = Form.useWatch(["contract", "fund"], form);
+
+  const ContractDepositOptions: CheckboxOptionType<CheckboxValueType>[] = [
+    {
+      label: `Đặt cọc ${fundValue}VND cho toàn bộ công việc`,
+      value: "full"
+    },
+    {
+      label: "Đặt cọc theo từng hạng mục công việc",
+      value: "period"
+    },
+  ]
 
   const initialValues: CreateProject = {
     title: "",
     language: "vn",
     projectField: "",
     description: "",
-    contract: "",
+    contract: {
+      date: 1708532861,
+      fund: 0,
+      depositType: "full"
+    },
     funding: "fixed",
     initialFunding: 0,
     freelancerRequirement: "junior",
@@ -71,7 +88,7 @@ export default function ProjectImportantInfo() {
                   },
                 ]}
               >
-                <FormRadioGroup options={projectFreelancerRequirementHourly} />
+                <FormRadioButtonGroup options={projectFreelancerRequirementHourly} />
               </Form.Item>
             </Row>
             <Row className="mt-[5%]">
@@ -84,7 +101,7 @@ export default function ProjectImportantInfo() {
                   },
                 ]}
               >
-                <FormRadioGroup options={ProjectTimeToComplete} />
+                <FormRadioButtonGroup options={ProjectTimeToComplete} />
               </Form.Item>
             </Row>
           </>
@@ -119,7 +136,7 @@ export default function ProjectImportantInfo() {
                   },
                 ]}
               >
-                <FormRadioGroup options={projectFreelancerRequirementFixed} />
+                <FormRadioButtonGroup options={projectFreelancerRequirementFixed} />
               </Form.Item>
             </Row>
           </>
@@ -254,10 +271,61 @@ export default function ProjectImportantInfo() {
               </Form.Item>
             </Col>
           </Row>
-          <Title level={3}>Tải lên hợp đồng</Title>
-          <DocumentUploadInput name="contract" />
-          <Paragraph>* Định dạng tệp được chấp nhận: .jpg, .png</Paragraph>
-          <Paragraph>* Kích thước tệp phải nhỏ hơn 4M</Paragraph>
+          <Divider/>
+          <Title level={3}>Hợp đồng</Title>
+          <Space size="large" direction="vertical">
+            <Row>
+                <Col span={15}>
+                  <Form.Item
+                    name={["contract", "fund"]}
+                    label="Tổng ngân sách"
+                    rules={[
+                      {
+                        type: "number",
+                        min: 1000,
+                        required: true,
+                      },
+                    ]}
+                  >
+                    <InputNumberFix />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+              <Col>
+                <Form.Item
+                  name={["contract", "depositType"]}
+                  label="Chọn loại ngân sách"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <FormRadioGroup
+                    options={ContractDepositOptions}
+                  />
+                </Form.Item>
+              </Col>
+              </Row>
+            <Row>
+                <Col span={15}>
+                  <Form.Item
+                    name={["contract", "date"]}
+                    label="Ngày hoàn thành"
+                    rules={[
+                      {
+                        type: "number",
+                        required: true,
+                      },
+                    ]}
+                  >
+                    <FormDatePicker/>
+                  </Form.Item>
+                </Col>
+              </Row>
+          </Space>
+          <Divider/>
           <Row className="mt-[5%]">
             <Form.Item
               name="funding"
@@ -268,7 +336,7 @@ export default function ProjectImportantInfo() {
                 },
               ]}
             >
-              <FormRadioGroup
+              <FormRadioButtonGroup
                 options={ProjectFundingTypes}
                 onChange={(e) => setRenderFunding(e.target.value)}
               />
@@ -290,6 +358,8 @@ export default function ProjectImportantInfo() {
     </>
   );
 }
+
+
 
 const ProjectFundingTypes: CheckboxOptionType<CheckboxValueType>[] = [
   {

@@ -1,7 +1,7 @@
 import { CheckboxOptionType, Col, Form, Row, Typography } from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
-import { FormRadioGroup } from "../../input/inputs";
+import { FormRadioButtonGroup, FormRadioGroup } from "../../input/inputs";
 import { OutlineButton, PrimaryButton } from "../../button/buttons";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 
@@ -14,7 +14,11 @@ export default function ProjectDetailInfo() {
     language: "vn",
     projectField: "",
     description: "",
-    contract: "",
+    contract: {
+      date: 1708532861,
+      fund: 0,
+      depositType: "full"
+    },
     funding: "fixed",
     initialFunding: 0,
     freelancerRequirement: "junior",
@@ -85,7 +89,7 @@ export default function ProjectDetailInfo() {
                   },
                 ]}
               >
-                <FormRadioGroup options={projectPrivacy} />
+                <FormRadioButtonGroup options={projectPrivacy} />
               </Form.Item>
             </Col>
           </Row>
@@ -100,7 +104,7 @@ export default function ProjectDetailInfo() {
                   },
                 ]}
               >
-                <FormRadioGroup options={projectType} />
+                <FormRadioButtonGroup options={projectType} />
               </Form.Item>
             </Col>
           </Row>

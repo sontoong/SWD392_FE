@@ -11,6 +11,7 @@ import {
   RadioGroupProps,
   Select,
   SelectProps,
+  Space,
   TreeProps,
   TreeSelect,
   TreeSelectProps,
@@ -249,6 +250,19 @@ function InputNumberFix(props: InputNumberProps) {
   );
 }
 
+function InputNumberTimeFix(props: InputNumberProps) {
+  return (
+    <InputNumber
+      {...props}
+      formatter={(value) => {
+        return `${value} giờ`;
+      }}
+      parser={(value) => value!.replace("giờ", "")}
+      className="w-full rounded-[6px] border-[1px] border-[#d9d9d9]"
+    />
+  );
+}
+
 function InputPasswordFix(props: InputProps) {
   return (
     <Input.Password
@@ -281,7 +295,7 @@ interface FormRadioGroupProps extends Omit<RadioGroupProps, "options"> {
   options: CheckboxOptionType<CheckboxValueType>[];
 }
 
-function FormRadioGroup(props: FormRadioGroupProps) {
+function FormRadioButtonGroup(props: FormRadioGroupProps) {
   const { options, ...rest } = props;
 
   return (
@@ -299,6 +313,25 @@ function FormRadioGroup(props: FormRadioGroupProps) {
           {option.label}
         </Radio.Button>
       ))}
+    </Radio.Group>
+  );
+}
+
+function FormRadioGroup(props: FormRadioGroupProps) {
+  const { options, ...rest } = props;
+
+  return (
+    <Radio.Group {...rest} >
+      <Space direction="vertical">
+        {options?.map((option, index) => (
+          <Radio
+            key={index}
+            value={option.value}
+          >
+            {option.label}
+          </Radio>
+        ))}
+      </Space>
     </Radio.Group>
   );
 }
@@ -355,4 +388,6 @@ export {
   MyTextArea,
   InputPasswordFix,
   InputNumberFix,
+  FormRadioButtonGroup,
+  InputNumberTimeFix
 };
