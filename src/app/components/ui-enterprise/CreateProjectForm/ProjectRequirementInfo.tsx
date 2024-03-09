@@ -22,7 +22,11 @@ export default function ProjectRequirementInfo({
     language: "vn",
     projectField: "",
     description: "",
-    contract: "",
+    contract: {
+      date: 1708532861,
+      fund: 0,
+      depositType: "full"
+    },
     funding: "fixed",
     initialFunding: 0,
     freelancerRequirement: "junior",

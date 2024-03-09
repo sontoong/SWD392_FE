@@ -8,7 +8,7 @@ import {
 } from "antd";
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
-import { FormRadioGroup } from "../../input/inputs";
+import { FormRadioButtonGroup } from "../../input/inputs";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import DefaultForm from "../../form/form";
 
@@ -24,7 +24,11 @@ export default function ProjectDetailInfo({
     language: "vn",
     projectField: "",
     description: "",
-    contract: "",
+    contract: {
+      date: 1708532861,
+      fund: 0,
+      depositType: "full"
+    },
     funding: "fixed",
     initialFunding: 0,
     freelancerRequirement: "junior",
@@ -88,7 +92,7 @@ export default function ProjectDetailInfo({
                 label="Ai có thể xem project này?"
                 rules={[{}]}
               >
-                <FormRadioGroup options={projectPrivacy} />
+                <FormRadioButtonGroup options={projectPrivacy} />
               </Form.Item>
             </Col>
           </Row>
@@ -99,7 +103,7 @@ export default function ProjectDetailInfo({
                 label="Chọn loại hình project"
                 rules={[{}]}
               >
-                <FormRadioGroup options={projectType} />
+                <FormRadioButtonGroup options={projectType} />
               </Form.Item>
             </Col>
           </Row>

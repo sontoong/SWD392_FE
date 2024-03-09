@@ -12,7 +12,6 @@ import {
   nations,
   projects,
 } from "../../../../constants/testData";
-import dayjs from "dayjs";
 import { UploadImg } from "../../input/upload-img";
 import DefaultForm from "../../form/form";
 
@@ -70,10 +69,7 @@ export default function EnterpriseModalEditGeneralInfo() {
         <DefaultForm
           form={form}
           name="EnterpriseEditGeneralInfo"
-          initialValues={{
-            ...initialValues,
-            dateOfBirth: dayjs(initialValues.dateOfBirth * 1000),
-          }}
+          initialValues={initialValues}
         >
           <UploadImg listType="picture-circle" maxCount={1} />
           <Row>

@@ -11,6 +11,7 @@ import {
   RadioGroupProps,
   Select,
   SelectProps,
+  Space,
   TreeProps,
   TreeSelect,
   TreeSelectProps,
@@ -20,6 +21,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { TextAreaProps } from "antd/es/input";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { RequiredFields } from "../../utils/helpers";
+import dayjs from "dayjs";
 
 const { TextArea } = Input;
 export interface MyInputProps {
@@ -249,6 +251,19 @@ function InputNumberFix(props: InputNumberProps) {
   );
 }
 
+function InputNumberTimeFix(props: InputNumberProps) {
+  return (
+    <InputNumber
+      {...props}
+      formatter={(value) => {
+        return `${value} giờ`;
+      }}
+      parser={(value) => value!.replace("giờ", "")}
+      className="w-full rounded-[6px] border-[1px] border-[#d9d9d9]"
+    />
+  );
+}
+
 function InputPasswordFix(props: InputProps) {
   return (
     <Input.Password
@@ -273,15 +288,17 @@ function FormTextArea(props: RequiredFields<TextAreaProps, "maxLength">) {
 }
 
 function FormDatePicker(props: DatePickerProps) {
+  let {value} = props;
+  if(value && typeof value === 'number') value = dayjs(value * 1000)
   const dateFormat = "DD/MM/YYYY";
-  return <DatePicker {...props} format={dateFormat} allowClear={false} />;
+  return <DatePicker {...props} format={dateFormat} allowClear={false} value={value}/>;
 }
 
 interface FormRadioGroupProps extends Omit<RadioGroupProps, "options"> {
   options: CheckboxOptionType<CheckboxValueType>[];
 }
 
-function FormRadioGroup(props: FormRadioGroupProps) {
+function FormRadioButtonGroup(props: FormRadioGroupProps) {
   const { options, ...rest } = props;
 
   return (
@@ -299,6 +316,25 @@ function FormRadioGroup(props: FormRadioGroupProps) {
           {option.label}
         </Radio.Button>
       ))}
+    </Radio.Group>
+  );
+}
+
+function FormRadioGroup(props: FormRadioGroupProps) {
+  const { options, ...rest } = props;
+
+  return (
+    <Radio.Group {...rest} >
+      <Space direction="vertical">
+        {options?.map((option, index) => (
+          <Radio
+            key={index}
+            value={option.value}
+          >
+            {option.label}
+          </Radio>
+        ))}
+      </Space>
     </Radio.Group>
   );
 }
@@ -355,4 +391,6 @@ export {
   MyTextArea,
   InputPasswordFix,
   InputNumberFix,
+  FormRadioButtonGroup,
+  InputNumberTimeFix
 };
