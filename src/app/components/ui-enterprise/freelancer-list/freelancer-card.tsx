@@ -20,11 +20,14 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { FreelancerDetail } from "../../../models/user";
+import PayFreelancerModal from "../modals/PayFreelancerModal";
 
 export default function FreelancerCard({
   freelancer,
+  paying,
 }: {
   freelancer: FreelancerDetail;
+  paying?: boolean; 
 }) {
   const {
     firstName,
@@ -49,13 +52,22 @@ export default function FreelancerCard({
       title={fullName}
       className="overflow-auto"
       extra={
-        <Tooltip title="Xem chi tiết">
-          <Link to={`${freelancer.id}`}>
-            <Button icon={<EyeOutlined />} className="ml-auto">
-              Chi tiết
-            </Button>
-          </Link>
-        </Tooltip>
+        <div>
+          <Space size={"large"}>
+            <Tooltip title="Xem chi tiết">
+              <Link to={`${freelancer.id}`}>
+                <Button icon={<EyeOutlined />} className="ml-auto">
+                  Chi tiết
+                </Button>
+              </Link>
+            </Tooltip>
+            {paying && (
+              <Tooltip title="Gửi tiền cho Freelancer">
+                <PayFreelancerModal title={fullName} />
+              </Tooltip>
+            )}
+          </Space>
+        </div>
       }
     >
       <Flex justify="space-between">

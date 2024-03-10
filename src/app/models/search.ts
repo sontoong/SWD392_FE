@@ -9,7 +9,7 @@ export interface ProjectSearch{
 export interface FreelancerSearch{
     input?: string;
     projectField?: string;
-    location: string;
+    nation: string;
     language: string;
     desiredSalary: 'all' | '<100K' | '100K-200K' | '200K-500K' | '>500K';
     experienceLevel: 'all' | 'junior' | 'senior' | 'expert';

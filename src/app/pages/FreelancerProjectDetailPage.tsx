@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { CustomCard } from "../components/ui/card";
 import { Content } from "antd/es/layout/layout";
-import { enterpriseInfo, project } from "../../constants/testData";
+import { enterpriseInfo, nations, project } from "../../constants/testData";
 import {
   EnvironmentOutlined,
   FolderOpenOutlined,
@@ -21,7 +21,6 @@ import {
   generateProjectFundingType,
   generateRequirementMsg,
   generateTimeToComplete,
-  generatorLocationType,
 } from "../utils/generators";
 import { formatCurrency } from "../utils/utils";
 import CustomTag from "../components/ui/tag";
@@ -69,7 +68,7 @@ export default function FreelancerProjectDetail() {
               </Col>
               <Col span={5} offset={2} className="text-[1.2rem] font-semibold">
                 <EnvironmentOutlined />{" "}
-                {generatorLocationType(data.optionalRequirements.location)}
+                {nations[data.optionalRequirements.nation].label}
               </Col>
             </Row>
             <Divider />

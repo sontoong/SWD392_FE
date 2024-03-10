@@ -1,6 +1,6 @@
 import { Layout, theme } from "antd";
 import { Content } from "antd/es/layout/layout";
-import FreelancerList from "../components/ui-enterprise/search/freelancer-list";
+import FreelancerList from "../components/ui-enterprise/freelancer-list/freelancer-list";
 import { freelancers } from "../../constants/testData";
 import FreelancerSearchForm from "../components/ui-enterprise/search/freelancer-search";
 

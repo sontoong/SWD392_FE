@@ -31,21 +31,6 @@ export function generateRequirementMsg(role: Project["freelancerRequirement"]) {
   }
 }
 
-
-
-export function generatorLocationType(type: OptionalRequirements["location"]){
-  switch(type){
-    case "all":
-      return "Tất cả";
-    case "hcm":
-      return "Hồ Chí Minh";
-    case "hn":
-      return "Hà Nội";
-    case "dn":
-      return "Đà Nẵng";
-  }
-}
-
 export function generateTimeToComplete(type: Project["timeToComplete"]){
   switch (type){
     case "<1 month":
@@ -183,5 +168,42 @@ export function generateDepositType(type: Contract["depositType"], fund: Contrac
       return `Đặt cọc ${fund} cho toàn bộ công việc`;
     case "period ":
       return "Đặt cọc theo từng hạng mục công việc"
+  }
+}
+
+export function generateRating(type: OptionalRequirements["rating"]){
+  switch(type){
+    case "all":
+      return `Tất cả`;
+    case ">3 stars":
+      return "Trên 3 sao";
+    case ">4 stars":
+      return "Trên 4 sao";
+  }
+}
+
+export function generateLanguage(type: OptionalRequirements["language"]){
+  switch(type){
+    case "all":
+      return "Tất cả";
+    case "vn":
+      return "Tiếng Việt";
+    case "en":
+      return "Tiếng Anh";
+    case "cn":
+      return "Tiếng Trung";
+    }
+}
+
+export function generateProjectCompleted(type: OptionalRequirements["minimumCompletedProjects"]){
+  switch (type) {
+    case "all":
+      return "Tất cả";
+    case "<3 projects":
+      return "Ít hơn 3 project";
+    case "5-10 projects":
+      return "5 đến 10 project";
+    case ">10 projects":
+      return "Nhiều hơn 10 project";  
   }
 }

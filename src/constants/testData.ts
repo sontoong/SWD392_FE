@@ -54,7 +54,7 @@ const field1: SkillField = {
 const optionalRequirements: OptionalRequirements = {
   minimumCompletedProjects: "all",
   language: "all",
-  location: "all",
+  nation: "all",
   rating: "all",
   skills: skills,
   questions: ["Câu 100", "Câu 2", "Câu 3"],

@@ -5,10 +5,10 @@ import { FormInput } from "../../input/inputs";
 import { IconButton } from "../../button/buttons";
 import { FormSelect, SelectMultiple } from "../../select/select";
 import { language } from "../../../../constants/language";
-import { location } from "../../../../constants/location";
 import { skills } from "../../../../constants/skill";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { DefaultForm } from "../../form/form";
+import { nations } from "../../../../constants/testData";
 
 export default function ProjectRequirementInfo({
   form,
@@ -18,45 +18,6 @@ export default function ProjectRequirementInfo({
   initialValues: CreateProject;
 }) {
   const { Title } = Typography;
-
-  // const initialValues: CreateProject = {
-  //   title: "",
-  //   language: "vn",
-  //   projectField: "",
-  //   description: "",
-  //   contract: {
-  //     date: 1708532861,
-  //     fund: 0,
-  //     depositType: "full"
-  //   },
-  //   funding: "fixed",
-  //   initialFunding: 0,
-  //   freelancerRequirement: "junior",
-  //   timeToComplete: "<1 month",
-  //   publishTime: 0,
-  //   createdBy: "",
-  //   applicantCount: 0,
-  //   paidAmount: 0,
-  //   isCompleted: false,
-  //   privacy: "public",
-  //   projectType: "unknown",
-  //   optionalRequirements: {
-  //     language: "all",
-  //     location: "all",
-  //     minimumCompletedProjects: "all",
-  //     rating: "all",
-  //     skills: [
-  //       { label: "Front-end Developer", value: "Front-end Developer" },
-  //       { label: "Back-end Developer", value: "Back-end Developer" },
-  //       { label: "Full-stack Developer", value: "Full-stack Developer" },
-  //     ],
-  //     questions: [
-  //       {
-  //         question: "",
-  //       },
-  //     ],
-  //   },
-  // };
 
   const onFinish = (values: any) => {
     console.log("Success:", values);
@@ -123,10 +84,10 @@ export default function ProjectRequirementInfo({
             </Col>
             <Col span={10} offset={4}>
               <Form.Item
-                name={["optionalRequirements", "location"]}
+                name={["optionalRequirements", "nation"]}
                 label="Địa điểm"
               >
-                <FormSelect options={Object.values(location)} />
+                <FormSelect options={Object.values(nations)} />
               </Form.Item>
             </Col>
           </Row>

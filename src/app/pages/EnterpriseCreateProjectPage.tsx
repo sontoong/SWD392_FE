@@ -39,7 +39,7 @@ export default function CreateProjectForm() {
     projectType: "unknown",
     optionalRequirements: {
       language: "all",
-      location: "all",
+      nation: "all",
       minimumCompletedProjects: "all",
       rating: "all",
       skills: [
