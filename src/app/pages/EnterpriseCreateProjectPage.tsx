@@ -29,7 +29,7 @@ export default function CreateProjectForm() {
     funding: "hourly",
     initialFunding: 0,
     freelancerRequirement: "junior",
-    timeToComplete: 1,
+    timeToComplete: "<1 month",
     publishTime: 0,
     createdBy: "",
     applicantCount: 0,

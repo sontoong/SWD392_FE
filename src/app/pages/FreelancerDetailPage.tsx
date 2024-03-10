@@ -64,6 +64,7 @@ export default function FreelancerDetailPage() {
     address,
     phone,
     jobRole,
+    skills,
     outsideProjects,
     experienceLevel,
     firstName,
@@ -346,11 +347,13 @@ export default function FreelancerDetailPage() {
               }
               type="inner"
             >
-              <Space size={[0, 8]} wrap>
-                <Tag color="#87d068">Front-end Developing</Tag>
-                <Tag color="#87d068">Back-end Developing</Tag>
-                <Tag color="#87d068">UI/UX Design</Tag>
-              </Space>
+            <Space size={[0, 8]} wrap>
+              {skills.map((skillItem, index) => (
+                <Tag key={index} color="#87d068">
+                  {skillItem.label}
+                </Tag>
+              ))}
+            </Space>
             </CustomCard>
             {/* languages */}
             <CustomCard

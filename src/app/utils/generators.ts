@@ -37,22 +37,22 @@ export function generatorLocationType(type: OptionalRequirements["location"]){
   switch(type){
     case "all":
       return "Tất cả";
-    case "vn":
-      return "Việt Nam";
-    case "us":
-      return "Hoa Kì";
-    case "cn":
-      return "Trung Quốc";
+    case "hcm":
+      return "Hồ Chí Minh";
+    case "hn":
+      return "Hà Nội";
+    case "dn":
+      return "Đà Nẵng";
   }
 }
 
 export function generateTimeToComplete(type: Project["timeToComplete"]){
   switch (type){
-    case 1:
+    case "<1 month":
       return "Ít hơn 1 tháng";
-    case 2:
+    case "1-3 month":
       return "1-3 tháng";
-    case 3:
+    case ">3 month":
       return "Hơn 3 tháng";
     default:
       return ""
