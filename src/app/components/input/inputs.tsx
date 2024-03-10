@@ -17,13 +17,18 @@ import {
   TreeSelectProps,
 } from "antd";
 import { ErrorMessage } from "formik";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { TextAreaProps } from "antd/es/input";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  SearchOutlined,
+} from "@ant-design/icons";
+import { SearchProps, TextAreaProps } from "antd/es/input";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { RequiredFields } from "../../utils/helpers";
 import dayjs from "dayjs";
+import { CSSProperties } from "react";
 
-const { TextArea } = Input;
+const { TextArea, Search } = Input;
 export interface MyInputProps {
   id: string;
   field: {
@@ -288,14 +293,22 @@ function FormTextArea(props: RequiredFields<TextAreaProps, "maxLength">) {
 }
 
 function FormDatePicker(props: DatePickerProps) {
-  let {value} = props;
-  if(value && typeof value === 'number') value = dayjs(value * 1000)
+  let { value } = props;
+  if (value && typeof value === "number") value = dayjs(value * 1000);
   const dateFormat = "DD/MM/YYYY";
-  return <DatePicker {...props} format={dateFormat} allowClear={false} value={value}/>;
+  return (
+    <DatePicker
+      {...props}
+      format={dateFormat}
+      allowClear={false}
+      value={value}
+    />
+  );
 }
 
 interface FormRadioGroupProps extends Omit<RadioGroupProps, "options"> {
   options: CheckboxOptionType<CheckboxValueType>[];
+  textStyle?:  CSSProperties;
 }
 
 function FormRadioButtonGroup(props: FormRadioGroupProps) {
@@ -321,17 +334,14 @@ function FormRadioButtonGroup(props: FormRadioGroupProps) {
 }
 
 function FormRadioGroup(props: FormRadioGroupProps) {
-  const { options, ...rest } = props;
+  const { options, textStyle, ...rest } = props;
 
   return (
-    <Radio.Group {...rest} >
+    <Radio.Group {...rest}>
       <Space direction="vertical">
         {options?.map((option, index) => (
-          <Radio
-            key={index}
-            value={option.value}
-          >
-            {option.label}
+          <Radio key={index} value={option.value}>
+            <span style={textStyle}>{option.label}</span>
           </Radio>
         ))}
       </Space>
@@ -375,6 +385,20 @@ function FormTreeSelect(props: TreeProps) {
   </ConfigProvider>;
 }
 
+function SearchInput(props: SearchProps) {
+  return(
+  
+  <Search
+    {...props}
+    placeholder="Tìm kiếm"
+    size="large"
+    allowClear
+    enterButton={<SearchOutlined style={{ fontSize: "1.5rem" }} />}
+  />
+
+  );
+}
+
 export {
   FormTextArea,
   FormDatePicker,
@@ -392,5 +416,6 @@ export {
   InputPasswordFix,
   InputNumberFix,
   FormRadioButtonGroup,
-  InputNumberTimeFix
+  InputNumberTimeFix,
+  SearchInput
 };

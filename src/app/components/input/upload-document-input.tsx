@@ -1,5 +1,5 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Space, Typography, Upload, UploadProps, message } from "antd";
+import { Button, Space, Upload, UploadProps, message } from "antd";
 import { handleUpload } from "../../services/image";
 
 const props: UploadProps = {

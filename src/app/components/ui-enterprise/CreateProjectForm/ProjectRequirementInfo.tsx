@@ -30,7 +30,7 @@ export default function ProjectRequirementInfo({
     funding: "fixed",
     initialFunding: 0,
     freelancerRequirement: "junior",
-    timeToComplete: 1,
+    timeToComplete: "<1 month",
     publishTime: 0,
     createdBy: "",
     applicantCount: 0,

@@ -1,8 +1,6 @@
-import ProjectApplicationList from "../components/ui-enterprise/ProjectApplicationList";
-// import { ViewSignContract } from "../components/ui-freelancer/modals";
-// import CreateProject from "./EnterpriseCreateProjectPage";
-// import FreelancerProjectDetail from "./FreelancerProjectDetailPage";
-// import FreelancerProjectList from "./FreelancerProjectList";
+import FreelancerSearchPage from "./FreelancerSearchPage";
+
+
 
 
 
@@ -13,6 +11,10 @@ export default function TestPage() {
     // <ViewSignContract />
     // <FreelancerProjectList/>
     // <CreateProject/>
-    <ProjectApplicationList/>
+    // <ProjectApplicationList/>
+    // <ProjectSearchPage />
+    // <ProjectSearchPage/>
+    // <FreelancerDetailPage/>
+    <FreelancerSearchPage/>
     );
 }

@@ -72,7 +72,7 @@ export const project: Project = {
   publishedTime: 1708532861,
   isCompleted: false,
   language: "en",
-  timeToComplete: 1,
+  timeToComplete: "<1 month",
   freelancerRequirement: "junior",
   optionalRequirements: optionalRequirements,
   funding: "hourly",
@@ -115,9 +115,11 @@ Facebook: fb.com/user/JoeBiden`,
   lastName: "A",
   jobRole: "Front-end Developer",
   profilePicture: "",
+  skills: skills,
 };
 
 export const projects: Project[] = [project];
+export const freelancers: FreelancerDetail[] = [freelancer];
 
 const comment: Comment = {
   title: "Nguyen Van A",
