@@ -1,31 +1,30 @@
 import { useState } from "react";
 import { AddNewButton } from "../../button/buttons";
 import { Col, Form, Row } from "antd";
-import { UserDetail } from "../../../models/user";
 import { CustomFormModal } from "../../modal/modal";
 import { FormInput } from "../../input/inputs";
 import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import { OutsideProject } from "../../../models/project";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 interface AddOutsideProject {
   project?: OutsideProject;
 }
 
 export default function AddOutsideProject(props: AddOutsideProject) {
-  console.log(props);
+  console.log(props.project);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
 
-  const initialValues: Pick<
-    UserDetail,
-    "address" | "email" | "phone" | "nation"
-  > = {
-    address: "abc abc",
-    email: "a@gmail.com",
-    phone: "0987654321",
-    nation: { label: "Việt Nam", value: "vn" },
+  const initialValues: AddOutsideProject["project"] = props.project ?? {
+    title: "a",
+    description: "a",
+    jobRole: "a",
+    startDate: 0,
+    endDate: 0,
+    images: [],
+    projectProfileImages: [{ image: "", description: "" }],
   };
 
   const handleSubmit = async (values: typeof initialValues) => {
@@ -42,7 +41,7 @@ export default function AddOutsideProject(props: AddOutsideProject) {
       <AddNewButton onClick={() => setOpen(true)} />
       <CustomFormModal
         open={open}
-        title="Thông tin liên hệ"
+        title="Project"
         onCancel={() => {
           handleCancel();
           form.resetFields();
@@ -64,10 +63,11 @@ export default function AddOutsideProject(props: AddOutsideProject) {
           initialValues={initialValues}
         >
           <Form.Item
-            name="address"
-            label="Địa chỉ"
+            name="title"
+            label="Tên project"
             rules={[
               {
+                type: "string",
                 required: true,
               },
             ]}
@@ -75,12 +75,12 @@ export default function AddOutsideProject(props: AddOutsideProject) {
             <FormInput />
           </Form.Item>
           <Form.Item
-            name="email"
-            label="Mail"
+            name="jobRole"
+            label="Vai trò"
             rules={[
               {
+                type: "string",
                 required: true,
-                type: "email",
               },
             ]}
           >

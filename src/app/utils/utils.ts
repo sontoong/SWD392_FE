@@ -9,7 +9,7 @@ export const formatUnixToLocal = (
   unixTimestamp: number,
   locale: string = "vi-VN",
 ) => {
-  const milliseconds = unixTimestamp * 1000;
+  const milliseconds = unixTimestamp;
   const date = new Date(milliseconds);
   const options: Intl.DateTimeFormatOptions = {
     day: "numeric",
@@ -56,7 +56,7 @@ export const formatToTimeDifference = (
 
 export const calculateDateToNow = (time: number, locale: string = "vi-VN") => {
   //exclude the milisecond from Date
-  const today = Math.floor(Date.now() / 1000);
+  const today = Math.floor(Date.now());
 
   const timeDifference = today - time;
   return formatToTimeDifference(timeDifference, locale);

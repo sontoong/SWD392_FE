@@ -5,36 +5,78 @@ import ProjectDetailInfo from "../components/ui-enterprise/CreateProjectForm/Pro
 import ProjectRequirementInfo from "../components/ui-enterprise/CreateProjectForm/ProjectRequirementInfo";
 import { useState } from "react";
 import { OutlineButton, PrimaryButton } from "../components/button/buttons";
+import { CreateProject } from "../models/project";
 
-export default function CreateProject() {
+export default function CreateProjectForm() {
   const { message } = App.useApp();
   const [form] = Form.useForm();
-
-  const [current, setCurrent] = useState(0);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const [current, setCurrent] = useState(0);
+
+  const initialValues: CreateProject = {
+    title: "",
+    language: "vn",
+    projectField: "",
+    description: "",
+    contract: {
+      date: 0,
+      fund: 0,
+      depositType: "full",
+    },
+    funding: "hourly",
+    initialFunding: 0,
+    freelancerRequirement: "junior",
+    timeToComplete: "<1 month",
+    publishTime: 0,
+    createdBy: "",
+    applicantCount: 0,
+    paidAmount: 0,
+    isCompleted: false,
+    privacy: "public",
+    projectType: "unknown",
+    optionalRequirements: {
+      language: "all",
+      location: "all",
+      minimumCompletedProjects: "all",
+      rating: "all",
+      skills: [
+        { label: "Front-end Developer", value: "Front-end Developer" },
+        { label: "Back-end Developer", value: "Back-end Developer" },
+        { label: "Full-stack Developer", value: "Full-stack Developer" },
+      ],
+      questions: [],
+    },
+  };
+
   const steps = [
     {
       title: "Thông tin",
-      content: <ProjectImportantInfo form={form} />,
+      content: (
+        <ProjectImportantInfo form={form} initialValues={initialValues} />
+      ),
     },
     {
       title: "Chi tiết",
-      content: <ProjectDetailInfo form={form} />,
+      content: <ProjectDetailInfo form={form} initialValues={initialValues} />,
     },
     {
       title: "Năng lực",
-      content: <ProjectRequirementInfo form={form} />,
+      content: (
+        <ProjectRequirementInfo form={form} initialValues={initialValues} />
+      ),
     },
   ];
 
   const next = () => {
+    window.scrollTo(0, 0);
     setCurrent(current + 1);
   };
 
   const prev = () => {
+    window.scrollTo(0, 0);
     setCurrent(current - 1);
   };
 
@@ -76,6 +118,20 @@ export default function CreateProject() {
         >
           <div>{steps[current].content}</div>
           <Form name="mainForm" onFinish={onFinish}>
+            {/* hidden fields for form to record */}
+            <Form.Item name="title" hidden />
+            <Form.Item name="language" hidden />
+            <Form.Item name="optionalRequirements" hidden />
+            <Form.Item name="projectField" hidden />
+            <Form.Item name="description" hidden />
+            <Form.Item name="contract" hidden />
+            <Form.Item name="funding" hidden />
+            <Form.Item name="freelancerRequirement" hidden />
+            <Form.Item name="timeToComplete" hidden />
+            <Form.Item name="privacy" hidden />
+            <Form.Item name="projectType" hidden />
+            <Form.Item name="optionalRequirements" hidden />
+
             <div style={{ marginTop: 24 }}>
               {current < steps.length - 1 && (
                 <PrimaryButton

@@ -10,49 +10,51 @@ import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import { FormRadioButtonGroup } from "../../input/inputs";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 export default function ProjectDetailInfo({
   form,
+  initialValues,
 }: {
   form: FormInstance<any>;
+  initialValues: CreateProject;
 }) {
   const { Title } = Typography;
 
-  const initialValues: CreateProject = {
-    title: "",
-    language: "vn",
-    projectField: "",
-    description: "",
-    contract: {
-      date: 1708532861,
-      fund: 0,
-      depositType: "full"
-    },
-    funding: "fixed",
-    initialFunding: 0,
-    freelancerRequirement: "junior",
-    timeToComplete: "<1 month",
-    publishTime: 0,
-    createdBy: "",
-    applicantCount: 0,
-    paidAmount: 0,
-    isCompleted: false,
-    privacy: "public",
-    projectType: "unknown",
-    optionalRequirements: {
-      language: "all",
-      location: "all",
-      minimumCompletedProjects: "all",
-      rating: "all",
-      skills: [
-        { label: "Front-end Developer", value: "Front-end Developer" },
-        { label: "Back-end Developer", value: "Back-end Developer" },
-        { label: "Full-stack Developer", value: "Full-stack Developer" },
-      ],
-      questions: [],
-    },
-  };
+  // const initialValues: CreateProject = {
+  //   title: "",
+  //   language: "vn",
+  //   projectField: "",
+  //   description: "",
+  //   contract: {
+  //     date: 1708532861,
+  //     fund: 0,
+  //     depositType: "full"
+  //   },
+  //   funding: "fixed",
+  //   initialFunding: 0,
+  //   freelancerRequirement: "junior",
+  //   timeToComplete: "<1 month",
+  //   publishTime: 0,
+  //   createdBy: "",
+  //   applicantCount: 0,
+  //   paidAmount: 0,
+  //   isCompleted: false,
+  //   privacy: "public",
+  //   projectType: "unknown",
+  //   optionalRequirements: {
+  //     language: "all",
+  //     location: "all",
+  //     minimumCompletedProjects: "all",
+  //     rating: "all",
+  //     skills: [
+  //       { label: "Front-end Developer", value: "Front-end Developer" },
+  //       { label: "Back-end Developer", value: "Back-end Developer" },
+  //       { label: "Full-stack Developer", value: "Full-stack Developer" },
+  //     ],
+  //     questions: [],
+  //   },
+  // };
 
   const onFinish = (values: any) => {
     console.log("Success:", values);
@@ -90,11 +92,7 @@ export default function ProjectDetailInfo({
               <Form.Item
                 name="privacy"
                 label="Ai có thể xem project này?"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+                rules={[{}]}
               >
                 <FormRadioButtonGroup options={projectPrivacy} />
               </Form.Item>
@@ -105,11 +103,7 @@ export default function ProjectDetailInfo({
               <Form.Item
                 name="projectType"
                 label="Chọn loại hình project"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+                rules={[{}]}
               >
                 <FormRadioButtonGroup options={projectType} />
               </Form.Item>

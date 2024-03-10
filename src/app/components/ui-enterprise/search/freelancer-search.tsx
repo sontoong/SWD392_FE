@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Col, Form, Row, Typography } from "antd";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 import { FreelancerSearch } from "../../../models/search";
 import { CustomCard } from "../../ui/card";
 import { IconButton } from "../../button/buttons";

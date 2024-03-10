@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Form, Typography } from "antd";
 import { Applicant } from "../../../models/applicant";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 interface ApplicationAcceptFormProp {
   record: Applicant;
@@ -57,16 +57,11 @@ export default function ApplicationAcceptForm(
             </React.Fragment>
           ))}
           <Title level={3}>Báo giá:</Title>
-          <Paragraph>
-            {record.money}VND
-          </Paragraph>
+          <Paragraph>{record.money}VND</Paragraph>
           <Title level={3}>Thời gian ước tính:</Title>
-          <Paragraph>
-            {record.time} giờ
-          </Paragraph>
+          <Paragraph>{record.time} giờ</Paragraph>
         </DefaultForm>
       </CustomFormModal>
     </>
   );
 }
-

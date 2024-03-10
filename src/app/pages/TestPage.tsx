@@ -1,4 +1,5 @@
-import FreelancerSearchPage from "./FreelancerSearchPage";
+import FreelancerProjectDetail from "./FreelancerProjectDetailPage";
+
 
 
 
@@ -7,14 +8,12 @@ import FreelancerSearchPage from "./FreelancerSearchPage";
 export default function TestPage() {
 
   return (
-    // <FreelancerProjectDetail/>
-    // <ViewSignContract />
+    <FreelancerProjectDetail/>
     // <FreelancerProjectList/>
-    // <CreateProject/>
+    // <CreateProjectForm/>
     // <ProjectApplicationList/>
     // <ProjectSearchPage />
-    // <ProjectSearchPage/>
     // <FreelancerDetailPage/>
-    <FreelancerSearchPage/>
+    // <FreelancerSearchPage/>
     );
 }

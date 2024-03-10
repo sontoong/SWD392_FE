@@ -4,7 +4,7 @@ import { CustomFormModal } from "../../modal/modal";
 import { FormInput } from "../../input/inputs";
 import { Col, Form, Row } from "antd";
 import { CompanyDetail } from "../../../models/company";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 
 export default function CompanyModalEditContact() {
   const [open, setOpen] = useState(false);

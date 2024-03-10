@@ -17,7 +17,7 @@ import {
 } from "antd";
 import React from "react";
 import BackButton from "../components/button/back-button";
-import { comments, freelancer } from "../../constants/testData";
+import { comments, freelancer, nations } from "../../constants/testData";
 import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
@@ -27,7 +27,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { generateVerifyMsg } from "../utils/generators";
-import { formatCurrency } from "../utils/utils";
+import { formatCurrency, formatUnixToLocal } from "../utils/utils";
 import { defaultImage } from "../../constants/images";
 import { qualityFactors } from "../../constants/quality";
 import Meta from "antd/es/card/Meta";
@@ -64,7 +64,13 @@ export default function FreelancerDetailPage() {
     address,
     phone,
     jobRole,
-    skills
+    skills,
+    outsideProjects,
+    experienceLevel,
+    firstName,
+    lastName,
+    middleName,
+    profilePicture,
   } = freelancer;
 
   return (
@@ -91,7 +97,19 @@ export default function FreelancerDetailPage() {
                   >
                     Tổng quan
                   </Title>
-                  <EditOverview />
+                  <EditOverview
+                    overview={{
+                      description,
+                      desireSalary,
+                      experienceLevel,
+                      firstName,
+                      jobRole,
+                      lastName,
+                      middleName,
+                      nation,
+                      profilePicture,
+                    }}
+                  />
                 </Space>
               }
               type="inner"
@@ -109,7 +127,9 @@ export default function FreelancerDetailPage() {
                       <div className="font-semibold">
                         <Space>
                           <EnvironmentOutlined />
-                          <span className="capitalize">{nation.label}</span>
+                          <span className="capitalize">
+                            {nations[nation].label}
+                          </span>
                         </Space>
                       </div>
                     </Col>
@@ -172,26 +192,36 @@ export default function FreelancerDetailPage() {
               extra={<AddOutsideProject />}
               type="inner"
             >
-              <Flex justify="space-between">
-                <Space direction="vertical">
-                  <Title level={4}>FPT Fap</Title>
-                  <Space>
-                    <Title level={5}>Back-end Developer</Title>
-                    <Title level={5} style={{ fontWeight: "400" }}>
-                      09/2023 - 12/2023
-                    </Title>
-                  </Space>
-                  <Paragraph>
-                    Tôi tạo và quản lý database và flow cho project
-                  </Paragraph>
-                </Space>
-                <Image
-                  width={200}
-                  height={200}
-                  src="error"
-                  fallback={defaultImage}
-                />
-              </Flex>
+              {outsideProjects?.map((project) => {
+                const {
+                  title,
+                  description,
+                  startDate,
+                  endDate,
+                  images,
+                  jobRole,
+                } = project;
+                return (
+                  <Flex justify="space-between">
+                    <Space direction="vertical">
+                      <Title level={4}>{title}</Title>
+                      <Space>
+                        <Title level={5}>{jobRole}</Title>
+                        <Title level={5} style={{ fontWeight: "400" }}>
+                          {`${formatUnixToLocal(startDate)} - ${endDate ? formatUnixToLocal(endDate) : "now"}`}
+                        </Title>
+                      </Space>
+                      <Paragraph>{description}</Paragraph>
+                    </Space>
+                    <Image
+                      width={200}
+                      height={200}
+                      src={images ? images[0] : "error"}
+                      fallback={defaultImage}
+                    />
+                  </Flex>
+                );
+              })}
               <Divider />
             </CustomCard>
             {/* rating */}
@@ -457,7 +487,7 @@ export default function FreelancerDetailPage() {
                   </div>
                   <div>
                     <Title level={4}>Múi giờ</Title>
-                    {nation.label}
+                    {nations[nation].label}
                   </div>
                   <div>
                     <Title level={4}>SĐT</Title>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Col, Form, Row, Typography } from "antd";
-import DefaultForm from "../../form/form";
+import { DefaultForm } from "../../form/form";
 import { ProjectSearch } from "../../../models/search";
 import { CustomCard } from "../../ui/card";
 import { IconButton } from "../../button/buttons";
@@ -27,7 +27,7 @@ export default function ProjectSearchForm() {
 
   const initialValues: ProjectSearch = {
     input: "",
-    projectField: "all",
+    projectField: "",
     timeToComplete: "all",
     enterpriseProject: "all",
     funding: "all",
@@ -92,7 +92,7 @@ export default function ProjectSearchForm() {
                   },
                 ]}
             >
-                <FormTreeSelect treeData={Object.values(projectFields)} />
+                <FormTreeSelect treeData={Object.values(projectFields)}/>
             </Form.Item>
             </Col>
             <Col span={4} offset={2}>

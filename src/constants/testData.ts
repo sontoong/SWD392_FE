@@ -69,7 +69,7 @@ export const project: Project = {
   isVerified: true,
   paidAmount: 0,
   projectField: field,
-  publishedTime: 1708532861,
+  publishedTime: 1708532861000,
   isCompleted: false,
   language: "en",
   timeToComplete: "<1 month",
@@ -83,27 +83,37 @@ export const project: Project = {
   inviteSent: 6,
   inviteAccepted: 3,
   freelancerCount: 10,
-  contract:{
-    date: 1708532861,
+  contract: {
+    date: 1708532861000,
     depositType: "full",
     fund: 0,
-  }
+  },
+};
+
+export const oproject1: OutsideProject = {
+  title: "FPT Fap",
+  description: "Tôi tạo và quản lý database và flow cho project",
+  jobRole: "Back-end Developer",
+  startDate: 1708532861000,
+  endDate: 1708532861000,
+  images: [],
+  projectProfileImages: [{ image: "", description: "" }],
 };
 
 export const freelancer: FreelancerDetail = {
   id: "1",
   role: "freelancer",
-  dob: 1708532861,
+  dob: 1708532861000,
   email: "nguyena@gmail.com",
   username: "Nguyễn Văn A",
   phone: "0123456789",
   address:
     "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh 715650",
-  nation: nations["vn"],
+  nation: "vn",
   isVerified: true,
   averageRating: 3.5,
   ratingCount: 10,
-  createdAt: 1708532861,
+  createdAt: 1708532861000,
   description: `20 năm trong Full-Stack Development + UI/UX
 Facebook: fb.com/user/JoeBiden`,
   desireSalary: 50000,
@@ -116,6 +126,7 @@ Facebook: fb.com/user/JoeBiden`,
   jobRole: "Front-end Developer",
   profilePicture: "",
   skills: skills,
+  outsideProjects: [oproject1],
 };
 
 export const projects: Project[] = [project];
@@ -163,7 +174,7 @@ export const enterpriseInfo: EnterpriseInfo = {
   firstName: "Nguyễn",
   middleName: "Văn",
   lastName: "A",
-  dateOfBirth: 1708532861,
+  dateOfBirth: 1708532861000,
   enterpriseCountry: { label: "Việt Nam", value: "vn" },
   documentType: "Hộ chiếu",
   enterpriseDocument: "FunnyMemeFrom9GAG.png",
@@ -178,36 +189,36 @@ export const enterpriseInfo: EnterpriseInfo = {
 export const FreelancerProjects: FreelancerProject[] = [
   {
     ...project,
-    startDate: 1708532861,
-    endDate: 1708532861,
+    startDate: 1708532861000,
+    endDate: 1708532861000,
     status: "stopped",
     signature: "Thuan",
   },
   {
     ...project,
-    startDate: 1708532861,
-    endDate: 1708532861,
+    startDate: 1708532861000,
+    endDate: 1708532861000,
     status: "doing",
     signature: "Thuan",
   },
   {
     ...project,
-    startDate: 1708532861,
-    endDate: 1708532861,
+    startDate: 1708532861000,
+    endDate: 1708532861000,
     status: "contracting",
     signature: "",
   },
   {
     ...project,
-    startDate: 1708532861,
-    endDate: 1708532861,
+    startDate: 1708532861000,
+    endDate: 1708532861000,
     status: "verifying",
     signature: "",
   },
   {
     ...project,
-    startDate: 1708532861,
-    endDate: 1708532861,
+    startDate: 1708532861000,
+    endDate: 1708532861000,
     status: "denied",
     signature: "",
   },
@@ -253,14 +264,14 @@ export const Incomes: Income[] = [
 export const Transactions: Transaction[] = [
   {
     name: "Nguyễn Văn Cường",
-    date: 1708532861,
+    date: 1708532861000,
     id: "#15XE335NME",
     moneyAmount: 5000000,
     type: "cash-out",
   },
   {
     name: "Nguyễn Văn Cường",
-    date: 1708532861,
+    date: 1708532861000,
     id: "#15XE335NME",
     moneyAmount: 5000000,
     type: "transaction",
@@ -272,7 +283,7 @@ export const Applicants: Applicant[] = [
     id: "",
     projectId: "",
     name: "Nguyễn Văn A",
-    date: 1708532861,
+    date: 1708532861000,
     money: 0,
     time: 0,
     questions: [
@@ -297,7 +308,7 @@ export const Applicants: Applicant[] = [
     id: "",
     projectId: "",
     name: "Nguyễn Văn A",
-    date: 1708532861,
+    date: 1708532861000,
     money: 0,
     time: 0,
     questions: [
@@ -319,11 +330,3 @@ export const Applicants: Applicant[] = [
     ],
   },
 ];
-
-export const oproject1: OutsideProject = {
-  title: "FPT Fap",
-  description: "Tôi tạo và quản lý database và flow cho project",
-  jobRole: "Back-end Developer",
-  startDate: 1708532861,
-  endDate: 1708532861,
-};

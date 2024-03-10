@@ -67,7 +67,7 @@ export default function FreelancerCard({
               <Col>
                 <Space className="whitespace-nowrap">
                   <EnvironmentOutlined />
-                  {nation.label}
+                  {nation}
                 </Space>
                 <div className="whitespace-nowrap text-[1.3rem] font-bold">
                   {jobRole}

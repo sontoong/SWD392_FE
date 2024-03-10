@@ -29,7 +29,7 @@ import Meta from "antd/es/card/Meta";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { defaultImage } from "../../constants/images";
-import { comments, freelancer } from "../../constants/testData";
+import { comments, freelancer, nations } from "../../constants/testData";
 import BackButton from "../components/button/back-button";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 import { generateVerifyMsg } from "../utils/generators";
@@ -114,7 +114,9 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
                       <div className="font-semibold">
                         <Space>
                           <EnvironmentOutlined />
-                          <span className="capitalize">{nation.label}</span>
+                          <span className="capitalize">
+                            {nations[nation].label}
+                          </span>
                         </Space>
                       </div>
                     </Col>
@@ -519,7 +521,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
                   </div>
                   <div>
                     <Title level={4}>Múi giờ</Title>
-                    {nation.label}
+                    {nations[nation].label}
                   </div>
                   <div>
                     <Title level={4}>SĐT</Title>

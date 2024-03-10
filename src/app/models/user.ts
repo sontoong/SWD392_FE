@@ -1,4 +1,3 @@
-import { Nation } from "./language";
 import { ExperienceLevel, OutsideProject, Skill } from "./project";
 
 export interface UserDetail {
@@ -9,7 +8,7 @@ export interface UserDetail {
   dob: number;
   role: "freelancer" | "enterprise" | "admin";
   address: string;
-  nation: Nation[string];
+  nation: string;
   isVerified: boolean;
   averageRating: number;
   ratingCount: number;

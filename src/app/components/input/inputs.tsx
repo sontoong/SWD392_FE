@@ -247,11 +247,8 @@ function InputNumberFix(props: InputNumberProps) {
   return (
     <InputNumber
       {...props}
-      formatter={(value) => {
-        return `${value} VND`;
-      }}
-      parser={(value) => value!.replace("VND", "")}
       className="w-full rounded-[6px] border-[1px] border-[#d9d9d9]"
+      min={0}
     />
   );
 }
