@@ -192,23 +192,17 @@ export default function FreelancerDetailPage() {
               extra={<AddOutsideProject />}
               type="inner"
             >
-              {outsideProjects?.map((project) => {
-                const {
-                  title,
-                  description,
-                  startDate,
-                  endDate,
-                  images,
-                  jobRole,
-                } = project;
+              {outsideProjects?.map((project, index) => {
+                const { title, description, startEndDate, images, jobRole } =
+                  project;
                 return (
-                  <Flex justify="space-between">
+                  <Flex justify="space-between" key={index}>
                     <Space direction="vertical">
                       <Title level={4}>{title}</Title>
                       <Space>
                         <Title level={5}>{jobRole}</Title>
                         <Title level={5} style={{ fontWeight: "400" }}>
-                          {`${formatUnixToLocal(startDate)} - ${endDate ? formatUnixToLocal(endDate) : "now"}`}
+                          {`${formatUnixToLocal(startEndDate[0])} - ${startEndDate[1] ? formatUnixToLocal(startEndDate[1]) : "now"}`}
                         </Title>
                       </Space>
                       <Paragraph>{description}</Paragraph>
@@ -347,13 +341,13 @@ export default function FreelancerDetailPage() {
               }
               type="inner"
             >
-            <Space size={[0, 8]} wrap>
-              {skills.map((skillItem, index) => (
-                <Tag key={index} color="#87d068">
-                  {skillItem.label}
-                </Tag>
-              ))}
-            </Space>
+              <Space size={[0, 8]} wrap>
+                {skills.map((skillItem, index) => (
+                  <Tag key={index} color="#87d068">
+                    {skillItem.label}
+                  </Tag>
+                ))}
+              </Space>
             </CustomCard>
             {/* languages */}
             <CustomCard

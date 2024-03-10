@@ -25,7 +25,7 @@ import {
 import { SearchProps, TextAreaProps } from "antd/es/input";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { RequiredFields } from "../../utils/helpers";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { RangePickerProps } from "antd/es/date-picker";
 import { CSSProperties } from "react";
 
@@ -300,11 +300,9 @@ function FormDatePicker(props: DatePickerProps) {
 function FormRangePicker(props: RangePickerProps) {
   const { value } = props;
   const dayjsDates = value?.map((item) => {
-    if (typeof item === "number") return dayjs(item);
-    else return dayjs(0);
-  });
-  console.log(props);
-  console.log(dayjsDates);
+    if (item && typeof item === "number") return dayjs(item);
+    else return item;
+  }) as RangePickerProps["value"] | undefined;
 
   return <RangePicker {...props} allowClear={false} value={dayjsDates} />;
 }
