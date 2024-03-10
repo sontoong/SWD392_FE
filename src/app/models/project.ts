@@ -6,6 +6,19 @@
 
 export type ExperienceLevel = "junior" | "senior" | "expert";
 
+export type OptionalRequirementsCreate = {
+  minimumCompletedProjects:
+    | "all"
+    | "<3 projects"
+    | "5-10 projects"
+    | ">10 projects";
+  rating: "all" | ">3 stars" | ">4 stars";
+  location: "all" | "hcm" | "hn" | "dn";
+  language: "all" | "en" | "vn" | "cn";
+  skills: Skill[];
+  questions?: string[];
+};
+
 export type OptionalRequirements = {
   minimumCompletedProjects:
     | "all"
@@ -13,7 +26,7 @@ export type OptionalRequirements = {
     | "5-10 projects"
     | ">10 projects";
   rating: "all" | ">3 stars" | ">4 stars";
-  location: "all" | "us" | "vn" | "cn";
+  location: "all" | "hcm" | "hn" | "dn";
   language: "all" | "en" | "vn" | "cn";
   skills: Skill[];
   questions?: string[];
@@ -44,7 +57,7 @@ export interface Contract {
 export interface Project {
   id: string;
   title: string;
-  language: "en" | "vn" | "cn";
+  language: "all" | "en" | "vn" | "cn";
   projectField: SkillField;
   description: string;
   contract: Contract;
@@ -52,7 +65,7 @@ export interface Project {
   initialFunding: number;
   freelancerRequirement: ExperienceLevel;
   optionalRequirements: OptionalRequirements;
-  timeToComplete: 1 | 2 | 3;
+  timeToComplete: "<1 month" | "1-3 month" | ">3 month";
   publishedTime: number;
   createdBy: string;
   createdById: string;
@@ -76,7 +89,7 @@ export interface CreateProject {
   funding: "hourly" | "fixed";
   initialFunding?: number;
   freelancerRequirement?: ExperienceLevel;
-  timeToComplete: 1 | 2 | 3;
+  timeToComplete: "<1 month" | "1-3 months" | ">3 months";
   publishTime: number;
   createdBy: string;
   applicantCount: number;

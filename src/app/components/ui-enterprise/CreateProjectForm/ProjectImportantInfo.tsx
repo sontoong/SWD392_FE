@@ -19,7 +19,6 @@ import {
 } from "../../input/inputs";
 import { FormSelect, FormTreeSelect } from "../../select/select";
 import { language } from "../../../../constants/language";
-import { location } from "../../../../constants/location";
 import { projectFields } from "../../../../constants/project-field";
 import { useState } from "react";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
@@ -44,7 +43,42 @@ export default function ProjectImportantInfo({
       label: "Đặt cọc theo từng hạng mục công việc",
       value: "period",
     },
-  ];
+  ]
+
+  // const initialValues: CreateProject = {
+  //   title: "",
+  //   language: "vn",
+  //   projectField: "",
+  //   description: "",
+  //   contract: {
+  //     date: 1708532861,
+  //     fund: 0,
+  //     depositType: "full"
+  //   },
+  //   funding: "hourly",
+  //   initialFunding: 0,
+  //   freelancerRequirement: "junior",
+  //   timeToComplete: "<1 month",
+  //   publishTime: 0,
+  //   createdBy: "",
+  //   applicantCount: 0,
+  //   paidAmount: 0,
+  //   isCompleted: false,
+  //   privacy: "public",
+  //   projectType: "unknown",
+  //   optionalRequirements: {
+  //     language: "all",
+  //     location: "all",
+  //     minimumCompletedProjects: "all",
+  //     rating: "all",
+  //     skills: [
+  //       { label: "Front-end Developer", value: "Front-end Developer" },
+  //       { label: "Back-end Developer", value: "Back-end Developer" },
+  //       { label: "Full-stack Developer", value: "Full-stack Developer" },
+  //     ],
+  //     questions: [],
+  //   },
+  // };
 
   const [renderFunding, setRenderFunding] = useState<string>(
     initialValues.funding,
@@ -161,7 +195,7 @@ export default function ProjectImportantInfo({
             </Col>
           </Row>
           <Row>
-            <Col span={10}>
+            <Col span={24}>
               <Form.Item
                 name="language"
                 label="Ngôn ngữ"
@@ -172,19 +206,6 @@ export default function ProjectImportantInfo({
                 ]}
               >
                 <FormSelect options={Object.values(language)} />
-              </Form.Item>
-            </Col>
-            <Col span={10} offset={4}>
-              <Form.Item
-                name={["optionalRequirements", "location"]}
-                label="Địa điểm"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <FormSelect options={Object.values(location)} />
               </Form.Item>
             </Col>
           </Row>
@@ -308,15 +329,15 @@ const ProjectFundingTypes: CheckboxOptionType<CheckboxValueType>[] = [
 const ProjectTimeToComplete: CheckboxOptionType<CheckboxValueType>[] = [
   {
     label: "Ít hơn 1 tháng",
-    value: 1,
+    value: "<1 month",
   },
   {
     label: "1-3 tháng",
-    value: 2,
+    value: "1-3 months",
   },
   {
     label: "3 tháng",
-    value: 3,
+    value: ">3 months",
   },
 ];
 

@@ -1,18 +1,19 @@
-import ProjectApplicationList from "../components/ui-enterprise/ProjectApplicationList";
-// import { ViewSignContract } from "../components/ui-freelancer/modals";
-// import CreateProject from "./EnterpriseCreateProjectPage";
-// import FreelancerProjectDetail from "./FreelancerProjectDetailPage";
-// import FreelancerProjectList from "./FreelancerProjectList";
+import FreelancerProjectDetail from "./FreelancerProjectDetailPage";
+
+
+
 
 
 
 export default function TestPage() {
 
   return (
-    // <FreelancerProjectDetail/>
-    // <ViewSignContract />
+    <FreelancerProjectDetail/>
     // <FreelancerProjectList/>
-    // <CreateProject/>
-    <ProjectApplicationList/>
+    // <CreateProjectForm/>
+    // <ProjectApplicationList/>
+    // <ProjectSearchPage />
+    // <FreelancerDetailPage/>
+    // <FreelancerSearchPage/>
     );
 }

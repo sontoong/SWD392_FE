@@ -75,7 +75,7 @@ export default function ApplyForm({ project }: { project: Project }) {
                   >
                     <Col span={18}>
                       <Title level={5}>
-                        {form.getFieldValue(["questions", "question", name])}
+                        {form.getFieldValue(["questions", name, "question"])}
                       </Title>
                       <Form.Item
                         {...restField}

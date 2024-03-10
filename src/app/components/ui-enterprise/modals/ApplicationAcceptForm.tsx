@@ -49,7 +49,7 @@ export default function ApplicationAcceptForm(
         }}
       >
         <DefaultForm form={form} name="ViewSignContract" initialValues={record}>
-          {record.questions?.map((qna, index) => (
+            {record.questions && record.questions.map((qna, index) => (
             <React.Fragment key={index}>
               <Title level={3}>{qna.question}</Title>
               <Paragraph>{qna.answer}</Paragraph>

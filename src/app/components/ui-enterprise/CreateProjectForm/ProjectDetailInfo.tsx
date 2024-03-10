@@ -21,6 +21,41 @@ export default function ProjectDetailInfo({
 }) {
   const { Title } = Typography;
 
+  // const initialValues: CreateProject = {
+  //   title: "",
+  //   language: "vn",
+  //   projectField: "",
+  //   description: "",
+  //   contract: {
+  //     date: 1708532861,
+  //     fund: 0,
+  //     depositType: "full"
+  //   },
+  //   funding: "fixed",
+  //   initialFunding: 0,
+  //   freelancerRequirement: "junior",
+  //   timeToComplete: "<1 month",
+  //   publishTime: 0,
+  //   createdBy: "",
+  //   applicantCount: 0,
+  //   paidAmount: 0,
+  //   isCompleted: false,
+  //   privacy: "public",
+  //   projectType: "unknown",
+  //   optionalRequirements: {
+  //     language: "all",
+  //     location: "all",
+  //     minimumCompletedProjects: "all",
+  //     rating: "all",
+  //     skills: [
+  //       { label: "Front-end Developer", value: "Front-end Developer" },
+  //       { label: "Back-end Developer", value: "Back-end Developer" },
+  //       { label: "Full-stack Developer", value: "Full-stack Developer" },
+  //     ],
+  //     questions: [],
+  //   },
+  // };
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
