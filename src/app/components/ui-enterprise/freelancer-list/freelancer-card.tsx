@@ -20,14 +20,14 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { FreelancerDetail } from "../../../models/user";
-import PayFreelancerModal from "../modals/PayFreelancerModal";
+import { PayFreelancerModal } from "../modals";
 
 export default function FreelancerCard({
   freelancer,
   paying,
 }: {
   freelancer: FreelancerDetail;
-  paying?: boolean; 
+  paying?: boolean;
 }) {
   const {
     firstName,

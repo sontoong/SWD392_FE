@@ -7,15 +7,15 @@ export const formatCurrency = (amount: number) => {
 
 export const formatUnixToLocal = (
   unixTimestamp: number,
+  options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  },
   locale: string = "vi-VN",
 ) => {
   const milliseconds = unixTimestamp;
   const date = new Date(milliseconds);
-  const options: Intl.DateTimeFormatOptions = {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  };
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);
 };

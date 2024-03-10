@@ -9,7 +9,7 @@ import {
 import { CustomFormModal } from "../../modal/modal";
 import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
-import UploadProfilePicture from "../upload/profile-picture";
+import { UploadProfileImage } from "../upload";
 import { FreelancerDetail } from "../../../models/user";
 import { DefaultForm } from "../../form/form";
 
@@ -87,7 +87,7 @@ export default function EditContact(props: EditOverviewProps) {
               },
             ]}
           >
-            <UploadProfilePicture />
+            <UploadProfileImage />
           </Form.Item>
           <Space>
             <Form.Item

@@ -1,7 +1,7 @@
 import { Layout, Table, TableProps, theme } from "antd";
 import { Applicants } from "../../../../constants/testData";
 import { Applicant } from "../../../models/applicant";
-import ApplicationAcceptForm from "../modals/ApplicationAcceptForm";
+import { ApplicationAcceptForm } from "../modals";
 import { formatUnixToLocal } from "../../../utils/utils";
 import { Content } from "antd/es/layout/layout";
 

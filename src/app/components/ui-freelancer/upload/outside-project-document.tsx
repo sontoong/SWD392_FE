@@ -11,13 +11,13 @@ interface uploadedImage {
   url: string;
 }
 
-export default function UploadOutsideProjectPicture(props: {
+export default function UploadOutsideProjectDocument(props: {
   value?: OutsideProject["images"];
-  setImages: React.Dispatch<
-    React.SetStateAction<OutsideProject["images"] | undefined>
+  setDocument: React.Dispatch<
+    React.SetStateAction<OutsideProject["projectDocumentImages"] | undefined>
   >;
 }) {
-  const { value, setImages } = props;
+  const { value, setDocument } = props;
   let uploadedList: uploadedImage[] = [];
   if (value) {
     uploadedList = value.map((img, index) => {
@@ -33,16 +33,16 @@ export default function UploadOutsideProjectPicture(props: {
   const [fileList, setFileList] = useState<UploadFile[]>(uploadedList);
 
   useEffect(() => {
-    const reformatImageList = fileList.map((img) => {
-      if (img.originFileObj) {
-        return {
-          name: img.name,
-          file: img.originFileObj,
-        };
-      } else return { name: img.name, url: img.url };
-    });
-    setImages(reformatImageList);
-  }, [fileList, setImages]);
+    // const reformatImageList = fileList.map((img) => {
+    //   if (img.originFileObj) {
+    //     return {
+    //       name: img.name,
+    //       file: img.originFileObj,
+    //     };
+    //   } else return { name: img.name, url: img.url };
+    // });
+    // setDocument(reformatImageList);
+  }, [fileList, setDocument]);
 
   const handleChange: UploadProps["onChange"] = ({ file, fileList }) => {
     if (file.type != "image/jpeg" && file.type != "image/png") {
@@ -55,7 +55,7 @@ export default function UploadOutsideProjectPicture(props: {
   return (
     <UploadImg
       listType="picture-card"
-      maxCount={5}
+      maxCount={1}
       onChange={handleChange}
       fileList={fileList}
     />

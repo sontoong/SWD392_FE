@@ -15,7 +15,7 @@ import {
   Field,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
-import { FreelancerDetail } from "../app/models/user";
+import { Education, FreelancerDetail } from "../app/models/user";
 
 export const nations: Nation = {
   all: { label: "Tất cả", value: "all" },
@@ -96,7 +96,15 @@ export const oproject1: OutsideProject = {
   jobRole: "Back-end Developer",
   startEndDate: [1708532861000, 1708532861000],
   images: [],
-  projectProfileImages: [{ image: "", description: "" }],
+  projectDocumentImages: [{ image: { name: "img1" }, description: "" }],
+};
+
+export const education1: Education = {
+  school: "FPT University",
+  degree: "Bachelor",
+  startYear: 1704042000000,
+  endYear: 1704042000000,
+  description: "Khóa học Full-Stack Development",
 };
 
 export const freelancer: FreelancerDetail = {
@@ -126,6 +134,7 @@ Facebook: fb.com/user/JoeBiden`,
   profilePicture: "",
   skills: skills,
   outsideProjects: [oproject1],
+  educations: [education1],
 };
 
 export const projects: Project[] = [project];

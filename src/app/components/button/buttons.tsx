@@ -11,6 +11,15 @@ export function PrimaryButton(props: ButtonProps) {
   );
 }
 
+export function DeletePrimaryButton(props: ButtonProps) {
+  const { children } = props;
+  return (
+    <Button type="primary" {...props} className="bg-[#df0022]">
+      {children}
+    </Button>
+  );
+}
+
 export function OutlineButton(props: ButtonProps) {
   const { children } = props;
   return (

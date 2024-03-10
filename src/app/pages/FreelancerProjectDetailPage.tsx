@@ -25,7 +25,7 @@ import {
 import { formatCurrency } from "../utils/utils";
 import CustomTag from "../components/ui/tag";
 import Sider from "antd/es/layout/Sider";
-import ApplyForm from "../components/ui-freelancer/modals/ApplyForm";
+import { ApplyProject } from "../components/ui-freelancer/modals";
 
 export default function FreelancerProjectDetail() {
   const { Title, Text } = Typography;
@@ -133,7 +133,7 @@ export default function FreelancerProjectDetail() {
           <Space direction="vertical" size={"large"}>
             <Row>
               <Col span={24}>
-                <ApplyForm project={data} />
+                <ApplyProject project={data} />
               </Col>
             </Row>
             <Title level={3}>Khách hàng</Title>

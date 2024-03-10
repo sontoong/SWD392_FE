@@ -6,7 +6,7 @@ import {
   generateFreelancerProjectStatus,
 } from "../utils/generators";
 import { FreelancerProjects } from "../../constants/testData";
-import { ViewSignContract } from "../components/ui-freelancer/modals/";
+import { ViewSignContract } from "../components/ui-freelancer/modals";
 import { formatUnixToLocal } from "../utils/utils";
 
 export interface TableData extends FreelancerProject {

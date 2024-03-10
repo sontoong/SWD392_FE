@@ -12,11 +12,10 @@ interface EditContactProps {
   contact?: Pick<UserDetail, "address" | "email" | "phone" | "nation">;
 }
 export default function EditContact(props: EditContactProps) {
-  console.log(props.contact);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
 
-  const initialValues: EditContactProps["contact"] = {
+  const initialValues: EditContactProps["contact"] = props.contact ?? {
     address: "",
     email: "",
     phone: "",

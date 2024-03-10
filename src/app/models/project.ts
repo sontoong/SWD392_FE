@@ -1,9 +1,3 @@
-// type Experience = {
-//   name: string;
-//   level: "junior" | "senior" | "expert";
-//   time: string;
-// };
-
 export type ExperienceLevel = "junior" | "senior" | "expert";
 
 export type OptionalRequirementsCreate = {
@@ -112,8 +106,11 @@ export interface OutsideProject {
   jobRole: string;
   description: string;
   startEndDate: [number, number?];
-  images?: string[];
-  projectProfileImages?: [{ image: string; description: string }];
+  images?: { name: string; url?: string; file?: File }[];
+  projectDocumentImages?: {
+    image: { name: string; url?: string; file?: File };
+    description: string;
+  }[];
 }
 
 export interface EnterpriseProject extends Project {

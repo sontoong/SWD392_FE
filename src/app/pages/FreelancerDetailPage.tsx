@@ -1,4 +1,5 @@
 import {
+  Affix,
   Avatar,
   Col,
   Divider,
@@ -33,9 +34,13 @@ import { qualityFactors } from "../../constants/quality";
 import Meta from "antd/es/card/Meta";
 import { PrimaryButton } from "../components/button/buttons";
 import { CustomCard } from "../components/ui/card";
-import { EditContact, EditOverview } from "../components/ui-freelancer/modals";
+import {
+  EditContact,
+  EditOverview,
+  AddOP,
+  DeleteModal,
+} from "../components/ui-freelancer/modals";
 import { InputFix } from "../components/input/inputs";
-import AddOutsideProject from "../components/ui-freelancer/modals/add-outside-project";
 
 const { Content, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
@@ -71,6 +76,7 @@ export default function FreelancerDetailPage() {
     lastName,
     middleName,
     profilePicture,
+    educations,
   } = freelancer;
 
   return (
@@ -189,34 +195,45 @@ export default function FreelancerDetailPage() {
                   Project làm ngoài Wellancer
                 </Title>
               }
-              extra={<AddOutsideProject />}
+              extra={<AddOP edit={false} />}
               type="inner"
             >
               {outsideProjects?.map((project, index) => {
                 const { title, description, startEndDate, images, jobRole } =
                   project;
                 return (
-                  <Flex justify="space-between" key={index}>
-                    <Space direction="vertical">
-                      <Title level={4}>{title}</Title>
-                      <Space>
-                        <Title level={5}>{jobRole}</Title>
-                        <Title level={5} style={{ fontWeight: "400" }}>
-                          {`${formatUnixToLocal(startEndDate[0])} - ${startEndDate[1] ? formatUnixToLocal(startEndDate[1]) : "now"}`}
-                        </Title>
+                  <React.Fragment key={index}>
+                    <Flex justify="space-between">
+                      <Space direction="vertical">
+                        <Space>
+                          <Title level={4}>{title}</Title>
+                          <AddOP edit={true} project={project} />
+                          <DeleteModal
+                            name={title}
+                            onOk={() => {
+                              console.log(title);
+                            }}
+                          />
+                        </Space>
+                        <Space>
+                          <Title level={5}>{jobRole}</Title>
+                          <Title level={5} style={{ fontWeight: "400" }}>
+                            {`${formatUnixToLocal(startEndDate[0])} - ${startEndDate[1] ? formatUnixToLocal(startEndDate[1]) : "now"}`}
+                          </Title>
+                        </Space>
+                        <Paragraph>{description}</Paragraph>
                       </Space>
-                      <Paragraph>{description}</Paragraph>
-                    </Space>
-                    <Image
-                      width={200}
-                      height={200}
-                      src={images ? images[0] : "error"}
-                      fallback={defaultImage}
-                    />
-                  </Flex>
+                      <Image
+                        width={200}
+                        height={200}
+                        src={images ? images[0]?.url : "error"}
+                        fallback={defaultImage}
+                      />
+                    </Flex>
+                    {index < outsideProjects.length - 1 ? <Divider /> : <></>}
+                  </React.Fragment>
                 );
               })}
-              <Divider />
             </CustomCard>
             {/* rating */}
             <CustomCard
@@ -419,23 +436,39 @@ export default function FreelancerDetailPage() {
               }
               type="inner"
             >
-              <Space direction="vertical">
-                <Title level={4}>FPT University</Title>
-                <Title level={5}>Tốt nghiệp, Lập trình IT</Title>
-                <Title level={5} style={{ fontWeight: "400" }}>
-                  09/2023 - 12/2023
-                </Title>
-                <Paragraph>Sinh viên tốt nghiệp tại FPT sau 3 năm</Paragraph>
-              </Space>
-              <Divider />
-              <Space direction="vertical">
-                <Title level={4}>FPT University</Title>
-                <Title level={5}>Tốt nghiệp, Lập trình IT</Title>
-                <Title level={5} style={{ fontWeight: "400" }}>
-                  09/2023 - 12/2023
-                </Title>
-                <Paragraph>Sinh viên tốt nghiệp tại FPT sau 3 năm</Paragraph>
-              </Space>
+              {educations?.map((education, index) => {
+                const { school, degree, description, endYear, startYear } =
+                  education;
+                return (
+                  <React.Fragment key={index}>
+                    <Space direction="vertical">
+                      <Space>
+                        <Title level={4}>{school}</Title>
+                        <DeleteModal
+                          name={school}
+                          onOk={() => {
+                            console.log(school);
+                          }}
+                        />
+                      </Space>
+                      <Title level={5}>{degree}</Title>
+                      <Title level={5} style={{ fontWeight: "400" }}>
+                        {formatUnixToLocal(startYear, {
+                          month: "numeric",
+                          year: "numeric",
+                        })}{" "}
+                        -{" "}
+                        {formatUnixToLocal(endYear, {
+                          month: "numeric",
+                          year: "numeric",
+                        })}
+                      </Title>
+                      <Paragraph>{description}</Paragraph>
+                    </Space>
+                    {index < educations.length - 1 ? <Divider /> : <></>}
+                  </React.Fragment>
+                );
+              })}
             </CustomCard>
           </Space>
         </Content>
@@ -444,64 +477,66 @@ export default function FreelancerDetailPage() {
           width={350}
           style={{ background: colorBgContainer, padding: 24 }}
         >
-          <Space direction="vertical" size={"large"}>
-            <PrimaryButton
-              block
-              onClick={() => {
-                modal.confirm({
-                  title: "Lưu ý",
-                  icon: <ExclamationCircleFilled />,
-                  content: <div>Bạn muốn gửi xác nhận hồ sơ</div>,
-                  okText: "Đồng ý",
-                  okType: "default",
-                  cancelText: "Hủy",
-                  onOk() {
-                    console.log(`duyệt`);
-                  },
-                  onCancel() {},
-                });
-              }}
-            >
-              Gửi xác nhận
-            </PrimaryButton>
-            <Space direction="vertical">
-              <Space>
-                <Title level={4}>Thông tin liên hệ</Title>
-                <EditContact />
-              </Space>
-              <CustomCard>
-                <Space direction="vertical" size={"large"}>
-                  <div>
-                    <Title level={4}>Mail</Title>
-                    {email}
-                  </div>
-                  <div>
-                    <Title level={4}>Địa chỉ</Title>
-                    {address}
-                  </div>
-                  <div>
-                    <Title level={4}>Múi giờ</Title>
-                    {nations[nation].label}
-                  </div>
-                  <div>
-                    <Title level={4}>SĐT</Title>
-                    {phone}
-                  </div>
-                </Space>
-              </CustomCard>
-            </Space>
-            <div>
-              <Title
-                level={4}
-                copyable={{
-                  text: "https://freelancerviet.vn/ho-so/thang-vo-minh-3.html",
+          <Affix offsetTop={150}>
+            <Space direction="vertical" size={"large"}>
+              <PrimaryButton
+                block
+                onClick={() => {
+                  modal.confirm({
+                    title: "Lưu ý",
+                    icon: <ExclamationCircleFilled />,
+                    content: <div>Bạn muốn gửi xác nhận hồ sơ</div>,
+                    okText: "Đồng ý",
+                    okType: "default",
+                    cancelText: "Hủy",
+                    onOk() {
+                      console.log(`duyệt`);
+                    },
+                    onCancel() {},
+                  });
                 }}
               >
-                Sao chép đường dẫn hồ sơ
-              </Title>
-              <InputFix defaultValue="https://freelancerviet.vn/ho-so/thang-vo-minh-3.html" />
-            </div>
-          </Space>
+                Gửi xác nhận
+              </PrimaryButton>
+              <Space direction="vertical">
+                <Space>
+                  <Title level={4}>Thông tin liên hệ</Title>
+                  <EditContact contact={{ phone, address, email, nation }} />
+                </Space>
+                <CustomCard>
+                  <Space direction="vertical" size={"large"}>
+                    <div>
+                      <Title level={4}>Mail</Title>
+                      {email}
+                    </div>
+                    <div>
+                      <Title level={4}>Địa chỉ</Title>
+                      {address}
+                    </div>
+                    <div>
+                      <Title level={4}>Múi giờ</Title>
+                      {nations[nation].label}
+                    </div>
+                    <div>
+                      <Title level={4}>SĐT</Title>
+                      {phone}
+                    </div>
+                  </Space>
+                </CustomCard>
+              </Space>
+              <div>
+                <Title
+                  level={4}
+                  copyable={{
+                    text: "https://freelancerviet.vn/ho-so/thang-vo-minh-3.html",
+                  }}
+                >
+                  Sao chép đường dẫn hồ sơ
+                </Title>
+                <InputFix defaultValue="https://freelancerviet.vn/ho-so/thang-vo-minh-3.html" />
+              </div>
+            </Space>
+          </Affix>
         </Sider>
       </Layout>
       {contextHolder}

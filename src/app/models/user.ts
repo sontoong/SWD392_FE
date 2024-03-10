@@ -1,5 +1,19 @@
 import { ExperienceLevel, OutsideProject, Skill } from "./project";
 
+interface Experience {
+  name: string;
+  level: "junior" | "senior" | "expert";
+  time: string;
+}
+
+export interface Education {
+  school: string;
+  degree: string;
+  startYear: number;
+  endYear: number;
+  description: string;
+}
+
 export interface UserDetail {
   id: string;
   username: string;
@@ -27,7 +41,9 @@ export interface FreelancerDetail extends UserDetail {
   experienceLevel: ExperienceLevel;
   jobRole: string;
   outsideProjects?: OutsideProject[];
-  skills: Skill[],
+  skills: Skill[];
+  educations?: Education[];
+  experiences?: Experience[];
 }
 
 export interface UserDetailTable extends UserDetail {
