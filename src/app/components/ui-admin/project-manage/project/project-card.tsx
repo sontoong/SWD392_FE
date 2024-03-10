@@ -1,7 +1,7 @@
-import { Avatar, Button, Card, Divider, Space, Tooltip } from "antd";
+import { Avatar, Button, Card, Divider, Flex, Space, Tooltip, Typography } from "antd";
 import { Project } from "../../../../models/project";
 import { formatCurrency, calculateDateToNow } from "../../../../utils/utils";
-import { generateRequirementMsg } from "../../../../utils/generators";
+import { generateProjectFunding, generateProjectFundingType, generateRequirementMsg } from "../../../../utils/generators";
 import {
   EnvironmentOutlined,
   EyeOutlined,
@@ -9,6 +9,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { nations } from "../../../../../constants/testData";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const {
@@ -22,7 +23,12 @@ export default function ProjectCard({ project }: { project: Project }) {
     createdBy,
     createdById,
     optionalRequirements,
+    funding,
+    initialFunding,
   } = project;
+
+  const { Title } = Typography;
+
   return (
     <Card
       bordered={true}
@@ -38,46 +44,57 @@ export default function ProjectCard({ project }: { project: Project }) {
         </Tooltip>
       }
     >
-      <Space direction="vertical" size="middle" className="flex">
-        <div className="flex gap-5">
-          <Space className="whitespace-nowrap">
-            <FolderOpenOutlined />
-            {projectField.label}
-          </Space>
-          <Space className="whitespace-nowrap">
-            <EnvironmentOutlined />
-            {optionalRequirements.location}
-          </Space>
-          <div className="whitespace-nowrap">
-            Đã đăng cách đây {calculateDateToNow(publishedTime)}
+      <Flex justify="space-between">
+        <Space direction="vertical" size="middle" className="flex">
+          <div className="flex gap-5">
+            <Space className="whitespace-nowrap">
+              <FolderOpenOutlined />
+              {projectField.label}
+            </Space>
+            <Space className="whitespace-nowrap">
+              <EnvironmentOutlined />
+              {nations[optionalRequirements.nation].label}
+            </Space>
+            <div className="whitespace-nowrap">
+              Đã đăng cách đây {calculateDateToNow(publishedTime)}
+            </div>
           </div>
-        </div>
-        <div>{description}</div>
-        <div className="flex items-center gap-5">
-          <div className="whitespace-nowrap">
-            <span className="font-bold">Kinh nghiệm: </span>
-            {generateRequirementMsg(freelancerRequirement).short}
+          <div>{description}</div>
+          <div className="flex items-center gap-5">
+            <div className="whitespace-nowrap">
+              <span className="font-bold">Kinh nghiệm: </span>
+              {generateRequirementMsg(freelancerRequirement).short}
+            </div>
+            <Divider type="vertical" />
+            <div className="whitespace-nowrap">
+              <span className="font-bold">Báo giá: </span> {applicationCount}
+            </div>
           </div>
-          <Divider type="vertical" />
-          <div className="whitespace-nowrap">
-            <span className="font-bold">Báo giá: </span> {applicationCount}
+          <div className="flex items-center gap-5">
+            <Avatar size={"default"} icon={<UserOutlined />} />
+            <div className="whitespace-nowrap">
+              <span className="font-bold">Đăng bởi: </span>
+              <Link to={`/admin/users/${createdById}`}>
+                <span className="text-blue-500">{createdBy}</span>
+              </Link>
+            </div>
+            <Divider type="vertical" />
+            <div className="whitespace-nowrap">
+              <span className="font-bold">Đã chi trả: </span>
+              {formatCurrency(paidAmount)}
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-5">
-          <Avatar size={"default"} icon={<UserOutlined />} />
-          <div className="whitespace-nowrap">
-            <span className="font-bold">Đăng bởi: </span>
-            <Link to={`/admin/users/${createdById}`}>
-              <span className="text-blue-500">{createdBy}</span>
-            </Link>
-          </div>
-          <Divider type="vertical" />
-          <div className="whitespace-nowrap">
-            <span className="font-bold">Đã chi trả: </span>
-            {formatCurrency(paidAmount)}
-          </div>
-        </div>
-      </Space>
+        </Space>
+        <Title level={3} className="text-right">
+          {generateProjectFunding(
+            funding,
+            freelancerRequirement,
+            initialFunding,
+          )}
+          <br/>
+          <span className="text-[1.2rem] font-normal text-[#b1b1b1]">{generateProjectFundingType(funding)}</span>
+        </Title>
+      </Flex>
     </Card>
   );
 }
