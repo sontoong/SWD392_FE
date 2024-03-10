@@ -8,8 +8,8 @@ import { FilterOutlined } from "@ant-design/icons";
 import { FormRadioGroup, SearchInput } from "../../input/inputs";
 import { FormSelect, FormTreeSelect } from "../../select/select";
 import { projectFields } from "../../../../constants/project-field";
-import { location } from "../../../../constants/location";
 import { language } from "../../../../constants/language";
+import { nations } from "../../../../constants/testData";
 
 
 
@@ -33,7 +33,7 @@ export default function FreelancerSearchForm() {
     experienceLevel: 'all',
     language: 'all',
     lastLogIn: 'all',
-    location: 'all'
+    nation: 'all'
   };
 
   return (
@@ -102,14 +102,14 @@ export default function FreelancerSearchForm() {
               <Col>
                 <Title level={4} style={{color:"white"}}>Địa điểm</Title>
                 <Form.Item
-                  name="location"
+                  name="nation"
                   rules={[
                     {
                       type: "string",
                     },
                   ]}
                             >
-                  <FormSelect options={Object.values(location)}/>
+                  <FormSelect options={Object.values(nations)}/>
                 </Form.Item>
               </Col>
               <Col>

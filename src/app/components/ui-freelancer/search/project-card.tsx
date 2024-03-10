@@ -14,7 +14,6 @@ import {
   generateProjectFunding,
   generateProjectFundingType,
   generateRequirementMsg,
-  generatorLocationType,
 } from "../../../utils/generators";
 import {
   EnvironmentOutlined,
@@ -23,6 +22,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { nations } from "../../../../constants/testData";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const {
@@ -66,7 +66,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             </Space>
             <Space className="whitespace-nowrap">
               <EnvironmentOutlined />
-              {generatorLocationType(optionalRequirements.location)}
+              {nations[optionalRequirements.nation].label}
             </Space>
             <div className="whitespace-nowrap">
               Đã đăng cách đây {calculateDateToNow(publishedTime)}

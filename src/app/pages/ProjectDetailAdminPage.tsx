@@ -23,9 +23,12 @@ import { calculateDateToNow, formatCurrency } from "../utils/utils";
 import {
   generateRequirementMsg,
   generateProjectTypeMsg,
+  generateLanguage,
+  generateRating,
+  generateProjectCompleted,
 } from "../utils/generators";
 import { useLocation, useNavigate } from "react-router-dom";
-import { project } from "../../constants/testData";
+import { nations, project } from "../../constants/testData";
 import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
 
@@ -142,6 +145,7 @@ export default function ProjectDetail() {
     applicationCount,
     inviteSent,
     inviteAccepted,
+    projectField,
   } = project;
 
   return (
@@ -171,6 +175,7 @@ export default function ProjectDetail() {
           }}
         >
           <Title level={2}>{title}</Title>
+          <Title level={4}>{projectField.label}</Title>
           <Text>Đã đăng cách đây {calculateDateToNow(publishedTime)}</Text>
           <Divider />
           <Title level={3}>{description}</Title>
@@ -215,11 +220,11 @@ export default function ProjectDetail() {
               <Title level={3}>Văn bằng ưu tiên</Title>
               <Title level={5}>
                 Công việc đã hoàn thành:{" "}
-                {optionalRequirements.minimumCompletedProjects}
+                {generateProjectCompleted(optionalRequirements.minimumCompletedProjects)}
               </Title>
-              <Title level={5}>Đánh giá: {optionalRequirements.rating}</Title>
-              <Title level={5}>Ngôn ngữ: {optionalRequirements.language}</Title>
-              <Title level={5}>Đất nước: {optionalRequirements.location}</Title>
+              <Title level={5}>Đánh giá: {generateRating(optionalRequirements.rating)}</Title>
+              <Title level={5}>Ngôn ngữ: {generateLanguage(optionalRequirements.language)}</Title>
+              <Title level={5}>Đất nước: {nations[optionalRequirements.nation].label}</Title>
             </Col>
             <Col span={8} offset={1}>
               <Title level={3}>Hoạt động ở công việc này</Title>
