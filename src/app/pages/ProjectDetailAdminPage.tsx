@@ -29,8 +29,8 @@ import {
 } from "../utils/generators";
 import { useLocation, useNavigate } from "react-router-dom";
 import { nations, project } from "../../constants/testData";
-import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
+import { FormTextArea } from "../components/input/inputs";
 
 const { Content, Sider } = Layout;
 const { Text, Title } = Typography;
@@ -89,7 +89,7 @@ export default function ProjectDetail() {
           content: (
             <Space direction="vertical" className="mb-3 w-full">
               <div className="font-semibold">Vui lòng nhập lý do</div>
-              <TextArea
+              <FormTextArea
                 rows={4}
                 placeholder="Nhập lý do"
                 maxLength={100}

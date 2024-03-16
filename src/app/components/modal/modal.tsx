@@ -2,11 +2,12 @@ import { Modal, ModalProps, Typography } from "antd";
 import { OutlineButton, PrimaryButton } from "../button/buttons";
 
 export function CustomFormModal(props: ModalProps) {
-  const { children, open, title, onCancel, onOk } = props;
+  const { children, open, title, onCancel, onOk, width } = props;
   const { Title } = Typography;
 
   return (
     <Modal
+      width={width}
       open={open}
       onCancel={onCancel}
       onOk={onOk}
