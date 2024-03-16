@@ -143,6 +143,33 @@ Facebook: fb.com/user/JoeBiden`,
   outsideProjects: [oproject1],
   educations: [education1],
   experiences: [experience1],
+  rating: [
+    {
+      name: "quality",
+      rating: 0,
+      ratingCount: 0,
+    },
+    {
+      name: "price",
+      rating: 0,
+      ratingCount: 0,
+    },
+    {
+      name: "time",
+      rating: 0,
+      ratingCount: 0,
+    },
+    {
+      name: "response",
+      rating: 0,
+      ratingCount: 0,
+    },
+    {
+      name: "talking",
+      rating: 0,
+      ratingCount: 0,
+    },
+  ]
 };
 
 export const projects: Project[] = [project];

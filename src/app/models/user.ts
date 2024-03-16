@@ -1,5 +1,6 @@
 import { languages } from "../../constants/language";
 import { ExperienceLevel, OutsideProject, Skill } from "./project";
+import { FreelancerRating } from "./rating";
 
 export interface Experience {
   company: string;
@@ -46,6 +47,7 @@ export interface FreelancerDetail extends UserDetail {
   skills: Skill[];
   educations?: Education[];
   experiences?: Experience[];
+  rating: FreelancerRating[];
 }
 
 export interface UserDetailTable extends UserDetail {

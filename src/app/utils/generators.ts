@@ -222,3 +222,18 @@ export function generateProjectCompleted(
       return "Nhiều hơn 10 project";
   }
 }
+
+export function generateRatingName(name: string){
+  switch(name){
+    case "quality":
+      return "Chất lượng";
+    case "price":
+      return "Chi phí";
+    case "time":
+      return "Thời gian";
+    case "response":
+      return "Trách nhiệm";
+    case "talking":
+      return "Giao tiếp";
+  }
+}
