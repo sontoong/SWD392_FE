@@ -4,7 +4,7 @@ import { CustomCard } from "../../ui/card";
 import { FormInput } from "../../input/inputs";
 import { IconButton } from "../../button/buttons";
 import { FormSelect, SelectMultiple } from "../../select/select";
-import { language } from "../../../../constants/language";
+import { languages } from "../../../../constants/language";
 import { skills } from "../../../../constants/skill";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { DefaultForm } from "../../form/form";
@@ -79,7 +79,7 @@ export default function ProjectRequirementInfo({
                 label="Ngôn ngữ"
                 rules={[{}]}
               >
-                <FormSelect options={Object.values(language)} />
+                <FormSelect options={Object.values(languages)} />
               </Form.Item>
             </Col>
             <Col span={10} offset={4}>

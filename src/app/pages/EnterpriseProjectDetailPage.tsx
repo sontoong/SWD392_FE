@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { Layout, Steps, theme } from "antd";
 import { Content } from "antd/es/layout/layout";
-import { DollarCircleOutlined, FileOutlined, SearchOutlined, TeamOutlined} from "@ant-design/icons";
+import {
+  DollarCircleOutlined,
+  FileOutlined,
+  SearchOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 import EnterpriseProjectDetail from "../components/ui-enterprise/project-detail/ProjectDetail";
 import ProjectFreelancerSearch from "../components/ui-enterprise/project-detail/ProjectFreelancerSearch";
 import ProjectApplicationList from "../components/ui-enterprise/project-detail/ProjectApplicationList";
 import ProjectHired from "../components/ui-enterprise/project-detail/ProjectHired";
 import BackButton from "../components/button/back-button";
+import { useLocation } from "react-router-dom";
+import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 
 const { Step } = Steps;
 
@@ -14,26 +21,33 @@ const steps = [
   {
     title: "Chi tiết project",
     content: <EnterpriseProjectDetail />,
-    icon: <FileOutlined/>
+    icon: <FileOutlined />,
   },
   {
     title: "Tìm Freelancer",
-    content: <ProjectFreelancerSearch/>,
-    icon: <SearchOutlined/>
+    content: <ProjectFreelancerSearch />,
+    icon: <SearchOutlined />,
   },
   {
     title: "Báo giá",
-    content: <ProjectApplicationList/>,
-    icon: <DollarCircleOutlined/>
+    content: <ProjectApplicationList />,
+    icon: <DollarCircleOutlined />,
   },
   {
     title: "Tuyển dụng",
-    content: <ProjectHired/>,
-    icon: <TeamOutlined/>
+    content: <ProjectHired />,
+    icon: <TeamOutlined />,
   },
 ];
 
 export default function EnterpriseProjectDetailPage() {
+  const location = useLocation();
+  useSetHeaderTitle([
+    {
+      title: ``,
+      path: location.pathname,
+    },
+  ]);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -58,10 +72,15 @@ export default function EnterpriseProjectDetailPage() {
         <BackButton className="mb-3" />
         <Steps type="navigation" current={current} onChange={onChange}>
           {steps.map((item, index) => (
-            <Step key={item.title} title={item.title} icon={item.icon} status={index === current ? 'process' : 'wait'} />
+            <Step
+              key={item.title}
+              title={item.title}
+              icon={item.icon}
+              status={index === current ? "process" : "wait"}
+            />
           ))}
         </Steps>
-        <div>{steps[current].content}</div>
+        <div className="mt-5">{steps[current].content}</div>
       </Content>
     </Layout>
   );

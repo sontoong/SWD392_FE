@@ -1,4 +1,11 @@
-import { Contract, EnterpriseProject, FreelancerProject, OptionalRequirements, Project } from "../models/project";
+import { languages } from "../../constants/language";
+import {
+  Contract,
+  EnterpriseProject,
+  FreelancerProject,
+  OptionalRequirements,
+  Project,
+} from "../models/project";
 import { Transaction } from "../models/transaction";
 import { UserDetail } from "../models/user";
 import { formatCurrency } from "./utils";
@@ -31,8 +38,8 @@ export function generateRequirementMsg(role: Project["freelancerRequirement"]) {
   }
 }
 
-export function generateTimeToComplete(type: Project["timeToComplete"]){
-  switch (type){
+export function generateTimeToComplete(type: Project["timeToComplete"]) {
+  switch (type) {
     case "<1 month":
       return "Ít hơn 1 tháng";
     case "1-3 month":
@@ -40,7 +47,7 @@ export function generateTimeToComplete(type: Project["timeToComplete"]){
     case ">3 month":
       return "Hơn 3 tháng";
     default:
-      return ""
+      return "";
   }
 }
 
@@ -65,7 +72,7 @@ export function generateProjectFundingType(type: Project["funding"]) {
     case "hourly":
       return "Theo giờ";
     default:
-      return '';
+      return "";
   }
 }
 
@@ -76,7 +83,7 @@ export function generateProjectFunding(
 ) {
   switch (type) {
     case "fixed":
-      return  formatCurrency(initialFunding) ;
+      return formatCurrency(initialFunding);
     case "hourly":
       if (freelancerRequirement) {
         switch (freelancerRequirement) {
@@ -87,16 +94,15 @@ export function generateProjectFunding(
           case "expert":
             return "Trên 500.000VND";
           default:
-            return '';
+            return "";
         }
       } else {
-        return ''; // Handle case when freelancerRequirement is undefined
+        return ""; // Handle case when freelancerRequirement is undefined
       }
     default:
-      return '';
+      return "";
   }
 }
-
 
 export function generateVerifyMsg(verified: UserDetail["isVerified"]) {
   switch (verified) {
@@ -121,58 +127,65 @@ export function generateRoleMsg(role: UserDetail["role"]) {
   }
 }
 
-export function generateFreelancerProjectStatus(status: FreelancerProject["status"]) {
+export function generateFreelancerProjectStatus(
+  status: FreelancerProject["status"],
+) {
   switch (status) {
     case "doing":
       return "Đang làm việc";
     case "stopped":
       return "Đã ngưng làm";
     case "contracting":
-        return "Chờ kí hợp đồng";
+      return "Chờ kí hợp đồng";
     case "verifying":
-        return "Đang duyệt";
+      return "Đang duyệt";
     case "denied":
-        return "Từ chối";
+      return "Từ chối";
     default:
-      return '';
+      return "";
   }
 }
 
-export function generateEnterpriseProjectStatus(status: EnterpriseProject["status"]) {
+export function generateEnterpriseProjectStatus(
+  status: EnterpriseProject["status"],
+) {
   switch (status) {
     case "doing":
       return "Đang làm việc";
     case "closed":
       return "Đã đóng";
     case "hiring":
-        return "Đang tuyển dụng";
+      return "Đang tuyển dụng";
     default:
-      return '';
+      return "";
   }
 }
 
-export function generateTransactionType(type: Transaction["type"]){
+export function generateTransactionType(type: Transaction["type"]) {
   switch (type) {
     case "cash-out":
       return "Rút tiền";
     case "transaction":
       return "Chuyển tiền";
     default:
-        return '';
+      return "";
   }
 }
 
-export function generateDepositType(type: Contract["depositType"], fund: Contract["fund"]){
-  switch(type){
+export function generateDepositType(
+  type: Contract["depositType"],
+  fund: Contract["fund"],
+) {
+  switch (type) {
     case "full":
       return `Đặt cọc ${fund} cho toàn bộ công việc`;
     case "period ":
-      return "Đặt cọc theo từng hạng mục công việc"
+      return "Đặt cọc theo từng hạng mục công việc";
   }
 }
 
-export function generateRating(type: OptionalRequirements["rating"]){
-  switch(type){
+export function generateRating(type: OptionalRequirements["rating"]) {
+  switch (type) {
     case "all":
       return `Tất cả`;
     case ">3 stars":
@@ -182,8 +195,8 @@ export function generateRating(type: OptionalRequirements["rating"]){
   }
 }
 
-export function generateLanguage(type: OptionalRequirements["language"]){
-  switch(type){
+export function generateLanguage(type: languages) {
+  switch (type) {
     case "all":
       return "Tất cả";
     case "vn":
@@ -192,10 +205,12 @@ export function generateLanguage(type: OptionalRequirements["language"]){
       return "Tiếng Anh";
     case "cn":
       return "Tiếng Trung";
-    }
+  }
 }
 
-export function generateProjectCompleted(type: OptionalRequirements["minimumCompletedProjects"]){
+export function generateProjectCompleted(
+  type: OptionalRequirements["minimumCompletedProjects"],
+) {
   switch (type) {
     case "all":
       return "Tất cả";
@@ -204,6 +219,6 @@ export function generateProjectCompleted(type: OptionalRequirements["minimumComp
     case "5-10 projects":
       return "5 đến 10 project";
     case ">10 projects":
-      return "Nhiều hơn 10 project";  
+      return "Nhiều hơn 10 project";
   }
 }

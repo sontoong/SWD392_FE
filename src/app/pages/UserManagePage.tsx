@@ -119,5 +119,11 @@ export default function UserManage() {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={{ position: ["bottomCenter"] }}
+    />
+  );
 }

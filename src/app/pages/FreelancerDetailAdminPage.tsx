@@ -42,19 +42,23 @@ import CustomTag from "../components/ui/tag";
 const { Content, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
 
-export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
+export default function UserDetailAdminPage({
+  verify = false,
+}: {
+  verify?: boolean;
+}) {
   const location = useLocation();
-  const [modal, contextHolder] = Modal.useModal();
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-  const [reason, setReason] = useState<string>();
   useSetHeaderTitle([
     {
       title: `Thông tin tài khoản`,
       path: location.pathname,
     },
   ]);
+  const [modal, contextHolder] = Modal.useModal();
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+  const [reason, setReason] = useState<string>();
 
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
@@ -68,7 +72,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
     ratingCount,
     projectCount,
     desireSalary,
-    language,
+    languages,
     description,
     email,
     address,
@@ -159,7 +163,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
                     <Divider type="vertical" />
                     <span>Chi phí/giờ: {formatCurrency(desireSalary)}</span>
                     <Divider type="vertical" />
-                    <span>Ngôn ngữ: {language.length}</span>
+                    <span>Ngôn ngữ: {languages.length}</span>
                   </Row>
                 </Space>
               </Space>
@@ -362,7 +366,7 @@ export default function UserDetailAdminPage({ verify }: { verify?: boolean }) {
               type="inner"
             >
               <Space size={[0, 8]} wrap>
-                {language.map((language, index) => (
+                {languages.map((language, index) => (
                   <CustomTag key={index} color="#87d068">
                     {language}
                   </CustomTag>

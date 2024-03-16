@@ -4,6 +4,8 @@ import { ROLE } from "../../constants/role";
 
 const Layout = lazy(() => import("../components/layout/public-layout"));
 const Layout2 = lazy(() => import("../components/layout/admin-layout"));
+const Layout3 = lazy(() => import("../components/layout/enterprise-layout"));
+const Layout4 = lazy(() => import("../components/layout/freelancer-layout"));
 
 //public
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -12,6 +14,10 @@ const HomePage = lazy(() => import("../pages/HomePage"));
 const FreelancerProjectDetailPage = lazy(
   () => import("../pages/FreelancerProjectDetailPage"),
 );
+const ProjectSearchPage = lazy(() => import("../pages/ProjectSearchPage"));
+const FreelancerSearchPage = lazy(
+  () => import("../pages/FreelancerSearchPage"),
+);
 
 //freelancer
 const FreelancerDetailPage = lazy(
@@ -19,6 +25,9 @@ const FreelancerDetailPage = lazy(
 );
 const FreelancerProjectList = lazy(
   () => import("../pages/FreelancerProjectList"),
+);
+const FreelancerIncomeListPage = lazy(
+  () => import("../pages/FreelancerIncomeListPage"),
 );
 
 //enterprise
@@ -30,6 +39,9 @@ const EnterpriseCreateProjectPage = lazy(
 );
 const EnterpriseProjectListPage = lazy(
   () => import("../pages/EnterpriseProjectListpage"),
+);
+const EnterpriseProjectDetailPage = lazy(
+  () => import("../pages/EnterpriseProjectDetailPage"),
 );
 
 //both
@@ -67,6 +79,22 @@ const AdminLayout = () => {
   );
 };
 
+const EnterpriseLayout = () => {
+  return (
+    <Layout3>
+      <Outlet />
+    </Layout3>
+  );
+};
+
+const FreelancerLayout = () => {
+  return (
+    <Layout4>
+      <Outlet />
+    </Layout4>
+  );
+};
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -92,7 +120,7 @@ export const router = createBrowserRouter([
         path: "freelancers",
         element: (
           <Suspense fallback={<></>}>
-            <Template />
+            <FreelancerSearchPage />
           </Suspense>
         ),
       },
@@ -100,7 +128,7 @@ export const router = createBrowserRouter([
         path: "projects",
         element: (
           <Suspense fallback={<></>}>
-            <Template />
+            <ProjectSearchPage />
           </Suspense>
         ),
       },
@@ -111,90 +139,6 @@ export const router = createBrowserRouter([
             <FreelancerProjectDetailPage />
           </Suspense>
         ),
-      },
-      {
-        path: "fd",
-        element: (
-          <PrivateRoute inverted={false} requiredRoles={[ROLE.FREELANCER]}>
-            <Outlet />
-          </PrivateRoute>
-        ),
-        children: [
-          {
-            path: "projects",
-            element: (
-              <Suspense fallback={<></>}>
-                <FreelancerProjectList />
-              </Suspense>
-            ),
-          },
-          {
-            path: "report/earnings",
-            element: (
-              <Suspense fallback={<></>}>
-                <Template />
-              </Suspense>
-            ),
-          },
-          {
-            path: "report/transactions",
-            element: (
-              <Suspense fallback={<></>}>
-                <TransactionList role={"freelancer"} />
-              </Suspense>
-            ),
-          },
-          {
-            path: "account",
-            element: (
-              <Suspense fallback={<></>}>
-                <FreelancerDetailPage />
-              </Suspense>
-            ),
-          },
-        ],
-      },
-      {
-        path: "ed",
-        element: (
-          <PrivateRoute inverted={false} requiredRoles={[ROLE.ENTERPRISE]}>
-            <Outlet />
-          </PrivateRoute>
-        ),
-        children: [
-          {
-            path: "projects",
-            element: (
-              <Suspense fallback={<></>}>
-                <EnterpriseProjectListPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: "new-project",
-            element: (
-              <Suspense fallback={<></>}>
-                <EnterpriseCreateProjectPage />
-              </Suspense>
-            ),
-          },
-          {
-            path: "report/transactions",
-            element: (
-              <Suspense fallback={<></>}>
-                <TransactionList role={"enterprise"} />
-              </Suspense>
-            ),
-          },
-          {
-            path: "account",
-            element: (
-              <Suspense fallback={<></>}>
-                <EnterpriseDetailPage />
-              </Suspense>
-            ),
-          },
-        ],
       },
       {
         path: "forbidden",
@@ -233,24 +177,108 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
+    path: "fd",
     element: (
       <Suspense fallback={<></>}>
-        <PrivateRoute inverted={true}>
-          <LoginPage />
+        <PrivateRoute inverted={false} requiredRoles={[ROLE.FREELANCER]}>
+          <FreelancerLayout />
         </PrivateRoute>
       </Suspense>
     ),
+    children: [
+      {
+        path: "projects",
+        element: (
+          <Suspense fallback={<></>}>
+            <FreelancerProjectList />
+          </Suspense>
+        ),
+      },
+      {
+        path: "report/earnings",
+        element: (
+          <Suspense fallback={<></>}>
+            <FreelancerIncomeListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "report/transactions",
+        element: (
+          <Suspense fallback={<></>}>
+            <TransactionList role={"freelancer"} />
+          </Suspense>
+        ),
+      },
+      {
+        path: "account",
+        element: (
+          <Suspense fallback={<></>}>
+            <FreelancerDetailPage />
+          </Suspense>
+        ),
+      },
+    ],
   },
   {
-    path: "/sign-up",
+    path: "ed",
     element: (
       <Suspense fallback={<></>}>
-        <PrivateRoute inverted={true}>
-          <SignupPage />
+        <PrivateRoute inverted={false} requiredRoles={[ROLE.ENTERPRISE]}>
+          <EnterpriseLayout />
         </PrivateRoute>
       </Suspense>
     ),
+    children: [
+      {
+        path: "projects",
+        element: (
+          <Suspense fallback={<></>}>
+            <EnterpriseProjectListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "projects/:projectId",
+        element: (
+          <Suspense fallback={<></>}>
+            <EnterpriseProjectDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "new-project",
+        element: (
+          <Suspense fallback={<></>}>
+            <EnterpriseCreateProjectPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "edit-project/:projectId",
+        element: (
+          <Suspense fallback={<></>}>
+            <EnterpriseCreateProjectPage edit={true} />
+          </Suspense>
+        ),
+      },
+      {
+        path: "report/transactions",
+        element: (
+          <Suspense fallback={<></>}>
+            <TransactionList role={"enterprise"} />
+          </Suspense>
+        ),
+      },
+      {
+        path: "account",
+        element: (
+          <Suspense fallback={<></>}>
+            <EnterpriseDetailPage />
+          </Suspense>
+        ),
+      },
+    ],
   },
   {
     path: "/admin",
@@ -331,5 +359,25 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/login",
+    element: (
+      <Suspense fallback={<></>}>
+        <PrivateRoute inverted={true}>
+          <LoginPage />
+        </PrivateRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/sign-up",
+    element: (
+      <Suspense fallback={<></>}>
+        <PrivateRoute inverted={true}>
+          <SignupPage />
+        </PrivateRoute>
+      </Suspense>
+    ),
   },
 ]);

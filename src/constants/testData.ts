@@ -15,7 +15,7 @@ import {
   Field,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
-import { Education, FreelancerDetail } from "../app/models/user";
+import { Education, Experience, FreelancerDetail } from "../app/models/user";
 
 export const nations: Nation = {
   all: { label: "Tất cả", value: "all" },
@@ -102,8 +102,15 @@ export const oproject1: OutsideProject = {
 export const education1: Education = {
   school: "FPT University",
   degree: "Bachelor",
-  startYear: 1704042000000,
-  endYear: 1704042000000,
+  startEndYear: [1704042000000, 1704042000000],
+  description: "Khóa học Full-Stack Development",
+};
+
+export const experience1: Experience = {
+  company: "FPT",
+  jobRole: "Back-end Developer",
+  nation: "vn",
+  startEndYear: [1704042000000, 1704042000000],
   description: "Khóa học Full-Stack Development",
 };
 
@@ -124,7 +131,7 @@ export const freelancer: FreelancerDetail = {
   description: `20 năm trong Full-Stack Development + UI/UX
 Facebook: fb.com/user/JoeBiden`,
   desireSalary: 50000,
-  language: ["English", "Vietnamese"],
+  languages: ["vn", "en"],
   projectCount: 5,
   experienceLevel: "junior",
   firstName: "Nguyễn",
@@ -135,6 +142,7 @@ Facebook: fb.com/user/JoeBiden`,
   skills: skills,
   outsideProjects: [oproject1],
   educations: [education1],
+  experiences: [experience1],
 };
 
 export const projects: Project[] = [project];

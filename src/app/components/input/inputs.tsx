@@ -9,8 +9,6 @@ import {
   InputProps,
   Radio,
   RadioGroupProps,
-  Select,
-  SelectProps,
   Space,
   TreeProps,
   TreeSelect,
@@ -31,7 +29,8 @@ import { CSSProperties } from "react";
 
 const { TextArea, Search } = Input;
 const { RangePicker } = DatePicker;
-export interface MyInputProps {
+
+interface MyInputProps {
   id: string;
   field: {
     name: string;
@@ -39,151 +38,6 @@ export interface MyInputProps {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
   placeholder: string;
-}
-
-export interface MyDatePickerProps {
-  id: string;
-  field: {
-    name: string;
-    value: string;
-    onChange: DatePickerProps["onChange"];
-  };
-  placeholder: string;
-}
-
-export interface MySelectProps extends SelectProps {
-  id: string;
-  field: {
-    name: string;
-  };
-  placeholder: string;
-}
-
-export interface MySkillFieldSelectProps extends SelectProps {
-  id: string;
-  field: {
-    name: string;
-  };
-  placeholder: string;
-}
-
-export interface MyTextAreaProps {
-  id: string;
-  field: {
-    name: string;
-    value: string;
-    onChange: (
-      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => void;
-  };
-  placeholder: string;
-}
-
-export interface MyNumberInputProps {
-  id: string;
-  field: {
-    name: string;
-    value: string;
-    onChange: (
-      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => void;
-  };
-  placeholder: string;
-}
-
-function MyTextArea({ field, placeholder }: MyTextAreaProps) {
-  const { name, value, onChange } = field;
-
-  return (
-    <div className="relative">
-      <TextArea
-        {...field}
-        value={value || ""}
-        onChange={onChange}
-        allowClear
-        size="large"
-        className="px-5 py-3"
-        style={{ width: "100%" }}
-      />
-      <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
-        {placeholder}
-      </p>
-      <ErrorMessage
-        name={name}
-        component="p"
-        className="ml-2 text-sm text-red-500"
-      />
-    </div>
-  );
-}
-
-function MySelectSkillFieldInput({
-  field,
-  placeholder,
-  ...props
-}: MySkillFieldSelectProps) {
-  const { name } = field;
-
-  return (
-    <div className="relative">
-      <Select
-        mode="multiple"
-        allowClear
-        size="large"
-        {...props}
-        style={{ width: "100%" }}
-      />
-      <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
-        {placeholder}
-      </p>
-      <ErrorMessage
-        name={name}
-        component="p"
-        className="ml-2 text-sm text-red-500"
-      />
-    </div>
-  );
-}
-
-function MySelectInput({ field, placeholder, ...props }: MySelectProps) {
-  const { name } = field;
-
-  return (
-    <div className="relative">
-      <Select size="large" {...props} style={{ width: "100%" }} />
-      <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
-        {placeholder}
-      </p>
-      <ErrorMessage
-        name={name}
-        component="p"
-        className="ml-2 text-sm text-red-500"
-      />
-    </div>
-  );
-}
-
-function MyDateInput({ field, placeholder }: MyDatePickerProps) {
-  const { name, onChange } = field;
-
-  return (
-    <div className="relative">
-      <DatePicker
-        onChange={onChange}
-        allowClear
-        size="large"
-        className="w-full px-5 py-3"
-      />
-      <p className="absolute top-0 z-50 -translate-y-2 translate-x-3 bg-white px-1 text-xs">
-        {placeholder}
-      </p>
-      <ErrorMessage
-        name={name}
-        component="p"
-        className="ml-2 text-sm text-red-500"
-      />
-    </div>
-  );
 }
 
 function MyInput({ field, placeholder }: MyInputProps) {
@@ -251,6 +105,7 @@ function InputNumberFix(props: InputNumberProps) {
       {...props}
       className="w-full rounded-[6px] border-[1px] border-[#d9d9d9]"
       min={0}
+      changeOnWheel
     />
   );
 }
@@ -291,20 +146,60 @@ function FormTextArea(props: RequiredFields<TextAreaProps, "maxLength">) {
   return <TextArea {...props} autoSize allowClear={true} showCount />;
 }
 
+const dateFormat = "DD/MM/YYYY";
+const monthFormat = "MM/YYYY";
 function FormDatePicker(props: DatePickerProps) {
   let { value } = props;
   if (value && typeof value === "number") value = dayjs(value);
-  return <DatePicker {...props} allowClear={false} value={value} />;
+
+  return (
+    <DatePicker
+      {...props}
+      allowClear={false}
+      value={value}
+      format={dateFormat}
+    />
+  );
 }
 
 function FormRangePicker(props: RangePickerProps) {
-  const { value } = props;
+  const { value, picker } = props;
   const dayjsDates = value?.map((item) => {
     if (item && typeof item === "number") return dayjs(item);
     else return item;
   }) as RangePickerProps["value"] | undefined;
 
-  return <RangePicker {...props} allowClear={false} value={dayjsDates} />;
+  switch (picker) {
+    case "date":
+      return (
+        <RangePicker
+          {...props}
+          allowClear={false}
+          value={dayjsDates}
+          format={dateFormat}
+        />
+      );
+
+    case "month":
+      return (
+        <RangePicker
+          {...props}
+          allowClear={false}
+          value={dayjsDates}
+          format={monthFormat}
+        />
+      );
+
+    default:
+      return (
+        <RangePicker
+          {...props}
+          allowClear={false}
+          value={dayjsDates}
+          format={dateFormat}
+        />
+      );
+  }
 }
 
 interface FormRadioGroupProps extends Omit<RadioGroupProps, "options"> {
@@ -409,10 +304,6 @@ export {
   FormTreeSelect,
   MyInput,
   MyInputPassword,
-  MyDateInput,
-  MySelectInput,
-  MySelectSkillFieldInput,
-  MyTextArea,
   InputPasswordFix,
   InputNumberFix,
   FormRadioButtonGroup,

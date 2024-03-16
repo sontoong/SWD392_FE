@@ -9,7 +9,7 @@ export const formatUnixToLocal = (
   unixTimestamp: number,
   options: Intl.DateTimeFormatOptions = {
     day: "numeric",
-    month: "short",
+    month: "numeric",
     year: "numeric",
   },
   locale: string = "vi-VN",

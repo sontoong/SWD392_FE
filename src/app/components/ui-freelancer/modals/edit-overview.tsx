@@ -156,7 +156,11 @@ export default function EditContact(props: EditOverviewProps) {
             </Col>
           </Row>
           <Form.Item name="nation" label="Quốc gia">
-            <FormSelect options={Object.values(nations)} />
+            <FormSelect
+              options={Object.values(nations).filter(
+                (nation) => nation.value != "all",
+              )}
+            />
           </Form.Item>
           <Form.Item name="experienceLevel" label="Cấp độ kinh nghiệm">
             <FormRadioButtonGroup options={experienceLevels} />

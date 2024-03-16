@@ -27,7 +27,7 @@ import {
   StarFilled,
   UserOutlined,
 } from "@ant-design/icons";
-import { generateVerifyMsg } from "../utils/generators";
+import { generateLanguage, generateVerifyMsg } from "../utils/generators";
 import { formatCurrency, formatUnixToLocal } from "../utils/utils";
 import { defaultImage } from "../../constants/images";
 import { qualityFactors } from "../../constants/quality";
@@ -39,8 +39,12 @@ import {
   EditOverview,
   AddOP,
   DeleteModal,
+  AddEducation,
+  ApplyExperience,
 } from "../components/ui-freelancer/modals";
 import { InputFix } from "../components/input/inputs";
+import AddSkill from "../components/ui-freelancer/modals/add-skill";
+import AddLanguage from "../components/ui-freelancer/modals/add-language";
 
 const { Content, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
@@ -63,7 +67,7 @@ export default function FreelancerDetailPage() {
     ratingCount,
     projectCount,
     desireSalary,
-    language,
+    languages,
     description,
     email,
     address,
@@ -77,6 +81,7 @@ export default function FreelancerDetailPage() {
     middleName,
     profilePicture,
     educations,
+    experiences,
   } = freelancer;
 
   return (
@@ -178,7 +183,7 @@ export default function FreelancerDetailPage() {
                     <Divider type="vertical" />
                     <span>Chi phí/giờ: {formatCurrency(desireSalary)}</span>
                     <Divider type="vertical" />
-                    <span>Ngôn ngữ: {language.length}</span>
+                    <span>Ngôn ngữ: {languages.length}</span>
                   </Row>
                 </Space>
               </Space>
@@ -209,6 +214,7 @@ export default function FreelancerDetailPage() {
                           <Title level={4}>{title}</Title>
                           <AddOP edit={true} project={project} />
                           <DeleteModal
+                            field="dự án"
                             name={title}
                             onOk={() => {
                               console.log(title);
@@ -217,8 +223,11 @@ export default function FreelancerDetailPage() {
                         </Space>
                         <Space>
                           <Title level={5}>{jobRole}</Title>
-                          <Title level={5} style={{ fontWeight: "400" }}>
-                            {`${formatUnixToLocal(startEndDate[0])} - ${startEndDate[1] ? formatUnixToLocal(startEndDate[1]) : "now"}`}
+                          <Title
+                            level={5}
+                            style={{ fontWeight: "400", fontSize: "14px" }}
+                          >
+                            {`${formatUnixToLocal(startEndDate[0])} - ${startEndDate[1] ? formatUnixToLocal(startEndDate[1]) : "bây giờ"}`}
                           </Title>
                         </Space>
                         <Paragraph>{description}</Paragraph>
@@ -357,6 +366,7 @@ export default function FreelancerDetailPage() {
                 </Title>
               }
               type="inner"
+              extra={<AddSkill skills={skills} />}
             >
               <Space size={[0, 8]} wrap>
                 {skills.map((skillItem, index) => (
@@ -377,11 +387,12 @@ export default function FreelancerDetailPage() {
                 </Title>
               }
               type="inner"
+              extra={<AddLanguage languages={languages} />}
             >
               <Space size={[0, 8]} wrap>
-                {language.map((language, index) => (
+                {languages.map((language, index) => (
                   <Tag key={index} color="#87d068">
-                    {language}
+                    {generateLanguage(language)}
                   </Tag>
                 ))}
               </Space>
@@ -397,32 +408,44 @@ export default function FreelancerDetailPage() {
                 </Title>
               }
               type="inner"
+              extra={<ApplyExperience edit={false} />}
             >
-              <Space direction="vertical">
-                <Title level={4}>FPT Fap</Title>
-                <Space>
-                  <Title level={5}>Back-end Developer</Title>
-                  <Title level={5} style={{ fontWeight: "400" }}>
-                    09/2023 - 12/2023
-                  </Title>
-                </Space>
-                <Paragraph>
-                  Tôi tạo và quản lý database và flow cho project
-                </Paragraph>
-              </Space>
+              {experiences?.map((experience, index) => {
+                const { company, jobRole, nation, startEndYear, description } =
+                  experience;
+                return (
+                  <React.Fragment key={index}>
+                    <Space direction="vertical">
+                      <Space>
+                        <Title level={4}>{jobRole}</Title>
+                        <ApplyExperience edit={true} experience={experience} />
+                        <DeleteModal
+                          field="kinh nghiệm"
+                          name={jobRole}
+                          onOk={() => {
+                            console.log(jobRole);
+                          }}
+                        />
+                      </Space>
+                      <Space>
+                        <Title level={5}>{company}</Title>
+                        <Title
+                          level={5}
+                          style={{ fontWeight: "400", fontSize: "14px" }}
+                        >
+                          {`${formatUnixToLocal(startEndYear[0])} - ${startEndYear[1] ? formatUnixToLocal(startEndYear[1]) : "bây giờ"}`}
+                        </Title>
+                      </Space>
+                      <Text type="secondary">{nations[nation].label}</Text>
+                      <Paragraph>{description}</Paragraph>
+                    </Space>
+                    {index !== qualityFactors.length - 1 && (
+                      <Divider type="vertical" className="h-auto" />
+                    )}
+                  </React.Fragment>
+                );
+              })}
               <Divider />
-              <Space direction="vertical">
-                <Title level={4}>FPT Fap</Title>
-                <Space>
-                  <Title level={5}>Back-end Developer</Title>
-                  <Title level={5} style={{ fontWeight: "400" }}>
-                    09/2023 - 12/2023
-                  </Title>
-                </Space>
-                <Paragraph>
-                  Tôi tạo và quản lý database và flow cho project
-                </Paragraph>
-              </Space>
             </CustomCard>
             {/* education */}
             <CustomCard
@@ -435,16 +458,18 @@ export default function FreelancerDetailPage() {
                 </Title>
               }
               type="inner"
+              extra={<AddEducation edit={false} />}
             >
               {educations?.map((education, index) => {
-                const { school, degree, description, endYear, startYear } =
-                  education;
+                const { school, degree, description, startEndYear } = education;
                 return (
                   <React.Fragment key={index}>
                     <Space direction="vertical">
                       <Space>
                         <Title level={4}>{school}</Title>
+                        <AddEducation edit={true} education={education} />
                         <DeleteModal
+                          field="học vấn"
                           name={school}
                           onOk={() => {
                             console.log(school);
@@ -452,13 +477,16 @@ export default function FreelancerDetailPage() {
                         />
                       </Space>
                       <Title level={5}>{degree}</Title>
-                      <Title level={5} style={{ fontWeight: "400" }}>
-                        {formatUnixToLocal(startYear, {
+                      <Title
+                        level={5}
+                        style={{ fontWeight: "400", fontSize: "14px" }}
+                      >
+                        {formatUnixToLocal(startEndYear[0], {
                           month: "numeric",
                           year: "numeric",
                         })}{" "}
                         -{" "}
-                        {formatUnixToLocal(endYear, {
+                        {formatUnixToLocal(startEndYear[1], {
                           month: "numeric",
                           year: "numeric",
                         })}

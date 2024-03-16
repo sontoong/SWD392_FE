@@ -4,22 +4,35 @@ import { generateEnterpriseProjectStatus } from "../utils/generators";
 import { EnterpriseProjects } from "../../constants/testData";
 import { IconButton } from "../components/button/buttons";
 import { DownloadOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 
-export interface TableData extends
-EnterpriseProject {
-    statusGenerator: string;
+export interface TableData extends EnterpriseProject {
+  statusGenerator: string;
 }
 
 export default function EnterpriseProjectList() {
-    const data: TableData[] = EnterpriseProjects.map((project) => (
-    {...project, statusGenerator: generateEnterpriseProjectStatus(project.status)}
-));
+  useSetHeaderTitle([
+    {
+      title: `Danh sách project`,
+      path: location.pathname,
+    },
+  ]);
+  const data: TableData[] = EnterpriseProjects.map((project) => ({
+    ...project,
+    statusGenerator: generateEnterpriseProjectStatus(project.status),
+  }));
 
-const columns: TableProps<TableData>["columns"] = [
+  const columns: TableProps<TableData>["columns"] = [
     {
       title: "Tên Project",
       dataIndex: "title",
       key: "title",
+      render: (_, record) => (
+        <Link to={`${record.id}`}>
+          <div className="text-blue-500 underline">{record.title}</div>
+        </Link>
+      ),
     },
     {
       title: "Báo giá",
@@ -37,13 +50,19 @@ const columns: TableProps<TableData>["columns"] = [
       key: "statusGenerator",
     },
     {
-        title: "Hợp đồng",
-        render: () => {
-            return <IconButton icon={<DownloadOutlined/>}/>
-        },
-        align:'center'
+      title: "Hợp đồng",
+      render: () => {
+        return <IconButton icon={<DownloadOutlined />} />;
       },
+      align: "center",
+    },
   ];
 
- return <Table columns={columns} dataSource={data} pagination={{position:["bottomCenter"]}}/>;
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={{ position: ["bottomCenter"] }}
+    />
+  );
 }

@@ -6,19 +6,30 @@ import ProjectRequirementInfo from "../components/ui-enterprise/CreateProjectFor
 import { useState } from "react";
 import { OutlineButton, PrimaryButton } from "../components/button/buttons";
 import { CreateProject } from "../models/project";
+import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 
-export default function CreateProjectForm() {
+export default function CreateProjectForm({
+  edit = false,
+}: {
+  edit?: boolean;
+}) {
+  useSetHeaderTitle([
+    {
+      title: ``,
+      path: location.pathname,
+    },
+  ]);
   const { message } = App.useApp();
   const [form] = Form.useForm();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  console.log(edit);
 
   const [current, setCurrent] = useState(0);
 
   const initialValues: CreateProject = {
     title: "",
-    language: "vn",
     projectField: "",
     description: "",
     contract: {
@@ -30,11 +41,7 @@ export default function CreateProjectForm() {
     initialFunding: 0,
     freelancerRequirement: "junior",
     timeToComplete: "<1 month",
-    publishTime: 0,
     createdBy: "",
-    applicantCount: 0,
-    paidAmount: 0,
-    isCompleted: false,
     privacy: "public",
     projectType: "unknown",
     optionalRequirements: {
@@ -82,7 +89,10 @@ export default function CreateProjectForm() {
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: CreateProject) => {
+    if (typeof values.initialFunding != "number") {
+      values = { ...values, initialFunding: 0 };
+    }
     console.log("Finish:", values);
     message.success("Processing complete!");
   };
@@ -120,17 +130,16 @@ export default function CreateProjectForm() {
           <Form name="mainForm" onFinish={onFinish}>
             {/* hidden fields for form to record */}
             <Form.Item name="title" hidden />
-            <Form.Item name="language" hidden />
             <Form.Item name="optionalRequirements" hidden />
             <Form.Item name="projectField" hidden />
             <Form.Item name="description" hidden />
             <Form.Item name="contract" hidden />
             <Form.Item name="funding" hidden />
+            <Form.Item name="initialFunding" hidden />
             <Form.Item name="freelancerRequirement" hidden />
             <Form.Item name="timeToComplete" hidden />
             <Form.Item name="privacy" hidden />
             <Form.Item name="projectType" hidden />
-            <Form.Item name="optionalRequirements" hidden />
 
             <div style={{ marginTop: 24 }}>
               {current < steps.length - 1 && (

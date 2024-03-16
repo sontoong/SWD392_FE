@@ -83,5 +83,11 @@ export default function VerifyUserPage() {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={{ position: ["bottomCenter"] }}
+    />
+  );
 }

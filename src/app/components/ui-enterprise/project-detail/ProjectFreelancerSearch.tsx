@@ -12,7 +12,9 @@ export default function ProjectFreelancerSearch() {
   } = theme.useToken();
 
   const [activeList, setActiveList] = useState<"search" | "invited">("search");
-  const [activeButton, setActiveButton] = useState<"search" | "invited">("search");
+  const [activeButton, setActiveButton] = useState<"search" | "invited">(
+    "search",
+  );
 
   const handleSwitchList = (list: "search" | "invited") => {
     setActiveList(list);
@@ -31,26 +33,34 @@ export default function ProjectFreelancerSearch() {
         }}
       >
         <FreelancerSearchForm />
-          <Row  style={{ marginBottom: 16, marginTop: 16 }}>
-            <Col style={{marginRight:"1rem"}}>
-              <OutlineButton
-                onClick={() => handleSwitchList("search")}
-                className={activeButton === "search" ? "bg-[#00b96b] text-white" : ""}
-              >
-                Tìm kiếm
-              </OutlineButton>
-            </Col>
-            <Col>
-              <OutlineButton
-                onClick={() => handleSwitchList("invited")}
-                className={activeButton === "invited" ? "bg-[#00b96b] text-white" : ""}
-              >
-                Đã mời
-              </OutlineButton>
-            </Col>
-          </Row>
-        {activeList === "search" && <FreelancerList freelancers={freelancers} />}
-        {activeList === "invited" && <FreelancerList freelancers={freelancers} />}
+        <Row style={{ marginBottom: 16, marginTop: 16 }}>
+          <Col style={{ marginRight: "1rem" }}>
+            <OutlineButton
+              onClick={() => handleSwitchList("search")}
+              className={
+                activeButton === "search" ? "bg-[#00b96b] text-white" : ""
+              }
+            >
+              Tìm kiếm
+            </OutlineButton>
+          </Col>
+          <Col>
+            <OutlineButton
+              onClick={() => handleSwitchList("invited")}
+              className={
+                activeButton === "invited" ? "bg-[#00b96b] text-white" : ""
+              }
+            >
+              Đã mời
+            </OutlineButton>
+          </Col>
+        </Row>
+        {activeList === "search" && (
+          <FreelancerList freelancers={freelancers} />
+        )}
+        {activeList === "invited" && (
+          <FreelancerList freelancers={freelancers} />
+        )}
       </Content>
     </Layout>
   );

@@ -8,10 +8,8 @@ import { FilterOutlined } from "@ant-design/icons";
 import { FormRadioGroup, SearchInput } from "../../input/inputs";
 import { FormSelect, FormTreeSelect } from "../../select/select";
 import { projectFields } from "../../../../constants/project-field";
-import { language } from "../../../../constants/language";
+import { languages } from "../../../../constants/language";
 import { nations } from "../../../../constants/testData";
-
-
 
 export default function FreelancerSearchForm() {
   const [form] = Form.useForm();
@@ -30,10 +28,10 @@ export default function FreelancerSearchForm() {
   const initialValues: FreelancerSearch = {
     input: "",
     desiredSalary: "all",
-    experienceLevel: 'all',
-    language: 'all',
-    lastLogIn: 'all',
-    nation: 'all'
+    experienceLevel: "all",
+    language: "all",
+    lastLogIn: "all",
+    nation: "all",
   };
 
   return (
@@ -70,12 +68,15 @@ export default function FreelancerSearchForm() {
                 },
               ]}
             >
-              <SearchInput onSearch={() => form.submit()}/>
+              <SearchInput onSearch={() => form.submit()} />
             </Form.Item>
           </Col>
           <Col span={1} offset={1}>
             <IconButton
-              style={{ color: "white", backgroundColor: showFilter ? "#58A35F" : "transparent"}}
+              style={{
+                color: "white",
+                backgroundColor: showFilter ? "#58A35F" : "transparent",
+              }}
               icon={<FilterOutlined />}
               onClick={() => {
                 setShowFilter(!showFilter);
@@ -87,7 +88,9 @@ export default function FreelancerSearchForm() {
           <Row>
             <Col span={4}>
               <Col>
-                <Title level={4} style={{color:"white"}}>Chọn lĩnh vực</Title>
+                <Title level={4} style={{ color: "white" }}>
+                  Chọn lĩnh vực
+                </Title>
                 <Form.Item
                   name="projectField"
                   rules={[
@@ -95,12 +98,14 @@ export default function FreelancerSearchForm() {
                       type: "string",
                     },
                   ]}
-                            >
+                >
                   <FormTreeSelect treeData={Object.values(projectFields)} />
                 </Form.Item>
               </Col>
               <Col>
-                <Title level={4} style={{color:"white"}}>Địa điểm</Title>
+                <Title level={4} style={{ color: "white" }}>
+                  Địa điểm
+                </Title>
                 <Form.Item
                   name="nation"
                   rules={[
@@ -108,12 +113,14 @@ export default function FreelancerSearchForm() {
                       type: "string",
                     },
                   ]}
-                            >
-                  <FormSelect options={Object.values(nations)}/>
+                >
+                  <FormSelect options={Object.values(nations)} />
                 </Form.Item>
               </Col>
               <Col>
-                <Title level={4} style={{color:"white"}}>Ngôn ngữ giao tiếp</Title>
+                <Title level={4} style={{ color: "white" }}>
+                  Ngôn ngữ giao tiếp
+                </Title>
                 <Form.Item
                   name="language"
                   rules={[
@@ -121,49 +128,64 @@ export default function FreelancerSearchForm() {
                       type: "string",
                     },
                   ]}
-                            >
-                  <FormSelect options={Object.values(language)}/>
+                >
+                  <FormSelect options={Object.values(languages)} />
                 </Form.Item>
               </Col>
             </Col>
             <Col span={4} offset={2}>
-            <Title level={4} style={{color:"white"}}>Chi phí/giờ</Title>
-            <Form.Item
+              <Title level={4} style={{ color: "white" }}>
+                Chi phí/giờ
+              </Title>
+              <Form.Item
                 name="desiredSalary"
                 rules={[
                   {
                     type: "string",
                   },
                 ]}
-            >
-                <FormRadioGroup options={salary} textStyle={{color:"white"}}/>
-            </Form.Item>
+              >
+                <FormRadioGroup
+                  options={salary}
+                  textStyle={{ color: "white" }}
+                />
+              </Form.Item>
             </Col>
             <Col span={4} offset={2}>
-            <Title level={4} style={{color:"white"}}>Kinh nghiệm</Title>
-            <Form.Item
+              <Title level={4} style={{ color: "white" }}>
+                Kinh nghiệm
+              </Title>
+              <Form.Item
                 name="experienceLevel"
                 rules={[
                   {
                     type: "string",
                   },
                 ]}
-            >
-                <FormRadioGroup options={experience} textStyle={{color:"white"}}/>
-            </Form.Item>
+              >
+                <FormRadioGroup
+                  options={experience}
+                  textStyle={{ color: "white" }}
+                />
+              </Form.Item>
             </Col>
             <Col span={4} offset={2}>
-            <Title level={4} style={{color:"white"}}>Lần truy cập gần đây</Title>
-            <Form.Item
+              <Title level={4} style={{ color: "white" }}>
+                Lần truy cập gần đây
+              </Title>
+              <Form.Item
                 name="lastLogIn"
                 rules={[
                   {
                     type: "string",
                   },
                 ]}
-            >
-                <FormRadioGroup options={login} textStyle={{color:"white"}}/>
-            </Form.Item>
+              >
+                <FormRadioGroup
+                  options={login}
+                  textStyle={{ color: "white" }}
+                />
+              </Form.Item>
             </Col>
           </Row>
         )}
@@ -173,23 +195,23 @@ export default function FreelancerSearchForm() {
 }
 
 const salary = [
-  { label: "Tất cả", value:"all"},
-  { label: "Dưới 100K VND", value: '<100K' },
-  { label: "100K-200K VND", value: '100K-200K' },
-  { label: "200K-500K VND", value: '200K-500K' },
-  { label: "Trên >500K VND", value: '>500K' },
+  { label: "Tất cả", value: "all" },
+  { label: "Dưới 100K VND", value: "<100K" },
+  { label: "100K-200K VND", value: "100K-200K" },
+  { label: "200K-500K VND", value: "200K-500K" },
+  { label: "Trên >500K VND", value: ">500K" },
 ];
 
 const login = [
-  {label: "Tất cả", value:"all"},
-  {label: "Trong vòng 2 tuần", value:'2 weeks'},
-  {label: "Trong vòng 1 tuần", value:'1 month'},
-  {label: "Trong vòng 2 tháng", value:"2 months"},
-]
+  { label: "Tất cả", value: "all" },
+  { label: "Trong vòng 2 tuần", value: "2 weeks" },
+  { label: "Trong vòng 1 tuần", value: "1 month" },
+  { label: "Trong vòng 2 tháng", value: "2 months" },
+];
 
 const experience = [
-  {label: "Mọi kinh nghiệm", value: "all"},
-  {label: "1-2 năm", value: "junior"},
-  {label: "2-5 năm", value: "senior"},
-  {label: "Hơn 5 năm", value: "expert"},
-]
+  { label: "Mọi kinh nghiệm", value: "all" },
+  { label: "1-2 năm", value: "junior" },
+  { label: "2-5 năm", value: "senior" },
+  { label: "Hơn 5 năm", value: "expert" },
+];

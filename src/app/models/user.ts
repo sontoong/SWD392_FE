@@ -1,16 +1,18 @@
+import { languages } from "../../constants/language";
 import { ExperienceLevel, OutsideProject, Skill } from "./project";
 
-interface Experience {
-  name: string;
-  level: "junior" | "senior" | "expert";
-  time: string;
+export interface Experience {
+  company: string;
+  jobRole: string;
+  nation: string;
+  startEndYear: [number, number];
+  description: string;
 }
 
 export interface Education {
   school: string;
   degree: string;
-  startYear: number;
-  endYear: number;
+  startEndYear: [number, number];
   description: string;
 }
 
@@ -28,7 +30,7 @@ export interface UserDetail {
   ratingCount: number;
   projectCount: number;
   createdAt: number;
-  language: string[];
+  languages: languages[];
   description: string;
 }
 

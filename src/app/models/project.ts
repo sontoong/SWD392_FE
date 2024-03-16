@@ -1,17 +1,6 @@
-export type ExperienceLevel = "junior" | "senior" | "expert";
+import { languages } from "../../constants/language";
 
-export type OptionalRequirementsCreate = {
-  minimumCompletedProjects:
-    | "all"
-    | "<3 projects"
-    | "5-10 projects"
-    | ">10 projects";
-  rating: "all" | ">3 stars" | ">4 stars";
-  nation: string;
-  language: "all" | "en" | "vn" | "cn";
-  skills: Skill[];
-  questions?: string[];
-};
+export type ExperienceLevel = "junior" | "senior" | "expert";
 
 export type OptionalRequirements = {
   minimumCompletedProjects:
@@ -21,7 +10,7 @@ export type OptionalRequirements = {
     | ">10 projects";
   rating: "all" | ">3 stars" | ">4 stars";
   nation: string;
-  language: "all" | "en" | "vn" | "cn";
+  language: languages;
   skills: Skill[];
   questions?: string[];
 };
@@ -51,7 +40,7 @@ export interface Contract {
 export interface Project {
   id: string;
   title: string;
-  language: "all" | "en" | "vn" | "cn";
+  language: languages;
   projectField: SkillField;
   description: string;
   contract: Contract;
@@ -76,7 +65,6 @@ export interface Project {
 
 export interface CreateProject {
   title: string;
-  language: "all" | "en" | "vn" | "cn";
   projectField: string;
   description: string;
   contract: Contract;
@@ -84,11 +72,7 @@ export interface CreateProject {
   initialFunding?: number;
   freelancerRequirement?: ExperienceLevel;
   timeToComplete: "<1 month" | "1-3 months" | ">3 months";
-  publishTime: number;
   createdBy: string;
-  applicantCount: number;
-  paidAmount: number;
-  isCompleted: boolean;
   privacy: "public" | "private" | "freelancer";
   projectType: "longterm" | "shortterm" | "unknown";
   optionalRequirements: OptionalRequirements;
@@ -105,7 +89,7 @@ export interface OutsideProject {
   title: string;
   jobRole: string;
   description: string;
-  startEndDate: [number, number?];
+  startEndDate: [number, number];
   images?: { name: string; url?: string; file?: File }[];
   projectDocumentImages?: {
     image: { name: string; url?: string; file?: File };

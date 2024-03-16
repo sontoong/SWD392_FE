@@ -17,8 +17,7 @@ import {
   FormTextArea,
   InputNumberFix,
 } from "../../input/inputs";
-import { FormSelect, FormTreeSelect } from "../../select/select";
-import { language } from "../../../../constants/language";
+import { FormTreeSelect } from "../../select/select";
 import { projectFields } from "../../../../constants/project-field";
 import { useState } from "react";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
@@ -156,21 +155,6 @@ export default function ProjectImportantInfo({
                 ]}
               >
                 <FormInput />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24}>
-              <Form.Item
-                name="language"
-                label="Ngôn ngữ"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <FormSelect options={Object.values(language)} />
               </Form.Item>
             </Col>
           </Row>

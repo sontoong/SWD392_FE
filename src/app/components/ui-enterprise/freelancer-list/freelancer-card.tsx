@@ -41,7 +41,7 @@ export default function FreelancerCard({
     averageRating,
     projectCount,
     desireSalary,
-    language,
+    languages,
   } = freelancer;
 
   const fullName = `${firstName} ${middleName ? middleName + " " : ""}${lastName}`;
@@ -117,7 +117,7 @@ export default function FreelancerCard({
             <Divider type="vertical" />
             <span>Chi phí/giờ: {formatCurrency(desireSalary)}</span>
             <Divider type="vertical" />
-            <span>Ngôn ngữ: {language.length}</span>
+            <span>Ngôn ngữ: {languages.length}</span>
           </Row>
         </Space>
       </Flex>

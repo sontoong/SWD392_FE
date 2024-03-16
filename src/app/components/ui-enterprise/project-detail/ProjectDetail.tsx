@@ -19,10 +19,9 @@ import {
   Typography,
 } from "antd";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
-import { useSetHeaderTitle } from "../../../hooks/useSetHeaderTitle";
 import { nations, project } from "../../../../constants/testData";
 import { calculateDateToNow, formatCurrency } from "../../../utils/utils";
 import {
@@ -38,14 +37,7 @@ const { Content, Sider } = Layout;
 const { Text, Title } = Typography;
 
 export default function EnterpriseProjectDetail() {
-  const location = useLocation();
   const navigate = useNavigate();
-  useSetHeaderTitle([
-    {
-      title: `Chi tiết project`,
-      path: location.pathname,
-    },
-  ]);
 
   const [reason, setReason] = useState<string>();
 
@@ -99,7 +91,7 @@ export default function EnterpriseProjectDetail() {
 
       case "edit":
         {
-          navigate("/test");
+          navigate(`/ed/edit-project/${1}`);
         }
 
         break;
@@ -151,67 +143,76 @@ export default function EnterpriseProjectDetail() {
           }}
         >
           <CustomCard>
-              <Title level={2}>{title}</Title>
-              <Title level={4}>{projectField.label}</Title>
-              <Text>Đã đăng cách đây {calculateDateToNow(publishedTime)}</Text>
-              <Divider />
-              <Title level={3}>{description}</Title>
-              <Divider />
-              <Row>
-                <Col span={8}>
-                  <Title level={3}>
-                    <Space>
-                      <TagOutlined />
-                      <span>
-                        {initialFunding
-                          ? formatCurrency(initialFunding)
-                          : generateRequirementMsg(freelancerRequirement).priceDesc}
-                      </span>
-                    </Space>
-                  </Title>
-                  <Text type="secondary">
-                    {funding === "hourly" ? "Giá theo giờ" : "Giá theo công việc"}
-                  </Text>
-                </Col>
-                <Col span={8} offset={1}>
-                  <Title level={3}>
-                    <Space>
-                      <TeamOutlined />
-                      <span>
-                        {generateRequirementMsg(freelancerRequirement).title}
-                      </span>
-                    </Space>
-                  </Title>
-                  <Text type="secondary">
-                    {generateRequirementMsg(freelancerRequirement).desc}
-                  </Text>
-                </Col>
-              </Row>
-              <Divider />
-              <Title level={3}>
-                Loại công việc: {generateProjectTypeMsg(projectType)}
-              </Title>
-              <Divider />
-              <Row>
-                <Col span={8}>
-                  <Title level={3}>Văn bằng ưu tiên</Title>
-                  <Title level={5}>
-                    Công việc đã hoàn thành:{" "}
-                    {generateProjectCompleted(optionalRequirements.minimumCompletedProjects)}
-                  </Title>
-                  <Title level={5}>Đánh giá: {generateRating(optionalRequirements.rating)}</Title>
-              <Title level={5}>Ngôn ngữ: {generateLanguage(optionalRequirements.language)}</Title>
-              <Title level={5}>Đất nước: {nations[optionalRequirements.nation].label}</Title>
-                </Col>
-                <Col span={8} offset={1}>
-                  <Title level={3}>Hoạt động ở công việc này</Title>
-                  <Title level={5}>Báo giá: {applicationCount}</Title>
-                  <Title level={5}>Lời mời đã gửi: {inviteSent}</Title>
-                  <Title level={5}>
-                    Lời mời chưa được trả lời: {inviteAccepted}
-                  </Title>
-                </Col>
-              </Row>
+            <Title level={2}>{title}</Title>
+            <Title level={4}>{projectField.label}</Title>
+            <Text>Đã đăng cách đây {calculateDateToNow(publishedTime)}</Text>
+            <Divider />
+            <Title level={3}>{description}</Title>
+            <Divider />
+            <Row>
+              <Col span={8}>
+                <Title level={3}>
+                  <Space>
+                    <TagOutlined />
+                    <span>
+                      {initialFunding
+                        ? formatCurrency(initialFunding)
+                        : generateRequirementMsg(freelancerRequirement)
+                            .priceDesc}
+                    </span>
+                  </Space>
+                </Title>
+                <Text type="secondary">
+                  {funding === "hourly" ? "Giá theo giờ" : "Giá theo công việc"}
+                </Text>
+              </Col>
+              <Col span={8} offset={1}>
+                <Title level={3}>
+                  <Space>
+                    <TeamOutlined />
+                    <span>
+                      {generateRequirementMsg(freelancerRequirement).title}
+                    </span>
+                  </Space>
+                </Title>
+                <Text type="secondary">
+                  {generateRequirementMsg(freelancerRequirement).desc}
+                </Text>
+              </Col>
+            </Row>
+            <Divider />
+            <Title level={3}>
+              Loại công việc: {generateProjectTypeMsg(projectType)}
+            </Title>
+            <Divider />
+            <Row>
+              <Col span={8}>
+                <Title level={3}>Văn bằng ưu tiên</Title>
+                <Title level={5}>
+                  Công việc đã hoàn thành:{" "}
+                  {generateProjectCompleted(
+                    optionalRequirements.minimumCompletedProjects,
+                  )}
+                </Title>
+                <Title level={5}>
+                  Đánh giá: {generateRating(optionalRequirements.rating)}
+                </Title>
+                <Title level={5}>
+                  Ngôn ngữ: {generateLanguage(optionalRequirements.language)}
+                </Title>
+                <Title level={5}>
+                  Đất nước: {nations[optionalRequirements.nation].label}
+                </Title>
+              </Col>
+              <Col span={8} offset={1}>
+                <Title level={3}>Hoạt động ở công việc này</Title>
+                <Title level={5}>Báo giá: {applicationCount}</Title>
+                <Title level={5}>Lời mời đã gửi: {inviteSent}</Title>
+                <Title level={5}>
+                  Lời mời chưa được trả lời: {inviteAccepted}
+                </Title>
+              </Col>
+            </Row>
           </CustomCard>
         </Content>
       </Layout>

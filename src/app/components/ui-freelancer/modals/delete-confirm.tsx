@@ -3,6 +3,7 @@ import { DeleteButton } from "../../button/buttons";
 import { DeleteModal } from "../../modal/modal";
 
 interface DeleteModalProps {
+  field: string;
   name: string;
   onOk: () => void;
 }
@@ -18,7 +19,7 @@ export default function Delete(props: DeleteModalProps) {
       <DeleteButton onClick={() => setOpen(true)} />
       <DeleteModal
         open={open}
-        title={`Xóa ${props.name}`}
+        title={`Xóa ${props.field}`}
         onCancel={() => {
           handleCancel();
         }}
