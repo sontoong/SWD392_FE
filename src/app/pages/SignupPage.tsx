@@ -1,13 +1,14 @@
-import { Button, Divider, Radio, Select, Space } from "antd";
-import { Formik, Field } from "formik";
-import * as Yup from "yup";
-import { MyInput, MyInputPassword } from "../components/input/inputs";
+import { CheckboxOptionType, Divider, Form, Select, Space } from "antd";
+import {
+  FormInputPassword,
+  FormRadioButtonGroup,
+  InputFix,
+} from "../components/input/inputs";
 import MyCarousel from "../components/ui/carousel";
 import { useAuth } from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
-  SIGNUP_ERROR_MESSAGES,
   LANGUAGES,
   LANGUAGE_OPTIONS,
   SIGNUP_PAGE_TEXT,
@@ -19,6 +20,8 @@ import { LeftOutlined } from "@ant-design/icons";
 import { UserDetail } from "../models/user";
 import { generateRoleMsg } from "../utils/generators";
 import { DefaultForm } from "../components/form/form";
+import { CheckboxValueType } from "antd/es/checkbox/Group";
+import { PrimaryButton } from "../components/button/buttons";
 
 export type SignupFormValues = Pick<
   UserDetail,
@@ -55,7 +58,7 @@ const SelectCustom = ({ onChangeLanguage }: SelectCustomProps) => {
 
 function SignupPage() {
   const navigate = useNavigate();
-  const { state, handleLogin } = useAuth();
+  const { state, handleSignup } = useAuth();
   const logo = useImageFetcher("logo");
   const [selectedLanguage, setSelectedLanguage] = useState(
     LANGUAGES.VIETNAMESE,
@@ -79,33 +82,11 @@ function SignupPage() {
   };
 
   const handleSubmit = async (values: SignupFormValues) => {
-    handleLogin(values, navigate);
+    console.log(values);
+    handleSignup(values, navigate);
   };
 
   const languageText = SIGNUP_PAGE_TEXT[selectedLanguage];
-  const validate = SIGNUP_ERROR_MESSAGES[selectedLanguage];
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email(validate.email?.invalid)
-      .required(validate.email?.required),
-    password: Yup.string()
-      .min(4, validate.password?.length)
-      .required(validate.password?.required),
-    confirmPassword: Yup.string()
-      .min(4, validate.password?.length)
-      .required(validate.password?.required),
-    address: Yup.string().required(validate.address?.required),
-    firstName: Yup.string().required(validate.firstName?.required),
-    middleName: Yup.string().required(validate.middleName?.required),
-    lastName: Yup.string().required(validate.lastName?.required),
-    nation: Yup.string().required(validate.nation?.required),
-    phone: Yup.number()
-      .typeError(validate.phone?.invalid || "")
-      .integer(validate.phone?.invalid)
-      .positive(validate.phone?.invalid)
-      .required(validate.phone?.required),
-  });
 
   return (
     <div className="flex bg-greenHome">
@@ -121,109 +102,103 @@ function SignupPage() {
             </Space>
           </Link>
         </div>
-        <Formik
+        <DefaultForm
           initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
+          name="SignupPage"
+          className="clear-both flex flex-col items-center justify-center space-y-5"
+          onFinish={handleSubmit}
         >
-          <DefaultForm
-            initialValues={{}}
-            name="SignupPage"
-            className="clear-both flex flex-col items-center justify-center space-y-5"
-          >
-            <section className="w-[70%] space-y-5 ">
-              <div className="mb-12 ml-1 mt-[20%] ">
-                <h1 className="text-3xl">{languageText.title}</h1>
-                <div className="mt-3 w-full">
-                  Đã có tài khoản? Đăng nhập tại{" "}
-                  <Link to={"/login"} className="text-blue-500">
-                    đây
-                  </Link>
-                </div>
+          <section className="w-[70%] space-y-5 ">
+            <div className="mb-12 ml-1 mt-[20%] ">
+              <h1 className="text-3xl">{languageText.title}</h1>
+              <div className="mt-3 w-full">
+                Đã có tài khoản? Đăng nhập tại{" "}
+                <Link to={"/login"} className="text-blue-500">
+                  đây
+                </Link>
               </div>
-              <div>
-                <Title level={5}>Bạn muốn tạo tài khoản cho</Title>
-                <Radio.Group
-                  name="role"
-                  onChange={() => {}}
-                  defaultValue={initialValues.role}
-                >
-                  <Radio.Button value="freelancer">
-                    {generateRoleMsg("freelancer")}
-                  </Radio.Button>
-                  <Radio.Button value="enterprise">
-                    {generateRoleMsg("enterprise")}
-                  </Radio.Button>
-                </Radio.Group>
-              </div>
-              <Field
-                name="email"
-                component={MyInput}
-                placeholder={languageText.emailPlaceholder}
-              />
-              <Field
-                name="password"
-                component={MyInputPassword}
-                placeholder={languageText.passwordPlaceholder}
-              />
-              <Field
-                name="confirmPassword"
-                component={MyInputPassword}
-                placeholder={languageText.confirmPasswordPlaceholder}
-              />
-              <Space>
-                <Field
-                  name="firstName"
-                  component={MyInput}
-                  placeholder={languageText.firstNamePlaceholder}
-                />
-                <Field
-                  name="middleName"
-                  component={MyInput}
-                  placeholder={languageText.middleNamePlaceholder}
-                />
-                <Field
-                  name="lastName"
-                  component={MyInput}
-                  placeholder={languageText.lastNamePlaceholder}
-                />
-              </Space>
-              <Field
-                name="address"
-                component={MyInput}
-                placeholder={languageText.addressPlaceholder}
-              />
-              <Field
-                name="nation"
-                component={MyInput}
-                placeholder={languageText.nationPlaceholder}
-              />
-              <Field
-                name="phone"
-                component={MyInput}
-                placeholder={languageText.phonePlaceholder}
-              />
-            </section>
-
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="text-md h-11 w-[70%] bg-greenHome font-bold"
-              loading={state.isFetching}
+            </div>
+            <div>
+              <Title level={5}>Bạn muốn tạo tài khoản cho</Title>
+              <Form.Item name="role">
+                <FormRadioButtonGroup options={userRole} />
+              </Form.Item>
+            </div>
+            <Form.Item
+              name="email"
+              label="Địa chỉ Email"
+              rules={[
+                {
+                  type: "email",
+                  min: 1000,
+                  required: true,
+                },
+              ]}
             >
-              {languageText.signupButton}
-            </Button>
-            {state.error && selectedLanguage === LANGUAGES.VIETNAMESE && (
-              <article className="text-red-500">{state.displayError}</article>
-            )}
+              <InputFix />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              label="Mật khẩu"
+              rules={[
+                {
+                  type: "string",
+                  required: true,
+                },
+                {
+                  min: 8,
+                  message: "Mật khẩu phải có ít nhất 8 kí tự",
+                },
+              ]}
+            >
+              <FormInputPassword />
+            </Form.Item>
+            <Form.Item
+              name="confirmPassword"
+              label="Nhập lại mật khẩu"
+              rules={[
+                {
+                  type: "string",
+                  required: true,
+                },
+              ]}
+            >
+              <FormInputPassword />
+            </Form.Item>
+            <Form.Item
+              name="phone"
+              label="Số điện thoại"
+              rules={[
+                {
+                  required: true,
+                  type: "string",
+                  pattern: /^[0-9]+$/,
+                  len: 11,
+                  message: "Số điện thoại không hợp lệ",
+                },
+              ]}
+            >
+              <InputFix />
+            </Form.Item>
+          </section>
 
-            {state.error && selectedLanguage !== LANGUAGES.VIETNAMESE && (
-              <article className="text-red-500">
-                Login Failed, Please try later!
-              </article>
-            )}
-          </DefaultForm>
-        </Formik>
+          <PrimaryButton
+            htmlType="submit"
+            className="text-md h-11 w-[70%] font-bold"
+            loading={state.isFetching}
+          >
+            {languageText.signupButton}
+          </PrimaryButton>
+          {state.error && selectedLanguage === LANGUAGES.VIETNAMESE && (
+            <article className="text-red-500">{state.displayError}</article>
+          )}
+
+          {state.error && selectedLanguage !== LANGUAGES.VIETNAMESE && (
+            <article className="text-red-500">
+              Login Failed, Please try later!
+            </article>
+          )}
+        </DefaultForm>
         <Divider>hoặc</Divider>
         <div className="flex justify-center">
           <GoogleLoginButton />
@@ -238,3 +213,14 @@ function SignupPage() {
 }
 
 export default SignupPage;
+
+const userRole: CheckboxOptionType<CheckboxValueType>[] = [
+  {
+    label: generateRoleMsg("freelancer"),
+    value: "freelancer",
+  },
+  {
+    label: generateRoleMsg("enterprise"),
+    value: "enterprise",
+  },
+];

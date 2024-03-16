@@ -1,11 +1,12 @@
 import { DeleteTwoTone, EditTwoTone, PlusOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { ButtonProps } from "antd/es/button/button";
+import { cn } from "../../utils/cn";
 
 export function PrimaryButton(props: ButtonProps) {
-  const { children } = props;
+  const { children, className } = props;
   return (
-    <Button type="primary" {...props} className="bg-[#00b96b]">
+    <Button type="primary" {...props} className={cn("bg-[#00b96b]", className)}>
       {children}
     </Button>
   );

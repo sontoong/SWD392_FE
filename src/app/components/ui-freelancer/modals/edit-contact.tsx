@@ -98,7 +98,9 @@ export default function EditContact(props: EditContactProps) {
                 rules={[
                   {
                     required: true,
-                    type: "number",
+                    type: "string",
+                    pattern: /^[0-9]+$/,
+                    len: 11,
                   },
                 ]}
               >

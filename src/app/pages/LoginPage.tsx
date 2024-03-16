@@ -1,13 +1,10 @@
-import { Button, Divider, Select, Space } from "antd";
-import { Formik, Field } from "formik";
-import * as Yup from "yup";
-import { MyInput, MyInputPassword } from "../components/input/inputs";
+import { Divider, Form, Select, Space } from "antd";
+import { FormInputPassword, InputFix } from "../components/input/inputs";
 import MyCarousel from "../components/ui/carousel";
 import { useAuth } from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
-  SIGNUP_ERROR_MESSAGES,
   LANGUAGES,
   LANGUAGE_OPTIONS,
   LOGIN_PAGE_TEXT,
@@ -16,6 +13,7 @@ import { useImageFetcher } from "../hooks/useGetImg";
 import { GoogleLoginButton } from "../components/button/google-button";
 import { LeftOutlined } from "@ant-design/icons";
 import { DefaultForm } from "../components/form/form";
+import { PrimaryButton } from "../components/button/buttons";
 
 export interface LoginFormValues {
   email: string;
@@ -66,16 +64,6 @@ function LoginPage() {
   };
 
   const languageText = LOGIN_PAGE_TEXT[selectedLanguage];
-  const validate = SIGNUP_ERROR_MESSAGES[selectedLanguage];
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email(validate.email?.invalid)
-      .required(validate.email?.required),
-    password: Yup.string()
-      .min(4, validate.password?.length)
-      .required(validate.password?.required),
-  });
 
   return (
     <div className="flex bg-greenHome">
@@ -91,59 +79,66 @@ function LoginPage() {
             </Space>
           </Link>
         </div>
-        <Formik
+        <DefaultForm
+          name="LoginPage"
           initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
+          onFinish={handleSubmit}
+          className="clear-both flex flex-col items-center justify-center space-y-5"
         >
-          <DefaultForm
-            name="LoginPage"
-            initialValues={{}}
-            className="clear-both flex flex-col items-center justify-center space-y-5"
-          >
-            <section className="w-[70%] space-y-5 ">
-              <div className="mb-12 ml-1 mt-[40%] ">
-                <h1 className="text-3xl">{languageText.title}</h1>
-                <div className="mt-3 w-full">
-                  Chưa có tài khoản? Đăng ký tại{" "}
-                  <Link to={"/sign-up"} className="text-blue-500">
-                    đây
-                  </Link>
-                </div>
+          <section className="w-[70%] space-y-5 ">
+            <div className="mb-12 ml-1 mt-[40%] ">
+              <h1 className="text-3xl">{languageText.title}</h1>
+              <div className="mt-3 w-full">
+                Chưa có tài khoản? Đăng ký tại{" "}
+                <Link to={"/sign-up"} className="text-blue-500">
+                  đây
+                </Link>
               </div>
-
-              <Field
-                name="email"
-                component={MyInput}
-                placeholder={languageText.emailPlaceholder}
-              />
-
-              <Field
-                name="password"
-                component={MyInputPassword}
-                placeholder={languageText.passwordPlaceholder}
-              />
-            </section>
-
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="text-md h-11 w-[70%] bg-greenHome font-bold"
-              loading={state.isFetching}
+            </div>
+            <Form.Item
+              name="email"
+              label="Địa chỉ Email"
+              rules={[
+                {
+                  type: "email",
+                  min: 1000,
+                  required: true,
+                },
+              ]}
             >
-              {languageText.loginButton}
-            </Button>
-            {state.error && selectedLanguage === LANGUAGES.VIETNAMESE && (
-              <article className="text-red-500">{state.displayError}</article>
-            )}
+              <InputFix />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              label="Mật khẩu"
+              rules={[
+                {
+                  type: "string",
+                  required: true,
+                },
+              ]}
+            >
+              <FormInputPassword />
+            </Form.Item>
+          </section>
 
-            {state.error && selectedLanguage !== LANGUAGES.VIETNAMESE && (
-              <article className="text-red-500">
-                Login Failed, Please try later!
-              </article>
-            )}
-          </DefaultForm>
-        </Formik>
+          <PrimaryButton
+            htmlType="submit"
+            className="text-md h-11 w-[70%] font-bold"
+            loading={state.isFetching}
+          >
+            {languageText.loginButton}
+          </PrimaryButton>
+          {state.error && selectedLanguage === LANGUAGES.VIETNAMESE && (
+            <article className="text-red-500">{state.displayError}</article>
+          )}
+
+          {state.error && selectedLanguage !== LANGUAGES.VIETNAMESE && (
+            <article className="text-red-500">
+              Login Failed, Please try later!
+            </article>
+          )}
+        </DefaultForm>
         <Divider>hoặc</Divider>
         <div className="flex justify-center">
           <GoogleLoginButton />
