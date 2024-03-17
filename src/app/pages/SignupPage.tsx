@@ -25,13 +25,10 @@ import { PrimaryButton } from "../components/button/buttons";
 
 export type SignupFormValues = Pick<
   UserDetail,
-  "role" | "email" | "address" | "nation" | "phone"
+  "role" | "email" | "phone" | "username"
 > & {
   password: string;
-  confirmPassword: string;
-  firstName: string;
-  middleName: string;
-  lastName: string;
+  passwordConfirm: string;
 };
 
 interface SelectCustomProps {
@@ -46,7 +43,7 @@ const SelectCustom = ({ onChangeLanguage }: SelectCustomProps) => {
   return (
     <Space wrap>
       <Select
-        bordered={false}
+        variant="borderless"
         defaultValue={LANGUAGES.VIETNAMESE}
         style={{ width: 100 }}
         onChange={handleChange}
@@ -65,15 +62,11 @@ function SignupPage() {
   );
 
   const initialValues: SignupFormValues = {
-    role: "freelancer",
+    role: "enterprise",
+    username: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    address: "",
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    nation: "",
+    passwordConfirm: "",
     phone: "",
   };
 
@@ -138,12 +131,27 @@ function SignupPage() {
               <InputFix />
             </Form.Item>
             <Form.Item
+              name="username"
+              label="Tên tài khoản"
+              rules={[
+                {
+                  type: "string",
+                  max: 20,
+                  required: true,
+                  whitespace: true,
+                },
+              ]}
+            >
+              <InputFix />
+            </Form.Item>
+            <Form.Item
               name="password"
               label="Mật khẩu"
               rules={[
                 {
                   type: "string",
                   required: true,
+                  whitespace: true,
                 },
                 {
                   min: 8,
@@ -154,12 +162,13 @@ function SignupPage() {
               <FormInputPassword />
             </Form.Item>
             <Form.Item
-              name="confirmPassword"
+              name="passwordConfirm"
               label="Nhập lại mật khẩu"
               rules={[
                 {
                   type: "string",
                   required: true,
+                  whitespace: true,
                 },
               ]}
             >
@@ -175,6 +184,7 @@ function SignupPage() {
                   pattern: /^[0-9]+$/,
                   len: 11,
                   message: "Số điện thoại không hợp lệ",
+                  whitespace: true,
                 },
               ]}
             >
@@ -216,11 +226,11 @@ export default SignupPage;
 
 const userRole: CheckboxOptionType<CheckboxValueType>[] = [
   {
-    label: generateRoleMsg("freelancer"),
-    value: "freelancer",
-  },
-  {
     label: generateRoleMsg("enterprise"),
     value: "enterprise",
+  },
+  {
+    label: generateRoleMsg("freelancer"),
+    value: "freelancer",
   },
 ];

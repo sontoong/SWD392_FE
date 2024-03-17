@@ -1,11 +1,10 @@
 import { Applicant } from "../app/models/applicant";
-import { Comment } from "../app/models/comment";
+import { Comment } from "../app/models/rating";
 import { CompanyDetail } from "../app/models/company";
 import { EnterpriseInfo } from "../app/models/enterprise";
 import { Income } from "../app/models/income";
 import { Nation } from "../app/models/language";
 import {
-  SkillField,
   Project,
   Skill,
   OptionalRequirements,
@@ -13,6 +12,7 @@ import {
   EnterpriseProject,
   OutsideProject,
   Field,
+  SkillField,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
 import { Education, Experience, FreelancerDetail } from "../app/models/user";
@@ -42,13 +42,11 @@ export const fields: Field[] = [
 const field: SkillField = {
   label: "IT",
   value: "it",
-  skills: skills,
 };
 
 const field1: SkillField = {
   label: "Nấu ăn",
   value: "cook",
-  skills: skills,
 };
 
 const optionalRequirements: OptionalRequirements = {
@@ -169,7 +167,8 @@ Facebook: fb.com/user/JoeBiden`,
       rating: 0,
       ratingCount: 0,
     },
-  ]
+  ],
+  jobField: { label: "IT", value: "it" },
 };
 
 export const projects: Project[] = [project];

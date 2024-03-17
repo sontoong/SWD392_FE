@@ -24,45 +24,16 @@ export function useAuth() {
       const { data } = await baseApi.post(`/auth/login`, {
         ...value,
       });
-      const { link, token, ...user } = data.data;
-      dispatch(loginSuccess(user));
+      const { token, data: userData } = data;
+      dispatch(loginSuccess(userData.user));
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("link", JSON.stringify(link));
-      navigate(link);
+      localStorage.setItem("user", JSON.stringify(userData.user));
+      navigate("/");
     } catch (error) {
+      console.log(error);
       if (error instanceof AxiosError) {
-        const errorResponse = error?.response?.data?.error?.message;
-        if (errorResponse in LoginError) {
-          const translatedError =
-            LoginError[errorResponse as keyof typeof LoginError];
-          dispatch(loginFailure(translatedError));
-        } else {
-          dispatch(loginFailure(errorResponse));
-        }
-      } else {
-        dispatch(loginFailure("Đã có lỗi xảy ra"));
-      }
-    }
-  };
-  const handleSignup = async (
-    value: SignupFormValues,
-    navigate: NavigateFunction,
-  ) => {
-    dispatch(loginStart());
-    try {
-      const { data } = await baseApi.post(`/auth/signup`, {
-        ...value,
-      });
-      const { link, token, ...user } = data.data;
-      dispatch(loginSuccess(user));
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("link", JSON.stringify(link));
-      navigate(link);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        const errorResponse = error?.response?.data?.error?.message;
+        const errorResponse = error?.response?.data?.message;
+        console.log(errorResponse);
         if (errorResponse in LoginError) {
           const translatedError =
             LoginError[errorResponse as keyof typeof LoginError];
@@ -76,5 +47,61 @@ export function useAuth() {
     }
   };
 
-  return { state, handleLogin, handleSignup };
+  const handleSignup = async (
+    value: SignupFormValues,
+    navigate: NavigateFunction,
+  ) => {
+    dispatch(loginStart());
+    try {
+      const { data } = await baseApi.post(`/auth/signup`, {
+        ...value,
+      });
+      const { token, data: userData } = data;
+      dispatch(loginSuccess(userData.user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(userData.user));
+      navigate("/");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errorResponse = error?.response?.data?.message;
+        if (errorResponse in LoginError) {
+          const translatedError =
+            LoginError[errorResponse as keyof typeof LoginError];
+          dispatch(loginFailure(translatedError));
+        } else {
+          dispatch(loginFailure(errorResponse));
+        }
+      } else {
+        dispatch(loginFailure("Đã có lỗi xảy ra"));
+      }
+    }
+  };
+
+  const handleLoginGoogle = async (navigate: NavigateFunction) => {
+    dispatch(loginStart());
+    try {
+      const { data } = await baseApi.get(`/auth/google`);
+      const { token, data: userData } = data;
+      dispatch(loginSuccess(userData.user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(userData.user));
+      navigate("/");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errorResponse = error?.response?.data?.message;
+        if (errorResponse in LoginError) {
+          const translatedError =
+            LoginError[errorResponse as keyof typeof LoginError];
+          dispatch(loginFailure(translatedError));
+        } else {
+          dispatch(loginFailure(errorResponse));
+        }
+      } else {
+        dispatch(loginFailure("Đã có lỗi xảy ra"));
+      }
+    }
+    console.log("error");
+  };
+
+  return { state, handleLogin, handleSignup, handleLoginGoogle };
 }

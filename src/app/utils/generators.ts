@@ -118,9 +118,9 @@ export function generateVerifyMsg(verified: UserDetail["isVerified"]) {
 
 export function generateRoleMsg(role: UserDetail["role"]) {
   switch (role) {
-    case "freelancer":
-      return "Nhà tuyển dụng";
     case "enterprise":
+      return "Nhà tuyển dụng";
+    case "freelancer":
       return "Nguời ứng tuyển";
     default:
       return "Chưa xác định";
@@ -223,8 +223,8 @@ export function generateProjectCompleted(
   }
 }
 
-export function generateRatingName(name: string){
-  switch(name){
+export function generateRatingName(name: string) {
+  switch (name) {
     case "quality":
       return "Chất lượng";
     case "price":

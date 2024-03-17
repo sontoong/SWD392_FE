@@ -23,7 +23,6 @@ export type Skill = {
 export type SkillField = {
   label: string;
   value: string;
-  skills: Skill[];
 };
 
 export type Field = {

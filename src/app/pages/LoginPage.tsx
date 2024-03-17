@@ -32,7 +32,7 @@ const SelectCustom = ({ onChangeLanguage }: SelectCustomProps) => {
   return (
     <Space wrap>
       <Select
-        bordered={false}
+        variant="borderless"
         defaultValue={LANGUAGES.VIETNAMESE}
         style={{ width: 100 }}
         onChange={handleChange}

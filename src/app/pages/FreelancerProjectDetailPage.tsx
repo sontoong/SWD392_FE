@@ -33,7 +33,7 @@ export default function FreelancerProjectDetail() {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const data = project;
+  const projectData = project;
   const creatorData = enterpriseInfo;
 
   return (
@@ -58,41 +58,44 @@ export default function FreelancerProjectDetail() {
                   color: "#74BA7B",
                 }}
               >
-                {data.title}
+                {projectData.title}
               </Title>
             }
           >
             <Row>
               <Col span={5} className="text-[1.2rem] font-semibold">
-                <FolderOpenOutlined /> {data.projectField.label}
+                <FolderOpenOutlined /> {projectData.projectField.label}
               </Col>
               <Col span={5} offset={2} className="text-[1.2rem] font-semibold">
                 <EnvironmentOutlined />{" "}
-                {nations[data.optionalRequirements.nation].label}
+                {nations[projectData.optionalRequirements.nation].label}
               </Col>
             </Row>
             <Divider />
             <Row>
               <Col span={5} className="text-[1.2rem] font-semibold">
-                {data.initialFunding
-                  ? formatCurrency(data.initialFunding)
-                  : generateRequirementMsg(data.freelancerRequirement)
+                {projectData.initialFunding
+                  ? formatCurrency(projectData.initialFunding)
+                  : generateRequirementMsg(projectData.freelancerRequirement)
                       .priceDesc}{" "}
                 <span className="text-[.75rem] font-normal text-gray-400">
-                  {generateProjectFundingType(data.funding)}
+                  {generateProjectFundingType(projectData.funding)}
                 </span>
               </Col>
               <Col span={5} offset={2} className="text-[1.2rem] font-semibold">
                 Kinh nghiệm{" "}
                 <span className=" font-normal text-gray-400">
-                  {generateRequirementMsg(data.freelancerRequirement).short}
+                  {
+                    generateRequirementMsg(projectData.freelancerRequirement)
+                      .short
+                  }
                 </span>
               </Col>
               <Divider type="vertical" />
               <Col span={5} offset={2} className="text-[1.2rem] font-semibold">
                 Báo giá:{" "}
                 <span className=" font-normal text-gray-400">
-                  {data.applicationCount}
+                  {projectData.applicationCount}
                 </span>
               </Col>
             </Row>
@@ -100,7 +103,7 @@ export default function FreelancerProjectDetail() {
             <Row>
               <Col span={24}>
                 <Title level={4}>Yêu cầu project</Title>
-                <Text>{data.description}</Text>
+                <Text>{projectData.description}</Text>
               </Col>
             </Row>
             <Divider />
@@ -110,7 +113,7 @@ export default function FreelancerProjectDetail() {
                   <Title level={4}>
                     Thời gian project:{" "}
                     <span className="font-normal text-gray-400">
-                      {generateTimeToComplete(data.timeToComplete)}
+                      {generateTimeToComplete(projectData.timeToComplete)}
                     </span>
                   </Title>
                 </Col>
@@ -118,9 +121,11 @@ export default function FreelancerProjectDetail() {
               <Row>
                 <Col span={24}>
                   <Title level={4}>Kỹ năng cần có:</Title>
-                  {data.projectField.skills.map((item, index) => (
-                    <CustomTag key={index}>{item.label}</CustomTag>
-                  ))}
+                  {projectData.optionalRequirements.skills.map(
+                    (item, index) => (
+                      <CustomTag key={index}>{item.label}</CustomTag>
+                    ),
+                  )}
                 </Col>
               </Row>
             </Space>
@@ -133,7 +138,7 @@ export default function FreelancerProjectDetail() {
           <Space direction="vertical" size={"large"}>
             <Row>
               <Col span={24}>
-                <ApplyProject project={data} />
+                <ApplyProject project={projectData} />
               </Col>
             </Row>
             <Title level={3}>Khách hàng</Title>
@@ -188,14 +193,14 @@ export default function FreelancerProjectDetail() {
                   Đã chi trả:
                   <Text className="font-normal">
                     {" "}
-                    {formatCurrency(data.paidAmount)}
+                    {formatCurrency(projectData.paidAmount)}
                   </Text>
                 </Title>
               </Row>
               <Row>
                 <Col>
                   <Text className="font-normal">
-                    {data.freelancerCount} đã tuyển
+                    {projectData.freelancerCount} đã tuyển
                   </Text>
                 </Col>
               </Row>

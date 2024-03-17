@@ -7,8 +7,13 @@ import { formatCurrency } from "../../../utils/utils";
 import { FormTextArea } from "../../input/inputs";
 import { generateRatingName } from "../../../utils/generators";
 
-export default function RatingFreelancerModal() {
-  const [money, setMoney] = useState(0);
+interface RatingFreelancerModalProps {
+  money: number;
+}
+
+export default function RatingFreelancerModal(
+  props: RatingFreelancerModalProps,
+) {
   const { Title, Text } = Typography;
   const [open, setOpen] = useState(true);
   const [form] = Form.useForm();
@@ -72,7 +77,7 @@ export default function RatingFreelancerModal() {
         <Row>
           <Col span={24}>
             <Title level={3} type="success" className="text-center">
-              CHUYỂN TIỀN THÀNH CÔNG!!!
+              CHUYỂN TIỀN THÀNH CÔNG
             </Title>
           </Col>
         </Row>
@@ -87,7 +92,7 @@ export default function RatingFreelancerModal() {
           <Col span={24}>
             <Text className="font-bold">
               Mức lương:{" "}
-              <Text className="font-normal">{formatCurrency(money)}</Text>
+              <Text className="font-normal">{formatCurrency(props.money)}</Text>
             </Text>
           </Col>
         </Row>

@@ -1,24 +1,25 @@
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import {
+  App,
   Avatar,
   Button,
   Dropdown,
+  Menu,
   MenuProps,
   Modal,
   Spin,
-  notification,
 } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { Menu } from "antd";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import apiJWT from "../../utils/api";
-import { useAuth } from "../../hooks/useAuth";
+import { ItemType } from "antd/es/menu/hooks/useItems";
 import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 import { useImageFetcher } from "../../hooks/useGetImg";
 import { useAppSelector } from "../../redux/hook";
-import { ItemType } from "antd/es/menu/hooks/useItems";
+import apiJWT from "../../utils/api";
 
 export default function MyHeader() {
+  const { notification } = App.useApp();
   const location = useLocation();
   const navigate = useNavigate();
   const logo = useImageFetcher("logo");
@@ -31,11 +32,11 @@ export default function MyHeader() {
   const logOut = async () => {
     setLoading(true);
     try {
-      const response = await apiJWT.post(`/auth/logout`);
+      const response = await apiJWT.get(`/auth/logout`);
       if (response) {
         localStorage.clear();
         setLoading(false);
-        navigate("/login");
+        window.location.href = "/login";
       }
     } catch (error) {
       notification.error({
