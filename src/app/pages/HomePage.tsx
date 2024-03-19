@@ -12,7 +12,7 @@ import {
   FileProtectOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const cardItems = [
   {
@@ -68,7 +68,8 @@ const reasons = [
   },
 ];
 
-export default function home() {
+export default function Home() {
+  const navigate = useNavigate();
   return (
     <div>
       {/* Banner */}
@@ -88,23 +89,21 @@ export default function home() {
             </h2>
           </div>
           <div className="flex w-[40rem] justify-between">
-            <Link to={"/"}>
-              <Button
-                type="primary"
-                className="h-[3rem] rounded-none px-[3rem] text-[1.5rem]"
-                style={{ backgroundColor: "#74BA7B" }}
-              >
-                Trở thành Freelancer
-              </Button>
-            </Link>
-            <Link to={"/"}>
-              <Button
-                className="h-[3rem] px-[3rem] text-[1.5rem]"
-                style={{ borderColor: "#74BA7B", color: "#74BA7B" }}
-              >
-                Tuyển Freelancer
-              </Button>
-            </Link>
+            <Button
+              type="primary"
+              className="h-[3rem] rounded-none px-[3rem] text-[1.5rem]"
+              style={{ backgroundColor: "#74BA7B" }}
+              onClick={() => navigate("/register?role=freelancer")}
+            >
+              Trở thành Freelancer
+            </Button>
+            <Button
+              className="h-[3rem] px-[3rem] text-[1.5rem]"
+              style={{ borderColor: "#74BA7B", color: "#74BA7B" }}
+              onClick={() => navigate("/register?role=enterprise")}
+            >
+              Tuyển Freelancer
+            </Button>
           </div>
         </div>
       </div>

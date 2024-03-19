@@ -108,7 +108,9 @@ export const router = createBrowserRouter([
         path: "",
         element: (
           <Suspense fallback={<></>}>
-            <HomePage />
+            <PrivateRoute inverted={true}>
+              <HomePage />
+            </PrivateRoute>
           </Suspense>
         ),
       },
@@ -371,7 +373,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/sign-up",
+    path: "/register",
     element: (
       <Suspense fallback={<></>}>
         <PrivateRoute inverted={true}>

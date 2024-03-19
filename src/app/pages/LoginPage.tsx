@@ -90,7 +90,7 @@ function LoginPage() {
               <h1 className="text-3xl">{languageText.title}</h1>
               <div className="mt-3 w-full">
                 Chưa có tài khoản? Đăng ký tại{" "}
-                <Link to={"/sign-up"} className="text-blue-500">
+                <Link to={"/register"} className="text-blue-500">
                   đây
                 </Link>
               </div>

@@ -29,9 +29,9 @@ export default function EnterpriseProjectList() {
       dataIndex: "title",
       key: "title",
       render: (_, record) => (
-        <Link to={`${record.id}`}>
-          <div className="text-blue-500 underline">{record.title}</div>
-        </Link>
+        <div className="text-blue-500 underline">
+          <Link to={`${record.id}`}>{record.title}</Link>
+        </div>
       ),
     },
     {

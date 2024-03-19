@@ -6,7 +6,7 @@ import {
 } from "../components/input/inputs";
 import MyCarousel from "../components/ui/carousel";
 import { useAuth } from "../hooks/useAuth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import {
   LANGUAGES,
@@ -55,6 +55,7 @@ const SelectCustom = ({ onChangeLanguage }: SelectCustomProps) => {
 
 function SignupPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { state, handleSignup } = useAuth();
   const logo = useImageFetcher("logo");
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -62,7 +63,8 @@ function SignupPage() {
   );
 
   const initialValues: SignupFormValues = {
-    role: "enterprise",
+    role:
+      (searchParams.get("role") as SignupFormValues["role"]) || "enterprise",
     username: "",
     email: "",
     password: "",

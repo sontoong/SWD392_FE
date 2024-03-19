@@ -80,11 +80,11 @@ export default function MyHeader() {
         ];
       case "enterprise":
         return [
-          getItem("Tìm Hồ Sơ", "/freelancers"),
           getItem("Quản Lý Project", "/ed", "", [
             { label: "Danh Sách Project", key: "/ed/projects" },
             { label: "Đăng Tuyển Dụng", key: "/ed/new-project" },
           ]),
+          getItem("Tìm Hồ Sơ", "/freelancers"),
           getItem("Thống Kê", "/ed/report", "", [
             { label: "Lịch Sử Giao Dịch", key: "/ed/report/transactions" },
           ]),

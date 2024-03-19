@@ -24,16 +24,22 @@ const PrivateRoute = ({
   // if (isFirstLogin && window.location.pathname !== '/account/change-password') {
   //   return <Navigate to='/account/change-password' />;
   // }
-  switch (role) {
-    case "":
-      break;
-
-    default:
-      break;
-  }
 
   if (inverted) {
-    return isAuth ? <Navigate to="/" /> : children;
+    if (isAuth) {
+      switch (role) {
+        case "enterprise":
+          return <Navigate to="/ed/projects" />;
+        case "freelancer":
+          return <Navigate to="/projects" />;
+        case "admin":
+          return <Navigate to="/admin" />;
+        default:
+          return <Navigate to="/" />;
+      }
+    } else {
+      return children;
+    }
   }
 
   if (role && !requiredRoles?.some((r) => role === r)) return <ErrorPage />;
