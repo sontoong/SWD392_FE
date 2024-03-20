@@ -63,7 +63,7 @@ export default function MyHeader() {
 
   const getConditionalItems = (): ItemType[] => {
     switch (role) {
-      case "freelancer":
+      case "candidate":
         return [
           getItem("Tìm Project", "/projects"),
           getItem("Quản Lý Project", "/fd/projects"),
@@ -84,7 +84,7 @@ export default function MyHeader() {
             { label: "Danh Sách Project", key: "/ed/projects" },
             { label: "Đăng Tuyển Dụng", key: "/ed/new-project" },
           ]),
-          getItem("Tìm Hồ Sơ", "/freelancers"),
+          getItem("Tìm Hồ Sơ", "/candidates"),
           getItem("Thống Kê", "/ed/report", "", [
             { label: "Lịch Sử Giao Dịch", key: "/ed/report/transactions" },
           ]),
@@ -98,14 +98,14 @@ export default function MyHeader() {
       default:
         return [
           getItem("Tìm Project", "/projects"),
-          getItem("Tìm Hồ Sơ", "/freelancers"),
+          getItem("Tìm Hồ Sơ", "/candidates"),
         ];
     }
   };
 
   const getConditionalDropdown = (): ItemType[] => {
     switch (role) {
-      case "freelancer":
+      case "candidate":
         return [
           getItem(
             <Link to={`/fd/account`}>Thông tin cá nhân</Link>,

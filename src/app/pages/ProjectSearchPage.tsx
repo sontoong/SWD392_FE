@@ -1,5 +1,5 @@
-import ProjectSearchForm from "../components/ui-freelancer/search/project-search";
-import ProjectList from "../components/ui-freelancer/search/project-list";
+import ProjectSearchForm from "../components/ui-candidate/search/project-search";
+import ProjectList from "../components/ui-candidate/search/project-list";
 import { projects } from "../../constants/testData";
 
 export default function ProjectSearchPage() {

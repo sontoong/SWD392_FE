@@ -10,12 +10,12 @@ import { CustomFormModal } from "../../modal/modal";
 import { FormSelect } from "../../select/select";
 import { nations } from "../../../../constants/testData";
 import { UploadProfileImage } from "../upload";
-import { FreelancerDetail } from "../../../models/user";
+import { CandidateDetail } from "../../../models/user";
 import { DefaultForm } from "../../form/form";
 
 interface EditOverviewProps {
   overview?: Pick<
-    FreelancerDetail,
+    CandidateDetail,
     | "firstName"
     | "middleName"
     | "lastName"

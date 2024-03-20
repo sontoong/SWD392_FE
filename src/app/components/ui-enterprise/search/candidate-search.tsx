@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Col, Form, Row, Typography } from "antd";
 import { DefaultForm } from "../../form/form";
-import { FreelancerSearch } from "../../../models/search";
+import { CandidateSearch } from "../../../models/search";
 import { CustomCard } from "../../ui/card";
 import { IconButton } from "../../button/buttons";
 import { FilterOutlined } from "@ant-design/icons";
@@ -11,7 +11,7 @@ import { projectFields } from "../../../../constants/project-field";
 import { languages } from "../../../../constants/language";
 import { nations } from "../../../../constants/testData";
 
-export default function FreelancerSearchForm() {
+export default function CandidateSearchForm() {
   const [form] = Form.useForm();
   const [showFilter, setShowFilter] = useState(false);
 
@@ -25,7 +25,7 @@ export default function FreelancerSearchForm() {
     console.log("Failed:", errorInfo);
   };
 
-  const initialValues: FreelancerSearch = {
+  const initialValues: CandidateSearch = {
     input: "",
     desiredSalary: "all",
     experienceLevel: "all",
@@ -45,7 +45,7 @@ export default function FreelancerSearchForm() {
             color: "white",
           }}
         >
-          Tìm Freelancer
+          Tìm Candidate
         </Title>
       }
       styles={{
@@ -55,7 +55,7 @@ export default function FreelancerSearchForm() {
     >
       <DefaultForm
         form={form}
-        name="FreelancerSearchForm"
+        name="CandidateSearchForm"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         initialValues={initialValues}

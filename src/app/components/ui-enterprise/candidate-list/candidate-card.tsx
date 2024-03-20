@@ -19,14 +19,14 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { FreelancerDetail } from "../../../models/user";
-import { PayFreelancerModal } from "../modals";
+import { CandidateDetail } from "../../../models/user";
+import { PayCandidateModal } from "../modals";
 
-export default function FreelancerCard({
-  freelancer,
+export default function CandidateCard({
+  candidate,
   paying,
 }: {
-  freelancer: FreelancerDetail;
+  candidate: CandidateDetail;
   paying?: boolean;
 }) {
   const {
@@ -42,7 +42,7 @@ export default function FreelancerCard({
     projectCount,
     desireSalary,
     languages,
-  } = freelancer;
+  } = candidate;
 
   const fullName = `${firstName} ${middleName ? middleName + " " : ""}${lastName}`;
 
@@ -55,15 +55,15 @@ export default function FreelancerCard({
         <div>
           <Space size={"large"}>
             <Tooltip title="Xem chi tiết">
-              <Link to={`${freelancer.id}`}>
+              <Link to={`${candidate.id}`}>
                 <Button icon={<EyeOutlined />} className="ml-auto">
                   Chi tiết
                 </Button>
               </Link>
             </Tooltip>
             {paying && (
-              <Tooltip title="Gửi tiền cho Freelancer">
-                <PayFreelancerModal title={fullName} />
+              <Tooltip title="Gửi tiền cho Candidate">
+                <PayCandidateModal title={fullName} />
               </Tooltip>
             )}
           </Space>

@@ -38,7 +38,7 @@ export default function TransactionList(props: { role: string }) {
       key: "TypeFormat",
     },
     {
-      title: props.role == "freelancer" ? "Khách hàng" : "Freelancer",
+      title: props.role == "candidate" ? "Khách hàng" : "Candidate",
       dataIndex: "name",
       key: "name",
     },

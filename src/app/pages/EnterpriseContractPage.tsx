@@ -34,19 +34,19 @@ export default function EnterpriseContractPage() {
 
   const columns: TableProps<TableData>["columns"] = [
     {
-      title: "Tên Freelancer",
-      dataIndex: "freelancerName",
-      key: "freelancerName",
+      title: "Tên Candidate",
+      dataIndex: "candidateName",
+      key: "candidateName",
       render: (_, record) => (
         <div className="text-blue-500 underline">
-          <Link to={`${record.freelancerId}`}>{record.freelancerName}</Link>
+          <Link to={`${record.candidateId}`}>{record.candidateName}</Link>
         </div>
       ),
     },
     {
       title: "Tên Project",
-      dataIndex: "freelancerName",
-      key: "freelancerName",
+      dataIndex: "candidateName",
+      key: "candidateName",
       render: (_, record) => (
         <div className="text-blue-500 underline">
           <Link to={`${record.projectId}`}>{record.projectName}</Link>

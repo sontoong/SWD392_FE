@@ -106,7 +106,7 @@ export default function EnterpriseProjectDetail() {
     title,
     funding,
     initialFunding,
-    freelancerRequirement,
+    candidateRequirement,
     description,
     projectType,
     optionalRequirements,
@@ -157,7 +157,7 @@ export default function EnterpriseProjectDetail() {
                     <span>
                       {initialFunding
                         ? formatCurrency(initialFunding)
-                        : generateRequirementMsg(freelancerRequirement)
+                        : generateRequirementMsg(candidateRequirement)
                             .priceDesc}
                     </span>
                   </Space>
@@ -171,12 +171,12 @@ export default function EnterpriseProjectDetail() {
                   <Space>
                     <TeamOutlined />
                     <span>
-                      {generateRequirementMsg(freelancerRequirement).title}
+                      {generateRequirementMsg(candidateRequirement).title}
                     </span>
                   </Space>
                 </Title>
                 <Text type="secondary">
-                  {generateRequirementMsg(freelancerRequirement).desc}
+                  {generateRequirementMsg(candidateRequirement).desc}
                 </Text>
               </Col>
             </Row>

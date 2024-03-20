@@ -49,7 +49,7 @@ export default function ProjectSearchForm() {
     >
       <DefaultForm
         form={form}
-        name="FreelancerSearchForm"
+        name="CandidateSearchForm"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         initialValues={initialValues}

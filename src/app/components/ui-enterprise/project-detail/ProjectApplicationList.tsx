@@ -22,7 +22,7 @@ export default function ProjectApplicationList() {
 
   const columns: TableProps<Applicant>["columns"] = [
     {
-      title: "Freelancer",
+      title: "Candidate",
       dataIndex: "name",
       key: "name",
     },

@@ -5,7 +5,7 @@ import { DownloadOutlined } from "@ant-design/icons";
 import { formatCurrency } from "../utils/utils";
 import { IconButton } from "../components/button/buttons";
 
-export default function FreeLancerIncomeList() {
+export default function CandidateIncomeList() {
   interface IncomeTable extends Income {
     IncomeAmountFormat: string;
     ServiceFeeFormat: string;

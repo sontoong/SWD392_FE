@@ -4,14 +4,14 @@ import { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Col, Form, Row, Space, Typography } from "antd";
 import { FormInput } from "../../input/inputs";
-import { FreelancerProject } from "../../../models/project";
+import { CandidateProject } from "../../../models/project";
 import { DefaultForm } from "../../form/form";
 import { generateDepositType } from "../../../utils/generators";
 import { formatUnixToLocal } from "../../../utils/utils";
 import { contract } from "../../../../constants/testData";
 
 interface ViewSignContractProp {
-  record: FreelancerProject;
+  record: CandidateProject;
 }
 export default function ViewSignContract(props: ViewSignContractProp) {
   const { record } = props;
@@ -69,10 +69,7 @@ export default function ViewSignContract(props: ViewSignContractProp) {
             <Row>
               <Col>
                 <Title level={5}>Đặt cọc</Title>
-                {generateDepositType(
-                  contract.depositType,
-                  contract.fund,
-                )}
+                {generateDepositType(contract.depositType, contract.fund)}
               </Col>
             </Row>
             <Row>

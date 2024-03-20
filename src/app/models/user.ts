@@ -1,6 +1,6 @@
 import { languages } from "../../constants/language";
 import { ExperienceLevel, OutsideProject, Skill, SkillField } from "./project";
-import { FreelancerRating } from "./rating";
+import { CandidateRating } from "./rating";
 
 export interface Experience {
   company: string;
@@ -23,7 +23,7 @@ export interface UserDetail {
   email: string;
   phone: string;
   dob: number;
-  role: "freelancer" | "enterprise" | "admin";
+  role: "candidate" | "enterprise" | "admin";
   address: string;
   nation: string;
   isVerified: boolean;
@@ -35,7 +35,7 @@ export interface UserDetail {
   description: string;
 }
 
-export interface FreelancerDetail extends UserDetail {
+export interface CandidateDetail extends UserDetail {
   firstName: string;
   middleName: string;
   lastName: string;
@@ -47,7 +47,7 @@ export interface FreelancerDetail extends UserDetail {
   skills: Skill[];
   educations?: Education[];
   experiences?: Experience[];
-  rating: FreelancerRating[];
+  rating: CandidateRating[];
   jobField: SkillField;
 }
 

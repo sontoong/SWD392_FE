@@ -25,9 +25,9 @@ import {
 import { formatCurrency } from "../utils/utils";
 import CustomTag from "../components/ui/tag";
 import Sider from "antd/es/layout/Sider";
-import { ApplyProject } from "../components/ui-freelancer/modals";
+import { ApplyProject } from "../components/ui-candidate/modals";
 
-export default function FreelancerProjectDetail() {
+export default function CandidateProjectDetail() {
   const { Title, Text } = Typography;
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -76,7 +76,7 @@ export default function FreelancerProjectDetail() {
               <Col span={5} className="text-[1.2rem] font-semibold">
                 {projectData.initialFunding
                   ? formatCurrency(projectData.initialFunding)
-                  : generateRequirementMsg(projectData.freelancerRequirement)
+                  : generateRequirementMsg(projectData.candidateRequirement)
                       .priceDesc}{" "}
                 <span className="text-[.75rem] font-normal text-gray-400">
                   {generateProjectFundingType(projectData.funding)}
@@ -86,7 +86,7 @@ export default function FreelancerProjectDetail() {
                 Kinh nghiệm{" "}
                 <span className=" font-normal text-gray-400">
                   {
-                    generateRequirementMsg(projectData.freelancerRequirement)
+                    generateRequirementMsg(projectData.candidateRequirement)
                       .short
                   }
                 </span>
@@ -200,7 +200,7 @@ export default function FreelancerProjectDetail() {
               <Row>
                 <Col>
                   <Text className="font-normal">
-                    {projectData.freelancerCount} đã tuyển
+                    {projectData.candidateCount} đã tuyển
                   </Text>
                 </Col>
               </Row>

@@ -58,10 +58,10 @@ export default function ProjectRequirementInfo({
             <Col span={10}>
               <Form.Item
                 name={["optionalRequirements", "minimumCompletedProjects"]}
-                label="Số lượng project Freelancer đã hoàn thành trên Wellancer"
+                label="Số lượng project Candidate đã hoàn thành trên Wellancer"
                 rules={[{}]}
               >
-                <FormSelect options={Object.values(freelancerProjectAmount)} />
+                <FormSelect options={Object.values(candidateProjectAmount)} />
               </Form.Item>
             </Col>
           </Row>
@@ -72,7 +72,7 @@ export default function ProjectRequirementInfo({
                 label="Điểm chất lượng"
                 rules={[{}]}
               >
-                <FormSelect options={Object.values(freelancerRating)} />
+                <FormSelect options={Object.values(candidateRating)} />
               </Form.Item>
             </Col>
           </Row>
@@ -184,7 +184,7 @@ export default function ProjectRequirementInfo({
   );
 }
 
-const freelancerProjectAmount = [
+const candidateProjectAmount = [
   {
     label: "Tất cả",
     value: "all",
@@ -203,7 +203,7 @@ const freelancerProjectAmount = [
   },
 ];
 
-const freelancerRating = [
+const candidateRating = [
   {
     label: "Tất cả",
     value: "all",

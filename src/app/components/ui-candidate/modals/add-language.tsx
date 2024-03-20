@@ -1,15 +1,22 @@
-import { Button, Form } from "antd";
-import { CustomFormModal } from "../../modal/modal";
 import { useState } from "react";
-import { Paying } from "../../../models/paying";
-import { DollarCircleOutlined } from "@ant-design/icons";
+import { Form } from "antd";
+import { AddNewButton } from "../../button/buttons";
+import { CustomFormModal } from "../../modal/modal";
+import { CandidateDetail } from "../../../models/user";
 import { DefaultForm } from "../../form/form";
-import { InputNumberFix } from "../../input/inputs";
+import { FormSelect } from "../../select/select";
+import { languages } from "../../../../constants/language";
 
-export default function PayFreelancerModal({ title }: { title: string }) {
-  // Accept title prop
+interface AddLanguageProps {
+  languages?: CandidateDetail["languages"];
+}
+export default function AddLanguage(props: AddLanguageProps) {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
+
+  const initialValues: AddLanguageProps = props.languages
+    ? { languages: props.languages }
+    : { languages: [] };
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
@@ -20,22 +27,12 @@ export default function PayFreelancerModal({ title }: { title: string }) {
     setOpen(false);
   };
 
-  const initialValues: Paying = {
-    payingAmount: 0,
-  };
-
   return (
     <>
-      <Button
-        icon={<DollarCircleOutlined />}
-        onClick={() => setOpen(true)}
-        className="ml-auto"
-      >
-        Gửi tiền
-      </Button>
+      <AddNewButton onClick={() => setOpen(true)} />
       <CustomFormModal
-        title={`CHUYỂN TIỀN CHO ${title}`}
         open={open}
+        title="Học vấn"
         onCancel={() => {
           handleCancel();
           form.resetFields();
@@ -45,6 +42,7 @@ export default function PayFreelancerModal({ title }: { title: string }) {
             .validateFields()
             .then((values) => {
               handleSubmit(values);
+              form.resetFields();
             })
             .catch((info) => {
               console.log("Validate Failed:", info);
@@ -53,19 +51,26 @@ export default function PayFreelancerModal({ title }: { title: string }) {
       >
         <DefaultForm
           form={form}
-          name="PayFreelancer"
+          name="AddLanguage"
           initialValues={initialValues}
         >
           <Form.Item
-            name="payingAmount"
-            label="Số tiền"
+            name="languages"
+            label="Kỹ năng"
             rules={[
               {
                 required: true,
               },
             ]}
           >
-            <InputNumberFix suffix={"VND"} step={1000} />
+            <FormSelect
+              mode="tags"
+              style={{ width: "100%" }}
+              placeholder="Tags Mode"
+              options={Object.values(languages).filter(
+                (language) => language.value != "all",
+              )}
+            />
           </Form.Item>
         </DefaultForm>
       </CustomFormModal>

@@ -8,23 +8,19 @@ const Layout = lazy(() => import("../components/layout/public-layout"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const SignupPage = lazy(() => import("../pages/SignupPage"));
 const HomePage = lazy(() => import("../pages/HomePage"));
-const FreelancerProjectDetailPage = lazy(
-  () => import("../pages/FreelancerProjectDetailPage"),
+const CandidateProjectDetailPage = lazy(
+  () => import("../pages/CandidateProjectDetailPage"),
 );
 const ProjectSearchPage = lazy(() => import("../pages/ProjectSearchPage"));
-const FreelancerSearchPage = lazy(
-  () => import("../pages/FreelancerSearchPage"),
-);
+const CandidateSearchPage = lazy(() => import("../pages/CandidateSearchPage"));
 
-//freelancer
-const FreelancerDetailPage = lazy(
-  () => import("../pages/FreelancerDetailPage"),
+//candidate
+const CandidateDetailPage = lazy(() => import("../pages/CandidateDetailPage"));
+const CandidateProjectList = lazy(
+  () => import("../pages/CandidateProjectList"),
 );
-const FreelancerProjectList = lazy(
-  () => import("../pages/FreelancerProjectList"),
-);
-const FreelancerIncomeListPage = lazy(
-  () => import("../pages/FreelancerIncomeListPage"),
+const CandidateIncomeListPage = lazy(
+  () => import("../pages/CandidateIncomeListPage"),
 );
 
 //enterprise
@@ -83,10 +79,10 @@ export const router = createBrowserRouter([
         element: <Navigate to={"/"} />,
       },
       {
-        path: "freelancers",
+        path: "candidates",
         element: (
           <Suspense fallback={<></>}>
-            <FreelancerSearchPage />
+            <CandidateSearchPage />
           </Suspense>
         ),
       },
@@ -102,7 +98,7 @@ export const router = createBrowserRouter([
         path: "projects/:projectId",
         element: (
           <Suspense fallback={<></>}>
-            <FreelancerProjectDetailPage />
+            <CandidateProjectDetailPage />
           </Suspense>
         ),
       },
@@ -135,7 +131,7 @@ export const router = createBrowserRouter([
       {
         path: "fd",
         element: (
-          <PrivateRoute inverted={false} requiredRoles={[ROLE.FREELANCER]}>
+          <PrivateRoute inverted={false} requiredRoles={[ROLE.Candidate]}>
             <Outlet />
           </PrivateRoute>
         ),
@@ -144,7 +140,7 @@ export const router = createBrowserRouter([
             path: "projects",
             element: (
               <Suspense fallback={<></>}>
-                <FreelancerProjectList />
+                <CandidateProjectList />
               </Suspense>
             ),
           },
@@ -152,7 +148,7 @@ export const router = createBrowserRouter([
             path: "report/earnings",
             element: (
               <Suspense fallback={<></>}>
-                <FreelancerIncomeListPage />
+                <CandidateIncomeListPage />
               </Suspense>
             ),
           },
@@ -160,7 +156,7 @@ export const router = createBrowserRouter([
             path: "report/transactions",
             element: (
               <Suspense fallback={<></>}>
-                <TransactionList role={"freelancer"} />
+                <TransactionList role={"candidate"} />
               </Suspense>
             ),
           },
@@ -168,7 +164,7 @@ export const router = createBrowserRouter([
             path: "account",
             element: (
               <Suspense fallback={<></>}>
-                <FreelancerDetailPage />
+                <CandidateDetailPage />
               </Suspense>
             ),
           },

@@ -93,7 +93,7 @@ export default function Home() {
               type="primary"
               className="h-[3rem] rounded-none px-[3rem] text-[1.5rem]"
               style={{ backgroundColor: "#74BA7B" }}
-              onClick={() => navigate("/register?role=freelancer")}
+              onClick={() => navigate("/register?role=candidate")}
             >
               Trở thành Freelancer
             </Button>

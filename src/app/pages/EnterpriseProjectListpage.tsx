@@ -30,7 +30,7 @@ export default function EnterpriseProjectList() {
       key: "information",
       label: "Xem thông tin project",
     },
-    { key: "search", label: "Tìm freelancer" },
+    { key: "search", label: "Tìm candidate" },
     { key: "application", label: "Xem báo giá" },
     { key: "hired", label: "Tuyển dụng" },
   ];
@@ -49,8 +49,8 @@ export default function EnterpriseProjectList() {
     },
     {
       title: "Tuyển dụng",
-      dataIndex: "freelancerCount",
-      key: "freelancerCount",
+      dataIndex: "candidateCount",
+      key: "candidateCount",
     },
     {
       title: "Tình trạng",

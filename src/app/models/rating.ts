@@ -1,4 +1,4 @@
-export interface FreelancerRating {
+export interface CandidateRating {
   name: string;
   rating: number;
   ratingCount: number;

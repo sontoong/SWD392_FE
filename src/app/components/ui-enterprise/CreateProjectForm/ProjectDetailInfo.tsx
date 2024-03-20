@@ -112,11 +112,11 @@ const projectPrivacy: CheckboxOptionType<CheckboxValueType>[] = [
   {
     label: (
       <div>
-        <div>Freelancer</div>
-        <p>Chỉ Freelancer trên Wellancer</p>
+        <div>Candidate</div>
+        <p>Chỉ Candidate trên Wellancer</p>
       </div>
     ),
-    value: "freelancer",
+    value: "candidate",
   },
   {
     label: (

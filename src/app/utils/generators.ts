@@ -2,7 +2,7 @@ import { languages } from "../../constants/language";
 import {
   Contract,
   EnterpriseProject,
-  FreelancerProject,
+  CandidateProject,
   OptionalRequirements,
   Project,
 } from "../models/project";
@@ -10,26 +10,26 @@ import { Transaction } from "../models/transaction";
 import { UserDetail } from "../models/user";
 import { formatCurrency } from "./utils";
 
-export function generateRequirementMsg(role: Project["freelancerRequirement"]) {
+export function generateRequirementMsg(role: Project["candidateRequirement"]) {
   switch (role) {
     case "junior":
       return {
         title: "Mới đi làm",
-        desc: "Tôi đang kiếm freelancer kinh nghiệm từ 2 đến 5 năm",
+        desc: "Tôi đang kiếm candidate kinh nghiệm từ 2 đến 5 năm",
         short: "2-5 năm",
         priceDesc: "Dưới 100.000VND",
       };
     case "senior":
       return {
         title: "Chuyên viên",
-        desc: "Tôi đang kiếm freelancer kinh nghiệm từ 2 đến 5 năm",
+        desc: "Tôi đang kiếm candidate kinh nghiệm từ 2 đến 5 năm",
         short: "2-5 năm",
         priceDesc: "100.000VND - 500.000VND",
       };
     case "expert":
       return {
         title: "Chuyên gia",
-        desc: "Tôi đang kiếm freelancer kinh nghiệm từ 5 năm trở lên",
+        desc: "Tôi đang kiếm candidate kinh nghiệm từ 5 năm trở lên",
         short: "3-5 năm",
         priceDesc: "Trên 500.000VND",
       };
@@ -78,15 +78,15 @@ export function generateProjectFundingType(type: Project["funding"]) {
 
 export function generateProjectFunding(
   type: Project["funding"],
-  freelancerRequirement: Project["freelancerRequirement"],
+  candidateRequirement: Project["candidateRequirement"],
   initialFunding: Project["initialFunding"],
 ) {
   switch (type) {
     case "fixed":
       return formatCurrency(initialFunding);
     case "hourly":
-      if (freelancerRequirement) {
-        switch (freelancerRequirement) {
+      if (candidateRequirement) {
+        switch (candidateRequirement) {
           case "junior":
             return "Dưới 100.000VND";
           case "senior":
@@ -97,7 +97,7 @@ export function generateProjectFunding(
             return "";
         }
       } else {
-        return ""; // Handle case when freelancerRequirement is undefined
+        return ""; // Handle case when candidateRequirement is undefined
       }
     default:
       return "";
@@ -120,15 +120,15 @@ export function generateRoleMsg(role: UserDetail["role"]) {
   switch (role) {
     case "enterprise":
       return "Nhà tuyển dụng";
-    case "freelancer":
+    case "candidate":
       return "Nguời ứng tuyển";
     default:
       return "Chưa xác định";
   }
 }
 
-export function generateFreelancerProjectStatus(
-  status: FreelancerProject["status"],
+export function generateCandidateProjectStatus(
+  status: CandidateProject["status"],
 ) {
   switch (status) {
     case "doing":
@@ -146,9 +146,7 @@ export function generateFreelancerProjectStatus(
   }
 }
 
-export function generateContractStatus(
-  status: Contract["status"],
-) {
+export function generateContractStatus(status: Contract["status"]) {
   switch (status) {
     case "doing":
       return "Đang làm việc";
@@ -199,7 +197,7 @@ export function generateDepositType(
   }
 }
 
-export function generateDepositTableType( type: Contract["depositType"]){
+export function generateDepositTableType(type: Contract["depositType"]) {
   switch (type) {
     case "full":
       return `Toàn bộ`;

@@ -29,7 +29,7 @@ export default function CreateProjectForm({
     description: "",
     funding: "hourly",
     initialFunding: 0,
-    freelancerRequirement: "junior",
+    candidateRequirement: "junior",
     timeToComplete: "<1 month",
     createdBy: "",
     privacy: "public",
@@ -131,7 +131,7 @@ export default function CreateProjectForm({
           <Form.Item name="contract" hidden />
           <Form.Item name="funding" hidden />
           <Form.Item name="initialFunding" hidden />
-          <Form.Item name="freelancerRequirement" hidden />
+          <Form.Item name="candidateRequirement" hidden />
           <Form.Item name="timeToComplete" hidden />
           <Form.Item name="privacy" hidden />
           <Form.Item name="projectType" hidden />

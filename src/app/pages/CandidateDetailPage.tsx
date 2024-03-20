@@ -18,7 +18,7 @@ import {
 } from "antd";
 import React from "react";
 import BackButton from "../components/button/back-button";
-import { comments, freelancer, nations } from "../../constants/testData";
+import { comments, candidate, nations } from "../../constants/testData";
 import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
@@ -41,15 +41,15 @@ import {
   DeleteModal,
   AddEducation,
   ApplyExperience,
-} from "../components/ui-freelancer/modals";
+} from "../components/ui-candidate/modals";
 import { InputFix } from "../components/input/inputs";
-import AddSkill from "../components/ui-freelancer/modals/add-skill";
-import AddLanguage from "../components/ui-freelancer/modals/add-language";
+import AddSkill from "../components/ui-candidate/modals/add-skill";
+import AddLanguage from "../components/ui-candidate/modals/add-language";
 
 const { Content, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
 
-export default function FreelancerDetailPage() {
+export default function CandidateDetailPage() {
   const [modal, contextHolder] = Modal.useModal();
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -82,7 +82,7 @@ export default function FreelancerDetailPage() {
     profilePicture,
     educations,
     experiences,
-  } = freelancer;
+  } = candidate;
 
   return (
     <>
@@ -556,12 +556,12 @@ export default function FreelancerDetailPage() {
                 <Title
                   level={4}
                   copyable={{
-                    text: "https://freelancerviet.vn/ho-so/thang-vo-minh-3.html",
+                    text: "https://candidateviet.vn/ho-so/thang-vo-minh-3.html",
                   }}
                 >
                   Sao chép đường dẫn hồ sơ
                 </Title>
-                <InputFix defaultValue="https://freelancerviet.vn/ho-so/thang-vo-minh-3.html" />
+                <InputFix defaultValue="https://candidateviet.vn/ho-so/thang-vo-minh-3.html" />
               </div>
             </Space>
           </Affix>

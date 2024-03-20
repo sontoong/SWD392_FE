@@ -1,22 +1,15 @@
-import { useState } from "react";
-import { Form } from "antd";
-import { AddNewButton } from "../../button/buttons";
+import { Button, Form } from "antd";
 import { CustomFormModal } from "../../modal/modal";
-import { FreelancerDetail } from "../../../models/user";
+import { useState } from "react";
+import { Paying } from "../../../models/paying";
+import { DollarCircleOutlined } from "@ant-design/icons";
 import { DefaultForm } from "../../form/form";
-import { FormSelect } from "../../select/select";
-import { skills } from "../../../../constants/skill";
+import { InputNumberFix } from "../../input/inputs";
 
-interface AddSkillProps {
-  skills?: FreelancerDetail["skills"];
-}
-export default function AddSkill(props: AddSkillProps) {
+export default function PayCandidateModal({ title }: { title: string }) {
+  // Accept title prop
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-
-  const initialValues: AddSkillProps = props.skills
-    ? { skills: props.skills }
-    : { skills: [] };
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
@@ -27,12 +20,22 @@ export default function AddSkill(props: AddSkillProps) {
     setOpen(false);
   };
 
+  const initialValues: Paying = {
+    payingAmount: 0,
+  };
+
   return (
     <>
-      <AddNewButton onClick={() => setOpen(true)} />
+      <Button
+        icon={<DollarCircleOutlined />}
+        onClick={() => setOpen(true)}
+        className="ml-auto"
+      >
+        Gửi tiền
+      </Button>
       <CustomFormModal
+        title={`CHUYỂN TIỀN CHO ${title}`}
         open={open}
-        title="Học vấn"
         onCancel={() => {
           handleCancel();
           form.resetFields();
@@ -42,29 +45,27 @@ export default function AddSkill(props: AddSkillProps) {
             .validateFields()
             .then((values) => {
               handleSubmit(values);
-              form.resetFields();
             })
             .catch((info) => {
               console.log("Validate Failed:", info);
             });
         }}
       >
-        <DefaultForm form={form} name="AddSkill" initialValues={initialValues}>
+        <DefaultForm
+          form={form}
+          name="PayCandidate"
+          initialValues={initialValues}
+        >
           <Form.Item
-            name="skills"
-            label="Kỹ năng"
+            name="payingAmount"
+            label="Số tiền"
             rules={[
               {
                 required: true,
               },
             ]}
           >
-            <FormSelect
-              mode="tags"
-              style={{ width: "100%" }}
-              placeholder="Tags Mode"
-              options={skills}
-            />
+            <InputNumberFix suffix={"VND"} step={1000} />
           </Form.Item>
         </DefaultForm>
       </CustomFormModal>

@@ -2,21 +2,21 @@ import { useState } from "react";
 import { Form } from "antd";
 import { AddNewButton } from "../../button/buttons";
 import { CustomFormModal } from "../../modal/modal";
-import { FreelancerDetail } from "../../../models/user";
+import { CandidateDetail } from "../../../models/user";
 import { DefaultForm } from "../../form/form";
 import { FormSelect } from "../../select/select";
-import { languages } from "../../../../constants/language";
+import { skills } from "../../../../constants/skill";
 
-interface AddLanguageProps {
-  languages?: FreelancerDetail["languages"];
+interface AddSkillProps {
+  skills?: CandidateDetail["skills"];
 }
-export default function AddLanguage(props: AddLanguageProps) {
+export default function AddSkill(props: AddSkillProps) {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
 
-  const initialValues: AddLanguageProps = props.languages
-    ? { languages: props.languages }
-    : { languages: [] };
+  const initialValues: AddSkillProps = props.skills
+    ? { skills: props.skills }
+    : { skills: [] };
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
@@ -49,13 +49,9 @@ export default function AddLanguage(props: AddLanguageProps) {
             });
         }}
       >
-        <DefaultForm
-          form={form}
-          name="AddLanguage"
-          initialValues={initialValues}
-        >
+        <DefaultForm form={form} name="AddSkill" initialValues={initialValues}>
           <Form.Item
-            name="languages"
+            name="skills"
             label="Kỹ năng"
             rules={[
               {
@@ -67,9 +63,7 @@ export default function AddLanguage(props: AddLanguageProps) {
               mode="tags"
               style={{ width: "100%" }}
               placeholder="Tags Mode"
-              options={Object.values(languages).filter(
-                (language) => language.value != "all",
-              )}
+              options={skills}
             />
           </Form.Item>
         </DefaultForm>

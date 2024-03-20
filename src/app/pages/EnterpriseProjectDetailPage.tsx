@@ -7,7 +7,7 @@ import {
   TeamOutlined,
 } from "@ant-design/icons";
 import EnterpriseProjectDetail from "../components/ui-enterprise/project-detail/ProjectDetail";
-import ProjectFreelancerSearch from "../components/ui-enterprise/project-detail/ProjectFreelancerSearch";
+import ProjectCandidateSearch from "../components/ui-enterprise/project-detail/ProjectCandidateSearch";
 import ProjectApplicationList from "../components/ui-enterprise/project-detail/ProjectApplicationList";
 import ProjectHired from "../components/ui-enterprise/project-detail/ProjectHired";
 import BackButton from "../components/button/back-button";
@@ -23,8 +23,8 @@ const steps = [
     icon: <FileOutlined />,
   },
   {
-    title: "Tìm Freelancer",
-    content: <ProjectFreelancerSearch />,
+    title: "Tìm Candidate",
+    content: <ProjectCandidateSearch />,
     icon: <SearchOutlined />,
   },
   {
@@ -51,11 +51,11 @@ export default function EnterpriseProjectDetailPage() {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   const [searchParams, setSearchParams] = useSearchParams();
-  const current = Number(searchParams.get("tab") || 0)
+  const current = Number(searchParams.get("tab") || 0);
 
   const onChange = (value: number) => {
     console.log("onChange:", value);
-    setSearchParams({tab: `${value}`});
+    setSearchParams({ tab: `${value}` });
   };
 
   return (

@@ -1,15 +1,15 @@
 import { Table, TableProps } from "antd";
-import { FreelancerProject } from "../models/project";
+import { CandidateProject } from "../models/project";
 import {
   generateProjectFunding,
   generateProjectFundingType,
-  generateFreelancerProjectStatus,
+  generateCandidateProjectStatus,
 } from "../utils/generators";
-import { FreelancerProjects } from "../../constants/testData";
-import { ViewSignContract } from "../components/ui-freelancer/modals";
+import { CandidateProjects } from "../../constants/testData";
+import { ViewSignContract } from "../components/ui-candidate/modals";
 import { formatUnixToLocal } from "../utils/utils";
 
-export interface TableData extends FreelancerProject {
+export interface TableData extends CandidateProject {
   statusGenerator?: string;
   fundingTypeGenerator?: string;
   fundingGenerator?: string | { initialFunding: string };
@@ -17,18 +17,18 @@ export interface TableData extends FreelancerProject {
   enDateGenerator?: string;
 }
 
-export default function FreelancerProjectList() {
-  const data: TableData[] = FreelancerProjects.map((project, index) => ({
+export default function CandidateProjectList() {
+  const data: TableData[] = CandidateProjects.map((project, index) => ({
     ...project,
     startDateGenerator: formatUnixToLocal(project.startDate),
     enDateGenerator: project.endDate
       ? formatUnixToLocal(project.endDate)
       : undefined,
-    statusGenerator: generateFreelancerProjectStatus(project.status),
+    statusGenerator: generateCandidateProjectStatus(project.status),
     fundingTypeGenerator: generateProjectFundingType(project.funding),
     fundingGenerator: generateProjectFunding(
       project.funding,
-      project.freelancerRequirement,
+      project.candidateRequirement,
       project.initialFunding,
     ),
     key: index,

@@ -1,12 +1,12 @@
 import { Col, Layout, Row, theme } from "antd";
 import { Content } from "antd/es/layout/layout";
-import FreelancerSearchForm from "../search/freelancer-search";
-import { freelancers } from "../../../../constants/testData";
-import FreelancerList from "../freelancer-list/freelancer-list";
+import CandidateSearchForm from "../search/candidate-search";
+import { candidates } from "../../../../constants/testData";
+import CandidateList from "../candidate-list/candidate-list";
 import { useState } from "react";
 import { OutlineButton } from "../../button/buttons";
 
-export default function ProjectFreelancerSearch() {
+export default function ProjectCandidateSearch() {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -32,7 +32,7 @@ export default function ProjectFreelancerSearch() {
           borderRadius: borderRadiusLG,
         }}
       >
-        <FreelancerSearchForm />
+        <CandidateSearchForm />
         <Row style={{ marginBottom: 16, marginTop: 16 }}>
           <Col style={{ marginRight: "1rem" }}>
             <OutlineButton
@@ -55,12 +55,8 @@ export default function ProjectFreelancerSearch() {
             </OutlineButton>
           </Col>
         </Row>
-        {activeList === "search" && (
-          <FreelancerList freelancers={freelancers} />
-        )}
-        {activeList === "invited" && (
-          <FreelancerList freelancers={freelancers} />
-        )}
+        {activeList === "search" && <CandidateList candidates={candidates} />}
+        {activeList === "invited" && <CandidateList candidates={candidates} />}
       </Content>
     </Layout>
   );

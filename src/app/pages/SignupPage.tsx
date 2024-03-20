@@ -232,7 +232,7 @@ const userRole: CheckboxOptionType<CheckboxValueType>[] = [
     value: "enterprise",
   },
   {
-    label: generateRoleMsg("freelancer"),
-    value: "freelancer",
+    label: generateRoleMsg("candidate"),
+    value: "candidate",
   },
 ];

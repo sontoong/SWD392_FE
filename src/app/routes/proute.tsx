@@ -30,7 +30,7 @@ const PrivateRoute = ({
       switch (role) {
         case "enterprise":
           return <Navigate to="/ed/projects" />;
-        case "freelancer":
+        case "candidate":
           return <Navigate to="/projects" />;
         case "admin":
           return <Navigate to="/admin" />;

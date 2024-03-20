@@ -8,7 +8,7 @@ export interface ProjectSearch {
   timeToComplete: "all" | "<1 month" | "1-3 month" | ">3 month";
 }
 
-export interface FreelancerSearch {
+export interface CandidateSearch {
   input?: string;
   projectField?: string;
   nation: string;
@@ -18,7 +18,7 @@ export interface FreelancerSearch {
   lastLogIn: "all" | "2 weeks" | "1 month" | "2 months";
 }
 
-export interface EnterpriseProjectSearch{
+export interface EnterpriseProjectSearch {
   input?: string;
   display: "all" | "public" | "private";
   status: "all" | "hiring" | "closed" | "doing";

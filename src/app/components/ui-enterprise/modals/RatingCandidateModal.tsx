@@ -7,13 +7,11 @@ import { formatCurrency } from "../../../utils/utils";
 import { FormTextArea } from "../../input/inputs";
 import { generateRatingName } from "../../../utils/generators";
 
-interface RatingFreelancerModalProps {
+interface RatingCandidateModalProps {
   money: number;
 }
 
-export default function RatingFreelancerModal(
-  props: RatingFreelancerModalProps,
-) {
+export default function RatingCandidateModal(props: RatingCandidateModalProps) {
   const { Title, Text } = Typography;
   const [open, setOpen] = useState(true);
   const [form] = Form.useForm();
@@ -99,7 +97,7 @@ export default function RatingFreelancerModal(
         <Divider />
         <DefaultForm
           form={form}
-          name="RatingFreelancer"
+          name="RatingCandidate"
           initialValues={initialValues}
         >
           <Row

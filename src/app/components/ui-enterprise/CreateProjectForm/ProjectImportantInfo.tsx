@@ -67,11 +67,11 @@ export default function ProjectImportantInfo({
           <>
             <Row>
               <Form.Item
-                name="freelancerRequirement"
-                label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
+                name="candidateRequirement"
+                label="Bạn cần tìm candidate kinh nghiệm như thế nào?"
               >
                 <FormRadioButtonGroup
-                  options={projectFreelancerRequirementHourly}
+                  options={projectCandidateRequirementHourly}
                 />
               </Form.Item>
             </Row>
@@ -107,11 +107,11 @@ export default function ProjectImportantInfo({
             </Row>
             <Row>
               <Form.Item
-                name="freelancerRequirement"
-                label="Bạn cần tìm freelancer kinh nghiệm như thế nào?"
+                name="candidateRequirement"
+                label="Bạn cần tìm candidate kinh nghiệm như thế nào?"
               >
                 <FormRadioButtonGroup
-                  options={projectFreelancerRequirementFixed}
+                  options={projectCandidateRequirementFixed}
                 />
               </Form.Item>
             </Row>
@@ -294,7 +294,7 @@ const ProjectTimeToComplete: CheckboxOptionType<CheckboxValueType>[] = [
   },
 ];
 
-const projectFreelancerRequirementFixed: CheckboxOptionType<CheckboxValueType>[] =
+const projectCandidateRequirementFixed: CheckboxOptionType<CheckboxValueType>[] =
   [
     {
       label: "Mới đi làm",
@@ -310,7 +310,7 @@ const projectFreelancerRequirementFixed: CheckboxOptionType<CheckboxValueType>[]
     },
   ];
 
-const projectFreelancerRequirementHourly: CheckboxOptionType<CheckboxValueType>[] =
+const projectCandidateRequirementHourly: CheckboxOptionType<CheckboxValueType>[] =
   [
     {
       label: (

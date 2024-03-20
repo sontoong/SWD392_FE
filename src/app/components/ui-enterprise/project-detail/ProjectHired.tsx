@@ -1,7 +1,7 @@
 import { Content } from "antd/es/layout/layout";
 import { Layout, theme } from "antd";
-import FreelancerList from "../freelancer-list/freelancer-list"
-import { freelancers } from "../../../../constants/testData";
+import CandidateList from "../candidate-list/candidate-list";
+import { candidates } from "../../../../constants/testData";
 
 export default function ProjectHired() {
   const {
@@ -19,7 +19,7 @@ export default function ProjectHired() {
           borderRadius: borderRadiusLG,
         }}
       >
-        <FreelancerList freelancers={freelancers} paying={true}/>
+        <CandidateList candidates={candidates} paying={true} />
       </Content>
     </Layout>
   );
