@@ -171,7 +171,7 @@ Facebook: fb.com/user/JoeBiden`,
   jobField: { label: "IT", value: "it" },
 };
 
-export const projects: Project[] = [project];
+export const projectsTest: Project[] = [project];
 export const candidates: CandidateDetail[] = [candidate];
 
 const comment: Comment = {
@@ -224,7 +224,7 @@ export const enterpriseInfo: EnterpriseInfo = {
   enterpriseEmail: "CoolMathGame@gmail.com",
   enterprisePhone: "09105452789",
   companyDetail: companyDetail,
-  projectList: projects,
+  projectList: projectsTest,
   currentHiringProject: 3,
 };
 

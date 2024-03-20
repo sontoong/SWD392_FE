@@ -7,11 +7,7 @@ import { Col, Form, Row } from "antd";
 import { IdDocuments } from "../../../../constants/id-documents";
 import { DocumentUploadInput } from "../../input/upload-document-input";
 import { FormSelect } from "../../select/select";
-import {
-  companyDetail,
-  nations,
-  projects,
-} from "../../../../constants/testData";
+import { enterpriseInfo, nations } from "../../../../constants/testData";
 import { UploadImg } from "../../input/upload-img";
 import { DefaultForm } from "../../form/form";
 
@@ -29,20 +25,7 @@ export default function EnterpriseModalEditGeneralInfo() {
   };
 
   const initialValues: EnterpriseInfo = {
-    id: "1",
-    firstName: "Nguyễn",
-    middleName: "Văn",
-    lastName: "A",
-    dateOfBirth: 1708532861000,
-    enterpriseCountry: { label: "Việt Nam", value: "vn" },
-    documentType: "Hộ chiếu",
-    enterpriseDocument: "FunnyMemeFrom9GAG.png",
-    documentNumber: 33333333333333,
-    enterpriseEmail: "CoolMathGame@gmail.com",
-    enterprisePhone: "33333333333333",
-    companyDetail: companyDetail,
-    projectList: projects,
-    currentHiringProject: 3,
+    ...enterpriseInfo,
   };
 
   return (

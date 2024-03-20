@@ -8,7 +8,7 @@ import { companyDocument } from "../../../../constants/company-doc";
 import { DocumentUploadInput } from "../../input/upload-document-input";
 
 import { FormSelect } from "../../select/select";
-import { nations } from "../../../../constants/testData";
+import { companyDetail, nations } from "../../../../constants/testData";
 import { DefaultForm } from "../../form/form";
 
 export default function CompanyModalEditDocument() {
@@ -26,25 +26,7 @@ export default function CompanyModalEditDocument() {
   };
 
   const initialValues: CompanyDetail = {
-    companyName: "FPT Software",
-    website: "http://domainexpansion.com",
-    videoLink: "https://youtu.be/dQw4w9WgXcQ?si=kCbyzyW8_XaVT8-j",
-    companySize: "10-20",
-    introduction:
-      "This is the place for cooking, like Gordon's grilled cheese sandwich.",
-    industryFields: [
-      { label: "IT", value: "it" },
-      { label: "Nấu ăn", value: "cook" },
-    ],
-    companyDocument: "FunnyMemeFrom9GAG.png",
-    enterpriseCountry: { label: "Việt Nam", value: "vn" },
-    registrationDocumentType: "Giấy phép ĐKKD",
-    identificationNumber: 333333333333333,
-    companyCountry: "Việt Nam",
-    taxNumber: 33333333333333,
-    address: "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Hồ Chí Minh, Việt Nam",
-    companyEmail: "CoolMathGame@gmail.com",
-    companyPhone: "33333333333333",
+    ...companyDetail,
   };
 
   return (
