@@ -2,11 +2,9 @@ import { Table, TableProps } from "antd";
 import { EnterpriseProject } from "../models/project";
 import { generateEnterpriseProjectStatus } from "../utils/generators";
 import { EnterpriseProjects } from "../../constants/testData";
-import { IconButton } from "../components/button/buttons";
-import { DownloadOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
-
+import ProjectSearchForm from "../components/ui-enterprise/search/project-search";
+import { CustomDropdown, CustomDropdownProps } from "../components/ui-enterprise/dropdown";
 export interface TableData extends EnterpriseProject {
   statusGenerator: string;
 }
@@ -23,14 +21,26 @@ export default function EnterpriseProjectList() {
     statusGenerator: generateEnterpriseProjectStatus(project.status),
   }));
 
+
+
+  const dropdownItems: CustomDropdownProps["items"] = [
+    {
+      key: "information",
+      label: "Xem thông tin project",
+    },
+    { key: "search", label: "Tìm freelancer" },
+    { key: "application", label: "Xem báo giá"},
+    { key: "hired", label: "Tuyển dụng" },
+  ];
+
   const columns: TableProps<TableData>["columns"] = [
     {
       title: "Tên Project",
       dataIndex: "title",
       key: "title",
       render: (_, record) => (
-        <div className="text-blue-500 underline">
-          <Link to={`${record.id}`}>{record.title}</Link>
+        <div>
+          {record.title}
         </div>
       ),
     },
@@ -50,19 +60,25 @@ export default function EnterpriseProjectList() {
       key: "statusGenerator",
     },
     {
-      title: "Hợp đồng",
-      render: () => {
-        return <IconButton icon={<DownloadOutlined />} />;
-      },
-      align: "center",
+      title: "Actions",
+      key: "actions",
+      render: (_, record) => (
+        <CustomDropdown
+          items={dropdownItems}
+          record={record}
+        />
+      ),
     },
   ];
 
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      pagination={{ position: ["bottomCenter"] }}
-    />
+    <div>
+      <ProjectSearchForm/>
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
+    </div>
   );
 }

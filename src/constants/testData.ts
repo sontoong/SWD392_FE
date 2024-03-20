@@ -13,6 +13,7 @@ import {
   OutsideProject,
   Field,
   SkillField,
+  Contract,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
 import { Education, Experience, FreelancerDetail } from "../app/models/user";
@@ -81,11 +82,6 @@ export const project: Project = {
   inviteSent: 6,
   inviteAccepted: 3,
   freelancerCount: 10,
-  contract: {
-    date: 1708532861000,
-    depositType: "full",
-    fund: 0,
-  },
 };
 
 export const oproject1: OutsideProject = {
@@ -372,3 +368,20 @@ export const Applicants: Applicant[] = [
     ],
   },
 ];
+
+export const contract: Contract = 
+  {
+    freelancerName:"",
+    freelancerId:"",
+    projectName:"",
+    projectId:"",
+    date: 1708532861000,
+    depositType: "full",
+    fund: 200,
+    status: "completed"
+  }
+
+export const contractList: Contract[] = [ 
+  contract
+]
+

@@ -1,7 +1,9 @@
-import RatingFreelancerModal from "../components/ui-enterprise/modals/RatingFreelancerModal";
+import EnterpriseProjectDetailPage from "./EnterpriseProjectDetailPage";
+
+
 
 const App: React.FC = () => {
-  return <RatingFreelancerModal money={2} />;
+  return <EnterpriseProjectDetailPage/>
 };
 
 export default App;
