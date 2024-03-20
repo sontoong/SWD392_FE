@@ -17,3 +17,10 @@ export interface FreelancerSearch {
   experienceLevel: "all" | "junior" | "senior" | "expert";
   lastLogIn: "all" | "2 weeks" | "1 month" | "2 months";
 }
+
+export interface EnterpriseProjectSearch{
+  input?: string;
+  display: "all" | "public" | "private";
+  status: "all" | "hiring" | "closed" | "doing";
+  funding: "all" | "hourly" | "fixed";
+}

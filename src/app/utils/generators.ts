@@ -146,6 +146,21 @@ export function generateFreelancerProjectStatus(
   }
 }
 
+export function generateContractStatus(
+  status: Contract["status"],
+) {
+  switch (status) {
+    case "doing":
+      return "Đang làm việc";
+    case "canceled":
+      return "Đã ngưng làm";
+    case "completed":
+      return "Đã hoàn thành";
+    default:
+      return "";
+  }
+}
+
 export function generateEnterpriseProjectStatus(
   status: EnterpriseProject["status"],
 ) {
@@ -179,8 +194,17 @@ export function generateDepositType(
   switch (type) {
     case "full":
       return `Đặt cọc ${fund} cho toàn bộ công việc`;
-    case "period ":
+    case "period":
       return "Đặt cọc theo từng hạng mục công việc";
+  }
+}
+
+export function generateDepositTableType( type: Contract["depositType"]){
+  switch (type) {
+    case "full":
+      return `Toàn bộ`;
+    case "period":
+      return "Hạng mục";
   }
 }
 

@@ -31,9 +31,14 @@ export type Field = {
 };
 
 export interface Contract {
+  freelancerName: string;
+  freelancerId: string;
+  projectName: string;
+  projectId: string;
   fund: number;
-  depositType: "full" | "period ";
+  depositType: "full" | "period";
   date: number;
+  status: "completed" | "doing" | "canceled"
 }
 
 export interface Project {
@@ -42,7 +47,6 @@ export interface Project {
   language: languages;
   projectField: SkillField;
   description: string;
-  contract: Contract;
   funding: "hourly" | "fixed";
   initialFunding: number;
   freelancerRequirement: ExperienceLevel;
@@ -66,7 +70,6 @@ export interface CreateProject {
   title: string;
   projectField: string;
   description: string;
-  contract: Contract;
   funding: "hourly" | "fixed";
   initialFunding?: number;
   freelancerRequirement?: ExperienceLevel;

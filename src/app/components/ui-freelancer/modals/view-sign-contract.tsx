@@ -8,6 +8,7 @@ import { FreelancerProject } from "../../../models/project";
 import { DefaultForm } from "../../form/form";
 import { generateDepositType } from "../../../utils/generators";
 import { formatUnixToLocal } from "../../../utils/utils";
+import { contract } from "../../../../constants/testData";
 
 interface ViewSignContractProp {
   record: FreelancerProject;
@@ -58,19 +59,19 @@ export default function ViewSignContract(props: ViewSignContractProp) {
             <Row>
               <Col span={5}>
                 <Title level={5}>Ngân sách</Title>
-                <Paragraph>{record.contract.fund} VND</Paragraph>
+                <Paragraph>{contract.fund} VND</Paragraph>
               </Col>
               <Col span={7} offset={8}>
                 <Title level={5}>Ngày hoàn thành</Title>
-                <Paragraph>{formatUnixToLocal(record.contract.date)}</Paragraph>
+                <Paragraph>{formatUnixToLocal(contract.date)}</Paragraph>
               </Col>
             </Row>
             <Row>
               <Col>
                 <Title level={5}>Đặt cọc</Title>
                 {generateDepositType(
-                  record.contract.depositType,
-                  record.contract.fund,
+                  contract.depositType,
+                  contract.fund,
                 )}
               </Col>
             </Row>

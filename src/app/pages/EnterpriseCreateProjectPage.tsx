@@ -32,11 +32,6 @@ export default function CreateProjectForm({
     title: "",
     projectField: "",
     description: "",
-    contract: {
-      date: 0,
-      fund: 0,
-      depositType: "full",
-    },
     funding: "hourly",
     initialFunding: 0,
     freelancerRequirement: "junior",

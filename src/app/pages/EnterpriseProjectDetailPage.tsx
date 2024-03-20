@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Layout, Steps, theme } from "antd";
 import { Content } from "antd/es/layout/layout";
 import {
@@ -12,7 +11,7 @@ import ProjectFreelancerSearch from "../components/ui-enterprise/project-detail/
 import ProjectApplicationList from "../components/ui-enterprise/project-detail/ProjectApplicationList";
 import ProjectHired from "../components/ui-enterprise/project-detail/ProjectHired";
 import BackButton from "../components/button/back-button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 
 const { Step } = Steps;
@@ -51,11 +50,12 @@ export default function EnterpriseProjectDetailPage() {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  const [current, setCurrent] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const current = Number(searchParams.get("tab") || 0)
 
   const onChange = (value: number) => {
     console.log("onChange:", value);
-    setCurrent(value);
+    setSearchParams({tab: `${value}`});
   };
 
   return (
