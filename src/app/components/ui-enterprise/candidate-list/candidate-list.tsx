@@ -12,7 +12,7 @@ export default function CandidateList({
   paying,
 }: CandidateListProps) {
   return (
-    <Row gutter={[16, 16]} className="w-full p-4">
+    <Row gutter={[0, 16]} className="w-full pt-4">
       {candidates.map((candidate, index) => {
         return (
           <Col xs={24} md={12} lg={24} key={index}>

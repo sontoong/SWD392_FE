@@ -9,7 +9,6 @@ export default function TransactionList(props: { role: string }) {
   useSetHeaderTitle([
     {
       title: `Lịch sử giao dịch`,
-      path: location.pathname,
     },
   ]);
   interface TransactionTable extends Transaction {

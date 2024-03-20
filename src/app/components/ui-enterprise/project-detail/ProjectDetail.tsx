@@ -2,6 +2,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   ExclamationCircleFilled,
+  MinusCircleOutlined,
   TagOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
@@ -53,6 +54,11 @@ export default function EnterpriseProjectDetail() {
       icon: <EditOutlined />,
     },
     {
+      label: "Bật chế độ riêng tư",
+      key: "private",
+      icon: <MinusCircleOutlined />,
+    },
+    {
       label: "Xóa dự án",
       key: "delete",
       danger: true,
@@ -88,13 +94,35 @@ export default function EnterpriseProjectDetail() {
         });
         break;
       }
-
-      case "edit":
-        {
-          navigate(`/ed/edit-project/${1}`);
-        }
-
+      case "edit": {
+        navigate(`/ed/edit-project/${1}`);
         break;
+      }
+      case "private": {
+        modal.confirm({
+          title: "Đặt làm riêng tư",
+          icon: <ExclamationCircleFilled />,
+          content: (
+            <Space direction="vertical" className="mb-3 w-full">
+              <div className="font-semibold">
+                Bạn có muốn bật chế độ riêng tư cho dự án?
+              </div>
+            </Space>
+          ),
+          okText: "Đồng ý",
+          cancelText: "Hủy",
+          okType: "default",
+          onOk() {
+            setReason((prevReason) => {
+              console.log(`${key}, Reason: ${prevReason}`);
+              console.log(reason);
+              return prevReason;
+            });
+          },
+          onCancel() {},
+        });
+        break;
+      }
 
       default:
         break;

@@ -12,27 +12,25 @@ import {
 } from "antd";
 import { Typography } from "antd";
 import { Content } from "antd/es/layout/layout";
-import { CustomCard } from "../components/ui/card";
-import { EmailCensored } from "../components/ui/email-censored";
-import { Link, useLocation } from "react-router-dom";
-import CustomTag from "../components/ui/tag";
-import { companyDetail, enterpriseInfo } from "../../constants/testData";
+import { CustomCard } from "../../components/ui/card";
+import { EmailCensored } from "../../components/ui/email-censored";
+import { Link } from "react-router-dom";
+import CustomTag from "../../components/ui/tag";
+import { companyDetail, enterpriseInfo } from "../../../constants/testData";
 import {
   CompanyEditDocument,
   CompanyEditGeneralInfo,
   CopanyEditContact,
   EnterpriseEditGeneralInfo,
-} from "../components/ui-enterprise/modals";
-import { defaultImage } from "../../constants/images";
-import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
+} from "../../components/ui-enterprise/modals";
+import { defaultImage } from "../../../constants/images";
+import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
 
 const { Title, Text } = Typography;
 export default function EnterpriseDetailPage() {
-  const location = useLocation();
   useSetHeaderTitle([
     {
       title: ``,
-      path: location.pathname,
     },
   ]);
   const {

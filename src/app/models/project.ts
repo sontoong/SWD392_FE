@@ -66,18 +66,21 @@ export interface Project {
   candidateCount: number;
 }
 
-export interface CreateProject {
-  title: string;
+export interface CreateProject
+  extends Pick<
+    Project,
+    | "description"
+    | "funding"
+    | "initialFunding"
+    | "candidateRequirement"
+    | "timeToComplete"
+    | "title"
+    | "createdBy"
+    | "privacy"
+    | "projectType"
+    | "optionalRequirements"
+  > {
   projectField: string;
-  description: string;
-  funding: "hourly" | "fixed";
-  initialFunding?: number;
-  candidateRequirement?: ExperienceLevel;
-  timeToComplete: "<1 month" | "1-3 months" | ">3 months";
-  createdBy: string;
-  privacy: "public" | "private" | "candidate";
-  projectType: "longterm" | "shortterm" | "unknown";
-  optionalRequirements: OptionalRequirements;
 }
 
 export interface CandidateProject extends Project {

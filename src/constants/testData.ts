@@ -370,10 +370,10 @@ export const Applicants: Applicant[] = [
 ];
 
 export const contract: Contract = {
-  candidateName: "",
-  candidateId: "",
-  projectName: "",
-  projectId: "",
+  candidateName: "Nguyen van a",
+  candidateId: "1",
+  projectName: "fpt",
+  projectId: "1",
   date: 1708532861000,
   depositType: "full",
   fund: 200,

@@ -55,7 +55,7 @@ export default function CandidateCard({
         <div>
           <Space size={"large"}>
             <Tooltip title="Xem chi tiết">
-              <Link to={`${candidate.id}`}>
+              <Link to={`/candidates/${candidate.id}`}>
                 <Button icon={<EyeOutlined />} className="ml-auto">
                   Chi tiết
                 </Button>

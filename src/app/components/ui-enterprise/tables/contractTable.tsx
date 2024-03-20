@@ -1,13 +1,13 @@
 import { Table, TableProps } from "antd";
-import { Contract } from "../models/project";
+
+import { Link } from "react-router-dom";
+import { Contract } from "../../../models/project";
+import { contractList } from "../../../../constants/testData";
 import {
   generateContractStatus,
   generateDepositTableType,
-} from "../utils/generators";
-import { contractList } from "../../constants/testData";
-import { Link } from "react-router-dom";
-import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
-import { formatCurrency, formatUnixToLocal } from "../utils/utils";
+} from "../../../utils/generators";
+import { formatCurrency, formatUnixToLocal } from "../../../utils/utils";
 
 export interface TableData extends Contract {
   depositGenerator: string;
@@ -16,13 +16,7 @@ export interface TableData extends Contract {
   contractStatus: string;
 }
 
-export default function EnterpriseContractPage() {
-  useSetHeaderTitle([
-    {
-      title: `Danh sách hợp đồng`,
-      path: location.pathname,
-    },
-  ]);
+export function ContractTable() {
   const data: TableData[] = contractList.map((contract, index) => ({
     ...contract,
     depositGenerator: generateDepositTableType(contract.depositType),
@@ -39,7 +33,9 @@ export default function EnterpriseContractPage() {
       key: "candidateName",
       render: (_, record) => (
         <div className="text-blue-500 underline">
-          <Link to={`${record.candidateId}`}>{record.candidateName}</Link>
+          <Link to={`/candidates/${record.candidateId}`}>
+            {record.candidateName}
+          </Link>
         </div>
       ),
     },
@@ -49,7 +45,9 @@ export default function EnterpriseContractPage() {
       key: "candidateName",
       render: (_, record) => (
         <div className="text-blue-500 underline">
-          <Link to={`${record.projectId}`}>{record.projectName}</Link>
+          <Link to={`/ed/projects/${record.projectId}`}>
+            {record.projectName}
+          </Link>
         </div>
       ),
     },
@@ -80,7 +78,7 @@ export default function EnterpriseContractPage() {
       <Table
         columns={columns}
         dataSource={data}
-        pagination={{ position: ["bottomCenter"] }}
+        pagination={{ position: ["none"] }}
       />
     </div>
   );

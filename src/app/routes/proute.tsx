@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../redux/hook";
 // import Forbidden from "../pages/ForbiddenPage";
-import ErrorPage from "../pages/404Page";
+import ErrorPage from "../pages/public/404Page";
 
 interface PrivateRouteProps {
   inverted: boolean;
@@ -32,8 +32,6 @@ const PrivateRoute = ({
           return <Navigate to="/ed/projects" />;
         case "candidate":
           return <Navigate to="/projects" />;
-        case "admin":
-          return <Navigate to="/admin" />;
         default:
           return <Navigate to="/" />;
       }

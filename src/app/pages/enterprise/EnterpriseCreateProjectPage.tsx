@@ -1,11 +1,14 @@
 import { App, Form, Steps } from "antd";
-import ProjectImportantInfo from "../components/ui-enterprise/CreateProjectForm/ProjectImportantInfo";
-import ProjectDetailInfo from "../components/ui-enterprise/CreateProjectForm/ProjectDetailInfo";
-import ProjectRequirementInfo from "../components/ui-enterprise/CreateProjectForm/ProjectRequirementInfo";
+import ProjectImportantInfo from "../../components/ui-enterprise/CreateProjectForm/ProjectImportantInfo";
+import ProjectDetailInfo from "../../components/ui-enterprise/CreateProjectForm/ProjectDetailInfo";
+import ProjectRequirementInfo from "../../components/ui-enterprise/CreateProjectForm/ProjectRequirementInfo";
 import { useState } from "react";
-import { OutlineButton, PrimaryButton } from "../components/button/buttons";
-import { CreateProject } from "../models/project";
-import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
+import { OutlineButton, PrimaryButton } from "../../components/button/buttons";
+import { CreateProject } from "../../models/project";
+import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
+import { project } from "../../../constants/testData";
+
+const formatProject = { ...project, projectField: project.projectField.value };
 
 export default function CreateProjectForm({
   edit = false,
@@ -15,7 +18,6 @@ export default function CreateProjectForm({
   useSetHeaderTitle([
     {
       title: ``,
-      path: location.pathname,
     },
   ]);
   const { message } = App.useApp();
@@ -23,30 +25,32 @@ export default function CreateProjectForm({
 
   const [current, setCurrent] = useState(0);
 
-  const initialValues: CreateProject = {
-    title: "",
-    projectField: "",
-    description: "",
-    funding: "hourly",
-    initialFunding: 0,
-    candidateRequirement: "junior",
-    timeToComplete: "<1 month",
-    createdBy: "",
-    privacy: "public",
-    projectType: "unknown",
-    optionalRequirements: {
-      language: "all",
-      nation: "all",
-      minimumCompletedProjects: "all",
-      rating: "all",
-      skills: [
-        { label: "Front-end Developer", value: "Front-end Developer" },
-        { label: "Back-end Developer", value: "Back-end Developer" },
-        { label: "Full-stack Developer", value: "Full-stack Developer" },
-      ],
-      questions: [],
-    },
-  };
+  const initialValues: CreateProject = edit
+    ? formatProject
+    : {
+        title: "",
+        projectField: "",
+        description: "",
+        funding: "hourly",
+        initialFunding: 0,
+        candidateRequirement: "junior",
+        timeToComplete: "<1 month",
+        createdBy: "",
+        privacy: "public",
+        projectType: "unknown",
+        optionalRequirements: {
+          language: "all",
+          nation: "all",
+          minimumCompletedProjects: "all",
+          rating: "all",
+          skills: [
+            { label: "Front-end Developer", value: "Front-end Developer" },
+            { label: "Back-end Developer", value: "Back-end Developer" },
+            { label: "Full-stack Developer", value: "Full-stack Developer" },
+          ],
+          questions: [],
+        },
+      };
   const formTitle = edit ? "Chỉnh sửa dự án" : "Tạo dự án";
   const steps = [
     {
@@ -102,7 +106,7 @@ export default function CreateProjectForm({
   };
 
   return (
-    <div>
+    <div className="w-[741px]">
       <Steps current={current} items={items} className="mb-[2rem]" />
       <Form.Provider
         onFormFinish={(name, { values, forms }) => {

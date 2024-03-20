@@ -1,15 +1,10 @@
-import { Layout, Table, TableProps, theme } from "antd";
+import { Table, TableProps } from "antd";
 import { Applicants } from "../../../../constants/testData";
 import { Applicant } from "../../../models/applicant";
 import { ApplicationAcceptForm } from "../modals";
 import { formatUnixToLocal } from "../../../utils/utils";
-import { Content } from "antd/es/layout/layout";
 
 export default function ProjectApplicationList() {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
   interface ApplicantTable extends Applicant {
     dateFormat: string;
   }
@@ -34,31 +29,19 @@ export default function ProjectApplicationList() {
     {
       title: "Báo giá",
       render: (_, record) => {
-        // Check if status is "denied" or "verifying", if so, return null (don't render anything)
         const { ...rest } = record;
-        // Otherwise, render the ViewSignContract component
         return <ApplicationAcceptForm record={rest} />;
       },
     },
   ];
 
   return (
-    <Layout>
-      <Content
-        style={{
-          padding: 24,
-          margin: 0,
-          minHeight: 280,
-          background: colorBgContainer,
-          borderRadius: borderRadiusLG,
-        }}
-      >
-        <Table
-          columns={columns}
-          dataSource={data}
-          pagination={{ position: ["bottomCenter"] }}
-        />
-      </Content>
-    </Layout>
+    <div className="w-full">
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
+    </div>
   );
 }

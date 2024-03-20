@@ -1,13 +1,14 @@
 import { Table, TableProps } from "antd";
-import { CandidateProject } from "../models/project";
+import { CandidateProject } from "../../models/project";
 import {
   generateProjectFunding,
   generateProjectFundingType,
   generateCandidateProjectStatus,
-} from "../utils/generators";
-import { CandidateProjects } from "../../constants/testData";
-import { ViewSignContract } from "../components/ui-candidate/modals";
-import { formatUnixToLocal } from "../utils/utils";
+} from "../../utils/generators";
+import { CandidateProjects } from "../../../constants/testData";
+import { ViewSignContract } from "../../components/ui-candidate/modals";
+import { formatUnixToLocal } from "../../utils/utils";
+import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
 
 export interface TableData extends CandidateProject {
   statusGenerator?: string;
@@ -18,6 +19,11 @@ export interface TableData extends CandidateProject {
 }
 
 export default function CandidateProjectList() {
+  useSetHeaderTitle([
+    {
+      title: `Danh sách dự án`,
+    },
+  ]);
   const data: TableData[] = CandidateProjects.map((project, index) => ({
     ...project,
     startDateGenerator: formatUnixToLocal(project.startDate),
@@ -83,10 +89,12 @@ export default function CandidateProjectList() {
   ];
 
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      pagination={{ position: ["bottomCenter"] }}
-    />
+    <div className="w-full">
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
+    </div>
   );
 }

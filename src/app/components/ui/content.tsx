@@ -7,10 +7,8 @@ export default function MyContent({ children }: { children: React.ReactNode }) {
   const currentHeader = headerTitle[headerTitle.length - 1];
   return (
     <Content className="mx-5 mt-5 pb-20 pt-16">
-      {currentHeader.title ? (
+      {currentHeader.title && (
         <div className="pb-5 text-xl uppercase">{currentHeader.title}</div>
-      ) : (
-        <></>
       )}
       <main className="flex h-full justify-center bg-white">{children}</main>
     </Content>

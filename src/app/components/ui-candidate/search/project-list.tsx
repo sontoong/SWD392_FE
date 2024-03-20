@@ -6,9 +6,9 @@ export interface Projectlist {
   projects: Project[];
 }
 
-export default function ProjectList({ projects }: Projectlist){
+export default function ProjectList({ projects }: Projectlist) {
   return (
-    <Row gutter={[16, 16]} className="w-full p-4">
+    <Row gutter={[0, 16]} className="w-full pt-4">
       {projects.map((project, index) => {
         return (
           <Col xs={24} md={12} lg={24} key={index}>
@@ -19,4 +19,3 @@ export default function ProjectList({ projects }: Projectlist){
     </Row>
   );
 }
-

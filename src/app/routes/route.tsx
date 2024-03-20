@@ -7,34 +7,40 @@ const Layout = lazy(() => import("../components/layout/public-layout"));
 //public
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const SignupPage = lazy(() => import("../pages/SignupPage"));
-const HomePage = lazy(() => import("../pages/HomePage"));
+const HomePage = lazy(() => import("../pages/public/HomePage"));
 const CandidateProjectDetailPage = lazy(
-  () => import("../pages/CandidateProjectDetailPage"),
+  () => import("../pages/public/CandidateProjectDetailPage"),
 );
-const ProjectSearchPage = lazy(() => import("../pages/ProjectSearchPage"));
-const CandidateSearchPage = lazy(() => import("../pages/CandidateSearchPage"));
+const ProjectSearchPage = lazy(
+  () => import("../pages/public/ProjectSearchPage"),
+);
+const CandidateSearchPage = lazy(
+  () => import("../pages/public/CandidateSearchPage"),
+);
 
 //candidate
-const CandidateDetailPage = lazy(() => import("../pages/CandidateDetailPage"));
+const CandidateDetailPage = lazy(
+  () => import("../pages/candidate/CandidateDetailPage"),
+);
 const CandidateProjectList = lazy(
-  () => import("../pages/CandidateProjectList"),
+  () => import("../pages/candidate/CandidateProjectList"),
 );
 const CandidateIncomeListPage = lazy(
-  () => import("../pages/CandidateIncomeListPage"),
+  () => import("../pages/candidate/CandidateIncomeListPage"),
 );
 
 //enterprise
 const EnterpriseDetailPage = lazy(
-  () => import("../pages/EnterpriseDetailPage"),
+  () => import("../pages/enterprise/EnterpriseDetailPage"),
 );
 const EnterpriseCreateProjectPage = lazy(
-  () => import("../pages/EnterpriseCreateProjectPage"),
+  () => import("../pages/enterprise/EnterpriseCreateProjectPage"),
 );
 const EnterpriseProjectListPage = lazy(
-  () => import("../pages/EnterpriseProjectListpage"),
+  () => import("../pages/enterprise/EnterpriseProjectListpage"),
 );
 const EnterpriseProjectDetailPage = lazy(
-  () => import("../pages/EnterpriseProjectDetailPage"),
+  () => import("../pages/enterprise/EnterpriseProjectDetailPage"),
 );
 
 //both
@@ -43,7 +49,7 @@ import TransactionList from "../pages/TransactionList";
 const Forbidden = lazy(() => import("../pages/ForbiddenPage"));
 const PrivateRoute = lazy(() => import("./proute"));
 const TestPage = lazy(() => import("../pages/TestPage"));
-const ErrorPage = lazy(() => import("../pages/404Page"));
+const ErrorPage = lazy(() => import("../pages/public/404Page"));
 
 const Template = lazy(() => import("../pages/template"));
 
@@ -87,6 +93,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "candidates/:candidateId",
+        element: (
+          <Suspense fallback={<></>}>
+            <CandidateDetailPage type="outer" />
+          </Suspense>
+        ),
+      },
+      {
         path: "projects",
         element: (
           <Suspense fallback={<></>}>
@@ -122,7 +136,7 @@ export const router = createBrowserRouter([
         path: "template",
         element: (
           <Suspense fallback={<></>}>
-            <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
+            <PrivateRoute inverted={false} requiredRoles={[ROLE.Candidate]}>
               <Template />
             </PrivateRoute>
           </Suspense>
@@ -164,7 +178,7 @@ export const router = createBrowserRouter([
             path: "account",
             element: (
               <Suspense fallback={<></>}>
-                <CandidateDetailPage />
+                <CandidateDetailPage type="inner" />
               </Suspense>
             ),
           },

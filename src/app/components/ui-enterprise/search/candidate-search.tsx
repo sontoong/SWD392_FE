@@ -36,21 +36,8 @@ export default function CandidateSearchForm() {
 
   return (
     <CustomCard
-      title={
-        <Title
-          level={4}
-          style={{
-            margin: 0,
-            textTransform: "uppercase",
-            color: "white",
-          }}
-        >
-          Tìm Candidate
-        </Title>
-      }
       styles={{
-        header: { backgroundColor: "#74BA7B" },
-        body: { backgroundColor: "#74BA7B" },
+        body: { backgroundColor: "#74BA7B", borderRadius: "8px" },
       }}
     >
       <DefaultForm

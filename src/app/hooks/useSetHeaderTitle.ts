@@ -2,9 +2,12 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../redux/hook";
 import { setHeaderTitle } from "../redux/slice/headerSlice";
 
-export function useSetHeaderTitle(
-  headerTitle: [{ title: string; path: string }],
-) {
+interface HeaderTitle {
+  title: string;
+  path?: string;
+}
+
+export function useSetHeaderTitle(headerTitle: HeaderTitle[]) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

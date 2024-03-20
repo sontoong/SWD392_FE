@@ -34,7 +34,6 @@ export default function ProjectCard({ project }: { project: Project }) {
     paidAmount,
     applicationCount,
     createdBy,
-    createdById,
     optionalRequirements,
     funding,
     initialFunding,
@@ -87,9 +86,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             <Avatar size={"default"} icon={<UserOutlined />} />
             <div className="whitespace-nowrap">
               <span className="font-bold">Đăng bởi: </span>
-              <Link to={`/admin/users/${createdById}`}>
-                <span className="text-blue-500">{createdBy}</span>
-              </Link>
+              <span>{createdBy}</span>
             </div>
             <Divider type="vertical" />
             <div className="whitespace-nowrap">

@@ -17,8 +17,8 @@ import {
   theme,
 } from "antd";
 import React from "react";
-import BackButton from "../components/button/back-button";
-import { comments, candidate, nations } from "../../constants/testData";
+import BackButton from "../../components/button/back-button";
+import { comments, candidate, nations } from "../../../constants/testData";
 import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
@@ -27,13 +27,13 @@ import {
   StarFilled,
   UserOutlined,
 } from "@ant-design/icons";
-import { generateLanguage, generateVerifyMsg } from "../utils/generators";
-import { formatCurrency, formatUnixToLocal } from "../utils/utils";
-import { defaultImage } from "../../constants/images";
-import { qualityFactors } from "../../constants/quality";
+import { generateLanguage, generateVerifyMsg } from "../../utils/generators";
+import { formatCurrency, formatUnixToLocal } from "../../utils/utils";
+import { defaultImage } from "../../../constants/images";
+import { qualityFactors } from "../../../constants/quality";
 import Meta from "antd/es/card/Meta";
-import { PrimaryButton } from "../components/button/buttons";
-import { CustomCard } from "../components/ui/card";
+import { PrimaryButton } from "../../components/button/buttons";
+import { CustomCard } from "../../components/ui/card";
 import {
   EditContact,
   EditOverview,
@@ -41,15 +41,25 @@ import {
   DeleteModal,
   AddEducation,
   ApplyExperience,
-} from "../components/ui-candidate/modals";
-import { InputFix } from "../components/input/inputs";
-import AddSkill from "../components/ui-candidate/modals/add-skill";
-import AddLanguage from "../components/ui-candidate/modals/add-language";
+} from "../../components/ui-candidate/modals";
+import { InputFix } from "../../components/input/inputs";
+import AddSkill from "../../components/ui-candidate/modals/add-skill";
+import AddLanguage from "../../components/ui-candidate/modals/add-language";
+import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
 
 const { Content, Sider } = Layout;
 const { Title, Paragraph, Text } = Typography;
 
-export default function CandidateDetailPage() {
+interface Props {
+  type: "inner" | "outer" | "admin";
+}
+
+export default function CandidateDetailPage({ type }: Props) {
+  useSetHeaderTitle([
+    {
+      title: ``,
+    },
+  ]);
   const [modal, contextHolder] = Modal.useModal();
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -58,6 +68,16 @@ export default function CandidateDetailPage() {
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
+
+  function canEditField(field: string): boolean {
+    if (type === "admin") {
+      return field !== "sendVerify";
+    }
+    if (type === "inner") {
+      return true;
+    }
+    return false;
+  }
 
   const {
     username,
@@ -89,7 +109,7 @@ export default function CandidateDetailPage() {
       <Layout>
         <Content
           style={{
-            padding: 24,
+            padding: "0px 24px",
             margin: 0,
             minHeight: 280,
             background: colorBgContainer,
@@ -108,19 +128,21 @@ export default function CandidateDetailPage() {
                   >
                     Tổng quan
                   </Title>
-                  <EditOverview
-                    overview={{
-                      description,
-                      desireSalary,
-                      experienceLevel,
-                      firstName,
-                      jobRole,
-                      lastName,
-                      middleName,
-                      nation,
-                      profilePicture,
-                    }}
-                  />
+                  {canEditField("overview") && (
+                    <EditOverview
+                      overview={{
+                        description,
+                        desireSalary,
+                        experienceLevel,
+                        firstName,
+                        jobRole,
+                        lastName,
+                        middleName,
+                        nation,
+                        profilePicture,
+                      }}
+                    />
+                  )}
                 </Space>
               }
               type="inner"
@@ -200,7 +222,7 @@ export default function CandidateDetailPage() {
                   Project làm ngoài Wellancer
                 </Title>
               }
-              extra={<AddOP edit={false} />}
+              extra={canEditField("OP") && <AddOP edit={false} />}
               type="inner"
             >
               {outsideProjects?.map((project, index) => {
@@ -212,14 +234,18 @@ export default function CandidateDetailPage() {
                       <Space direction="vertical">
                         <Space>
                           <Title level={4}>{title}</Title>
-                          <AddOP edit={true} project={project} />
-                          <DeleteModal
-                            field="dự án"
-                            name={title}
-                            onOk={() => {
-                              console.log(title);
-                            }}
-                          />
+                          {canEditField("OP") && (
+                            <>
+                              <AddOP edit={true} project={project} />
+                              <DeleteModal
+                                field="dự án"
+                                name={title}
+                                onOk={() => {
+                                  console.log(title);
+                                }}
+                              />
+                            </>
+                          )}
                         </Space>
                         <Space>
                           <Title level={5}>{jobRole}</Title>
@@ -366,7 +392,7 @@ export default function CandidateDetailPage() {
                 </Title>
               }
               type="inner"
-              extra={<AddSkill skills={skills} />}
+              extra={canEditField("skill") && <AddSkill skills={skills} />}
             >
               <Space size={[0, 8]} wrap>
                 {skills.map((skillItem, index) => (
@@ -387,7 +413,11 @@ export default function CandidateDetailPage() {
                 </Title>
               }
               type="inner"
-              extra={<AddLanguage languages={languages} />}
+              extra={
+                canEditField("language") && (
+                  <AddLanguage languages={languages} />
+                )
+              }
             >
               <Space size={[0, 8]} wrap>
                 {languages.map((language, index) => (
@@ -408,7 +438,9 @@ export default function CandidateDetailPage() {
                 </Title>
               }
               type="inner"
-              extra={<ApplyExperience edit={false} />}
+              extra={
+                canEditField("experience") && <ApplyExperience edit={false} />
+              }
             >
               {experiences?.map((experience, index) => {
                 const { company, jobRole, nation, startEndYear, description } =
@@ -418,14 +450,21 @@ export default function CandidateDetailPage() {
                     <Space direction="vertical">
                       <Space>
                         <Title level={4}>{jobRole}</Title>
-                        <ApplyExperience edit={true} experience={experience} />
-                        <DeleteModal
-                          field="kinh nghiệm"
-                          name={jobRole}
-                          onOk={() => {
-                            console.log(jobRole);
-                          }}
-                        />
+                        {canEditField("experience") && (
+                          <>
+                            <ApplyExperience
+                              edit={true}
+                              experience={experience}
+                            />
+                            <DeleteModal
+                              field="kinh nghiệm"
+                              name={jobRole}
+                              onOk={() => {
+                                console.log(jobRole);
+                              }}
+                            />
+                          </>
+                        )}
                       </Space>
                       <Space>
                         <Title level={5}>{company}</Title>
@@ -458,7 +497,7 @@ export default function CandidateDetailPage() {
                 </Title>
               }
               type="inner"
-              extra={<AddEducation edit={false} />}
+              extra={canEditField("education") && <AddEducation edit={false} />}
             >
               {educations?.map((education, index) => {
                 const { school, degree, description, startEndYear } = education;
@@ -467,14 +506,18 @@ export default function CandidateDetailPage() {
                     <Space direction="vertical">
                       <Space>
                         <Title level={4}>{school}</Title>
-                        <AddEducation edit={true} education={education} />
-                        <DeleteModal
-                          field="học vấn"
-                          name={school}
-                          onOk={() => {
-                            console.log(school);
-                          }}
-                        />
+                        {canEditField("education") && (
+                          <div>
+                            <AddEducation edit={true} education={education} />
+                            <DeleteModal
+                              field="học vấn"
+                              name={school}
+                              onOk={() => {
+                                console.log(school);
+                              }}
+                            />
+                          </div>
+                        )}
                       </Space>
                       <Title level={5}>{degree}</Title>
                       <Title
@@ -500,36 +543,39 @@ export default function CandidateDetailPage() {
             </CustomCard>
           </Space>
         </Content>
-
         <Sider
           width={350}
-          style={{ background: colorBgContainer, padding: 24 }}
+          style={{ background: colorBgContainer, padding: "0px 24px" }}
         >
-          <Affix offsetTop={150}>
+          <Affix offsetTop={80}>
             <Space direction="vertical" size={"large"}>
-              <PrimaryButton
-                block
-                onClick={() => {
-                  modal.confirm({
-                    title: "Lưu ý",
-                    icon: <ExclamationCircleFilled />,
-                    content: <div>Bạn muốn gửi xác nhận hồ sơ</div>,
-                    okText: "Đồng ý",
-                    okType: "default",
-                    cancelText: "Hủy",
-                    onOk() {
-                      console.log(`duyệt`);
-                    },
-                    onCancel() {},
-                  });
-                }}
-              >
-                Gửi xác nhận
-              </PrimaryButton>
+              {canEditField("sendVerify") && (
+                <PrimaryButton
+                  block
+                  onClick={() => {
+                    modal.confirm({
+                      title: "Lưu ý",
+                      icon: <ExclamationCircleFilled />,
+                      content: <div>Bạn muốn gửi xác nhận hồ sơ</div>,
+                      okText: "Đồng ý",
+                      okType: "default",
+                      cancelText: "Hủy",
+                      onOk() {
+                        console.log(`duyệt`);
+                      },
+                      onCancel() {},
+                    });
+                  }}
+                >
+                  Gửi xác nhận
+                </PrimaryButton>
+              )}
               <Space direction="vertical">
                 <Space>
                   <Title level={4}>Thông tin liên hệ</Title>
-                  <EditContact contact={{ phone, address, email, nation }} />
+                  {canEditField("contact") && (
+                    <EditContact contact={{ phone, address, email, nation }} />
+                  )}
                 </Space>
                 <CustomCard>
                   <Space direction="vertical" size={"large"}>

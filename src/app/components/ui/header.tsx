@@ -61,7 +61,7 @@ export default function MyHeader() {
     };
   }
 
-  const getConditionalItems = (): ItemType[] => {
+  const getHeader = (): ItemType[] => {
     switch (role) {
       case "candidate":
         return [
@@ -89,12 +89,6 @@ export default function MyHeader() {
             { label: "Lịch Sử Giao Dịch", key: "/ed/report/transactions" },
           ]),
         ];
-      case "admin":
-        return [
-          getItem("Quản Lý Tài Khoản", "/admin/users"),
-          getItem("Quản Lý Project", "/admin/projects"),
-          getItem("Xác Thực Người Dùng", "/admin/verify-user"),
-        ];
       default:
         return [
           getItem("Tìm Project", "/projects"),
@@ -103,7 +97,7 @@ export default function MyHeader() {
     }
   };
 
-  const getConditionalDropdown = (): ItemType[] => {
+  const getProfileDropdown = (): ItemType[] => {
     switch (role) {
       case "candidate":
         return [
@@ -142,12 +136,10 @@ export default function MyHeader() {
     }
   };
 
-  const items: ItemType[] = getConditionalDropdown();
-
   const onClick: MenuProps["onClick"] = (e) => {
     if (e.key) navigate(e.key);
   };
-
+  console.log(`/${location.pathname.split("/").slice(1, 2).join("/")}`);
   return (
     <Header className="fixed z-50 flex w-full border-b border-gray-200 bg-white px-5">
       <img
@@ -158,16 +150,17 @@ export default function MyHeader() {
       />
       <Menu
         mode="horizontal"
-        items={getConditionalItems()}
+        items={getHeader()}
         style={{ flex: 1, minWidth: 0 }}
-        selectedKeys={[
-          `/${location.pathname.split("/").slice(1, 3).join("/")}`,
-        ]}
+        selectedKeys={location.pathname
+          .split("/")
+          .slice(1)
+          .map((_, index, arr) => `/${arr.slice(0, index + 1).join("/")}`)}
         onClick={onClick}
       />
       {Object.values(state.currentUser).length ? (
         <Dropdown
-          menu={{ items }}
+          menu={{ items: getProfileDropdown() }}
           placement="bottomRight"
           trigger={["click"]}
           arrow

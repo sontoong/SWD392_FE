@@ -126,7 +126,7 @@ export default function RatingCandidateModal(props: RatingCandidateModalProps) {
                             },
                           ]}
                         >
-                          <Rate />
+                          <Rate allowHalf={true} />
                         </Form.Item>
                       </Flex>
                       <Divider type="vertical" />

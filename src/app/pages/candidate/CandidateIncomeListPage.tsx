@@ -1,11 +1,18 @@
 import { Table, TableProps } from "antd";
-import { Incomes } from "../../constants/testData";
-import { Income } from "../models/income";
+import { Incomes } from "../../../constants/testData";
+import { Income } from "../../models/income";
 import { DownloadOutlined } from "@ant-design/icons";
-import { formatCurrency } from "../utils/utils";
-import { IconButton } from "../components/button/buttons";
+import { formatCurrency } from "../../utils/utils";
+import { IconButton } from "../../components/button/buttons";
+import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
 
 export default function CandidateIncomeList() {
+  useSetHeaderTitle([
+    {
+      title: `Thống kê thu nhập`,
+    },
+  ]);
+
   interface IncomeTable extends Income {
     IncomeAmountFormat: string;
     ServiceFeeFormat: string;
@@ -44,10 +51,12 @@ export default function CandidateIncomeList() {
   ];
 
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      pagination={{ position: ["bottomCenter"] }}
-    />
+    <div className="w-full">
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
+    </div>
   );
 }
