@@ -10,13 +10,17 @@ import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { DefaultForm } from "../../form/form";
 import { nations } from "../../../../constants/testData";
 
+interface Props {
+  formTitle: string;
+  form: FormInstance<any>;
+  initialValues: CreateProject;
+}
+
 export default function ProjectRequirementInfo({
   form,
   initialValues,
-}: {
-  form: FormInstance<any>;
-  initialValues: CreateProject;
-}) {
+  formTitle,
+}: Props) {
   const { Title } = Typography;
 
   const onFinish = (values: any) => {
@@ -39,7 +43,7 @@ export default function ProjectRequirementInfo({
               color: "#74BA7B",
             }}
           >
-            Tạo Project (Năng lực)
+            {formTitle} (Năng lực)
           </Title>
         }
       >

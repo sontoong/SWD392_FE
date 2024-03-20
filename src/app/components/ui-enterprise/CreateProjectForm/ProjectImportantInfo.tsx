@@ -23,13 +23,17 @@ import { useState } from "react";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { DefaultForm } from "../../form/form";
 
+interface Props {
+  formTitle: string;
+  form: FormInstance<any>;
+  initialValues: CreateProject;
+}
+
 export default function ProjectImportantInfo({
   form,
   initialValues,
-}: {
-  form: FormInstance<any>;
-  initialValues: CreateProject;
-}) {
+  formTitle,
+}: Props) {
   const { Title, Paragraph } = Typography;
   const fundValue = Form.useWatch(["contract", "fund"], form);
 
@@ -130,7 +134,7 @@ export default function ProjectImportantInfo({
               color: "#74BA7B",
             }}
           >
-            Tạo Project
+            {formTitle}
           </Title>
         }
       >

@@ -24,7 +24,6 @@ export default function CreateProjectForm({
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  console.log(edit);
 
   const [current, setCurrent] = useState(0);
 
@@ -52,22 +51,36 @@ export default function CreateProjectForm({
       questions: [],
     },
   };
-
+  const formTitle = edit ? "Chỉnh sửa dự án" : "Tạo dự án";
   const steps = [
     {
       title: "Thông tin",
       content: (
-        <ProjectImportantInfo form={form} initialValues={initialValues} />
+        <ProjectImportantInfo
+          formTitle={formTitle}
+          form={form}
+          initialValues={initialValues}
+        />
       ),
     },
     {
       title: "Chi tiết",
-      content: <ProjectDetailInfo form={form} initialValues={initialValues} />,
+      content: (
+        <ProjectDetailInfo
+          formTitle={formTitle}
+          form={form}
+          initialValues={initialValues}
+        />
+      ),
     },
     {
       title: "Năng lực",
       content: (
-        <ProjectRequirementInfo form={form} initialValues={initialValues} />
+        <ProjectRequirementInfo
+          formTitle={formTitle}
+          form={form}
+          initialValues={initialValues}
+        />
       ),
     },
   ];

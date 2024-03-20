@@ -30,9 +30,6 @@ export default function ProjectSearchForm() {
 
   return (
     <CustomCard
-      bodyStyle={{ backgroundColor: "#74BA7B" }}
-      headStyle={{ backgroundColor: "#74BA7B" }}
-      className="m-[3rem]"
       title={
         <Title
           level={4}
@@ -45,6 +42,10 @@ export default function ProjectSearchForm() {
           Tìm Project
         </Title>
       }
+      styles={{
+        header: { backgroundColor: "#74BA7B" },
+        body: { backgroundColor: "#74BA7B" },
+      }}
     >
       <DefaultForm
         form={form}

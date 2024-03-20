@@ -12,13 +12,17 @@ import { FormRadioButtonGroup } from "../../input/inputs";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { DefaultForm } from "../../form/form";
 
+interface Props {
+  formTitle: string;
+  form: FormInstance<any>;
+  initialValues: CreateProject;
+}
+
 export default function ProjectDetailInfo({
   form,
   initialValues,
-}: {
-  form: FormInstance<any>;
-  initialValues: CreateProject;
-}) {
+  formTitle,
+}: Props) {
   const { Title } = Typography;
 
   const onFinish = (values: any) => {
@@ -41,7 +45,7 @@ export default function ProjectDetailInfo({
               color: "#74BA7B",
             }}
           >
-            Tạo Project (Chi tiết)
+            {formTitle} (Chi tiết)
           </Title>
         }
       >

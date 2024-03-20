@@ -36,8 +36,6 @@ export default function FreelancerSearchForm() {
 
   return (
     <CustomCard
-      bodyStyle={{ backgroundColor: "#74BA7B" }}
-      headStyle={{ backgroundColor: "#74BA7B" }}
       title={
         <Title
           level={4}
@@ -50,6 +48,10 @@ export default function FreelancerSearchForm() {
           Tìm Freelancer
         </Title>
       }
+      styles={{
+        header: { backgroundColor: "#74BA7B" },
+        body: { backgroundColor: "#74BA7B" },
+      }}
     >
       <DefaultForm
         form={form}

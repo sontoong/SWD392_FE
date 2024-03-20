@@ -14,9 +14,10 @@ export default function ProjectApplicationList() {
     dateFormat: string;
   }
 
-  const data: ApplicantTable[] = Applicants.map((applicant) => ({
+  const data: ApplicantTable[] = Applicants.map((applicant, index) => ({
     ...applicant,
     dateFormat: formatUnixToLocal(applicant.date),
+    key: index,
   }));
 
   const columns: TableProps<Applicant>["columns"] = [

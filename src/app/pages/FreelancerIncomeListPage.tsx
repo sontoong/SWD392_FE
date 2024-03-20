@@ -5,18 +5,20 @@ import { DownloadOutlined } from "@ant-design/icons";
 import { formatCurrency } from "../utils/utils";
 import { IconButton } from "../components/button/buttons";
 
-
 export default function FreeLancerIncomeList() {
-  interface IncomeTable extends Income{
+  interface IncomeTable extends Income {
     IncomeAmountFormat: string;
     ServiceFeeFormat: string;
   }
 
-const data: IncomeTable[] = Incomes.map((item)=>(
-  {...item, IncomeAmountFormat:formatCurrency(item.incomeAmount), ServiceFeeFormat:formatCurrency(item.serviceFee)}
-))
+  const data: IncomeTable[] = Incomes.map((item, index) => ({
+    ...item,
+    IncomeAmountFormat: formatCurrency(item.incomeAmount),
+    ServiceFeeFormat: formatCurrency(item.serviceFee),
+    key: index,
+  }));
 
-const columns: TableProps<IncomeTable>["columns"] = [
+  const columns: TableProps<IncomeTable>["columns"] = [
     {
       title: "Khách hàng",
       dataIndex: "customer",
@@ -25,9 +27,9 @@ const columns: TableProps<IncomeTable>["columns"] = [
     {
       title: "Hợp đồng",
       render: () => {
-          return <IconButton icon={<DownloadOutlined/>}/>
+        return <IconButton icon={<DownloadOutlined />} />;
       },
-      align:'center'
+      align: "center",
     },
     {
       title: "Thu nhập",
@@ -41,5 +43,11 @@ const columns: TableProps<IncomeTable>["columns"] = [
     },
   ];
 
- return <Table columns={columns} dataSource={data} pagination={{position:["bottomCenter"]}}/>;
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={{ position: ["bottomCenter"] }}
+    />
+  );
 }

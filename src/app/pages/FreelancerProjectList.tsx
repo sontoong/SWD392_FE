@@ -18,10 +18,12 @@ export interface TableData extends FreelancerProject {
 }
 
 export default function FreelancerProjectList() {
-  const data: TableData[] = FreelancerProjects.map((project) => ({
+  const data: TableData[] = FreelancerProjects.map((project, index) => ({
     ...project,
     startDateGenerator: formatUnixToLocal(project.startDate),
-    enDateGenerator: project.endDate ? formatUnixToLocal(project.endDate) : undefined,
+    enDateGenerator: project.endDate
+      ? formatUnixToLocal(project.endDate)
+      : undefined,
     statusGenerator: generateFreelancerProjectStatus(project.status),
     fundingTypeGenerator: generateProjectFundingType(project.funding),
     fundingGenerator: generateProjectFunding(
@@ -29,6 +31,7 @@ export default function FreelancerProjectList() {
       project.freelancerRequirement,
       project.initialFunding,
     ),
+    key: index,
   }));
 
   const columns: TableProps<TableData>["columns"] = [

@@ -4,7 +4,10 @@ import { generateEnterpriseProjectStatus } from "../utils/generators";
 import { EnterpriseProjects } from "../../constants/testData";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
 import ProjectSearchForm from "../components/ui-enterprise/search/project-search";
-import { CustomDropdown, CustomDropdownProps } from "../components/ui-enterprise/dropdown";
+import {
+  CustomDropdown,
+  CustomDropdownProps,
+} from "../components/ui-enterprise/dropdown";
 export interface TableData extends EnterpriseProject {
   statusGenerator: string;
 }
@@ -16,12 +19,11 @@ export default function EnterpriseProjectList() {
       path: location.pathname,
     },
   ]);
-  const data: TableData[] = EnterpriseProjects.map((project) => ({
+  const data: TableData[] = EnterpriseProjects.map((project, index) => ({
     ...project,
+    key: index,
     statusGenerator: generateEnterpriseProjectStatus(project.status),
   }));
-
-
 
   const dropdownItems: CustomDropdownProps["items"] = [
     {
@@ -29,7 +31,7 @@ export default function EnterpriseProjectList() {
       label: "Xem thông tin project",
     },
     { key: "search", label: "Tìm freelancer" },
-    { key: "application", label: "Xem báo giá"},
+    { key: "application", label: "Xem báo giá" },
     { key: "hired", label: "Tuyển dụng" },
   ];
 
@@ -38,11 +40,7 @@ export default function EnterpriseProjectList() {
       title: "Tên Project",
       dataIndex: "title",
       key: "title",
-      render: (_, record) => (
-        <div>
-          {record.title}
-        </div>
-      ),
+      render: (_, record) => <div>{record.title}</div>,
     },
     {
       title: "Báo giá",
@@ -63,17 +61,14 @@ export default function EnterpriseProjectList() {
       title: "Actions",
       key: "actions",
       render: (_, record) => (
-        <CustomDropdown
-          items={dropdownItems}
-          record={record}
-        />
+        <CustomDropdown items={dropdownItems} record={record} />
       ),
     },
   ];
 
   return (
     <div>
-      <ProjectSearchForm/>
+      <ProjectSearchForm />
       <Table
         columns={columns}
         dataSource={data}

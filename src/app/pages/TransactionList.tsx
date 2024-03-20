@@ -18,11 +18,12 @@ export default function TransactionList(props: { role: string }) {
     DateFormat: string;
   }
 
-  const data: TransactionTable[] = Transactions.map((item) => ({
+  const data: TransactionTable[] = Transactions.map((item, index) => ({
     ...item,
     MoneyFormat: formatCurrency(item.moneyAmount),
     TypeFormat: generateTransactionType(item.type),
     DateFormat: formatUnixToLocal(item.date),
+    key: index,
   }));
 
   const columns: TableProps<TransactionTable>["columns"] = [

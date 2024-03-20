@@ -1,6 +1,9 @@
 import { Table, TableProps } from "antd";
 import { Contract } from "../models/project";
-import { generateContractStatus, generateDepositTableType } from "../utils/generators";
+import {
+  generateContractStatus,
+  generateDepositTableType,
+} from "../utils/generators";
 import { contractList } from "../../constants/testData";
 import { Link } from "react-router-dom";
 import { useSetHeaderTitle } from "../hooks/useSetHeaderTitle";
@@ -20,12 +23,13 @@ export default function EnterpriseContractPage() {
       path: location.pathname,
     },
   ]);
-  const data: TableData[] = contractList.map((contract) => ({
+  const data: TableData[] = contractList.map((contract, index) => ({
     ...contract,
     depositGenerator: generateDepositTableType(contract.depositType),
     dateFormat: formatUnixToLocal(contract.date),
     formatCurrency: formatCurrency(contract.fund),
-    contractStatus: generateContractStatus(contract.status)
+    contractStatus: generateContractStatus(contract.status),
+    key: index,
   }));
 
   const columns: TableProps<TableData>["columns"] = [
@@ -40,15 +44,15 @@ export default function EnterpriseContractPage() {
       ),
     },
     {
-        title: "Tên Project",
-        dataIndex: "freelancerName",
-        key: "freelancerName",
-        render: (_, record) => (
-          <div className="text-blue-500 underline">
-            <Link to={`${record.projectId}`}>{record.projectName}</Link>
-          </div>
-        ),
-      },
+      title: "Tên Project",
+      dataIndex: "freelancerName",
+      key: "freelancerName",
+      render: (_, record) => (
+        <div className="text-blue-500 underline">
+          <Link to={`${record.projectId}`}>{record.projectName}</Link>
+        </div>
+      ),
+    },
     {
       title: "Hạn hoàn thành",
       dataIndex: "dateFormat",
@@ -65,10 +69,10 @@ export default function EnterpriseContractPage() {
       key: "formatCurrency",
     },
     {
-        title: "Trạng thái",
-        dataIndex: "contractStatus",
-        key: "contractStatus",
-    }
+      title: "Trạng thái",
+      dataIndex: "contractStatus",
+      key: "contractStatus",
+    },
   ];
 
   return (
