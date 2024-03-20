@@ -80,7 +80,7 @@ export default function MyHeader() {
         ];
       case "enterprise":
         return [
-          getItem("Quản Lý Project", "/ed", "", [
+          getItem("Quản Lý Project", "/ed/projects", "", [
             { label: "Danh Sách Project", key: "/ed/projects" },
             { label: "Đăng Tuyển Dụng", key: "/ed/new-project" },
           ]),
@@ -139,7 +139,12 @@ export default function MyHeader() {
   const onClick: MenuProps["onClick"] = (e) => {
     if (e.key) navigate(e.key);
   };
-  console.log(`/${location.pathname.split("/").slice(1, 2).join("/")}`);
+  console.log(
+    location.pathname
+      .split("/")
+      .slice(1)
+      .map((_, index, arr) => `/${arr.slice(0, index + 1).join("/")}`),
+  );
   return (
     <Header className="fixed z-50 flex w-full border-b border-gray-200 bg-white px-5">
       <img
