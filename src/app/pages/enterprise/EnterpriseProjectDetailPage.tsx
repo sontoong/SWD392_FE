@@ -64,7 +64,7 @@ export default function EnterpriseProjectDetailPage() {
           />
         ))}
       </Steps>
-      <div className="mt-5">{steps[current].content}</div>
+      <div className="mt-5 flex justify-center">{steps[current].content}</div>
     </div>
   );
 }

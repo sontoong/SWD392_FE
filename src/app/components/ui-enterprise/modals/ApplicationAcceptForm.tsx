@@ -12,6 +12,7 @@ import {
 } from "../../input/inputs";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { Contract } from "../../../models/project";
+import { formatCurrency } from "../../../utils/utils";
 
 interface ApplicationAcceptFormProp {
   record: Applicant;
@@ -92,11 +93,10 @@ export default function ApplicationAcceptForm(
               <React.Fragment key={index}>
                 <Title level={3}>{qna.question}</Title>
                 <Paragraph>{qna.answer}</Paragraph>
-                <Paragraph>{qna.answer}</Paragraph>
               </React.Fragment>
             ))}
           <Title level={3}>Báo giá:</Title>
-          <Paragraph>{record.money}VND</Paragraph>
+          <Paragraph>{formatCurrency(record.money)}</Paragraph>
           <Title level={3}>Thời gian ước tính:</Title>
           <Paragraph>{record.time} giờ</Paragraph>
           <Divider />

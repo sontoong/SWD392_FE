@@ -56,7 +56,11 @@ const optionalRequirements: OptionalRequirements = {
   nation: "all",
   rating: "all",
   skills: skills,
-  questions: ["Câu 100", "Câu 2", "Câu 3"],
+  questions: [
+    "Bạn có thể cung cấp ví dụ về các dự án tương tự mà bạn đã hoàn thành trong quá khứ, và kết quả như thế nào không?",
+    "Bạn tiếp cận thế nào với việc giao tiếp và hợp tác trong suốt vòng đời của dự án?",
+    "Quy trình của bạn để xử lý sửa đổi hoặc phản hồi từ khách hàng như thế nào, và làm thế nào để đảm bảo sự hài lòng của khách hàng?",
+  ],
 };
 
 export const project: Project = {
@@ -113,7 +117,7 @@ export const candidate: CandidateDetail = {
   role: "candidate",
   dob: 1708532861000,
   email: "nguyena@gmail.com",
-  username: "Nguyễn Văn A",
+  username: "Nguyễn Văn An",
   phone: "0123456789",
   address:
     "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh 715650",
@@ -171,18 +175,18 @@ export const projects: Project[] = [project];
 export const candidates: CandidateDetail[] = [candidate];
 
 const comment: Comment = {
-  title: "Nguyen Van A",
+  title: "Nguyen Vu",
   avatar: "",
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a erat ut nibh dignissim bibendum id eu est. Nunc libero nisl, vestibulum id sodales sit amet, condimentum ut velit. Curabitur scelerisque laoreet maximus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi faucibus, diam nec accumsan suscipit, quam mi dictum felis, vestibulum dictum lectus ex sit amet nibh. Maecenas ultrices elit eget cursus auctor. Donec venenatis nisl odio, quis ...",
-  rating: 4.5,
+    "Sự chú ý đến chi tiết trong dự án này thật sự đáng kinh ngạc. Mọi khía cạnh của công việc của bạn phản ánh một cấp độ chuyên nghiệp cao.",
+  rating: 5,
 };
 
 const comment2: Comment = {
-  title: "Nguyen Van A",
+  title: "Vo Minh Khoai",
   avatar: "",
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a erat ut nibh dignissim bibendum id eu est. Nunc libero nisl, vestibulum id sodales sit amet, condimentum ut velit. Curabitur scelerisque laoreet maximus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi faucibus, diam nec accumsan suscipit, quam mi dictum felis, vestibulum dictum lectus ex sit amet nibh. Maecenas ultrices elit eget cursus auctor. Donec venenatis nisl odio, quis ...",
+    "Tôi ấn tượng với sự sáng tạo và các giải pháp đổi mới mà bạn mang lại cho công việc này. Quan điểm độc đáo của bạn thực sự tỏa sáng trong sản phẩm cuối cùng.",
   rating: 4.5,
 };
 
@@ -199,12 +203,12 @@ export const companyDetail: CompanyDetail = {
   industryFields: [field1, field],
   companyDocument: "FunnyMemeFrom9GAG.png",
   registrationDocumentType: "Giấy phép ĐKKD",
-  identificationNumber: 333333333333333,
+  identificationNumber: 1015452789,
   companyCountry: "Việt Nam",
-  taxNumber: 33333333333333,
+  taxNumber: 10301458121,
   address: "Đường D1, Đ. D1, Phường Tân Phú, Quận 9, Hồ Chí Minh, Việt Nam",
   companyEmail: "CoolMathGame@gmail.com",
-  companyPhone: "33333333333333",
+  companyPhone: "09105452789",
 };
 
 export const enterpriseInfo: EnterpriseInfo = {
@@ -216,9 +220,9 @@ export const enterpriseInfo: EnterpriseInfo = {
   enterpriseCountry: { label: "Việt Nam", value: "vn" },
   documentType: "Hộ chiếu",
   enterpriseDocument: "FunnyMemeFrom9GAG.png",
-  documentNumber: 33333333333333,
+  documentNumber: 10301458121,
   enterpriseEmail: "CoolMathGame@gmail.com",
-  enterprisePhone: "33333333333333",
+  enterprisePhone: "09105452789",
   companyDetail: companyDetail,
   projectList: projects,
   currentHiringProject: 3,
@@ -327,45 +331,51 @@ export const Applicants: Applicant[] = [
     time: 0,
     questions: [
       {
-        question: "Câu 1",
+        question:
+          "Bạn có thể cung cấp ví dụ về các dự án tương tự mà bạn đã hoàn thành trong quá khứ, và kết quả như thế nào không?",
         answer:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+          "Dĩ nhiên, tôi đã hoàn thành nhiều dự án tương tự trước đây và đạt được các kết quả tích cực. Ví dụ, tôi đã làm việc trên một dự án phát triển trang web thương mại điện tử cho một khách hàng, và kết quả là họ đã tăng doanh số bán hàng của họ lên 30% sau khi trang web được triển khai. Tôi cũng có thể cung cấp một danh sách các dự án khác và chi tiết về kết quả nếu cần.",
       },
       {
-        question: "Câu 2",
+        question:
+          "Bạn tiếp cận thế nào với việc giao tiếp và hợp tác trong suốt vòng đời của dự án?",
         answer:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+          "Tôi luôn coi trọng việc giao tiếp và hợp tác trong dự án. Tôi thường sử dụng các công cụ như email, tin nhắn trực tuyến và cuộc họp video để duy trì liên lạc với khách hàng và đồng nghiệp. Tôi sẽ thường xuyên cập nhật tiến độ của dự án và chia sẻ thông tin chi tiết để đảm bảo rằng mọi người đều được thông tin.",
       },
       {
-        question: "Câu 3",
+        question:
+          "Quy trình của bạn để xử lý sửa đổi hoặc phản hồi từ khách hàng như thế nào, và làm thế nào để đảm bảo sự hài lòng của khách hàng?",
         answer:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+          "Khi nhận phản hồi từ khách hàng, tôi luôn mở lòng và sẵn lòng thực hiện các sửa đổi cần thiết để đáp ứng yêu cầu của họ. Tôi sẽ tiếp tục duy trì một quá trình giao tiếp mạnh mẽ với khách hàng để đảm bảo rằng họ hài lòng với kết quả cuối cùng. Nếu cần, tôi sẽ cung cấp các phiên bản thử nghiệm và cho phép khách hàng tham gia vào quá trình để đảm bảo rằng dự án đáp ứng mong đợi của họ.",
       },
     ],
   },
   {
     id: "",
     projectId: "",
-    candidateName: "Nguyễn Văn A",
+    candidateName: "Võ Văn Khoai",
     candidateId: "",
     date: 1708532861000,
-    money: 0,
-    time: 0,
+    money: 1000000,
+    time: 90,
     questions: [
       {
-        question: "Câu 1",
+        question:
+          "Bạn có thể cung cấp ví dụ về các dự án tương tự mà bạn đã hoàn thành trong quá khứ, và kết quả như thế nào không?",
         answer:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+          "Dĩ nhiên, tôi đã hoàn thành nhiều dự án tương tự trước đây và đạt được các kết quả tích cực. Ví dụ, tôi đã làm việc trên một dự án phát triển trang web thương mại điện tử cho một khách hàng, và kết quả là họ đã tăng doanh số bán hàng của họ lên 30% sau khi trang web được triển khai. Tôi cũng có thể cung cấp một danh sách các dự án khác và chi tiết về kết quả nếu cần.",
       },
       {
-        question: "Câu 2",
+        question:
+          "Bạn tiếp cận thế nào với việc giao tiếp và hợp tác trong suốt vòng đời của dự án?",
         answer:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+          "Tôi luôn coi trọng việc giao tiếp và hợp tác trong dự án. Tôi thường sử dụng các công cụ như email, tin nhắn trực tuyến và cuộc họp video để duy trì liên lạc với khách hàng và đồng nghiệp. Tôi sẽ thường xuyên cập nhật tiến độ của dự án và chia sẻ thông tin chi tiết để đảm bảo rằng mọi người đều được thông tin.",
       },
       {
-        question: "Câu 3",
+        question:
+          "Quy trình của bạn để xử lý sửa đổi hoặc phản hồi từ khách hàng như thế nào, và làm thế nào để đảm bảo sự hài lòng của khách hàng?",
         answer:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut condimentum turpis. Aenean accumsan vel turpis id dictum. Maecenas lobortis, ante quis volutpat dignissim, mi magna viverra enim, quis lacinia arcu metus nec leo. Sed accumsan sed eros non rhoncus. Integer sagittis diam eget justo commodo dapibus. Ut at maximus sem, vitae laoreet leo.",
+          "Khi nhận phản hồi từ khách hàng, tôi luôn mở lòng và sẵn lòng thực hiện các sửa đổi cần thiết để đáp ứng yêu cầu của họ. Tôi sẽ tiếp tục duy trì một quá trình giao tiếp mạnh mẽ với khách hàng để đảm bảo rằng họ hài lòng với kết quả cuối cùng. Nếu cần, tôi sẽ cung cấp các phiên bản thử nghiệm và cho phép khách hàng tham gia vào quá trình để đảm bảo rằng dự án đáp ứng mong đợi của họ.",
       },
     ],
   },

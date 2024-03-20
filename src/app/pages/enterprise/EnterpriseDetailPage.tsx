@@ -101,22 +101,14 @@ export default function EnterpriseDetailPage() {
                 <Row>
                   <Col span={10}>
                     <Row>
-                      <Col span={2}>
-                        <Title level={3}>Họ</Title>
-                        <div>{lastName}</div>
-                      </Col>
-                      <Col span={6} offset={4}>
-                        <Title level={3}>Tên đệm</Title>
-                        <div>{middleName}</div>
-                      </Col>
-                      <Col span={3} offset={4}>
-                        <Title level={3}>Tên</Title>
-                        <div>{firstName}</div>
+                      <Col span={12}>
+                        <Title level={3}>Họ và tên</Title>
+                        <div>{`${firstName} ${middleName} ${lastName}`}</div>
                       </Col>
                     </Row>
                   </Col>
                   <Col span={10} offset={4}>
-                    <Title level={3}>Ngày sinh của bạn</Title>
+                    <Title level={3}>Ngày sinh</Title>
                     <div>{dateOfBirth}</div>
                   </Col>
                 </Row>
@@ -214,7 +206,7 @@ export default function EnterpriseDetailPage() {
                   <Col span={10} offset={4}>
                     <Space direction="vertical" size={"large"}>
                       <div>
-                        <Title level={3}>Qui mô công ti</Title>
+                        <Title level={3}>Qui mô công ty</Title>
                         <div>{companySize}</div>
                       </div>
                       <div>
@@ -227,7 +219,7 @@ export default function EnterpriseDetailPage() {
                   </Col>
                 </Row>
                 <div>
-                  <Title level={3}>Giới thiệu công ti</Title>
+                  <Title level={3}>Giới thiệu công ty</Title>
                   <div>{introduction}</div>
                 </div>
                 <div>

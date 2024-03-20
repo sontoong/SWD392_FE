@@ -2,11 +2,7 @@ import { PrimaryButton } from "../../button/buttons";
 import { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Col, Form, Row, Typography } from "antd";
-import {
-  InputNumberFix,
-  FormTextArea,
-  InputNumberTimeFix,
-} from "../../input/inputs";
+import { InputNumberFix, FormTextArea } from "../../input/inputs";
 import { Applicant } from "../../../models/applicant";
 import { Project } from "../../../models/project";
 import { DefaultForm } from "../../form/form";
@@ -29,8 +25,6 @@ export default function ApplyForm({ project }: { project: Project }) {
       answer: "",
     })),
   };
-
-  console.log(initialValues);
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
@@ -104,13 +98,16 @@ export default function ApplyForm({ project }: { project: Project }) {
               label="Số tiền bạn muốn nhận"
               rules={[
                 {
-                  type: "string",
                   required: true,
-                  whitespace: true,
+                  message: "Vui lòng nhập số tiền",
+                },
+                {
+                  type: "number",
+                  min: 1000,
                 },
               ]}
             >
-              <InputNumberFix />
+              <InputNumberFix suffix={"VND"} step={1000} />
             </Form.Item>
           </Row>
           <Row>
@@ -118,14 +115,15 @@ export default function ApplyForm({ project }: { project: Project }) {
               name="time"
               label="Số giờ để bạn hoàn thành công việc"
               rules={[
+                { required: true, message: "Vui lòng nhập số giờ" },
                 {
-                  type: "string",
-                  required: true,
-                  whitespace: true,
+                  type: "number",
+                  min: 0,
                 },
               ]}
+              wrapperCol={{ span: 12 }}
             >
-              <InputNumberTimeFix />
+              <InputNumberFix suffix={"giờ"} step={1} />
             </Form.Item>
           </Row>
         </DefaultForm>

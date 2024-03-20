@@ -148,7 +148,7 @@ export default function CompanyModalEditDocument() {
             <Col span={24}>
               <Form.Item
                 name="address"
-                label="Địa chỉ công ti"
+                label="Địa chỉ công ty"
                 rules={[
                   {
                     type: "string",
