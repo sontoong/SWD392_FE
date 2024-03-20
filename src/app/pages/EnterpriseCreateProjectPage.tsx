@@ -1,6 +1,5 @@
-import { App, Form, Layout, Steps, theme } from "antd";
+import { App, Form, Steps } from "antd";
 import ProjectImportantInfo from "../components/ui-enterprise/CreateProjectForm/ProjectImportantInfo";
-import { Content } from "antd/es/layout/layout";
 import ProjectDetailInfo from "../components/ui-enterprise/CreateProjectForm/ProjectDetailInfo";
 import ProjectRequirementInfo from "../components/ui-enterprise/CreateProjectForm/ProjectRequirementInfo";
 import { useState } from "react";
@@ -21,9 +20,6 @@ export default function CreateProjectForm({
   ]);
   const { message } = App.useApp();
   const [form] = Form.useForm();
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
 
   const [current, setCurrent] = useState(0);
 
@@ -106,80 +102,66 @@ export default function CreateProjectForm({
   };
 
   return (
-    <Layout>
-      <Content
-        style={{
-          padding: "24px 250px 24px 250px",
-          margin: 0,
-          minHeight: 280,
-          background: colorBgContainer,
-          borderRadius: borderRadiusLG,
+    <div>
+      <Steps current={current} items={items} className="mb-[2rem]" />
+      <Form.Provider
+        onFormFinish={(name, { values, forms }) => {
+          const { mainForm } = forms;
+          if (name === "ProjectImportantInfo") {
+            mainForm.setFieldsValue({ ...values });
+            next();
+          }
+          if (name === "ProjectDetailInfo") {
+            mainForm.setFieldsValue({ ...values });
+            next();
+          }
+          if (name === "ProjectRequirementInfo") {
+            mainForm.setFieldsValue({ ...values });
+            mainForm.submit();
+          }
         }}
       >
-        <Steps current={current} items={items} className="mb-[2rem]" />
-        <Form.Provider
-          onFormFinish={(name, { values, forms }) => {
-            const { mainForm } = forms;
-            if (name === "ProjectImportantInfo") {
-              mainForm.setFieldsValue({ ...values });
-              next();
-            }
-            if (name === "ProjectDetailInfo") {
-              mainForm.setFieldsValue({ ...values });
-              next();
-            }
-            if (name === "ProjectRequirementInfo") {
-              mainForm.setFieldsValue({ ...values });
-              mainForm.submit();
-            }
-          }}
-        >
-          <div>{steps[current].content}</div>
-          <Form name="mainForm" onFinish={onFinish}>
-            {/* hidden fields for form to record */}
-            <Form.Item name="title" hidden />
-            <Form.Item name="optionalRequirements" hidden />
-            <Form.Item name="projectField" hidden />
-            <Form.Item name="description" hidden />
-            <Form.Item name="contract" hidden />
-            <Form.Item name="funding" hidden />
-            <Form.Item name="initialFunding" hidden />
-            <Form.Item name="freelancerRequirement" hidden />
-            <Form.Item name="timeToComplete" hidden />
-            <Form.Item name="privacy" hidden />
-            <Form.Item name="projectType" hidden />
-
-            <div style={{ marginTop: 24 }}>
-              {current < steps.length - 1 && (
-                <PrimaryButton
-                  onClick={() => {
-                    form.submit();
-                  }}
-                >
-                  Tiếp tục
-                </PrimaryButton>
-              )}
-              {current === steps.length - 1 && (
-                <PrimaryButton
-                  onClick={() => {
-                    form.submit();
-                  }}
-                >
-                  Gửi ngay
-                </PrimaryButton>
-              )}
-              {current > 0 && (
-                <OutlineButton
-                  style={{ margin: "0 8px" }}
-                  onClick={() => prev()}
-                >
-                  Quay lại
-                </OutlineButton>
-              )}
-            </div>
-          </Form>
-        </Form.Provider>
-      </Content>
-    </Layout>
+        <div>{steps[current].content}</div>
+        <Form name="mainForm" onFinish={onFinish}>
+          {/* hidden fields for form to record */}
+          <Form.Item name="title" hidden />
+          <Form.Item name="optionalRequirements" hidden />
+          <Form.Item name="projectField" hidden />
+          <Form.Item name="description" hidden />
+          <Form.Item name="contract" hidden />
+          <Form.Item name="funding" hidden />
+          <Form.Item name="initialFunding" hidden />
+          <Form.Item name="freelancerRequirement" hidden />
+          <Form.Item name="timeToComplete" hidden />
+          <Form.Item name="privacy" hidden />
+          <Form.Item name="projectType" hidden />
+          <div style={{ marginTop: 24 }}>
+            {current < steps.length - 1 && (
+              <PrimaryButton
+                onClick={() => {
+                  form.submit();
+                }}
+              >
+                Tiếp tục
+              </PrimaryButton>
+            )}
+            {current === steps.length - 1 && (
+              <PrimaryButton
+                onClick={() => {
+                  form.submit();
+                }}
+              >
+                Gửi ngay
+              </PrimaryButton>
+            )}
+            {current > 0 && (
+              <OutlineButton style={{ margin: "0 8px" }} onClick={() => prev()}>
+                Quay lại
+              </OutlineButton>
+            )}
+          </div>
+        </Form>
+      </Form.Provider>
+    </div>
   );
 }

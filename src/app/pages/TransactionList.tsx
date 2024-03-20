@@ -55,10 +55,12 @@ export default function TransactionList(props: { role: string }) {
   ];
 
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      pagination={{ position: ["bottomCenter"] }}
-    />
+    <div className="w-full">
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
+    </div>
   );
 }

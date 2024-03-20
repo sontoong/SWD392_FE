@@ -3,9 +3,6 @@ import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
 import { ROLE } from "../../constants/role";
 
 const Layout = lazy(() => import("../components/layout/public-layout"));
-const Layout2 = lazy(() => import("../components/layout/admin-layout"));
-const Layout3 = lazy(() => import("../components/layout/enterprise-layout"));
-const Layout4 = lazy(() => import("../components/layout/freelancer-layout"));
 
 //public
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -47,15 +44,6 @@ const EnterpriseProjectDetailPage = lazy(
 //both
 import TransactionList from "../pages/TransactionList";
 
-//admin
-const UserManagePage = lazy(() => import("../pages/UserManagePage"));
-const ProjectManagePage = lazy(() => import("../pages/ProjectManagePage"));
-const VerifyUserPage = lazy(() => import("../pages/UserVerifyPage"));
-const ProjectDetail = lazy(() => import("../pages/ProjectDetailAdminPage"));
-const UserDetailAdminPage = lazy(
-  () => import("../pages/FreelancerDetailAdminPage"),
-);
-
 const Forbidden = lazy(() => import("../pages/ForbiddenPage"));
 const PrivateRoute = lazy(() => import("./proute"));
 const TestPage = lazy(() => import("../pages/TestPage"));
@@ -68,30 +56,6 @@ const PublicLayout = () => {
     <Layout>
       <Outlet />
     </Layout>
-  );
-};
-
-const AdminLayout = () => {
-  return (
-    <Layout2>
-      <Outlet />
-    </Layout2>
-  );
-};
-
-const EnterpriseLayout = () => {
-  return (
-    <Layout3>
-      <Outlet />
-    </Layout3>
-  );
-};
-
-const FreelancerLayout = () => {
-  return (
-    <Layout4>
-      <Outlet />
-    </Layout4>
   );
 };
 
@@ -169,188 +133,104 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "*",
+        path: "fd",
         element: (
-          <Suspense fallback={<></>}>
-            <ErrorPage />
-          </Suspense>
+          <PrivateRoute inverted={false} requiredRoles={[ROLE.FREELANCER]}>
+            <Outlet />
+          </PrivateRoute>
         ),
-      },
-    ],
-  },
-  {
-    path: "fd",
-    element: (
-      <Suspense fallback={<></>}>
-        <PrivateRoute inverted={false} requiredRoles={[ROLE.FREELANCER]}>
-          <FreelancerLayout />
-        </PrivateRoute>
-      </Suspense>
-    ),
-    children: [
-      {
-        path: "projects",
-        element: (
-          <Suspense fallback={<></>}>
-            <FreelancerProjectList />
-          </Suspense>
-        ),
-      },
-      {
-        path: "report/earnings",
-        element: (
-          <Suspense fallback={<></>}>
-            <FreelancerIncomeListPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "report/transactions",
-        element: (
-          <Suspense fallback={<></>}>
-            <TransactionList role={"freelancer"} />
-          </Suspense>
-        ),
+        children: [
+          {
+            path: "projects",
+            element: (
+              <Suspense fallback={<></>}>
+                <FreelancerProjectList />
+              </Suspense>
+            ),
+          },
+          {
+            path: "report/earnings",
+            element: (
+              <Suspense fallback={<></>}>
+                <FreelancerIncomeListPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "report/transactions",
+            element: (
+              <Suspense fallback={<></>}>
+                <TransactionList role={"freelancer"} />
+              </Suspense>
+            ),
+          },
+          {
+            path: "account",
+            element: (
+              <Suspense fallback={<></>}>
+                <FreelancerDetailPage />
+              </Suspense>
+            ),
+          },
+        ],
       },
       {
-        path: "account",
+        path: "ed",
         element: (
-          <Suspense fallback={<></>}>
-            <FreelancerDetailPage />
-          </Suspense>
+          <PrivateRoute inverted={false} requiredRoles={[ROLE.ENTERPRISE]}>
+            <Outlet />
+          </PrivateRoute>
         ),
-      },
-    ],
-  },
-  {
-    path: "ed",
-    element: (
-      <Suspense fallback={<></>}>
-        <PrivateRoute inverted={false} requiredRoles={[ROLE.ENTERPRISE]}>
-          <EnterpriseLayout />
-        </PrivateRoute>
-      </Suspense>
-    ),
-    children: [
-      {
-        path: "projects",
-        element: (
-          <Suspense fallback={<></>}>
-            <EnterpriseProjectListPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "projects/:projectId",
-        element: (
-          <Suspense fallback={<></>}>
-            <EnterpriseProjectDetailPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "new-project",
-        element: (
-          <Suspense fallback={<></>}>
-            <EnterpriseCreateProjectPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "edit-project/:projectId",
-        element: (
-          <Suspense fallback={<></>}>
-            <EnterpriseCreateProjectPage edit={true} />
-          </Suspense>
-        ),
-      },
-      {
-        path: "report/transactions",
-        element: (
-          <Suspense fallback={<></>}>
-            <TransactionList role={"enterprise"} />
-          </Suspense>
-        ),
-      },
-      {
-        path: "account",
-        element: (
-          <Suspense fallback={<></>}>
-            <EnterpriseDetailPage />
-          </Suspense>
-        ),
-      },
-    ],
-  },
-  {
-    path: "/admin",
-    element: (
-      <Suspense fallback={<></>}>
-        <PrivateRoute inverted={false} requiredRoles={[ROLE.ADMIN]}>
-          <AdminLayout />
-        </PrivateRoute>
-      </Suspense>
-    ),
-    children: [
-      {
-        path: "",
-        element: <Navigate to={"users"} />,
-      },
-      {
-        path: "users",
-        element: (
-          <Suspense fallback={<></>}>
-            <UserManagePage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "users/:userId",
-        element: (
-          <Suspense fallback={<></>}>
-            <UserDetailAdminPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "projects",
-        element: (
-          <Suspense fallback={<></>}>
-            <ProjectManagePage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "projects/:projectId",
-        element: (
-          <Suspense fallback={<></>}>
-            <ProjectDetail />
-          </Suspense>
-        ),
-      },
-      {
-        path: "verify-user",
-        element: (
-          <Suspense fallback={<></>}>
-            <VerifyUserPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "verify-user/:userId",
-        element: (
-          <Suspense fallback={<></>}>
-            <UserDetailAdminPage verify={true} />
-          </Suspense>
-        ),
-      },
-      {
-        path: "test",
-        element: (
-          <Suspense fallback={<></>}>
-            <TestPage />
-          </Suspense>
-        ),
+        children: [
+          {
+            path: "projects",
+            element: (
+              <Suspense fallback={<></>}>
+                <EnterpriseProjectListPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "projects/:projectId",
+            element: (
+              <Suspense fallback={<></>}>
+                <EnterpriseProjectDetailPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "new-project",
+            element: (
+              <Suspense fallback={<></>}>
+                <EnterpriseCreateProjectPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "edit-project/:projectId",
+            element: (
+              <Suspense fallback={<></>}>
+                <EnterpriseCreateProjectPage edit={true} />
+              </Suspense>
+            ),
+          },
+          {
+            path: "report/transactions",
+            element: (
+              <Suspense fallback={<></>}>
+                <TransactionList role={"enterprise"} />
+              </Suspense>
+            ),
+          },
+          {
+            path: "account",
+            element: (
+              <Suspense fallback={<></>}>
+                <EnterpriseDetailPage />
+              </Suspense>
+            ),
+          },
+        ],
       },
       {
         path: "*",

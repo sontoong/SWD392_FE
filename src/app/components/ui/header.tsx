@@ -131,7 +131,7 @@ export default function MyHeader() {
             <LogoutOutlined />,
           ),
         ];
-      case "admin":
+      default:
         return [
           getItem(
             <div onClick={logOut}>Đăng xuất</div>,
@@ -139,8 +139,6 @@ export default function MyHeader() {
             <LogoutOutlined />,
           ),
         ];
-      default:
-        return [];
     }
   };
 

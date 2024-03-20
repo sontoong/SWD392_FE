@@ -67,7 +67,7 @@ export default function EnterpriseProjectList() {
   ];
 
   return (
-    <div>
+    <div className="w-full">
       <ProjectSearchForm />
       <Table
         columns={columns}
