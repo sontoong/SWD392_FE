@@ -1,10 +1,10 @@
 import { Button, Card } from "antd";
-import BannerImg from "../../assets/HomeBanner.png";
-import Card1 from "../../assets/Card-1.png";
-import Card2 from "../../assets/Card-2.png";
-import Card3 from "../../assets/Card-3.png";
-import CardL from "../../assets/Card-Left.png";
-import CardR from "../../assets/Card-Right.png";
+import BannerImg from "../../../assets/HomeBanner.png";
+import Card1 from "../../../assets/Card-1.png";
+import Card2 from "../../../assets/Card-2.png";
+import Card3 from "../../../assets/Card-3.png";
+import CardL from "../../../assets/Card-Left.png";
+import CardR from "../../../assets/Card-Right.png";
 import {
   AudioOutlined,
   DollarCircleOutlined,

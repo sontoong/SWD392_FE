@@ -320,7 +320,8 @@ export const Applicants: Applicant[] = [
   {
     id: "",
     projectId: "",
-    name: "Nguyễn Văn A",
+    candidateName: "Nguyễn Văn A",
+    candidateId: "",
     date: 1708532861000,
     money: 0,
     time: 0,
@@ -345,7 +346,8 @@ export const Applicants: Applicant[] = [
   {
     id: "",
     projectId: "",
-    name: "Nguyễn Văn A",
+    candidateName: "Nguyễn Văn A",
+    candidateId: "",
     date: 1708532861000,
     money: 0,
     time: 0,

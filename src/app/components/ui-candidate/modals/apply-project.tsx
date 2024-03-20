@@ -18,7 +18,8 @@ export default function ApplyForm({ project }: { project: Project }) {
 
   const initialValues: Applicant = {
     id: "",
-    name: "",
+    candidateName: "",
+    candidateId: "",
     date: 0,
     money: 0,
     time: 0,

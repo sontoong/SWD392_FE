@@ -15,11 +15,13 @@ export default function ProjectApplicationList() {
     key: index,
   }));
 
+  console.log(data);
+
   const columns: TableProps<Applicant>["columns"] = [
     {
       title: "Candidate",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "candidateName",
+      key: "candidateName",
     },
     {
       title: "Ngày",

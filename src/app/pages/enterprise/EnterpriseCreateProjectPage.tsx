@@ -132,7 +132,6 @@ export default function CreateProjectForm({
           <Form.Item name="optionalRequirements" hidden />
           <Form.Item name="projectField" hidden />
           <Form.Item name="description" hidden />
-          <Form.Item name="contract" hidden />
           <Form.Item name="funding" hidden />
           <Form.Item name="initialFunding" hidden />
           <Form.Item name="candidateRequirement" hidden />

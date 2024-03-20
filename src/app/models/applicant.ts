@@ -6,7 +6,8 @@ export interface Question {
 export interface Applicant {
   id: string;
   projectId: string;
-  name: string;
+  candidateName: string;
+  candidateId: string;
   date: number;
   questions?: Question[];
   money: number;

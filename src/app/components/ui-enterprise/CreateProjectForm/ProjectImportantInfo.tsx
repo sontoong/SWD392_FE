@@ -1,7 +1,6 @@
 import {
   CheckboxOptionType,
   Col,
-  Divider,
   Form,
   FormInstance,
   Row,
@@ -10,10 +9,8 @@ import {
 import { CreateProject } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import {
-  FormDatePicker,
   FormInput,
   FormRadioButtonGroup,
-  FormRadioGroup,
   FormTextArea,
   InputNumberFix,
 } from "../../input/inputs";
@@ -35,18 +32,6 @@ export default function ProjectImportantInfo({
   formTitle,
 }: Props) {
   const { Title, Paragraph } = Typography;
-  const fundValue = Form.useWatch(["contract", "fund"], form);
-
-  const ContractDepositOptions: CheckboxOptionType<CheckboxValueType>[] = [
-    {
-      label: `Đặt cọc ${fundValue}VND cho toàn bộ công việc`,
-      value: "full",
-    },
-    {
-      label: "Đặt cọc theo từng hạng mục công việc",
-      value: "period",
-    },
-  ];
 
   const [renderFunding, setRenderFunding] = useState<string>(
     initialValues.funding,
@@ -202,56 +187,6 @@ export default function ProjectImportantInfo({
               </Form.Item>
             </Col>
           </Row>
-          <Divider />
-          <Title level={3}>Hợp đồng</Title>
-          <Row>
-            <Col span={7}>
-              <Form.Item
-                name={["contract", "fund"]}
-                label="Tổng ngân sách"
-                rules={[
-                  {
-                    type: "number",
-                    min: 1000,
-                    required: true,
-                  },
-                ]}
-              >
-                <InputNumberFix suffix={"VND"} step={1000} />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Form.Item
-                name={["contract", "depositType"]}
-                label="Chọn loại ngân sách"
-                rules={[{}]}
-              >
-                <FormRadioGroup options={ContractDepositOptions} />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={15}>
-              <Form.Item
-                name={["contract", "date"]}
-                label="Ngày hoàn thành"
-                rules={[
-                  {
-                    type: "number",
-                    min: 1,
-                    required: true,
-                    message: "Vui lòng chọn ngày hoàn thành",
-                  },
-                ]}
-                getValueFromEvent={(e: any) => e?.valueOf()}
-              >
-                <FormDatePicker />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Divider />
           <Row>
             <Form.Item name="funding" label="Chọn loại ngân sách" rules={[{}]}>
               <FormRadioButtonGroup
