@@ -20,11 +20,6 @@ export type Skill = {
   value: string;
 };
 
-export type SkillField = {
-  label: string;
-  value: string;
-};
-
 export type Field = {
   label: string;
   value: string;
@@ -45,7 +40,7 @@ export interface Project {
   id: string;
   title: string;
   language: languages;
-  projectField: SkillField;
+  projectField: Field;
   description: string;
   funding: "hourly" | "fixed";
   initialFunding: number;

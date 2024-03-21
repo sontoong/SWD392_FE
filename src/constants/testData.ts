@@ -12,7 +12,6 @@ import {
   EnterpriseProject,
   OutsideProject,
   Field,
-  SkillField,
   Contract,
 } from "../app/models/project";
 import { Transaction } from "../app/models/transaction";
@@ -35,20 +34,17 @@ const skills: Skill[] = [
   { label: "Data Engineer", value: "Data Engineer" },
 ];
 
-export const fields: Field[] = [
-  { label: "IT", value: "it" },
-  { label: "Nấu ăn", value: "cook" },
-];
-
-const field: SkillField = {
+const field: Field = {
   label: "IT",
   value: "it",
 };
 
-const field1: SkillField = {
+const field1: Field = {
   label: "Nấu ăn",
   value: "cook",
 };
+
+export const fields: Field[] = [field, field1];
 
 const optionalRequirements: OptionalRequirements = {
   minimumCompletedProjects: "all",

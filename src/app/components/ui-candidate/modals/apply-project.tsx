@@ -118,7 +118,7 @@ export default function ApplyForm({ project }: { project: Project }) {
                 { required: true, message: "Vui lòng nhập số giờ" },
                 {
                   type: "number",
-                  min: 0,
+                  min: 1,
                 },
               ]}
               wrapperCol={{ span: 12 }}
