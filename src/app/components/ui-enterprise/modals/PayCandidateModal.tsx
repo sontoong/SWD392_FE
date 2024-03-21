@@ -5,15 +5,18 @@ import { Paying } from "../../../models/paying";
 import { DollarCircleOutlined } from "@ant-design/icons";
 import { DefaultForm } from "../../form/form";
 import { InputNumberFix } from "../../input/inputs";
+import RatingCandidateModal from "./RatingCandidateModal";
 
 export default function PayCandidateModal({ title }: { title: string }) {
   // Accept title prop
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
+  const [open2, setOpen2] = useState(false);
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
     setOpen(false);
+    setOpen2(true);
   };
 
   const handleCancel = () => {
@@ -61,6 +64,8 @@ export default function PayCandidateModal({ title }: { title: string }) {
             label="Số tiền"
             rules={[
               {
+                type: "number",
+                min: 1000,
                 required: true,
               },
             ]}
@@ -69,6 +74,7 @@ export default function PayCandidateModal({ title }: { title: string }) {
           </Form.Item>
         </DefaultForm>
       </CustomFormModal>
+      <RatingCandidateModal money={300000} open={open2} setOpen={setOpen2} />
     </>
   );
 }

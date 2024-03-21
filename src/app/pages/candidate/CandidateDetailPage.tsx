@@ -602,12 +602,12 @@ export default function CandidateDetailPage({ type }: Props) {
                 <Title
                   level={4}
                   copyable={{
-                    text: "https://candidateviet.vn/ho-so/thang-vo-minh-3.html",
+                    text: "http://localhost:3000/candidates/1",
                   }}
                 >
                   Sao chép đường dẫn hồ sơ
                 </Title>
-                <InputFix defaultValue="https://candidateviet.vn/ho-so/thang-vo-minh-3.html" />
+                <InputFix defaultValue="http://localhost:3000/candidates/1" />
               </div>
             </Space>
           </Affix>

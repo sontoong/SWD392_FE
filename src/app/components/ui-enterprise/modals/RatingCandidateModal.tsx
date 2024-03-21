@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
 import { Avatar, Col, Divider, Flex, Form, Rate, Row, Typography } from "antd";
 import { DefaultForm } from "../../form/form";
@@ -9,20 +8,21 @@ import { generateRatingName } from "../../../utils/generators";
 
 interface RatingCandidateModalProps {
   money: number;
+  open: boolean;
+  setOpen: (toggle: boolean) => void;
 }
 
 export default function RatingCandidateModal(props: RatingCandidateModalProps) {
   const { Title, Text } = Typography;
-  const [open, setOpen] = useState(true);
   const [form] = Form.useForm();
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
-    setOpen(false);
+    props.setOpen(false);
   };
 
   const handleCancel = () => {
-    setOpen(false);
+    props.setOpen(false);
   };
 
   const initialValues = {
@@ -56,7 +56,7 @@ export default function RatingCandidateModal(props: RatingCandidateModalProps) {
       <CustomFormModal
         width={1200}
         title="NHÀ TUYỂN DỤNG"
-        open={open}
+        open={props.open}
         onCancel={() => {
           handleCancel();
           form.resetFields();

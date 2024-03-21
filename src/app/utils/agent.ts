@@ -31,8 +31,19 @@ const JobTitle = {
   getMostPopularJobTitles: () => requests.get("/popular"),
 };
 
+const Candidate = {
+  getAllCandidates: () => requests.get("/candidates/get-all-candidates"),
+  viewProfile: () => requests.get("/candidates/profile"),
+};
+
+const Enterprise = {
+  createRating: (data: any) => requests.post("/enterprises/rating", data),
+};
+
 const agent = {
   Post,
   JobTitle,
+  Candidate,
+  Enterprise,
 };
 export default agent;

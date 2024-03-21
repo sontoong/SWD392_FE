@@ -1,10 +1,9 @@
 import { Table, TableProps } from "antd";
 import { Incomes } from "../../../constants/testData";
 import { Income } from "../../models/income";
-import { DownloadOutlined } from "@ant-design/icons";
 import { formatCurrency } from "../../utils/utils";
-import { IconButton } from "../../components/button/buttons";
 import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
+import { ViewContractHistory } from "../../components/ui-candidate/modals/view-contract-history";
 
 export default function CandidateIncomeList() {
   useSetHeaderTitle([
@@ -33,8 +32,9 @@ export default function CandidateIncomeList() {
     },
     {
       title: "Hợp đồng",
-      render: () => {
-        return <IconButton icon={<DownloadOutlined />} />;
+      render: (_, record) => {
+        console.log(record);
+        return <ViewContractHistory />;
       },
       align: "center",
     },

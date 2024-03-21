@@ -171,8 +171,13 @@ Facebook: fb.com/user/JoeBiden`,
   jobField: { label: "IT", value: "it" },
 };
 
-export const projectsTest: Project[] = [project];
-export const candidates: CandidateDetail[] = [candidate];
+export const projectsTest: Project[] = [project, project, project, project];
+export const candidates: CandidateDetail[] = [
+  candidate,
+  candidate,
+  candidate,
+  candidate,
+];
 
 const comment: Comment = {
   title: "Nguyen Vu",

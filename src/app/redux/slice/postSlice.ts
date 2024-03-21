@@ -49,8 +49,33 @@ export const fetchPostById = createAsyncThunk<Project, string>(
 export const createPost = createAsyncThunk<any, Project>(
   "post/createPost",
   async (project) => {
+    const {
+      description,
+      title,
+      language,
+      funding,
+      initialFunding,
+      timeToComplete,
+      privacy,
+      candidateRequirement,
+      optionalRequirements,
+      projectType,
+      candidateCount,
+    } = project;
     const request = {
-      ...project,
+      content: description,
+      postTitle: title,
+      language: language,
+      address: "",
+      budgetType: funding,
+      budget: initialFunding,
+      duration: timeToComplete,
+      durationType: projectType,
+      privacy: privacy,
+      participants: candidateCount,
+      experience: candidateRequirement,
+      ratingRequired: optionalRequirements.rating,
+      contract: {},
     };
     try {
       const response = await agent.Post.createPost(request);

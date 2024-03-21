@@ -183,7 +183,7 @@ export default function ProjectImportantInfo({
                   },
                 ]}
               >
-                <FormTextArea maxLength={100} />
+                <FormTextArea maxLength={250} />
               </Form.Item>
             </Col>
           </Row>
