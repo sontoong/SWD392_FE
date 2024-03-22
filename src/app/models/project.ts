@@ -37,17 +37,17 @@ export interface Contract {
 }
 
 export interface Project {
-  projectId: string;
+  projectId: number;
   title: string;
   language: languages;
-  projectField: Field;
+  projectField: string;
   description: string;
   funding: "hourly" | "fixed";
   initialFunding: number;
   candidateRequirement: ExperienceLevel;
   optionalRequirements: OptionalRequirements;
   timeToComplete: "<1 month" | "1-3 month" | ">3 month";
-  createdAt: number;
+  createdAt: string;
   createdBy: string;
   createdById: string;
   paidAmount: number;
@@ -59,6 +59,13 @@ export interface Project {
   inviteSent: number;
   inviteAccepted: number;
   candidateCount: number;
+  createdByProjectField?: {
+    jobTitleId: number;
+    jobTitleName: string;
+    jobTitleDescription: string;
+    popularity: number;
+    candidateInfoId: number;
+  };
 }
 
 export interface CreateProject

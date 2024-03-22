@@ -31,6 +31,7 @@ import { useAppDispatch } from "../../redux/hook";
 import { fetchPostById } from "../../redux/slice/postSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Project } from "../../models/project";
 
 export default function CandidateProjectDetail() {
   const { Title, Text } = Typography;
@@ -39,7 +40,7 @@ export default function CandidateProjectDetail() {
   } = theme.useToken();
   const dispatch = useAppDispatch();
   const { projectId } = useParams();
-  const [projectData, setProjectData] = useState({});
+  const [projectData, setProjectData] = useState<Project>(project);
 
   // const projectData = project;
   const creatorData = enterpriseInfo;
@@ -49,7 +50,7 @@ export default function CandidateProjectDetail() {
       if (projectId) {
         const res = await dispatch(fetchPostById(projectId)).unwrap();
         console.log(res);
-        setProjectData({ ...project, ...res });
+        setProjectData({ ...res });
       }
     }
     fetch();
@@ -83,11 +84,12 @@ export default function CandidateProjectDetail() {
         >
           <Row>
             <Col span={5} className="text-[1.2rem] font-semibold">
-              {/* <FolderOpenOutlined /> {projectData.projectField.label} */}
+              <FolderOpenOutlined />{" "}
+              {projectData.createdByProjectField?.jobTitleName}
             </Col>
             <Col span={5} offset={2} className="text-[1.2rem] font-semibold">
               <EnvironmentOutlined />{" "}
-              {/* {nations[projectData.optionalRequirements.nation].label} */}
+              {nations[projectData.optionalRequirements.nation]?.label}
             </Col>
           </Row>
           <Divider />

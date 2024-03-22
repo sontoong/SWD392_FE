@@ -29,8 +29,8 @@ const Post = {
   deletePost: (postId: string) => requests.del("posts", { postId }),
 };
 
-const JobTitle = {
-  getAllJobTitles: () => requests.get("job-titles"),
+const Job = {
+  getJobs: () => requests.get("job-titles"),
   createJobTitle: (data: any) => requests.post("job-titles", data),
   getJobTitleByName: (jobTitleName: string) =>
     requests.get(`/search/${jobTitleName}`),
@@ -48,8 +48,8 @@ const Enterprise = {
 
 const agent = {
   Post,
-  JobTitle,
   Candidate,
   Enterprise,
+  Job,
 };
 export default agent;

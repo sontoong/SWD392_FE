@@ -27,7 +27,6 @@ import { nations } from "../../../../constants/testData";
 export default function ProjectCard({ project }: { project: Project }) {
   const {
     title,
-    projectField,
     description,
     candidateRequirement,
     paidAmount,
@@ -38,6 +37,7 @@ export default function ProjectCard({ project }: { project: Project }) {
     initialFunding,
     createdAt,
     projectId,
+    createdByProjectField,
   } = project;
 
   const { Title } = Typography;
@@ -62,11 +62,13 @@ export default function ProjectCard({ project }: { project: Project }) {
           <div className="flex gap-5">
             <Space className="whitespace-nowrap">
               <FolderOpenOutlined />
-              {projectField ? projectField.label : "react"}
+              {createdByProjectField
+                ? createdByProjectField.jobTitleName
+                : "react"}
             </Space>
             <Space className="whitespace-nowrap">
               <EnvironmentOutlined />
-              {nations[optionalRequirements.nation].label}
+              {nations[optionalRequirements.nation]?.label}
             </Space>
             <div className="whitespace-nowrap">
               {/* Ngày đăng: {formatDateToLocal(createdAt)} */}
