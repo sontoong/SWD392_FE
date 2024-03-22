@@ -9,7 +9,11 @@ import {
   Typography,
 } from "antd";
 import { Project } from "../../../models/project";
-import { formatCurrency, calculateDateToNow } from "../../../utils/utils";
+import {
+  formatCurrency,
+  calculateDateToNow,
+  formatDateToLocal,
+} from "../../../utils/utils";
 import {
   generateProjectFunding,
   generateProjectFundingType,
@@ -37,6 +41,8 @@ export default function ProjectCard({ project }: { project: Project }) {
     optionalRequirements,
     funding,
     initialFunding,
+    createdAt,
+    projectId,
   } = project;
 
   const { Title } = Typography;
@@ -48,7 +54,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       className="overflow-auto"
       extra={
         <Tooltip title="Xem chi tiết">
-          <Link to={`${project.id}`}>
+          <Link to={`${projectId}`}>
             <Button icon={<EyeOutlined />} className="ml-auto">
               Chi tiết
             </Button>
@@ -61,14 +67,15 @@ export default function ProjectCard({ project }: { project: Project }) {
           <div className="flex gap-5">
             <Space className="whitespace-nowrap">
               <FolderOpenOutlined />
-              {projectField.label}
+              {projectField ? projectField.label : "react"}
             </Space>
             <Space className="whitespace-nowrap">
               <EnvironmentOutlined />
               {nations[optionalRequirements.nation].label}
             </Space>
             <div className="whitespace-nowrap">
-              Đã đăng cách đây {calculateDateToNow(publishedTime)}
+              Ngày đăng: {formatDateToLocal(createdAt)}
+              {/* Đã đăng cách đây {calculateDateToNow(publishedTime)} */}
             </div>
           </div>
           <div>{description}</div>
@@ -91,7 +98,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             <Divider type="vertical" />
             <div className="whitespace-nowrap">
               <span className="font-bold">Đã chi trả: </span>
-              {formatCurrency(paidAmount)}
+              {paidAmount && formatCurrency(paidAmount)}
             </div>
           </div>
         </Space>

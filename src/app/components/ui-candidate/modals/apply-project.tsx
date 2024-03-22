@@ -20,10 +20,12 @@ export default function ApplyForm({ project }: { project: Project }) {
     money: 0,
     time: 0,
     projectId: "",
-    questions: project.optionalRequirements.questions?.map((question) => ({
-      question: question,
-      answer: "",
-    })),
+    questions:
+      project.optionalRequirements &&
+      project.optionalRequirements.questions?.map((question) => ({
+        question: question,
+        answer: "",
+      })),
   };
 
   const handleSubmit = async (values: typeof initialValues) => {

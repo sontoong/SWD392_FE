@@ -7,7 +7,7 @@ import {
 } from "antd";
 
 export function FormSelect(props: SelectProps) {
-  return <Select style={{ height: "42px" }} {...props} />;
+  return <Select style={{ height: "42px", minHeight: "42px" }} {...props} />;
 }
 
 interface FormTreeSelectProps {

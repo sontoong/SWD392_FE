@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Project } from "../../models/project";
+import { CreateProject, Project } from "../../models/project";
 import { project } from "../../../constants/testData";
-import agent from "../../utils/agent";
+import agent, { IPagination } from "../../utils/agent";
 import { AxiosError } from "axios";
 
 const initialState: Project[] = [project];
 
 const postSlice = createSlice({
-  name: "auth",
+  name: "post",
   initialState,
   reducers: {},
 });
@@ -15,9 +15,14 @@ const postSlice = createSlice({
 export const fetchAllPostsPagination = createAsyncThunk(
   "post/fetchAllPostsPagination",
   async () => {
+    const req: IPagination = {
+      limit: 10,
+      page: 1,
+      search: "",
+    };
     try {
-      const response = await agent.Post.getAllPosts();
-      return response;
+      const response = await agent.Post.getPosts(req);
+      return response.projects;
     } catch (error) {
       if (error instanceof AxiosError) {
         return {
@@ -46,13 +51,12 @@ export const fetchPostById = createAsyncThunk<Project, string>(
   },
 );
 
-export const createPost = createAsyncThunk<any, Project>(
-  "post/createPost",
+export const createProject = createAsyncThunk<any, CreateProject>(
+  "post/createProject",
   async (project) => {
     const {
-      description,
       title,
-      language,
+      description,
       funding,
       initialFunding,
       timeToComplete,
@@ -60,22 +64,19 @@ export const createPost = createAsyncThunk<any, Project>(
       candidateRequirement,
       optionalRequirements,
       projectType,
-      candidateCount,
     } = project;
+    const userId = localStorage.getItem("userId");
     const request = {
-      content: description,
-      postTitle: title,
-      language: language,
-      address: "",
-      budgetType: funding,
-      budget: initialFunding,
-      duration: timeToComplete,
-      durationType: projectType,
-      privacy: privacy,
-      participants: candidateCount,
-      experience: candidateRequirement,
-      ratingRequired: optionalRequirements.rating,
-      contract: {},
+      title,
+      description,
+      funding,
+      candidateRequirement,
+      initialFunding,
+      timeToComplete,
+      createdBy: userId,
+      privacy,
+      projectType,
+      optionalRequirements,
     };
     try {
       const response = await agent.Post.createPost(request);

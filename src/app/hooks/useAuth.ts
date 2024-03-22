@@ -10,6 +10,7 @@ import baseApi from "../utils/baseApi";
 import { AxiosError } from "axios";
 import { LoginError } from "../../constants/login";
 import { SignupFormValues } from "../pages/SignupPage";
+import { jwtDecode } from "jwt-decode";
 
 export function useAuth() {
   const state = useAppSelector((state) => state.auth);
@@ -28,6 +29,8 @@ export function useAuth() {
       dispatch(loginSuccess(userData.user));
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(userData.user));
+      const decode = jwtDecode(token) as any;
+      localStorage.setItem("userId", decode.id);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -60,6 +63,8 @@ export function useAuth() {
       dispatch(loginSuccess(userData.user));
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(userData.user));
+      const decode = jwtDecode(token) as any;
+      localStorage.setItem("userId", decode.id);
       navigate("/");
     } catch (error) {
       if (error instanceof AxiosError) {

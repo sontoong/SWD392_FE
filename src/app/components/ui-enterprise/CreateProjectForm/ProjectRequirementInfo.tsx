@@ -99,11 +99,11 @@ export default function ProjectRequirementInfo({
             <Col span={24}>
               <Form.Item
                 name={["optionalRequirements", "skills"]}
-                label="Ngành nghề"
+                label="Kỹ năng"
                 rules={[
                   {
                     required: true,
-                    message: "Vui lòng chọn ngành nghề",
+                    message: "Vui lòng chọn kỹ năng",
                   },
                 ]}
               >
@@ -149,7 +149,7 @@ export default function ProjectRequirementInfo({
                               },
                             ]}
                           >
-                            <FormInput maxLength={100} />
+                            <FormInput maxLength={250} />
                           </Form.Item>
                         </Col>
                         <Col span={6}>

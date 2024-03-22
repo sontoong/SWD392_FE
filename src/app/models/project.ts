@@ -47,7 +47,7 @@ export interface Project {
   candidateRequirement: ExperienceLevel;
   optionalRequirements: OptionalRequirements;
   timeToComplete: "<1 month" | "1-3 month" | ">3 month";
-  publishedTime: number;
+  createdAt: number;
   createdBy: string;
   createdById: string;
   paidAmount: number;

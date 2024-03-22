@@ -1,6 +1,5 @@
 import ProjectSearchForm from "../../components/ui-candidate/search/project-search";
 import ProjectList from "../../components/ui-candidate/search/project-list";
-import { projectsTest } from "../../../constants/testData";
 import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
 import { useAppDispatch } from "../../redux/hook";
 import { useEffect, useState } from "react";
@@ -15,7 +14,6 @@ export default function ProjectSearchPage() {
   ]);
   const dispatch = useAppDispatch();
   const [projects, setProjects] = useState<Project[]>([]);
-  console.log(projects);
 
   useEffect(() => {
     async function fetch() {
@@ -29,7 +27,7 @@ export default function ProjectSearchPage() {
     <div className="w-[1000px]">
       <div className="pb-5 text-xl uppercase">Tìm dự án</div>
       <ProjectSearchForm />
-      <ProjectList projects={projectsTest} />
+      <ProjectList projects={projects} />
     </div>
   );
 }

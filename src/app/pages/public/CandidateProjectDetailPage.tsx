@@ -27,15 +27,33 @@ import CustomTag from "../../components/ui/tag";
 import Sider from "antd/es/layout/Sider";
 import { ApplyProject } from "../../components/ui-candidate/modals";
 import BackButton from "../../components/button/back-button";
+import { useAppDispatch } from "../../redux/hook";
+import { fetchPostById } from "../../redux/slice/postSlice";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function CandidateProjectDetail() {
   const { Title, Text } = Typography;
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const dispatch = useAppDispatch();
+  const { projectId } = useParams();
+  const [projectData, setProjectData] = useState({});
 
-  const projectData = project;
+  // const projectData = project;
   const creatorData = enterpriseInfo;
+
+  useEffect(() => {
+    async function fetch() {
+      if (projectId) {
+        const res = await dispatch(fetchPostById(projectId)).unwrap();
+        console.log(res);
+        setProjectData({ ...project, ...res });
+      }
+    }
+    fetch();
+  }, [dispatch, projectId]);
 
   return (
     <Layout>
@@ -65,11 +83,11 @@ export default function CandidateProjectDetail() {
         >
           <Row>
             <Col span={5} className="text-[1.2rem] font-semibold">
-              <FolderOpenOutlined /> {projectData.projectField.label}
+              {/* <FolderOpenOutlined /> {projectData.projectField.label} */}
             </Col>
             <Col span={5} offset={2} className="text-[1.2rem] font-semibold">
               <EnvironmentOutlined />{" "}
-              {nations[projectData.optionalRequirements.nation].label}
+              {/* {nations[projectData.optionalRequirements.nation].label} */}
             </Col>
           </Row>
           <Divider />
@@ -119,9 +137,10 @@ export default function CandidateProjectDetail() {
             <Row>
               <Col span={24}>
                 <Title level={4}>Kỹ năng cần có:</Title>
-                {projectData.optionalRequirements.skills.map((item, index) => (
-                  <CustomTag key={index}>{item.label}</CustomTag>
-                ))}
+                {projectData.optionalRequirements &&
+                  projectData.optionalRequirements.skills.map((item, index) => (
+                    <CustomTag key={index}>{item.label}</CustomTag>
+                  ))}
               </Col>
             </Row>
           </Space>
@@ -189,7 +208,8 @@ export default function CandidateProjectDetail() {
                 Đã chi trả:
                 <Text className="font-normal">
                   {" "}
-                  {formatCurrency(projectData.paidAmount)}
+                  {projectData.paidAmount &&
+                    formatCurrency(projectData.paidAmount)}
                 </Text>
               </Title>
             </Row>

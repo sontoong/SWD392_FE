@@ -1,6 +1,12 @@
 import { AxiosResponse } from "axios";
 import apiJWT from "./api";
 
+export interface IPagination {
+  page: number;
+  limit: number;
+  search: string;
+}
+
 const responseBody = (response: AxiosResponse) => response.data;
 
 const requests = {
@@ -15,9 +21,9 @@ const requests = {
 };
 
 const Post = {
-  getAllPosts: () => requests.get("posts"),
-  getPostById: (postId: string) => requests.get("posts", { postId }),
-  createPost: (data: any) => requests.post("posts", data),
+  getPosts: (req: IPagination) => requests.post("posts/getPosts", req),
+  getPostById: (postId: string) => requests.get(`posts/${postId}`),
+  createPost: (data: any) => requests.post(`posts/create`, data),
   updatePost: (postId: string, data: any) =>
     requests.patch(`post/${postId}`, data),
   deletePost: (postId: string) => requests.del("posts", { postId }),

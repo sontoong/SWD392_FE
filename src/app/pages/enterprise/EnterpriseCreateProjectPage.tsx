@@ -7,6 +7,9 @@ import { OutlineButton, PrimaryButton } from "../../components/button/buttons";
 import { CreateProject } from "../../models/project";
 import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
 import { project } from "../../../constants/testData";
+import { useAppDispatch } from "../../redux/hook";
+import { createProject } from "../../redux/slice/postSlice";
+import { useNavigate } from "react-router-dom";
 
 const formatProject = { ...project, projectField: project.projectField.value };
 
@@ -22,6 +25,8 @@ export default function CreateProjectForm({
   ]);
   const { message } = App.useApp();
   const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [current, setCurrent] = useState(0);
 
@@ -102,7 +107,14 @@ export default function CreateProjectForm({
       values = { ...values, initialFunding: 0 };
     }
     console.log("Finish:", values);
-    message.success("Processing complete!");
+    async function create() {
+      const res = await dispatch(createProject(values)).unwrap();
+      if (res) {
+        message.success("Processing complete!");
+        navigate("/ed/projects");
+      }
+    }
+    create();
   };
 
   return (
@@ -129,15 +141,15 @@ export default function CreateProjectForm({
         <Form name="mainForm" onFinish={onFinish}>
           {/* hidden fields for form to record */}
           <Form.Item name="title" hidden />
-          <Form.Item name="optionalRequirements" hidden />
-          <Form.Item name="projectField" hidden />
           <Form.Item name="description" hidden />
           <Form.Item name="funding" hidden />
-          <Form.Item name="initialFunding" hidden />
           <Form.Item name="candidateRequirement" hidden />
+          <Form.Item name="initialFunding" hidden />
           <Form.Item name="timeToComplete" hidden />
           <Form.Item name="privacy" hidden />
           <Form.Item name="projectType" hidden />
+          <Form.Item name="optionalRequirements" hidden />
+          <Form.Item name="projectField" hidden />
           <div style={{ marginTop: 24 }}>
             {current < steps.length - 1 && (
               <PrimaryButton

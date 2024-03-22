@@ -9,13 +9,14 @@ export interface Projectlist {
 export default function ProjectList({ projects }: Projectlist) {
   return (
     <Row gutter={[0, 16]} className="w-full pt-4">
-      {projects.map((project, index) => {
-        return (
-          <Col xs={24} md={12} lg={24} key={index}>
-            <ProjectCard project={project} />
-          </Col>
-        );
-      })}
+      {projects &&
+        projects.map((project, index) => {
+          return (
+            <Col xs={24} md={12} lg={24} key={index}>
+              <ProjectCard project={project} />
+            </Col>
+          );
+        })}
     </Row>
   );
 }
