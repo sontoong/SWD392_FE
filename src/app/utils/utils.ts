@@ -54,7 +54,13 @@ export const formatToTimeDifference = (
   }
 };
 
-export const calculateDateToNow = (time: number, locale: string = "vi-VN") => {
+export const calculateDateToNow = (
+  time: string | number,
+  locale: string = "vi-VN",
+) => {
+  if (typeof time === "string") {
+    time = Date.parse(time);
+  }
   //exclude the milisecond from Date
   const today = Math.floor(Date.now());
 

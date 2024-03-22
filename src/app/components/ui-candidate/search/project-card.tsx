@@ -9,11 +9,7 @@ import {
   Typography,
 } from "antd";
 import { Project } from "../../../models/project";
-import {
-  formatCurrency,
-  calculateDateToNow,
-  formatDateToLocal,
-} from "../../../utils/utils";
+import { formatCurrency, calculateDateToNow } from "../../../utils/utils";
 import {
   generateProjectFunding,
   generateProjectFundingType,
@@ -32,7 +28,6 @@ export default function ProjectCard({ project }: { project: Project }) {
   const {
     title,
     projectField,
-    publishedTime,
     description,
     candidateRequirement,
     paidAmount,
@@ -74,8 +69,8 @@ export default function ProjectCard({ project }: { project: Project }) {
               {nations[optionalRequirements.nation].label}
             </Space>
             <div className="whitespace-nowrap">
-              Ngày đăng: {formatDateToLocal(createdAt)}
-              {/* Đã đăng cách đây {calculateDateToNow(publishedTime)} */}
+              {/* Ngày đăng: {formatDateToLocal(createdAt)} */}
+              Đã đăng cách đây {calculateDateToNow(createdAt)}
             </div>
           </div>
           <div>{description}</div>

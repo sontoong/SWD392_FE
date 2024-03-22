@@ -64,6 +64,7 @@ export const createProject = createAsyncThunk<any, CreateProject>(
       candidateRequirement,
       optionalRequirements,
       projectType,
+      projectField,
     } = project;
     const userId = localStorage.getItem("userId");
     const request = {
@@ -77,6 +78,7 @@ export const createProject = createAsyncThunk<any, CreateProject>(
       privacy,
       projectType,
       optionalRequirements,
+      projectField,
     };
     try {
       const response = await agent.Post.createPost(request);

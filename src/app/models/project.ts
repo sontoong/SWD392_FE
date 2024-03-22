@@ -37,7 +37,7 @@ export interface Contract {
 }
 
 export interface Project {
-  id: string;
+  projectId: string;
   title: string;
   language: languages;
   projectField: Field;
