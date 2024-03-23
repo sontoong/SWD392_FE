@@ -1,7 +1,6 @@
 import { Space, Table, TableProps } from "antd";
-import { EnterpriseProject } from "../../models/project";
+import { EnterpriseProject, Project } from "../../models/project";
 import { generateEnterpriseProjectStatus } from "../../utils/generators";
-import { EnterpriseProjects } from "../../../constants/testData";
 import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
 import ProjectSearchForm from "../../components/ui-enterprise/search/project-search";
 import {
@@ -12,6 +11,9 @@ import { ContractTable } from "../../components/ui-enterprise/tables/contractTab
 import { PrimaryButton } from "../../components/button/buttons";
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hook";
+import { useEffect, useState } from "react";
+import { fetchPostsByEnterpriseId } from "../../redux/slice/postSlice";
 export interface TableData extends EnterpriseProject {
   statusGenerator: string;
 }
@@ -23,8 +25,23 @@ export default function EnterpriseProjectList() {
     },
   ]);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const data: TableData[] = EnterpriseProjects.map((project, index) => ({
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      const res = await dispatch(fetchPostsByEnterpriseId()).unwrap();
+      setProjects(res);
+    }
+    fetchProjects();
+  }, [dispatch]);
+
+  const fakeProjects = projects.map((project) => ({
+    ...project,
+    status: "hiring",
+  }));
+  const data: TableData[] = fakeProjects.map((project, index) => ({
     ...project,
     key: index,
     statusGenerator: generateEnterpriseProjectStatus(project.status),

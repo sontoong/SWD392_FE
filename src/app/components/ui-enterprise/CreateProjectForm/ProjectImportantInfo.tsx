@@ -6,7 +6,7 @@ import {
   Row,
   Typography,
 } from "antd";
-import { CreateProject } from "../../../models/project";
+import { CreateProject, Field } from "../../../models/project";
 import { CustomCard } from "../../ui/card";
 import {
   FormInput,
@@ -14,11 +14,12 @@ import {
   FormTextArea,
   InputNumberFix,
 } from "../../input/inputs";
-import { FormTreeSelect } from "../../select/select";
-import { projectFields } from "../../../../constants/project-field";
-import { useState } from "react";
+import { FormSelect } from "../../select/select";
+import { useEffect, useState } from "react";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { DefaultForm } from "../../form/form";
+import { fetchJobsPagination } from "../../../redux/slice/jobSlice";
+import { useAppDispatch } from "../../../redux/hook";
 
 interface Props {
   formTitle: string;
@@ -32,10 +33,19 @@ export default function ProjectImportantInfo({
   formTitle,
 }: Props) {
   const { Title, Paragraph } = Typography;
-
+  const dispatch = useAppDispatch();
   const [renderFunding, setRenderFunding] = useState<string>(
     initialValues.funding,
   );
+  const [jobs, setJobs] = useState<Field[]>();
+
+  useEffect(() => {
+    async function fetchJobs() {
+      const res = await dispatch(fetchJobsPagination()).unwrap();
+      setJobs(res);
+    }
+    fetchJobs();
+  }, [dispatch]);
 
   const onFinish = (values: any) => {
     console.log("Success:", values);
@@ -158,7 +168,13 @@ export default function ProjectImportantInfo({
                   },
                 ]}
               >
-                <FormTreeSelect treeData={Object.values(projectFields)} />
+                {/* <FormTreeSelect treeData={Object.values(projectFields)} /> */}
+                <FormSelect
+                  options={jobs?.map((job) => ({
+                    label: job.jobTitleName,
+                    value: job.jobTitleId,
+                  }))}
+                />
               </Form.Item>
             </Col>
           </Row>

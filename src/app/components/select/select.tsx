@@ -7,6 +7,7 @@ import {
 } from "antd";
 
 export function FormSelect(props: SelectProps) {
+  console.log(props.options);
   return <Select style={{ height: "42px", minHeight: "42px" }} {...props} />;
 }
 

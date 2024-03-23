@@ -49,7 +49,6 @@ export default function CandidateProjectDetail() {
     async function fetch() {
       if (projectId) {
         const res = await dispatch(fetchPostById(projectId)).unwrap();
-        console.log(res);
         setProjectData({ ...res });
       }
     }

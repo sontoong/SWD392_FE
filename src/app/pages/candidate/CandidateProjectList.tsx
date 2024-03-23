@@ -9,6 +9,9 @@ import { CandidateProjects } from "../../../constants/testData";
 import { ViewSignContract } from "../../components/ui-candidate/modals";
 import { formatUnixToLocal } from "../../utils/utils";
 import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
+import { useAppDispatch } from "../../redux/hook";
+import { getContractsCandidate } from "../../redux/slice/contractSlice";
+import { useEffect, useState } from "react";
 
 export interface TableData extends CandidateProject {
   statusGenerator?: string;
@@ -24,6 +27,19 @@ export default function CandidateProjectList() {
       title: `Danh sách dự án`,
     },
   ]);
+  const dispatch = useAppDispatch();
+  const [contracts, setContracts] = useState();
+  console.log(contracts);
+
+  useEffect(() => {
+    async function fetch() {
+      const res = await dispatch(getContractsCandidate()).unwrap();
+      console.log(res);
+      setContracts(res);
+    }
+    fetch();
+  }, [dispatch]);
+
   const data: TableData[] = CandidateProjects.map((project, index) => ({
     ...project,
     startDateGenerator: formatUnixToLocal(project.startDate),

@@ -1,8 +1,12 @@
 import { Modal, ModalProps, Typography } from "antd";
 import { OutlineButton, PrimaryButton } from "../button/buttons";
 
-export function CustomFormModal(props: ModalProps) {
-  const { children, open, title, onCancel, onOk, width } = props;
+interface FormModal extends ModalProps {
+  disableAccept?: boolean;
+}
+
+export function CustomFormModal(props: FormModal) {
+  const { children, open, title, onCancel, onOk, width, disableAccept } = props;
   const { Title } = Typography;
 
   return (
@@ -29,9 +33,11 @@ export function CustomFormModal(props: ModalProps) {
         <OutlineButton key="cancel" onClick={onCancel}>
           Hủy
         </OutlineButton>,
-        <PrimaryButton key="sumbit" onClick={onOk}>
-          Lưu
-        </PrimaryButton>,
+        !disableAccept && (
+          <PrimaryButton key="sumbit" onClick={onOk}>
+            Lưu
+          </PrimaryButton>
+        ),
       ]}
     >
       <div className="pb-3 pt-5">{children}</div>

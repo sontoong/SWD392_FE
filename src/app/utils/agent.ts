@@ -27,6 +27,8 @@ const Post = {
   updatePost: (postId: string, data: any) =>
     requests.patch(`post/${postId}`, data),
   deletePost: (postId: string) => requests.del("posts", { postId }),
+  getPostsByEnterpriseId: (enterpriseId: string) =>
+    requests.get(`posts/get-by-enterprise/${enterpriseId}`),
 };
 
 const Job = {
@@ -35,6 +37,32 @@ const Job = {
   getJobTitleByName: (jobTitleName: string) =>
     requests.get(`/search/${jobTitleName}`),
   getMostPopularJobTitles: () => requests.get("/popular"),
+};
+
+const Application = {
+  getApplications: () => requests.get("applicant"),
+  getApplicationById: (applicationId: string) =>
+    requests.get(`applicant/detail/${applicationId}`),
+  createApplication: (data: any) => requests.post("applicant/create", data),
+  updateApplicationAccepted: (applicationId: number, data: any) =>
+    requests.put(`applicant/accepted/${applicationId}`, data),
+  updateApplicationRejected: (applicationId: number, data: any) =>
+    requests.put(`applicant/rejected/${applicationId}`, data),
+};
+
+const Contract = {
+  getContracts: () => requests.get("contract"),
+  createContract: (data: any) => requests.post("contract/create", data),
+  getContractById: (contractId: string) =>
+    requests.get(`contracts/${contractId}`),
+  updateContract: (contractId: string, data: any) =>
+    requests.patch(`contracts/${contractId}`, data),
+  getContractsByEnterpriseId: (enterpriseId: string) =>
+    requests.get(`contracts/get/enterprise/${enterpriseId}`),
+  getContractsByCandidateId: (candidateId: string) =>
+    requests.get(`contracts/get/candidate/${candidateId}`),
+  getContractsByProjectId: (postId: string) =>
+    requests.get(`contracts/get/project/${postId}`),
 };
 
 const Candidate = {
@@ -51,5 +79,7 @@ const agent = {
   Candidate,
   Enterprise,
   Job,
+  Application,
+  Contract,
 };
 export default agent;

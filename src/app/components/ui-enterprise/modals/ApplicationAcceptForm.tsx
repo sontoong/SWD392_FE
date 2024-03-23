@@ -2,7 +2,15 @@ import { EyeOutlined } from "@ant-design/icons";
 import { IconButton } from "../../button/buttons";
 import React, { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
-import { CheckboxOptionType, Col, Divider, Form, Row, Typography } from "antd";
+import {
+  App,
+  CheckboxOptionType,
+  Col,
+  Divider,
+  Form,
+  Row,
+  Typography,
+} from "antd";
 import { Applicant } from "../../../models/applicant";
 import { DefaultForm } from "../../form/form";
 import {
@@ -13,6 +21,9 @@ import {
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { Contract } from "../../../models/project";
 import { formatCurrency } from "../../../utils/utils";
+import { useAppDispatch } from "../../../redux/hook";
+import { createContract } from "../../../redux/slice/contractSlice";
+import { setApplicationStatus } from "../../../redux/slice/applicationSlice";
 
 interface ApplicationAcceptFormProp {
   record: Applicant;
@@ -26,16 +37,14 @@ export default function ApplicationAcceptForm(
   const { Title, Paragraph } = Typography;
   const [form] = Form.useForm();
   const fundValue = Form.useWatch(["contract", "fund"], form);
+  const dispatch = useAppDispatch();
+  const { message } = App.useApp();
 
   const initialValues: {
-    contract: Pick<
-      Contract,
-      "fund" | "projectId" | "candidateId" | "date" | "depositType"
-    >;
+    contract: Pick<Contract, "fund" | "applicantId" | "date" | "depositType">;
   } = {
     contract: {
-      candidateId: "",
-      projectId: "",
+      applicantId: 0,
       date: 0,
       depositType: "full",
       fund: 0,
@@ -57,9 +66,25 @@ export default function ApplicationAcceptForm(
     setOpen(false);
   };
 
-  const handleSubmit = async (values: typeof props) => {
+  const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
-    setOpen(false);
+    async function create() {
+      const contract = {
+        applicantId: record.applicantId,
+        date: values.contract.date,
+        depositType: values.contract.depositType,
+        fund: values.contract.fund,
+      };
+      const response = await dispatch(createContract(contract));
+      if (response) {
+        const response2 = await dispatch(
+          setApplicationStatus({ id: record.applicantId, status: "accepted" }),
+        ).unwrap();
+        message.success("Processing complete!");
+        setOpen(false);
+      }
+    }
+    create();
   };
 
   return (
@@ -67,7 +92,7 @@ export default function ApplicationAcceptForm(
       <IconButton icon={<EyeOutlined />} onClick={() => setOpen(true)} />
       <CustomFormModal
         open={open}
-        title={`Báo giá của ${record.candidateName}`}
+        title={`Báo giá của ${record.candidate.username}`}
         onCancel={() => {
           handleCancel();
           form.resetFields();
@@ -82,6 +107,7 @@ export default function ApplicationAcceptForm(
               console.log("Validate Failed:", info);
             });
         }}
+        disableAccept={record.status !== "pending"}
       >
         <DefaultForm
           form={form}

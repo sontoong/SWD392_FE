@@ -80,7 +80,7 @@ export default function MyHeader() {
         ];
       case "enterprise":
         return [
-          getItem("Quản Lý Project", "/ed/projects", "", [
+          getItem("Quản Lý Project", "abc", "", [
             { label: "Danh Sách Project", key: "/ed/projects" },
             { label: "Đăng Tuyển Dụng", key: "/ed/new-project" },
           ]),

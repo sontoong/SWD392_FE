@@ -1,4 +1,5 @@
 import { languages } from "../../constants/language";
+import { Applicant } from "./applicant";
 
 export type ExperienceLevel = "junior" | "senior" | "expert";
 
@@ -16,31 +17,35 @@ export type OptionalRequirements = {
 };
 
 export type Skill = {
-  label: string;
-  value: string;
+  skillId: string;
+  skillName: string;
 };
 
 export type Field = {
-  label: string;
-  value: string;
+  jobTitleId: number;
+  jobTitleName: string;
+  jobTitleDescription: string;
+  popularity: number;
+  candidateInfoId?: number;
+  skills: Skill[];
 };
 
 export interface Contract {
-  candidateName: string;
-  candidateId: string;
-  projectName: string;
-  projectId: string;
+  id: number;
+  applicantId: number;
   fund: number;
   depositType: "full" | "period";
   date: number;
-  status: "completed" | "doing" | "canceled";
+  status: "completed" | "doing" | "canceled" | "pending";
+  signature?: string;
+  applicant: Applicant;
 }
 
 export interface Project {
   projectId: number;
   title: string;
   language: languages;
-  projectField: string;
+  projectField: number;
   description: string;
   funding: "hourly" | "fixed";
   initialFunding: number;
@@ -82,7 +87,7 @@ export interface CreateProject
     | "projectType"
     | "optionalRequirements"
   > {
-  projectField: string;
+  projectField: number | null;
 }
 
 export interface CandidateProject extends Project {

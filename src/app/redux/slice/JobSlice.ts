@@ -16,7 +16,7 @@ export const fetchJobsPagination = createAsyncThunk(
   async () => {
     try {
       const response = await agent.Job.getJobs();
-      return response.data;
+      return response;
     } catch (error) {
       if (error instanceof AxiosError) {
         return {

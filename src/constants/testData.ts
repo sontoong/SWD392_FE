@@ -25,26 +25,17 @@ export const nations: Nation = {
 };
 
 const skills: Skill[] = [
-  { label: "Front-end Developer", value: "Front-end Developer" },
-  { label: "Back-end Developer", value: "Back-end Developer" },
-  { label: "Full-stack Developer", value: "Full-stack Developer" },
-  { label: "Mobile Developer", value: "Mobile Developer" },
-  { label: "UI/UX Designer", value: "UI/UX Designer" },
-  { label: "Data Scientist", value: "Data Scientist" },
-  { label: "Data Engineer", value: "Data Engineer" },
+  { skillName: "Front-end Developer", skillId: "Front-end Developer" },
 ];
 
 const field: Field = {
-  label: "IT",
-  value: "it",
+  jobTitleId: 1,
+  jobTitleName: "",
+  jobTitleDescription: "",
+  popularity: 1,
+  skills: skills,
 };
-
-const field1: Field = {
-  label: "Nấu ăn",
-  value: "cook",
-};
-
-export const fields: Field[] = [field, field1];
+export const fields: Field[] = [field];
 
 const optionalRequirements: OptionalRequirements = {
   minimumCompletedProjects: "all",
@@ -60,15 +51,15 @@ const optionalRequirements: OptionalRequirements = {
 };
 
 export const project: Project = {
-  id: "1",
+  projectId: 1,
   title: "Lập trình Front-end",
   createdBy: "Nguyễn Văn A",
   createdById: "1",
   description: "Viết app ứng dụng android",
   isVerified: true,
   paidAmount: 0,
-  projectField: field,
-  publishedTime: 1708532861000,
+  projectField: 0,
+  createdAt: "",
   isCompleted: false,
   language: "en",
   timeToComplete: "<1 month",
@@ -164,7 +155,7 @@ Facebook: fb.com/user/JoeBiden`,
       ratingCount: 0,
     },
   ],
-  jobField: { label: "IT", value: "it" },
+  jobField: field,
 };
 
 export const projectsTest: Project[] = [project, project, project, project];
@@ -201,7 +192,7 @@ export const companyDetail: CompanyDetail = {
   companySize: "10-20",
   introduction:
     "This is the place for cooking, like Gordon's grilled cheese sandwich.",
-  industryFields: [field1, field],
+  industryFields: [field],
   companyDocument: "FunnyMemeFrom9GAG.png",
   registrationDocumentType: "Giấy phép ĐKKD",
   identificationNumber: 1015452789,
@@ -323,10 +314,9 @@ export const Transactions: Transaction[] = [
 
 export const Applicants: Applicant[] = [
   {
-    id: "",
-    projectId: "",
-    candidateName: "Nguyễn Văn A",
-    candidateId: "",
+    id: 0,
+    projectId: 0,
+    candidateId: 0,
     date: 1708532861000,
     money: 0,
     time: 0,
@@ -350,43 +340,13 @@ export const Applicants: Applicant[] = [
           "Khi nhận phản hồi từ khách hàng, tôi luôn mở lòng và sẵn lòng thực hiện các sửa đổi cần thiết để đáp ứng yêu cầu của họ. Tôi sẽ tiếp tục duy trì một quá trình giao tiếp mạnh mẽ với khách hàng để đảm bảo rằng họ hài lòng với kết quả cuối cùng. Nếu cần, tôi sẽ cung cấp các phiên bản thử nghiệm và cho phép khách hàng tham gia vào quá trình để đảm bảo rằng dự án đáp ứng mong đợi của họ.",
       },
     ],
-  },
-  {
-    id: "",
-    projectId: "",
-    candidateName: "Võ Văn Khoai",
-    candidateId: "",
-    date: 1708532861000,
-    money: 1000000,
-    time: 90,
-    questions: [
-      {
-        question:
-          "Bạn có thể cung cấp ví dụ về các dự án tương tự mà bạn đã hoàn thành trong quá khứ, và kết quả như thế nào không?",
-        answer:
-          "Dĩ nhiên, tôi đã hoàn thành nhiều dự án tương tự trước đây và đạt được các kết quả tích cực. Ví dụ, tôi đã làm việc trên một dự án phát triển trang web thương mại điện tử cho một khách hàng, và kết quả là họ đã tăng doanh số bán hàng của họ lên 30% sau khi trang web được triển khai. Tôi cũng có thể cung cấp một danh sách các dự án khác và chi tiết về kết quả nếu cần.",
-      },
-      {
-        question:
-          "Bạn tiếp cận thế nào với việc giao tiếp và hợp tác trong suốt vòng đời của dự án?",
-        answer:
-          "Tôi luôn coi trọng việc giao tiếp và hợp tác trong dự án. Tôi thường sử dụng các công cụ như email, tin nhắn trực tuyến và cuộc họp video để duy trì liên lạc với khách hàng và đồng nghiệp. Tôi sẽ thường xuyên cập nhật tiến độ của dự án và chia sẻ thông tin chi tiết để đảm bảo rằng mọi người đều được thông tin.",
-      },
-      {
-        question:
-          "Quy trình của bạn để xử lý sửa đổi hoặc phản hồi từ khách hàng như thế nào, và làm thế nào để đảm bảo sự hài lòng của khách hàng?",
-        answer:
-          "Khi nhận phản hồi từ khách hàng, tôi luôn mở lòng và sẵn lòng thực hiện các sửa đổi cần thiết để đáp ứng yêu cầu của họ. Tôi sẽ tiếp tục duy trì một quá trình giao tiếp mạnh mẽ với khách hàng để đảm bảo rằng họ hài lòng với kết quả cuối cùng. Nếu cần, tôi sẽ cung cấp các phiên bản thử nghiệm và cho phép khách hàng tham gia vào quá trình để đảm bảo rằng dự án đáp ứng mong đợi của họ.",
-      },
-    ],
+    status: "pending",
   },
 ];
 
 export const contract: Contract = {
-  candidateName: "Nguyen van a",
-  candidateId: "1",
-  projectName: "fpt",
-  projectId: "1",
+  id: 0,
+  applicantId: 1,
   date: 1708532861000,
   depositType: "full",
   fund: 200,

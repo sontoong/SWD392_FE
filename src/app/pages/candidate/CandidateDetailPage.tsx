@@ -397,7 +397,7 @@ export default function CandidateDetailPage({ type }: Props) {
               <Space size={[0, 8]} wrap>
                 {skills.map((skillItem, index) => (
                   <Tag key={index} color="#87d068">
-                    {skillItem.label}
+                    {skillItem.skillName}
                   </Tag>
                 ))}
               </Space>

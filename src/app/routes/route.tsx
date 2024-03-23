@@ -212,7 +212,7 @@ export const router = createBrowserRouter([
             path: "new-project",
             element: (
               <Suspense fallback={<></>}>
-                <EnterpriseCreateProjectPage />
+                <EnterpriseCreateProjectPage key={"create"} />
               </Suspense>
             ),
           },
@@ -220,7 +220,7 @@ export const router = createBrowserRouter([
             path: "edit-project/:projectId",
             element: (
               <Suspense fallback={<></>}>
-                <EnterpriseCreateProjectPage edit={true} />
+                <EnterpriseCreateProjectPage key={"edit"} edit={true} />
               </Suspense>
             ),
           },

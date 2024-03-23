@@ -2,12 +2,15 @@ import { Table, TableProps } from "antd";
 
 import { Link } from "react-router-dom";
 import { Contract } from "../../../models/project";
-import { contractList } from "../../../../constants/testData";
+
 import {
   generateContractStatus,
   generateDepositTableType,
 } from "../../../utils/generators";
 import { formatCurrency, formatUnixToLocal } from "../../../utils/utils";
+import { useAppDispatch } from "../../../redux/hook";
+import { getContracts } from "../../../redux/slice/contractSlice";
+import { useEffect, useState } from "react";
 
 export interface TableData extends Contract {
   depositGenerator: string;
@@ -17,7 +20,20 @@ export interface TableData extends Contract {
 }
 
 export function ContractTable() {
-  const data: TableData[] = contractList.map((contract, index) => ({
+  const dispatch = useAppDispatch();
+  const [contracts, setContracts] = useState<Contract[]>([]);
+  console.log(contracts);
+
+  useEffect(() => {
+    async function fetch() {
+      const res = await dispatch(getContracts()).unwrap();
+      setContracts(res);
+    }
+    fetch();
+  }, [dispatch]);
+
+  if (!contracts) return;
+  const data: TableData[] = contracts.map((contract, index) => ({
     ...contract,
     depositGenerator: generateDepositTableType(contract.depositType),
     dateFormat: formatUnixToLocal(contract.date),
@@ -29,12 +45,12 @@ export function ContractTable() {
   const columns: TableProps<TableData>["columns"] = [
     {
       title: "Tên Candidate",
-      dataIndex: "candidateName",
+      dataIndex: ["applicant", "candidateName"],
       key: "candidateName",
       render: (_, record) => (
         <div className="text-blue-500 underline">
-          <Link to={`/candidates/${record.candidateId}`}>
-            {record.candidateName}
+          <Link to={`/candidates/${record.applicant.candidateId}`}>
+            {record.applicant.candidate.username}
           </Link>
         </div>
       ),
@@ -45,8 +61,8 @@ export function ContractTable() {
       key: "candidateName",
       render: (_, record) => (
         <div className="text-blue-500 underline">
-          <Link to={`/ed/projects/${record.projectId}`}>
-            {record.projectName}
+          <Link to={`/ed/projects/${record.applicant.projectId}`}>
+            {record.applicant.project.title}
           </Link>
         </div>
       ),
@@ -68,8 +84,8 @@ export function ContractTable() {
     },
     {
       title: "Trạng thái",
-      dataIndex: "contractStatus",
-      key: "contractStatus",
+      dataIndex: "status",
+      key: "status",
     },
   ];
 

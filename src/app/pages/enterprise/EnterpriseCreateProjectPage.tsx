@@ -2,16 +2,14 @@ import { App, Form, Steps } from "antd";
 import ProjectImportantInfo from "../../components/ui-enterprise/CreateProjectForm/ProjectImportantInfo";
 import ProjectDetailInfo from "../../components/ui-enterprise/CreateProjectForm/ProjectDetailInfo";
 import ProjectRequirementInfo from "../../components/ui-enterprise/CreateProjectForm/ProjectRequirementInfo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OutlineButton, PrimaryButton } from "../../components/button/buttons";
-import { CreateProject } from "../../models/project";
+import { CreateProject, Project } from "../../models/project";
 import { useSetHeaderTitle } from "../../hooks/useSetHeaderTitle";
-import { project } from "../../../constants/testData";
+// import { project } from "../../../constants/testData";
 import { useAppDispatch } from "../../redux/hook";
-import { createProject } from "../../redux/slice/postSlice";
-import { useNavigate } from "react-router-dom";
-
-const formatProject = { ...project, projectField: project.projectField.value };
+import { createProject, fetchPostById } from "../../redux/slice/postSlice";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function CreateProjectForm({
   edit = false,
@@ -27,35 +25,51 @@ export default function CreateProjectForm({
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { projectId } = useParams();
 
   const [current, setCurrent] = useState(0);
+  const [project, setProject] = useState<Project>();
 
-  const initialValues: CreateProject = edit
-    ? formatProject
-    : {
-        title: "",
-        projectField: "",
-        description: "",
-        funding: "hourly",
-        initialFunding: 0,
-        candidateRequirement: "junior",
-        timeToComplete: "<1 month",
-        createdBy: "",
-        privacy: "public",
-        projectType: "unknown",
-        optionalRequirements: {
-          language: "all",
-          nation: "all",
-          minimumCompletedProjects: "all",
-          rating: "all",
-          skills: [
-            { label: "Front-end Developer", value: "Front-end Developer" },
-            { label: "Back-end Developer", value: "Back-end Developer" },
-            { label: "Full-stack Developer", value: "Full-stack Developer" },
-          ],
-          questions: [],
-        },
-      };
+  useEffect(() => {
+    async function fetch() {
+      if (projectId) {
+        const res = await dispatch(fetchPostById(projectId)).unwrap();
+        setProject(res);
+      }
+    }
+    fetch();
+  }, [dispatch, projectId]);
+
+  if (projectId && !project) return;
+
+  const initialValues: CreateProject =
+    edit && project
+      ? project
+      : {
+          title: "",
+          projectField: null,
+          description: "",
+          funding: "hourly",
+          initialFunding: 0,
+          candidateRequirement: "junior",
+          timeToComplete: "<1 month",
+          createdBy: "",
+          privacy: "public",
+          projectType: "unknown",
+          optionalRequirements: {
+            language: "all",
+            nation: "all",
+            minimumCompletedProjects: "all",
+            rating: "all",
+            skills: [
+              {
+                skillName: "Front-end Developer",
+                skillId: "Front-end Developer",
+              },
+            ],
+            questions: [],
+          },
+        };
   const formTitle = edit ? "Chỉnh sửa dự án" : "Tạo dự án";
   const steps = [
     {

@@ -20,10 +20,10 @@ import {
   Typography,
 } from "antd";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { useState } from "react";
-import { nations, project } from "../../../../constants/testData";
+import { useEffect, useState } from "react";
+import { nations } from "../../../../constants/testData";
 import { calculateDateToNow, formatCurrency } from "../../../utils/utils";
 import {
   generateLanguage,
@@ -33,19 +33,34 @@ import {
   generateRequirementMsg,
 } from "../../../utils/generators";
 import { CustomCard } from "../../ui/card";
+import { useAppDispatch } from "../../../redux/hook";
+import { fetchPostById } from "../../../redux/slice/postSlice";
+import { Project } from "../../../models/project";
 
 const { Content, Sider } = Layout;
 const { Text, Title } = Typography;
 
 export default function EnterpriseProjectDetail() {
   const navigate = useNavigate();
-
-  const [reason, setReason] = useState<string>();
-
+  const dispatch = useAppDispatch();
+  const { projectId } = useParams();
   const [modal, contextHolder] = Modal.useModal();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const [reason, setReason] = useState<string>();
+  const [project, setProject] = useState<Project>();
+
+  useEffect(() => {
+    async function fetch() {
+      if (projectId) {
+        const res = await dispatch(fetchPostById(projectId)).unwrap();
+        setProject(res);
+      }
+    }
+    fetch();
+  }, [dispatch, projectId]);
 
   const items: MenuProps["items"] = [
     {
@@ -95,7 +110,7 @@ export default function EnterpriseProjectDetail() {
         break;
       }
       case "edit": {
-        navigate(`/ed/edit-project/${1}`);
+        navigate(`/ed/edit-project/${projectId}`);
         break;
       }
       case "private": {
@@ -129,8 +144,10 @@ export default function EnterpriseProjectDetail() {
     }
   };
 
+  if (!project) return;
+
   const {
-    publishedTime,
+    createdAt,
     title,
     funding,
     initialFunding,
@@ -141,7 +158,7 @@ export default function EnterpriseProjectDetail() {
     applicationCount,
     inviteSent,
     inviteAccepted,
-    projectField,
+    createdByProjectField,
   } = project;
 
   return (
@@ -172,8 +189,8 @@ export default function EnterpriseProjectDetail() {
         >
           <CustomCard>
             <Title level={2}>{title}</Title>
-            <Title level={4}>{projectField.label}</Title>
-            <Text>Đã đăng cách đây {calculateDateToNow(publishedTime)}</Text>
+            <Title level={4}>{createdByProjectField?.jobTitleName}</Title>
+            <Text>Đã đăng cách đây {calculateDateToNow(createdAt)}</Text>
             <Divider />
             <Title level={3}>{description}</Title>
             <Divider />
@@ -229,7 +246,7 @@ export default function EnterpriseProjectDetail() {
                   Ngôn ngữ: {generateLanguage(optionalRequirements.language)}
                 </Title>
                 <Title level={5}>
-                  Đất nước: {nations[optionalRequirements.nation].label}
+                  Đất nước: {nations[optionalRequirements.nation]?.label}
                 </Title>
               </Col>
               <Col span={8} offset={1}>

@@ -34,6 +34,26 @@ export const fetchAllPostsPagination = createAsyncThunk(
   },
 );
 
+export const fetchPostsByEnterpriseId = createAsyncThunk(
+  "post/fetchPostsByEnterpriseId",
+  async () => {
+    const userId = localStorage.getItem("userId");
+    try {
+      if (userId) {
+        const response = await agent.Post.getPostsByEnterpriseId(userId);
+        return response;
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return {
+          message: error.response?.data.error.message,
+          status: error.response?.status,
+        };
+      }
+    }
+  },
+);
+
 export const fetchPostById = createAsyncThunk<Project, string>(
   "post/fetchPostById",
   async (postId) => {

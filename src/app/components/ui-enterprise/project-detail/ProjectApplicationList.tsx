@@ -1,17 +1,31 @@
 import { Table, TableProps } from "antd";
-import { Applicants } from "../../../../constants/testData";
 import { Applicant } from "../../../models/applicant";
 import { ApplicationAcceptForm } from "../modals";
-import { formatUnixToLocal } from "../../../utils/utils";
+import { formatDateToLocal } from "../../../utils/utils";
+import { useAppDispatch } from "../../../redux/hook";
+import { useEffect, useState } from "react";
+import { getApplications } from "../../../redux/slice/applicationSlice";
 
 export default function ProjectApplicationList() {
   interface ApplicantTable extends Applicant {
     dateFormat: string;
   }
+  const dispatch = useAppDispatch();
 
-  const data: ApplicantTable[] = Applicants.map((applicant, index) => ({
+  const [application, setApplication] = useState<Applicant[]>([]);
+
+  useEffect(() => {
+    async function fetch() {
+      const res = await dispatch(getApplications()).unwrap();
+      setApplication(res);
+    }
+    fetch();
+  }, [dispatch]);
+
+  const data: ApplicantTable[] = application.map((applicant, index) => ({
     ...applicant,
-    dateFormat: formatUnixToLocal(applicant.date),
+    dateFormat:
+      (applicant.createdAt && formatDateToLocal(applicant.createdAt)) || "",
     key: index,
   }));
 
@@ -20,8 +34,8 @@ export default function ProjectApplicationList() {
   const columns: TableProps<Applicant>["columns"] = [
     {
       title: "Candidate",
-      dataIndex: "candidateName",
-      key: "candidateName",
+      dataIndex: ["candidate", "username"],
+      key: "candidate",
     },
     {
       title: "Ngày",

@@ -1,25 +1,31 @@
 import { PrimaryButton } from "../../button/buttons";
 import { useState } from "react";
 import { CustomFormModal } from "../../modal/modal";
-import { Col, Form, Row, Typography } from "antd";
+import { App, Col, Form, Row, Typography } from "antd";
 import { InputNumberFix, FormTextArea } from "../../input/inputs";
 import { Applicant } from "../../../models/applicant";
 import { Project } from "../../../models/project";
 import { DefaultForm } from "../../form/form";
+import { useAppDispatch } from "../../../redux/hook";
+import { createApplication } from "../../../redux/slice/applicationSlice";
+import { useParams } from "react-router-dom";
+
+const { Title } = Typography;
 
 export default function ApplyForm({ project }: { project: Project }) {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const { Title } = Typography;
+  const dispatch = useAppDispatch();
+  const { message } = App.useApp();
+  const { projectId } = useParams();
 
   const initialValues: Applicant = {
-    id: "",
-    candidateName: "",
-    candidateId: "",
+    id: 0,
     date: 0,
     money: 0,
     time: 0,
-    projectId: "",
+    candidateId: 0,
+    projectId: 0,
     questions:
       project.optionalRequirements &&
       project.optionalRequirements.questions?.map((question) => ({
@@ -30,7 +36,25 @@ export default function ApplyForm({ project }: { project: Project }) {
 
   const handleSubmit = async (values: typeof initialValues) => {
     console.log("Received values of form: ", values);
-    setOpen(false);
+    const { money, time, questions } = values;
+    async function create() {
+      if (projectId) {
+        const parseProjectId = Number(projectId);
+        const res = await dispatch(
+          createApplication({
+            projectId: parseProjectId,
+            money,
+            time,
+            questions,
+          }),
+        ).unwrap();
+        if (res) {
+          message.success("Processing complete!");
+          setOpen(false);
+        }
+      }
+    }
+    create();
   };
 
   const handleCancel = () => {
@@ -52,6 +76,7 @@ export default function ApplyForm({ project }: { project: Project }) {
             .validateFields()
             .then((values) => {
               handleSubmit(values);
+              form.resetFields();
             })
             .catch((info) => {
               console.log("Validate Failed:", info);
