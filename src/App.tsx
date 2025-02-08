@@ -1,12 +1,23 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./app/routes/route";
+import { App, ConfigProvider } from "antd";
+import { validateMessages } from "./app/utils/validate-messages";
 
-function App() {
+function AppWrapper() {
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#00b96b",
+        },
+      }}
+      form={{ validateMessages }}
+    >
+      <App>
+        <RouterProvider router={router} />
+      </App>
+    </ConfigProvider>
   );
 }
 
-export default App;
+export default AppWrapper;

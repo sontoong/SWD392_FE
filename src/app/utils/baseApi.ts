@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Envs } from "./env";
 
-const baseURL = Envs.apiRemote;
+const baseURL = Envs.apiLocal;
 
 const baseApi = axios.create({
   baseURL,
